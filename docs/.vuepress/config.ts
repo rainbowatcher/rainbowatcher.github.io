@@ -8,7 +8,7 @@ export default defineUserConfig({
     // logo: '/logo.ico',
     logoDark: "",
     navbar: [
-      { text: "foo", link: "/" },
+      { text: "foo", link: "/notes" },
       { text: "bar", link: "/" },
     ],
     repo: "https://github.com/with-rainbow/with-rainbow.github.io",
