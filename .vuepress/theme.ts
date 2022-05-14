@@ -36,19 +36,19 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   // 首页图片
   homeHeaderImages: [
     {
+      path: "/img/home-bg/1.jpg",
+      mask: "rgb(100, 100, 100, .1)",
+    },
+    {
       path: "/img/home-bg/2.jpg",
       mask: "rgb(100, 100, 100, .1)",
     },
     {
+      path: "/img/home-bg/3.jpg",
+      mask: "rgb(100, 100, 100, .1)",
+    },
+    {
       path: "/img/home-bg/4.jpg",
-      mask: "rgb(100, 100, 100, .1)",
-    },
-    {
-      path: "/img/home-bg/5.jpg",
-      mask: "rgb(100, 100, 100, .1)",
-    },
-    {
-      path: "/img/home-bg/6.jpg",
       mask: "rgb(100, 100, 100, .1)",
     },
   ],
