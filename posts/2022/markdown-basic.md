@@ -2,13 +2,14 @@
 layout: Post
 title: Markdown简明语法
 subtitle: markdown语法功能测试
-headerImage: /img/2022/markdown/markdown.png
+headerImage: /img/markdown.png
 useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
-date: 2020-03-31
+date: 2022-05-04
 permalinkPattern: /post/:year/:month/:day/:slug/
 tags:
   - Markdown
+  - Syntax
 ---
 
 ## Heading 标题

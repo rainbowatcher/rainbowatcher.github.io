@@ -8,6 +8,9 @@ export default defineUserConfig<GungnirThemeOptions>({
   description: "Sheep Sheep Sheep",
   theme: "gungnir",
   themeConfig: themeConfig,
+  head:[
+    ["link", { rel: "icon", href: "sheep.svg" }],
+  ],
   plugins: [
     ["@renovamen/vuepress-plugin-katex"],
     [

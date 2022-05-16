@@ -58,15 +58,15 @@ const themeConfig: Partial<GungnirThemeOptions> = {
       title: "标签",
       // subtitle: "吼哇朋友们，这是标签页",
       bgImage: {
-        path: "/img/pages/tags.jpg",
-        mask: "rgba(211, 206, 237, .7)",
+        path: "/img/home-bg/3.jpg",
+        mask: "rgba(64, 118, 190, 0.5)",
       },
     },
     // 链接页配置
     links: {
       // subtitle: "吼哇朋友们，这是链接页",
       bgImage: {
-        path: "/img/pages/links.jpg",
+        path: "/img/home-bg/2.jpg",
         mask: "rgba(64, 118, 190, 0.5)",
       },
     },
