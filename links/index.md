@@ -44,12 +44,12 @@ links:
   - title: Me ⭐️
     items:
       - sitename: Github
-        url: https://github.io/with-rainbow
+        url: https://github.com/with-rainbow
         img: https://github.githubassets.com/favicons/favicon.svg
         desc: 我的 Github 主页
       - sitename: 笔记
-        url: https://with-rainbow.github.io/notes
-        img: https://with-rainbow.github.io/notes/logo.ico
+        url: https://notes-with-rainbow.vercel.app
+        img: https://notes-with-rainbow.vercel.app/logo.ico
         desc: 我自己的笔记项目
 
   - title: Awesome
@@ -58,6 +58,10 @@ links:
         url: https://vercel.com/
         img: https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/favicon.ico
         desc: 用于前端框架和静态站点的平台
+      - sitename: Netlify
+        url: https://www.netlify.com/
+        img: https://www.netlify.com/v3/static/favicon/apple-touch-icon.png
+        desc: 自动化现代网络项目的一体化平台
       - sitename: Giscus
         url: https://giscus.app/zh-CN
         img: https://avatars.githubusercontent.com/in/106117
