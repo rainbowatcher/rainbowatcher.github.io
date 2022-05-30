@@ -8,7 +8,7 @@ date: 2022-05-04
 permalinkPattern: /post/:year/:month/:day/:slug/
 tags:
   - Git
-  - Command Line
+  - CLI
 ---
 
 使用 git 过程中经常会碰到提交 commit 过程中，手抖或者忽略了一些东西导致 commit 的结果是不理想的，这时候就要用到 `git reset`命令了。
@@ -31,7 +31,9 @@ git reset [--soft | --mixed | --hard] [HEAD]
 | `--mixed` | HEAD 引用指向给定提交，并且索引（暂存区）内容也跟着改变，工作目录内容不变     |
 | `--hard`  | HEAD 引用指向给定提交，索引（暂存区）内容和工作目录内容都会变给定提交时的状态 |
 
-### 示例
+## 示例
+
+### 撤销 commit
 
 前提：咱们国内有些公司把代码提交记录与绩效挂钩。
 
@@ -40,10 +42,35 @@ git reset [--soft | --mixed | --hard] [HEAD]
 ```shell
 git commit -m "message"
 git commit -m "message1"
-git reset --soft HEAD^
+git reset --soft HEAD~2
 git push origin main
 ```
 
 ::: tip
-`HEAD^` 的意思是上一个版本，也可以写成 `HEAD~1`
+`HEAD~1` 和 `HEAD^` 的意思一样，都是上一个版本。
 :::
+
+### 撤销 push
+
+```shell
+git commit -m 'message'
+git push origin main
+```
+
+```shell
+git log
+```
+
+<pre style="border: 1px solid black;padding: 20px;background-color: #eee">
+fcf4a7baf498f0a4df3a8c10c1013c157bbdb243 (HEAD -> main, origin/main, origin/HEAD) del: README
+cb9a7c6d249c9966ae249af49dd8997ae3953579 post blog
+bded190b1e7ca629ab47e5cc3bef26250859e45b ✨ feat: update dependency version to lastest
+12b12df137500e96a6affb896a0181ae980c6f2f chore: 链接地址修正
+</pre>
+
+```shell
+git reset --hard bded190b1e7ca629ab47e5cc3bef26250859e45b
+git push origin main --force
+```
+
+

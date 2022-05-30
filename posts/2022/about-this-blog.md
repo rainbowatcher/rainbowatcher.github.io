@@ -12,7 +12,7 @@ tags: [Blog, VuePress, Github Pages, Vercel]
 
 ## 缘起
 
-在倒腾博客之前用 VuePress 做了一个笔记项目，由于我希望这个笔记项目的内容是比较规范的，所以在写笔记的时候一直都放不开手脚，觉得似乎少了一个可以打草稿的地方，自然而然想到了做博客，那博客比起笔记项目在风格上就自(hua)由(shao)很多，这样才符合博客的态度 😋。
+在倒腾博客之前用 VuePress 做了一个[笔记项目](https://notes-with-rainbow.vercel.app)，由于我希望这个笔记项目的内容是比较规范的，所以在写笔记的时候一直都放不开手脚，觉得似乎少了一个可以打草稿的地方，自然而然想到了做博客，那博客比起笔记项目在风格上就自(hua)由(shao)很多，这样才符合博客的态度 😋。
 
 ## 为什么是 VuePress
 
@@ -30,10 +30,12 @@ tags: [Blog, VuePress, Github Pages, Vercel]
 4. 丰富的主题
 5. 丰富的插件
 
-::: warning
+::: warning 缺点
+
 主要的缺点就是当前的版本还是 Beta，大部分插件和主题还没有适配 2.x 新版本 😝。
 在选用 VuePress 的时候对比了 GoLang 下的 HuGo、Facebook 的 Docusaurus、Rust 的 Zola。
 还有很多没试用过的 Hexo/Docsify/GitBook/WordPress/Jekyll 等等。
+
 :::
 
 废话说的够多了，开始进入正题了。
@@ -108,17 +110,23 @@ echo '.cache' >> .gitignore
 }
 ```
 
-::: info
+::: info 吐槽
+
 这里吐槽一下,完全可以添加一些命令行的 init 命令或 create 命令。类似`tsc --init`会自动生成 tsconfig.json 配置文件一样。
 前 5 步都是可以自动生成的。
+
 :::
+
+## 博客主题安装
 
 经过上面的步骤你的 VuePress 就可以正常运行了，但是还没有内容，同时还不是一个博客。
 
 VuePress 内置了 theme-default 主题，这个主题不是我们要的，我们要去挑选一个博客主题，先看看我们有什么主题。
 
 ::: link {/img/icon/awesome-vuepress.jpg} [Awesome VuePress - V2 Themes](https://github.com/vuepress/awesome-vuepress/blob/main/v2.md#themes)
+
 Awesome VuePress 列表
+
 :::
 
 我的博客就选择了其中的`vuepress-theme-gungnir`主题。我们可以去[主题的文档页](https://v2-vuepress-theme-gungnir.vercel.app/zh/docs/basic/intro.html)看看如何安装这个主题。
@@ -126,6 +134,13 @@ Awesome VuePress 列表
 第一步当让是添加依赖
 
 <CodeGroup>
+<CodeGroupItem title="PNPM">
+
+```shell
+pnpm add -D vuepress-theme-gungnir@next
+```
+
+</CodeGroupItem>
 <CodeGroupItem title="YARN">
 
 ```shell
@@ -141,6 +156,8 @@ npm install -D vuepress-theme-gungnir@next
 
 </CodeGroupItem>
 </CodeGroup>
+
+## 主题配置
 
 然后在 `.vuepress/config.js` 或 `.vuepress/config.ts`（如果你在使用 TypeScript 的话）中指定主题：
 
@@ -181,4 +198,44 @@ export default defineUserConfig({
 </CodeGroupItem>
 </CodeGroup>
 
-## 项目介绍
+这时候博客主页还不会显示任何东西，仍需要进行一些[基本配置](https://vuepress-theme-gungnir-with-rainbow.vercel.app/zh/docs/basic/config.html)
+
+### 作者信息
+
+```javascript
+// .vuepress/config.js
+
+module.exports = {
+  theme: gungnirTheme({
+    personalInfo: {
+      // 必须：名称，将在首页、移动端侧边栏和文章作者信息处显示
+      name: "Cool Dragon",
+
+      // 必须：头像，将在首页和移动端侧边栏显示
+      avatar: "/img/avatar.jpeg",
+
+      // 必须：个人简介，将在首页显示
+      description: "A cool dragon lost in human world.",
+      
+      // 可选：社交平台账号，将在首页和移动端侧边栏显示
+      sns: {
+        github: "Renovamen",  // Github
+        linkedin: "xiaohan-zou-55bba0160",  // 领英
+        facebook: "renovamen.zou",  // Facebook
+        twitter: "renovamen_zxh",  // 推特
+        zhihu: "chao-neng-gui-su",  // 知乎
+        weibo: "your-weibo-id",  // 新浪微博
+        email: "renovamenzxh@gmail.com",  // 邮箱
+        rss: "/rss.xml",  // RSS 文件的链接
+        // 添加其他的社交平台
+        bilibili: {  // 随便什么名字
+          icon: "ri-bilibili-line",  // 社交平台的图标
+          link: "https://www.bilibili.com/"  // 主页链接
+        }
+        // ...
+      }
+    }
+  })
+}
+```
+

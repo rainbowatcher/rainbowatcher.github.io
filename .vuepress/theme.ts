@@ -29,19 +29,23 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   // 首页图片
   homeHeaderImages: [
     {
-      path: "/img/home-bg/1.jpg",
+      path: "/img/home-bg/1.jpeg",
       mask: "rgb(100, 100, 100, .1)",
     },
     {
-      path: "/img/home-bg/2.jpg",
+      path: "/img/home-bg/2.jpeg",
       mask: "rgb(100, 100, 100, .1)",
     },
     {
-      path: "/img/home-bg/3.jpg",
+      path: "/img/home-bg/3.jpeg",
       mask: "rgb(100, 100, 100, .1)",
     },
     {
       path: "/img/home-bg/4.jpg",
+      mask: "rgb(100, 100, 100, .1)",
+    },
+    {
+      path: "/img/home-bg/5.jpeg",
       mask: "rgb(100, 100, 100, .1)",
     },
   ],
@@ -51,7 +55,7 @@ const themeConfig: Partial<GungnirThemeOptions> = {
       title: "标签",
       // subtitle: "吼哇朋友们，这是标签页",
       bgImage: {
-        path: "/img/home-bg/3.jpg",
+        path: "/img/home-bg/3.jpeg",
         mask: "rgba(64, 118, 190, 0.5)",
       },
     },
@@ -59,7 +63,7 @@ const themeConfig: Partial<GungnirThemeOptions> = {
     links: {
       // subtitle: "吼哇朋友们，这是链接页",
       bgImage: {
-        path: "/img/home-bg/2.jpg",
+        path: "/img/home-bg/2.jpeg",
         mask: "rgba(64, 118, 190, 0.5)",
       },
     },

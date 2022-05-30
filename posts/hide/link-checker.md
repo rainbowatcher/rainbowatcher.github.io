@@ -6,6 +6,7 @@ useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
 date: 2022-05-18
 permalinkPattern: /post/:year/:month/:day/:slug/
+hide: true
 tags: 
   - Project
   - Idea
