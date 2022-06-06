@@ -1,6 +1,6 @@
 ---
 layout: Post
-title: "[reset] git撤回commit消息"
+title: Git 后悔药，如何撤回/重新编辑 commit 消息
 headerImage: /img/git.png
 useHeaderImage: true
 headerMask: rgba(100, 100, 100, .618)
@@ -73,4 +73,21 @@ git reset --hard bded190b1e7ca629ab47e5cc3bef26250859e45b
 git push origin main --force
 ```
 
+## 编辑上一次提交
 
+提交 commit 消息的时候手抖多敲了几个奇怪的符号，该如何撤回呢，`--amend`可以编辑上次提交的消息。
+
+```shell
+git commit -m 'message？'
+git commit --amend -m "message"
+```
+
+当你想把某个文件加入到上一次的提交时也可以使用`--amend`参数
+
+```shell
+git commit -m "message"
+git add index.html
+git commit --amend --no-edit
+```
+
+`--no-edit`是不弹出编辑器的意思，不加这个参数的情况下会启动默认编辑器。

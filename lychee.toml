@@ -5,7 +5,7 @@
 ### Display
 ###
 # Verbose program output
-verbose = false
+verbose = true
 
 # Show progress
 progress = false

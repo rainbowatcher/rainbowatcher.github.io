@@ -62,6 +62,13 @@ DNS Records 就是我们配置 DNS 解析记录的地方。下面表格解释了
 
 :::
 
-## SSL/TLS 加密模式
+## 关于 Cloudflare
+
+1. 对应 nameservers 修改为 Cloudflare 提供的 nameservers
+2. SSL/TLS 加密模式修改为完全(full)
+
+::: warning SSL/TLS 加密模式
 
 之前配置了子域名映射到`vercel`，然后打开一直提示重定向次数过多。一番查找之后发现是因为 vercel 的 ssl 配置与 cloudflare 冲突，把 cloudflare 的 ssl 配置修改为完全（严格）之后问题不再重现。
+
+:::

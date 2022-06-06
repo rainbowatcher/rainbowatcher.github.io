@@ -1,7 +1,9 @@
 ---
 layout: Post
-title: "[commit] git提交修改到暂存区🚧"
+title: "git提交修改到暂存区🚧"
+useHeaderImage: true
 headerImage: /img/git.png
+headerMask: rgba(0, 0, 0, .4)
 date: 2022-05-16
 permalinkPattern: /post/:year/:month/:day/:slug/
 hide: false

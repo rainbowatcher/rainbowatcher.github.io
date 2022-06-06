@@ -14,6 +14,44 @@ tags: [JUnit, Java, Test]
 
 JUnit5 提供 `@Order` 和 `@TestMethodOrder` 两个注解配合
 
+```java
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class Test{
+
+  @Test
+  @Order(1)
+  void testMethod1(){}
+
+  @Test
+  @Order(2)
+  void testMethod1(){}
+
+}
+```
+
+MethodOrderer 类图
+
+```mermaid
+classDiagram
+  interface MethodOrderer
+  class DisplayName
+  class OrderAnnotation
+  class MethodName
+  class Random
+  class Alphanumeric
+  Random : -List~string~ messages
+
+  MethodOrderer <|.. DisplayName    : 实现
+  MethodOrderer <|.. Random         : 实现
+  MethodOrderer <|.. OrderAnnotation: 实现
+  MethodOrderer <|.. MethodName     : 实现
+  MethodOrderer o-- DisplayName     : 聚合
+  MethodOrderer o-- Random          : 聚合
+  MethodOrderer o-- OrderAnnotation : 聚合
+  MethodOrderer o-- MethodName      : 聚合
+  MethodName    <|-- Alphanumeric   : 继承
+```
+
 ## Custom Argument Provider
 
 传递测试参数的另一种高级方法是使用叫做 argumentsProvider 的接口的自定义实现：

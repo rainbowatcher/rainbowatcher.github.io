@@ -1,6 +1,6 @@
 ---
 layout: Post
-title: "[config] Git config 使用与常用的配置🚧"
+title: Git 常用的配置项
 date: 2022-05-24
 useHeaderImage: true
 headerImage: /img/git.png
@@ -8,10 +8,6 @@ headerMask: rgba(0, 0, 0, .4)
 hide: false
 tags: [Git, CLI]
 ---
-
-## 安装
-
-客户端可以在[Git 官网](https://git-scm.com/downloads/)选择对应的平台，按照官方的教程安装。
 
 ## 用户设置
 
@@ -106,7 +102,7 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
         rebase = true
 ```
 
-## rebase
+<!-- ## rebase
 
 多⼈协作开发项⽬，在上传代码时通常会先拉⼀下远程代码，使本地与远程同步更新，但是如果远程此时与⾃⼰代码存在冲突，在解决冲突后提交有时会出现`Merge branch 'master' of …`这条信息。这是因为 pull 其本质是 `fetch + Merge` 的结合。通常会分为以下两种情况：
 
@@ -118,13 +114,12 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 
    - pull 拉取代码时远程和本地会出现分叉，会进⾏分⽀合并，就会产⽣`Merge branch 'master' of …`信息。解决⽅法使⽤ `git pull --rebase` 命令。
    - 如果没有冲突,则会直接合并，如果存在冲突，⼿动解决冲突即可，不会再产⽣那条多余的信息。
-   - 如果你不想每次都 rebase，可以在 git bash ⾥执⾏ git config --global pull.rebase true 这个配置就是告诉 git 在每次 pull 前先进⾏ rebase 操作
+   - 如果你不想每次都 rebase，可以在 git bash ⾥执⾏ git config --global pull.rebase true 这个配置就是告诉 git 在每次 pull 前先进⾏ rebase 操作 -->
 
 ## 自用配置
 
 ```shell
-git config --global alias.ls "log --oneline"
-git config --global alias.ll 'log --graph --pretty=format:"%h <%an> %ar %s"'
-git config --global pull.rebase true
+git config --global alias.ls "log --oneline --cherry"
+git config --global alias.ll 'log --graph --cherry --pretty=format:"%h <%an> %ar %s"'
 git config --global core.editor "code --wait"
 ```

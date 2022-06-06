@@ -132,6 +132,26 @@ you can type this command `git clone <repo-addr>` to clone the repository locall
 
 you can type this command `git clone <repo-addr>` to clone the repository locally.
 
+## CodeBlock 代码块
+
+````markdown
+```js
+export default {
+  markdown: {
+    lineNumbers: true,
+  },
+};
+```
+````
+
+```js
+export default {
+  markdown: {
+    lineNumbers: true,
+  },
+};
+```
+
 ## Link 链接
 
 ### Markdown 链接

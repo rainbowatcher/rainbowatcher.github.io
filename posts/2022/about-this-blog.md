@@ -1,7 +1,7 @@
 ---
 layout: Post
 title: 关于这个博客搭建过程的点滴
-subtitle: 考虑到我的小伙伴们可能好奇这个博客的搭建过程，就写了个小攻略
+subtitle: 我的小伙伴们可能好奇这个博客的搭建过程，就写了个小攻略
 headerImage: /img/2022/about-this-post/blog.jpg
 useHeaderImage: true
 headerMask: rgba(0,0,0,0.4)
@@ -204,8 +204,9 @@ export default defineUserConfig({
 
 ```javascript
 // .vuepress/config.js
+import { GungnirThemeOptions } from "vuepress-theme-gungnir";
 
-module.exports = {
+const themeConfig: GungnirThemeOptions = {
   theme: gungnirTheme({
     personalInfo: {
       // 必须：名称，将在首页、移动端侧边栏和文章作者信息处显示
@@ -216,26 +217,62 @@ module.exports = {
 
       // 必须：个人简介，将在首页显示
       description: "A cool dragon lost in human world.",
-      
+
       // 可选：社交平台账号，将在首页和移动端侧边栏显示
       sns: {
-        github: "Renovamen",  // Github
-        linkedin: "xiaohan-zou-55bba0160",  // 领英
-        facebook: "renovamen.zou",  // Facebook
-        twitter: "renovamen_zxh",  // 推特
-        zhihu: "chao-neng-gui-su",  // 知乎
-        weibo: "your-weibo-id",  // 新浪微博
-        email: "renovamenzxh@gmail.com",  // 邮箱
-        rss: "/rss.xml",  // RSS 文件的链接
+        github: "Renovamen", // Github
+        linkedin: "xiaohan-zou-55bba0160", // 领英
+        facebook: "renovamen.zou", // Facebook
+        twitter: "renovamen_zxh", // 推特
+        zhihu: "chao-neng-gui-su", // 知乎
+        weibo: "your-weibo-id", // 新浪微博
+        email: "renovamenzxh@gmail.com", // 邮箱
+        rss: "/rss.xml", // RSS 文件的链接
         // 添加其他的社交平台
-        bilibili: {  // 随便什么名字
-          icon: "ri-bilibili-line",  // 社交平台的图标
-          link: "https://www.bilibili.com/"  // 主页链接
-        }
+        bilibili: {
+          // 随便什么名字
+          icon: "ri-bilibili-line", // 社交平台的图标
+          link: "https://www.example.com/", // 主页链接
+        },
         // ...
-      }
-    }
-  })
-}
+      },
+    },
+  }),
+};
 ```
 
+在加上这个配置之后启动项目就可以看到主页了
+
+<CodeGroup>
+<CodeGroupItem title="PNPM">
+
+```shell
+pnpm docs:dev
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="NPM">
+
+```shell
+npm run docs:dev
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="YARN">
+
+```shell
+yarn docs:dev
+```
+
+</CodeGroupItem>
+</CodeGroup>
+
+不过这个时候还没有头像、页面背景图和博文。还需要根据主题文档继续配置，这里就不废话了。
+
+## Github Pages
+
+突然有点懒，就放个链接吧，[Vuepress 部署](https://v2.vuepress.vuejs.org/zh/guide/deployment.html#github-pages)。文档都是中文的，相信你能看懂。
+
+## Vercel
+
+[Vercel](https://vercel.com/) 是什么，Vercel 是一个用于前端框架和静态站点的平台。他的优点很多，对我来说最突出的就是快，这个快不是构建、不是部署，而是他有香港的节点，所以国内访问会比较快 :+1:。他操作简单，还可以和 github 集成。基本没什么多说的，就连[Vuepress 官方部署教程](https://v2.vuepress.vuejs.org/zh/guide/deployment.html#vercel)都简单的不行。
