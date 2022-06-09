@@ -14,7 +14,7 @@ tags: [Npm, CLI]
 
 npm-check-updates 是 package.json 中依赖更新管理工具，结局 `npm update` 仅更新 lock 文件中依赖的版本的问题
 
-[<Badge text="Github 地址" vertical="middle" type="danger"/>](<(https://github.com/raineorshine/npm-check-updates)>)
+[<Badge text="Github 地址" vertical="middle" type="danger"/>](https://github.com/raineorshine/npm-check-updates)
 
 ![](../../.vuepress/public/img/2022/npm-check-update/img/ncu.png)
 
