@@ -48,32 +48,14 @@ git config --global alias.st status
 设置好之后执行 `git co` 就相当于与执行 `git checkout`。
 
 ```shell
-$ git l
-*   cc200b5 (HEAD -> master) Merge branch 'cat'
-|\
-| * 0d1d15d (cat) add cat 2
-| * 0d392fb add cat 1
-|/
-* 657fce7 (origin/master, origin/HEAD) add container
-* abb4f43 update index page
-* cef6e40 create index page
-* cc797cd init commit
-```
-
-```shell
 $ git config --global alias.l "log --oneline --graph"
 $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 \$ git ls
 
-*   cc200b5 <Eddie Kao> 9 seconds ago Merge branch 'cat'
-|\
-| * 0d1d15d <Eddie Kao> 18 seconds ago add cat 2
-| * 0d392fb <Eddie Kao> 20 seconds ago add cat 1
-|/
-* 657fce7 <Eddie Kao> 13 days ago add container
-* abb4f43 <Eddie Kao> 13 days ago update index page
-* cef6e40 <Eddie Kao> 2 weeks ago create index page
-* cc797cd <Eddie Kao> 2 weeks ago init commit
+* f5c469b <with-rainbow> 4 days ago fix: 重新添加README文件 && 修改sidebar显示层数
+* 0678f0f <with-rainbow> 4 days ago feat: 优化目录结构，增加测试案例，自动生成sidebar
+* 4d0f7b3 <with-rainbow> 3 weeks ago rename
+* fa8c1a7 <with-rainbow> 3 weeks ago feat: disable github action
 ```
 
 这些 alias 也可以在 `~/.gitconfig` 里修改

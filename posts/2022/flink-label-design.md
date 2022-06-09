@@ -3,7 +3,7 @@ layout: Post
 title: Flink 任务的程序设计和思考
 date: 2022-05-27
 useHeaderImage: true
-headerImage: /img/markdown.png
+headerImage: /img/2022/flink-label-design/flink-logo.png
 headerMask: rgba(0, 0, 0, .4)
 hide: false
 tags: [Flink, Engineering]
