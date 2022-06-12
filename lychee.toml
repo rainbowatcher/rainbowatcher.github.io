@@ -8,7 +8,7 @@
 verbose = true
 
 # Show progress
-progress = false
+progress = true
 
 
 ###
@@ -29,7 +29,7 @@ max_redirects = 5
 user_agent = "curl/7.71.1"
 
 # Website timeout from connect to response finished
-timeout = 10
+timeout = 3
 
 # Comma-separated list of accepted status codes for valid links.
 # Omit to accept all response types.

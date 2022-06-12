@@ -4,7 +4,7 @@ title: npm 包升级检测工具 ncu 介绍
 subtitle:
 date: 2022-06-08
 useHeaderImage: true
-headerImage: /img/2022/npm-check-update/img/ncu.png
+headerImage: /img/2022/npm-check-update/ncu.png
 headerMask: rgba(0, 0, 0, .4)
 hide: false
 tags: [Npm, CLI]
@@ -14,9 +14,15 @@ tags: [Npm, CLI]
 
 npm-check-updates 是 package.json 中依赖更新管理工具，结局 `npm update` 仅更新 lock 文件中依赖的版本的问题
 
+::: info taze
+
+大家喜爱的 Anthony Fu 发布了 [taze](https://github.com/antfu/taze)，与 npm-check-updates 是同一类工具，可以期待正式版发布
+
+:::
+
 [<Badge text="Github 地址" vertical="middle" type="danger"/>](https://github.com/raineorshine/npm-check-updates)
 
-![](../../.vuepress/public/img/2022/npm-check-update/img/ncu.png)
+![](../../.vuepress/public/img/2022/npm-check-update/ncu.png)
 
 - Red = major upgrade (and all major version zero)
 - Cyan = minor upgrade
