@@ -1,5 +1,5 @@
 ---
-layout: Link
+layout: Post
 title: "[log] git log 常见使用方式"
 date: 2022-05-25
 useHeaderImage: true

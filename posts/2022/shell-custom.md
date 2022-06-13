@@ -7,7 +7,7 @@ useHeaderImage: true
 headerImage: /img/2022/shell-custom/shell.png
 headerMask: rgba(0, 0, 0, .4)
 hide: hide
-tags: [Shell, Zsh, Rust]
+tags: [Shell, Zsh, Rust, CLI]
 ---
 
 Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比如`exa、bat、ripgrep、fd、starship`等等

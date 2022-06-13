@@ -36,7 +36,7 @@ timeout = 3
 #accept = "text/html"
 
 # Proceed for server connections considered insecure (invalid TLS)
-insecure = false
+insecure = false 
 
 # Only test links with the given schemes (e.g. https)
 # Omit to check links with any scheme
