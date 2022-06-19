@@ -28,7 +28,7 @@ export default defineUserConfig({
     }),
     // https://giscus.app/zh-CN
     giscusPlugin({
-      repo: "with-rainbow/with-rainbow.github.io",
+      repo: "rainbowatcher/rainbowatcher.github.io",
       repoId: "R_kgDOHBYFAg",
       category: "Announcements",
       categoryId: "DIC_kwDOHBYFAs4CPGQS",

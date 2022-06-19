@@ -1,10 +1,10 @@
 import { GungnirThemeOptions } from "vuepress-theme-gungnir";
 
 const themeConfig: Partial<GungnirThemeOptions> = {
-  repo: "https://github.com/with-rainbow/with-rainbow.github.io",
+  repo: "https://github.com/rainbowatcher/rainbowatcher.github.io",
   repoLabel: '项目',
   // 编辑页面配置
-  docsRepo: "https://github.com/with-rainbow/with-rainbow.github.io",
+  docsRepo: "https://github.com/rainbowatcher/rainbowatcher.github.io",
   docsBranch: "main",
   editLinkPattern: ":repo/edit/:branch/:path",
   editLinkText: "编辑页面",
@@ -17,11 +17,11 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   mermaid: true,
   katex: true,
   personalInfo: {
-    name: "with-rainbow",
+    name: "rainbowatcher",
     avatar: "/img/avatar.jpg",
     description: "BigData engineer, love with programing",
     sns: {
-      github: "with-rainbow", // Github
+      github: "rainbowatcher", // Github
       email: "renovamenzxh@gmail.com", // 邮箱
       rss: "/rss.xml", // RSS 文件的链接
     },
@@ -79,7 +79,7 @@ const themeConfig: Partial<GungnirThemeOptions> = {
     },
     {
       text: "笔记",
-      link: "https://notes-with-rainbow.vercel.app",
+      link: "https://notes-rainbowatcher.vercel.app",
     },
   ],
   // 页脚配置
