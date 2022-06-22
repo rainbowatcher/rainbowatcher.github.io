@@ -52,10 +52,10 @@ $ git config --global alias.l "log --oneline --graph"
 $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 \$ git ls
 
-* f5c469b <with-rainbow> 4 days ago fix: 重新添加README文件 && 修改sidebar显示层数
-* 0678f0f <with-rainbow> 4 days ago feat: 优化目录结构，增加测试案例，自动生成sidebar
-* 4d0f7b3 <with-rainbow> 3 weeks ago rename
-* fa8c1a7 <with-rainbow> 3 weeks ago feat: disable github action
+* f5c469b <rainbowatcher> 4 days ago fix: 重新添加README文件 && 修改sidebar显示层数
+* 0678f0f <rainbowatcher> 4 days ago feat: 优化目录结构，增加测试案例，自动生成sidebar
+* 4d0f7b3 <rainbowatcher> 3 weeks ago rename
+* fa8c1a7 <rainbowatcher> 3 weeks ago feat: disable github action
 ```
 
 这些 alias 也可以在 `~/.gitconfig` 里修改

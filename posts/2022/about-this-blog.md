@@ -12,7 +12,7 @@ tags: [Blog, VuePress, Github Pages, Vercel]
 
 ## 缘起
 
-在倒腾博客之前用 VuePress 做了一个[笔记项目](https://notes-with-rainbow.vercel.app)，由于我希望这个笔记项目的内容是比较规范的，所以在写笔记的时候一直都放不开手脚，觉得似乎少了一个可以打草稿的地方，自然而然想到了做博客，那博客比起笔记项目在风格上就自(hua)由(shao)很多，这样才符合博客的态度 😋。
+在倒腾博客之前用 VuePress 做了一个[笔记项目](https://notes-rainbowatcher.vercel.app)，由于我希望这个笔记项目的内容是比较规范的，所以在写笔记的时候一直都放不开手脚，觉得似乎少了一个可以打草稿的地方，自然而然想到了做博客，那博客比起笔记项目在风格上就自(hua)由(shao)很多，这样才符合博客的态度 😋。
 
 ## 为什么是 VuePress
 
@@ -198,7 +198,7 @@ export default defineUserConfig({
 </CodeGroupItem>
 </CodeGroup>
 
-这时候博客主页还不会显示任何东西，仍需要进行一些[基本配置](https://vuepress-theme-gungnir-with-rainbow.vercel.app/zh/docs/basic/config.html)
+这时候博客主页还不会显示任何东西，仍需要进行一些[基本配置](https://vuepress-theme-gungnir-rainbowatcher.vercel.app/zh/docs/basic/config.html)
 
 ### 作者信息
 

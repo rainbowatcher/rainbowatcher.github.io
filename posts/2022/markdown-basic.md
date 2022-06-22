@@ -157,10 +157,10 @@ export default {
 ### Markdown 链接
 
 ```markdown
-[Github](http://github.com/with-rainbow)
+[Github](http://github.com/rainbowatcher)
 ```
 
-[Github](http://github.com/with-rainbow)
+[Github](http://github.com/rainbowatcher)
 
 ### 原始链接
 

@@ -17,13 +17,16 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   mermaid: true,
   katex: true,
   personalInfo: {
-    name: "rainbowatcher",
+    name: "Rainbow Watcher",
     avatar: "/img/avatar.jpg",
-    description: "BigData engineer, love with programing",
+    description: "💖Bigdata engineer, love with programing",
     sns: {
       github: "rainbowatcher", // Github
-      email: "renovamenzxh@gmail.com", // 邮箱
-      rss: "/rss.xml", // RSS 文件的链接
+      email: "rainbow-w@qq.com", // 邮箱
+      notes: {
+        icon: "ri-book-mark-fill",
+        link: "https://notes-rainbowatcher.vercel.app", // 笔记
+      }
     },
   },
   // 首页图片
@@ -84,7 +87,7 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   ],
   // 页脚配置
   footer: `
-  &copy; <a href="https://github.com/with-rainbow" target="_blank">with-rainbow</a> 2018-2022
+  &copy; <a href="https://github.com/rainbowatcher" target="_blank">rainbowatcher</a> 2018-2022
   <br>
   Powered by <a href="https://v2.vuepress.vuejs.org" target="_blank">VuePress</a> &
   <a href="https://github.com/Renovamen/vuepress-theme-gungnir" target="_blank">Gungnir</a>

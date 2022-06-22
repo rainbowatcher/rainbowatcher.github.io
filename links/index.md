@@ -44,12 +44,12 @@ links:
   - title: Me ⭐️
     items:
       - sitename: Github
-        url: https://github.com/with-rainbow
+        url: https://github.com/rainbowatcher
         img: https://github.githubassets.com/favicons/favicon.svg
         desc: 我的 Github 主页
       - sitename: 笔记
-        url: https://notes-with-rainbow.vercel.app
-        img: https://notes-with-rainbow.vercel.app/logo.ico
+        url: https://notes-rainbowatcher.vercel.app
+        img: https://notes-rainbowatcher.vercel.app/logo.ico
         desc: 我自己的笔记项目
 
   - title: Awesome
