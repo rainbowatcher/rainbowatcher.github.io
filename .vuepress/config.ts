@@ -21,7 +21,7 @@ export default defineUserConfig({
     katexPlugin(),
     mermaidPlugin({
       token: "mermaid",
-      theme: "forest",
+      theme: "classic",
     }),
     mdPlusPlugin({
       all: true,
