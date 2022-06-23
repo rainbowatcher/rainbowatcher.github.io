@@ -4,13 +4,13 @@ title: Shell 定制折腾记录
 subtitle:
 date: 2022-06-12
 useHeaderImage: true
-headerImage: /img/2022/shell-custom/shell.png
+headerImage: /img/shell.jpg
 headerMask: rgba(0, 0, 0, .4)
-hide: hide
+hide: false
 tags: [Shell, Zsh, Rust, CLI]
 ---
 
-Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比如`exa、bat、ripgrep、fd、starship`等等
+Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比如`exa、bat、ripgrep、fd、starship`等等，下面介绍我是怎么配置我的终端的。
 
 <!-- more -->
 
@@ -45,6 +45,8 @@ brew install bat fd ripgrep
 
 ## 配置
 
+### Starship
+
 starship 中 gitstatus 的配置，默认存储位置在`~/.config/starship.toml`
 
 ```toml
@@ -63,7 +65,7 @@ ahead = "⏫${count}"
 diverged = "⏫${ahead_count}⏬${behind_count}"
 ```
 
-[![asciicast](https://asciinema.org/a/7ow4rkwLvSBkjkRlAwRO4oJ3j.svg)](https://asciinema.org/a/7ow4rkwLvSBkjkRlAwRO4oJ3j)
+### Sheldon
 
 接下来是 Sheldon 的配置，默认存储位置在`~/.sheldon/plugins.toml`
 
@@ -106,37 +108,80 @@ dir = "bin"
 apply = ["defer", "PATH", "source"]
 ```
 
-### zsh-defer
+### Bat
 
-这个插件提供了异步加载插件的功能，使用方式`zsh-defer source /path/to/your/plugin.zsh`
+在 `~/.zshrc` 中加入下面的配置，Bat 自带了很多款主题，TowDark 是其中一款类似 OneDark 的主题
 
-### zsh-nvm
+```shell
+export BAT_THEME="TwoDark"
+```
 
-nvm 是一个 node 版本管理工具，zsh-nvm 提供能力管理 nvm 的安装、升级等（因为 nvm 安装之后需要在`.zshrc`中添加加载代码，而这个加载代码比较占时间，会拖慢终端的启动速度），使用 zsh-defer 加 zsh-nvm 可以加速 nvm 的加载
+### Vim
 
-### zsh-syntax-highlighting
+使用 [onedark.vim](https://github.com/joshdick/onedark.vim) 主题，先执行下面的命令下载主题
 
-语法高亮插件
+```shell
+mkdir ~/.vim/colors ~/.vim/autoload
+curl -o ~/.vim/colors/onedark.vim https://raw.githubusercontent.com/joshdick/onedark.vim/main/colors/onedark.vim
+curl -o ~/.vim/autoload/onedark.vim https://raw.githubusercontent.com/joshdick/onedark.vim/main/autoload/onedark.vim
+```
 
-### auto-ls
+接着在 `~/.vimrc` 中添加主题加载代码
 
-在你使用`cd`命令之后自动触发`ls`
+```shell
+colorscheme onedark
+```
 
-### alias-tips
+::: tip
 
-当你 shell 中存在相应的 alias 时进行提示
+目前使用 vim 的时间不长，以后熟练了争取出一篇相关文章
 
-### zsh-autocomplete
+:::
 
-为zsh提供实时自动补全功能
+## zsh 插件
 
-![autocomplete](../../.vuepress/public/img/2022/shell-custom/autocomplete.gif)
+- zsh-defer
 
-### zsh-autosuggestions
+  提供了异步加载插件的功能，使用方式`zsh-defer source /path/to/your/plugin.zsh`
 
-### autojump
+- zsh-nvm
 
+  nvm 是一个 node 版本管理工具，zsh-nvm 提供能力管理 nvm 的安装、升级等（因为 nvm 安装之后需要在`.zshrc`中添加加载代码，而这个加载代码比较占时间，会拖慢终端的启动速度），使用 zsh-defer 加 zsh-nvm 可以加速 nvm 的加载
 
+- zsh-syntax-highlighting
+
+  提供命令行语法高亮
+
+- auto-ls
+
+  在你使用`cd`命令之后自动触发`ls`
+
+  ```shell
+  # 指定cd命令之后自动执行的命令
+  AUTO_LS_COMMANDS=(ls)
+  ```
+
+- alias-tips
+
+  当你 shell 中存在相应的 alias 时进行提示
+
+- zsh-autocomplete
+
+  为 zsh 提供实时自动补全功能
+
+  ![autocomplete](../../.vuepress/public/img/2022/shell-custom/autocomplete.gif)
+
+- zsh-autosuggestions
+
+  自动提示上下文信息
+
+- autojump
+
+  自动跳转到目录
+
+## 最终效果演示
+
+![demo](../../.vuepress/public/img/2022/shell-custom/demo.gif)
 
 <style>
   img {
