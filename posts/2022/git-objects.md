@@ -14,9 +14,11 @@ tags: [Git, CLI]
 
 ## Blob 对象
 
-我们在根目录下新建一个 README.md 文件，并把它添加到暂存区
+我们从一个空项目开始，先在根目录下新建一个 README.md 文件，并把它添加到暂存区
 
 ```shell
+mkdir git-test && cd git-test
+git init
 echo "# hello git" > README.md
 ```
 
@@ -217,11 +219,11 @@ tree
 ```mermaid
 flowchart LR
 
-classDef tree    fill:#fb923c,stroke:#000,stroke-width:2px,stroke-dasharray: 5 5;
-classDef blob    fill:#22c55e,stroke:#000,stroke-width:2px,stroke-dasharray: 5 5;
-classDef tag     fill:#fcd34d;
-classDef commit  fill:#f87171;
-classDef comment stroke:#000,stroke-width:2px;
+classDef tree    fill:#fb923c,stroke:#000,stroke-width:2px;
+classDef blob    fill:#22c55e,stroke:#000,stroke-width:2px;
+classDef tag     fill:#fcd34d,stroke:#000,stroke-width:2px;
+classDef commit  fill:#f87171,stroke:#000,stroke-width:2px;
+classDef comment stroke-width:0px;
 
 subgraph content
   root(88e4e6):::tree
@@ -279,11 +281,11 @@ first tag
 ```mermaid
 flowchart LR
 
-classDef tree    fill:#fb923c,stroke:#000,stroke-width:2px,stroke-dasharray: 5 5;
-classDef blob    fill:#22c55e,stroke:#000,stroke-width:2px,stroke-dasharray: 5 5;
-classDef tag     fill:#fcd34d;
-classDef commit  fill:#f87171;
-classDef comment stroke:#000,stroke-width:2px;
+classDef tree    fill:#fb923c,stroke:#000,stroke-width:2px;
+classDef blob    fill:#22c55e,stroke:#000,stroke-width:2px;
+classDef tag     fill:#fcd34d,stroke:#000,stroke-width:2px;
+classDef commit  fill:#f87171,stroke:#000,stroke-width:2px;
+classDef comment stroke-width:0px;
 
 subgraph content
   root(88e4e6):::tree
