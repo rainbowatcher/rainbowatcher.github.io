@@ -7,9 +7,7 @@ headerMask: rgba(0, 0, 0, .4)
 date: 2022-05-16
 permalinkPattern: /post/:year/:month/:day/:slug/
 hide: false
-tags:
-  - Git
-  - CLI
+tags: [Git, CLI]
 ---
 
 ## 三个区域
@@ -49,3 +47,42 @@ D-->|"fetch|clone"|C
 C-->|checkout|A
 D-->|pull|A
 ```
+
+## 新建项目
+
+```shell
+mkdir git-test && cd git-test
+git init
+echo ".vscode" > .gitignore
+echo "# Introduce" > README.md
+```
+## 连接到远程仓库
+
+```shell
+git remote add origin https://github.com/username/reponame.git
+```
+
+## 提交变更到暂存区
+
+```shell
+git add .
+git commit -m "init"
+```
+
+## 推送到远程仓库
+
+```shell
+git push origin main
+```
+
+## 拉取变更
+
+pull
+
+## 克隆仓库到本地
+
+clone
+
+## 从本地存储库同步
+
+checkout
