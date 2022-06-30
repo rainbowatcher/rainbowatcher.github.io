@@ -40,9 +40,9 @@ tags: [Data Warehouse, DataLake, LakeHouse]
 
 ::: tip 相关资料
 
-[维基百科 - 数据湖](https://zh.m.wikipedia.org/zh-cn/%E6%95%B0%E6%8D%AE%E6%B9%96)
-[亚马逊云 - 什么是数据湖](https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/)
-[知乎 - 数据湖总结](https://zhuanlan.zhihu.com/p/91165577)
+- [维基百科 - 数据湖](https://zh.m.wikipedia.org/zh-cn/%E6%95%B0%E6%8D%AE%E6%B9%96)
+- [亚马逊云 - 什么是数据湖](https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/)
+- [知乎 - 数据湖总结](https://zhuanlan.zhihu.com/p/91165577)
 
 :::
 
