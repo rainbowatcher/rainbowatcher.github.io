@@ -3,8 +3,9 @@ layout: Post
 title: 理解 Git 中的对象
 subtitle: 介绍 Git 中的 Blob、Tree、Commit、Tag 对象
 date: 2022-06-22
-useHeaderImage: true
+permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/git.png
+useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
 hide: false
 tags: [Git, CLI]
