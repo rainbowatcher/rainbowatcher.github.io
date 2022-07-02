@@ -98,10 +98,22 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
    - 如果没有冲突,则会直接合并，如果存在冲突，⼿动解决冲突即可，不会再产⽣那条多余的信息。
    - 如果你不想每次都 rebase，可以在 git bash ⾥执⾏ git config --global pull.rebase true 这个配置就是告诉 git 在每次 pull 前先进⾏ rebase 操作 -->
 
-## 自用配置
+## 我的配置
+
+Git 提供的 alias 很好，但是我更喜欢 shell 自带的 alias
 
 ```shell
-git config --global alias.ls "log --oneline --cherry"
-git config --global alias.ll 'log --graph --cherry --pretty=format:"%h <%an> %ar %s"'
-git config --global core.editor "code --wait"
+alias gst='git status'
+alias gl='git log --oneline --cherry'
+alias gll='git log --graph --cherry --pretty=format:"%h <%an> %ar %s"'
+alias gp='git push'
+alias gpl='git pull'
+alias gcf='git config -l'
+alias gaa='git add .'
+alias gcf='git config --list'
+alias gba='git branch -a'
+alias gbd='git branch --delete'
+alias gbrn='git branch -m'
+alias gho='git hash-object'
+alias gcat='git cat-file'
 ```
