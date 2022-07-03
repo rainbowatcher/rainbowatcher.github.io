@@ -227,6 +227,100 @@ git commit --amend --no-edit
 ❯ git rm --cached /docs/intro.md
 ```
 
+## 重新整理提交消息
+
+查看当前日志
+
+```shell
+❯ git log --oneline
+a1fa5ca (HEAD -> main, origin/main) docs: git intro
+530b198 Revert "docs: git is awesome"
+82ba9d4 docs: git is awesome
+2b25ff6 (tag: 0.0.1) add: docs
+```
+
+由于 530b198 和 82ba9d4 一个是添加内容，一个是撤销前者的内容，所以我们希望将他们删除掉，使用 `rebase` 命令
+
+```shell
+❯ git rebase -i 82ba9d4 530b198
+hint: Waiting for your editor to close the file...
+```
+
+弹出编辑器内容如下
+
+```shell
+pick 82ba9d4 docs: git is awesome
+pick 530b198 Revert "docs: git is awesome"
+pick a1fa5ca docs: git intro
+
+# Rebase 2b25ff6..a1fa5ca onto 2b25ff6 (3 commands)
+#
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified); use -c <commit> to reword the commit message
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+
+```
+
+先看下提示信息
+
+- `p，pick <commit>` = 使用提交
+- `r，reword <commit>` = 使用提交，但编辑提交消息
+- `e，edit <commit>` = 使用提交，但停止修改
+- `s，squash <commit>` = 使用提交，但融合到之前的提交
+- `f, fixup [-C | -c] <commit>` = 类似于 "squash" 但只保留前一次提交的日志消息，除非使用 -C，在这种情况下只保留这次提交的消息； -c 与 -C 相同，但打开编辑器
+- `x，exec <command>` = 使用 shell 运行命令（行的其余部分）
+- `b，break` = 在此处停止（稍后使用 'git rebase --continue' 继续变基）
+- `d， drop <commit>` = 删除提交
+- `l，label <label>` = 使用名称标记当前 HEAD
+- `t，reset <label>` = 将 HEAD 重置为标签
+- `m，merge [-C <commit> | -c <commit>] <label> [# <oneline>]`
+
+  使用原始合并提交的创建合并提交
+  消息（或单行，如果没有原始合并提交
+  指定的）;使用 `-c <commit>` 改写提交信息
+
+这些行可以重新排序；它们是从上到下执行的。如果您在此处删除一行，则 COMMIT 将丢失。但是，如果您删除所有内容，rebase 将被中止。
+
+由于我们是想删除提交记录，所以使用drop 指令就好了，将内容修改成下面的样子，并且保存关闭。
+
+```shell
+d 82ba9d4 docs: git is awesome
+d 530b198 Revert "docs: git is awesome"
+pick a1fa5ca docs: git intro
+```
+
+关闭编辑器之后查看一下git日志
+
+```shell
+❯ git log --oneline
+749685a (HEAD -> main) docs: git intro
+2b25ff6 (tag: 0.0.1) add: docs
+```
+
+这样就把两条提交记录删掉了。这里我们的提交已经推送到了远程仓库，所以当我们rebase之后commit的SHA-1码是重新生成了的，所以会导致本地和远程的提交记录不一致。所以rebase命令最好在本地未提交到远程仓库的时候使用，如果想我现在的状况就只能 `push --force` 强制推送都远程仓库了。
+
 ## 参考
 
 - [如何撤销 Git 操作？ - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2019/12/git-undo.html)
