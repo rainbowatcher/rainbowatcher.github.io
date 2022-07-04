@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-cd258cfa","path":"/tags/dns/","title":"DNS | Tags","lang":"zh-CN","frontmatter":{"title":"DNS | Tags","layout":"Tags","blog":{"type":"category","name":"DNS","key":"tag"}},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{t as data};

@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-58527fd9","path":"/tags/engineering/","title":"Engineering | Tags","lang":"zh-CN","frontmatter":{"title":"Engineering | Tags","layout":"Tags","blog":{"type":"category","name":"Engineering","key":"tag"}},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{e as data};

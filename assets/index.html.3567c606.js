@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-cc9643a2","path":"/tags/syntax/","title":"Syntax | Tags","lang":"zh-CN","frontmatter":{"title":"Syntax | Tags","layout":"Tags","blog":{"type":"category","name":"Syntax","key":"tag"}},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{t as data};

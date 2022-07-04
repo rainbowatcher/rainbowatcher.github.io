@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-664a6652","path":"/tags/data-warehouse/","title":"Data Warehouse | Tags","lang":"zh-CN","frontmatter":{"title":"Data Warehouse | Tags","layout":"Tags","blog":{"type":"category","name":"Data Warehouse","key":"tag"}},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{a as data};

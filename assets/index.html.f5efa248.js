@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-d5fb11e4","path":"/tags/rust/","title":"Rust | Tags","lang":"zh-CN","frontmatter":{"title":"Rust | Tags","layout":"Tags","blog":{"type":"category","name":"Rust","key":"tag"}},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{t as data};

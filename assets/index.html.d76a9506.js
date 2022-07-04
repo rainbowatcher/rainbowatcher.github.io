@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-9f3bb84e","path":"/tags/datalake/","title":"DataLake | Tags","lang":"zh-CN","frontmatter":{"title":"DataLake | Tags","layout":"Tags","blog":{"type":"category","name":"DataLake","key":"tag"}},"excerpt":"","headers":[],"git":{},"filePathRelative":null}');export{a as data};
