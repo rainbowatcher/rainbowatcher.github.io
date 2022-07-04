@@ -303,7 +303,7 @@ pick a1fa5ca docs: git intro
 
 这些行可以重新排序；它们是从上到下执行的。如果您在此处删除一行，则 COMMIT 将丢失。但是，如果您删除所有内容，rebase 将被中止。
 
-由于我们是想删除提交记录，所以使用drop 指令就好了，将内容修改成下面的样子，并且保存关闭。
+由于我们是想删除提交记录，所以使用 drop 指令就好了，将内容修改成下面的样子，并且保存关闭。
 
 ```shell
 d 82ba9d4 docs: git is awesome
@@ -311,7 +311,7 @@ d 530b198 Revert "docs: git is awesome"
 pick a1fa5ca docs: git intro
 ```
 
-关闭编辑器之后查看一下git日志
+关闭编辑器之后查看一下 git 日志
 
 ```shell
 ❯ git log --oneline
@@ -319,7 +319,7 @@ pick a1fa5ca docs: git intro
 2b25ff6 (tag: 0.0.1) add: docs
 ```
 
-这样就把两条提交记录删掉了。这里我们的提交已经推送到了远程仓库，所以当我们rebase之后commit的SHA-1码是重新生成了的，所以会导致本地和远程的提交记录不一致。所以rebase命令最好在本地未提交到远程仓库的时候使用，如果想我现在的状况就只能 `push --force` 强制推送都远程仓库了。
+这样就把两条提交记录从远程仓库删掉了。这里我们的提交已经推送到了远程仓库，所以当我们 rebase 之后 commit 的 SHA-1 码是重新生成了的，所以会导致本地和远程的提交记录不一致。所以 rebase 命令最好在本地未提交到远程仓库的时候使用，如果想我现在的状况就只能 `push --force` 强制推送都远程仓库了。
 
 ## 参考
 
