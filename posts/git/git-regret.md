@@ -15,43 +15,6 @@ tags:
 
 <!-- more -->
 
-<!-- ## reset 命令
-
-这个命令用于将 HEAD 重置为指定状态
-
-```shell
-git reset [-q] [<tree-ish>] [--] <pathspec>...
-git reset [-q] [--pathspec-from-file=<file> [--pathspec-file-nul]] [<tree-ish>]
-git reset (--patch | -p) [<tree-ish>] [--] [<pathspec>...]
-git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [<commit>]
-```
-
-常用参数：
-
-| 参数      | 说明                                                                          |
-| --------- | ----------------------------------------------------------------------------- |
-| `--soft`  | 将 HEAD 引用指向给定提交，不改变索引（工作区）和工作目录                      |
-| `--mixed` | HEAD 引用指向给定提交，并且索引（暂存区）内容也跟着改变，工作目录内容不变     |
-| `--hard`  | HEAD 引用指向给定提交，索引（暂存区）内容和工作目录内容都会变成给定提交时的状态 |
-
-## revert 命令
-
-revert 命令的原理是，在当前提交后面，新增一次提交，抵消掉上一次提交导致的所有变化。
-
-```shell
-git revert [--[no-]edit] [-n] [-m parent-number] [-s] [-S[<keyid>]] <commit>...
-git revert (--continue | --skip | --abort | --quit)
-```
-
-常用参数：
-
-| 参数          | 描述                                                         |
-| ------------- | ------------------------------------------------------------ |
-| `--no-edit`   | 不弹出编辑器界面                                             |
-| `--no-commit` | 通常 revert 命令会自动进行一次提交，设置该参数则不会自动提交 | -->
-
-<!-- ## 场景 -->
-
 ## 撤销提交
 
 ```shell

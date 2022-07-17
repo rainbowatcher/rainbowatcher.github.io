@@ -2,7 +2,7 @@ import { GungnirThemeOptions } from "vuepress-theme-gungnir";
 
 const themeConfig: Partial<GungnirThemeOptions> = {
   repo: "https://github.com/rainbowatcher/rainbowatcher.github.io",
-  repoLabel: '项目',
+  repoLabel: "项目",
   // 编辑页面配置
   docsRepo: "https://github.com/rainbowatcher/rainbowatcher.github.io",
   docsBranch: "main",
@@ -26,7 +26,7 @@ const themeConfig: Partial<GungnirThemeOptions> = {
       notes: {
         icon: "ri-book-mark-fill",
         link: "https://notes-rainbowatcher.vercel.app", // 笔记
-      }
+      },
     },
   },
   // 首页图片
@@ -87,10 +87,12 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   ],
   // 页脚配置
   footer: `
-  &copy; <a href="https://github.com/rainbowatcher" target="_blank">rainbowatcher</a> 2018-2022
-  <br>
-  Powered by <a href="https://v2.vuepress.vuejs.org" target="_blank">VuePress</a> &
-  <a href="https://github.com/Renovamen/vuepress-theme-gungnir" target="_blank">Gungnir</a>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  CC BY-NC-SA 4.0
+  </a>
+  <br />
+  2022-PRESENT &copy; <a href="https://github.com/rainbowatcher" target="_blank">rainbowatcher</a><br />
+  Powered by <a href="https://v2.vuepress.vuejs.org" target="_blank">VuePress</a> & <a href="https://github.com/Renovamen/vuepress-theme-gungnir" target="_blank">Gungnir</a>
 `,
 };
 
