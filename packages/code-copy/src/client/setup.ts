@@ -5,8 +5,6 @@ import { useRoute } from "vue-router";
 declare const CODE_COPY_OPTIONS: Required<ACodeCopyOptions>;
 const options = CODE_COPY_OPTIONS
 
-console.log(`options: ${JSON.stringify(options, null, 2)}`)
-
 const isMobile = (): boolean => navigator
   ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/iu.test(
     navigator.userAgent
@@ -29,11 +27,11 @@ export const setupCodeCopy = (): void => {
       })
 
       if (codeBlockElement.parentElement)
-      codeBlockElement.parentElement.insertBefore(
-        copyButton,
-        codeBlockElement
-      );
-    codeBlockElement.setAttribute("copy-code-registered", "");
+        codeBlockElement.parentElement.insertBefore(
+          copyButton,
+          codeBlockElement
+        );
+      codeBlockElement.setAttribute("copy-code-registered", "");
     }
   }
 
@@ -43,7 +41,6 @@ export const setupCodeCopy = (): void => {
     setTimeout(() => {
       document.querySelectorAll<HTMLElement>(selector)
         .forEach(t => {
-          console.log(t);
           insertCopyButton(t)
         })
 
@@ -51,13 +48,12 @@ export const setupCodeCopy = (): void => {
   }
 
   onMounted(() => {
-    console.log(isMobile());
     if (!isMobile()) {
       getCopyButton()
     }
   })
 
-  watch(()=>route.path, ()=>{
+  watch(() => route.path, () => {
     if (!isMobile()) {
       getCopyButton()
     }
