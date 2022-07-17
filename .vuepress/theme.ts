@@ -88,11 +88,11 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   // 页脚配置
   footer: `
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  CC BY-NC-SA 4.0
   </a>
   <br />
-  &copy; <a href="https://github.com/rainbowatcher" target="_blank">rainbowatcher</a>2018-2022<br />
-  Powered by <a href="https://v2.vuepress.vuejs.org" target="_blank">VuePress</a> &<a href="https://github.com/Renovamen/vuepress-theme-gungnir" target="_blank">Gungnir</a>
+  2022-PRESENT &copy; <a href="https://github.com/rainbowatcher" target="_blank">rainbowatcher</a><br />
+  Powered by <a href="https://v2.vuepress.vuejs.org" target="_blank">VuePress</a> & <a href="https://github.com/Renovamen/vuepress-theme-gungnir" target="_blank">Gungnir</a>
 `,
 };
 
