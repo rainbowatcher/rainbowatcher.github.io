@@ -1,0 +1,24 @@
+{
+  "name": "@rainbowatcher/vuepress-plugin-code-copy",
+  "version": "0.0.1",
+  "author": "rainbowatcher <rainbow-w@qq.com>",
+  "description": "code copy plugin for vuepress",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [
+    "vuepress",
+    "vuepress2",
+    "vuepress-plugin",
+    "code-copy",
+    "copy-code"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@vuepress/client": "2.0.0-beta.48",
+    "@vuepress/utils": "2.0.0-beta.48",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2"
+  }
+}
