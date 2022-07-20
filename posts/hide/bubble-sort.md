@@ -1,6 +1,6 @@
 ---
 layout: Post
-title: 冒泡排序算法详解
+title: 冒泡排序及鸡尾酒排序算法
 date: 2022-07-17
 permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/markdown.png
@@ -31,7 +31,7 @@ tags: [Algorithm, Sort, Java]
 ```java
 import java.util.Arrays;
 
-public class BubbleSort {
+public class BubbleSort0 {
 
   public static void main(String[] args) {
     int[] arr = new int[] { 9, 7, 2, 6, 5 };
@@ -84,7 +84,7 @@ public class BubbleSort {
 ```java
 import java.util.Arrays;
 
-public class BubbleSort {
+public class BubbleSort1 {
 
   public static void main(String[] args) {
     int[] arr = new int[] { 3, 4, 2, 1, 5, 6, 7, 8 };
@@ -123,7 +123,7 @@ public class BubbleSort {
 ```java
 import java.util.Arrays;
 
-public class BubbleSort {
+public class BubbleSort2 {
 
   public static void main(String[] args) {
     int[] arr = new int[] { 3, 4, 2, 1, 5, 6, 7, 8 };
@@ -138,7 +138,7 @@ public class BubbleSort {
 
     for (int i = 0; i < arr.length - 1; i++) {
       boolean isSorted = true;
-      for (int j = 0; j < sortBorder - i - 1; j++) {
+      for (int j = 0; j < sortBorder; j++) {
         if (arr[j] > arr[j + 1]) {
           int tmp = arr[j];
           arr[j] = arr[j + 1];
@@ -165,7 +165,7 @@ public class BubbleSort {
 ```java
 import java.util.Arrays;
 
-public class BubbleSort {
+public class CocktailSort {
 
   public static void main(String[] args) {
     int[] arr = new int[] { 3, 4, 2, 1, 5, 6, 7, 8 };
@@ -185,7 +185,6 @@ public class BubbleSort {
           isSorted = false;
         }
       }
-      System.out.println(Arrays.toString(arr));
       if (isSorted) {
         break;
       }
@@ -200,7 +199,6 @@ public class BubbleSort {
           isSorted = false;
         }
       }
-      System.out.println(Arrays.toString(arr));
       if (isSorted) {
         break;
       }
@@ -210,6 +208,56 @@ public class BubbleSort {
 ```
 
 冒泡排序默认是从左到右遍历数组，鸡尾酒排序奇数轮与偶数轮遍历方向相反，从而优化了某些特殊场景的排序时间复杂度。
+
+### 边界优化的鸡尾酒排序
+
+```java
+import java.util.Arrays;
+
+public class OptimizedCocktailSort {
+
+  public static void optimizedCocktailSort(int[] arr) {
+    int tmp = 0;
+    // 记录最后一次交换的位置
+    int lastExchangeIndex = 0;
+    // 顺序无序数组的边界
+    int leftSortBorder = arr.length - 1;
+    // 逆序无序数组的边界
+    int rightSortBorder = 0;
+    for (int i = 0; i < arr.length / 2 - 1; i++) {
+      boolean isSorted = true;
+      // 奇数轮，从左到右
+      for (int j = rightSortBorder; j < leftSortBorder; j++) {
+        if (arr[j] > arr[j + 1]) {
+          tmp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = tmp;
+          isSorted = false;
+          lastExchangeIndex = j;
+        }
+      }
+      leftSortBorder = lastExchangeIndex;
+      if (isSorted) {
+        break;
+      }
+      isSorted = true;
+      // 偶数轮
+      for (int j = leftSortBorder; j > rightSortBorder; j--) {
+        if (arr[j] < arr[j - 1]) {
+          tmp = arr[j];
+          arr[j] = arr[j - 1];
+          arr[j - 1] = tmp;
+          isSorted = false;
+          lastExchangeIndex = j;
+        }
+      }
+      rightSortBorder = lastExchangeIndex;
+      if (isSorted) {
+        break;
+      }
+    }
+  }
+```
 
 ## 参考
 
