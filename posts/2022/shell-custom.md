@@ -24,6 +24,7 @@ Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比�
 - [starship/starship](https://github.com/starship/starship): 迷你、快速、自由定义的跨平台 shell 提示符! ![GitHub Repo stars](https://img.shields.io/github/stars/starship/starship?style=plastic)
 - [uutils/coreutils](https://github.com/uutils/coreutils): 跨平台 Rust 重写 GNU coreutils ![GitHub Repo stars](https://img.shields.io/github/stars/uutils/coreutils?style=plastic)
 - [rossmacarthur/sheldon](https://github.com/rossmacarthur/sheldon): 快速、可配置化的插件管理器 ![GitHub Repo stars](https://img.shields.io/github/stars/rossmacarthur/sheldon?style=plastic)
+- [ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide): 更智能的 cd 命令。支持所有主要的 shell。![GitHub Repo stars](https://img.shields.io/github/stars/ajeetdsouza/zoxide?style=plastic)
 
 [更多项目](https://github.com/rust-unofficial/awesome-rust)
 
@@ -32,7 +33,7 @@ Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比�
 折腾了两天，整理一套自己的 zsh 配置，首先是必备的软件安装
 
 ```shell
-brew install starship sheldon
+brew install starship sheldon zoxide
 ```
 
 最终选用了 Rust 写的 [rossmacarthur/sheldon](https://github.com/rossmacarthur/sheldon) 项目来做 zsh 插件管理。看了很多 zsh 插件管理器，很多作者都几年没有更新了，甚至还有想 zinit 这种作者弃坑的开源项目，为了能找一个长久更新、有活力的插件管理器，就选了 sheldon，这个项目虽然 star 数量不多，但是他是使用 Rust (毕竟 Rust 才是未来:dog:) 编写的，有一定的学习价值，也希望这个项目能越来越好。
@@ -45,24 +46,50 @@ brew install bat fd ripgrep
 
 ## 配置
 
+### Zoxide
+
+使用方式很简单，在 `~/.zshrc` 中添加加载代码
+
+```shell
+eval "$(zoxide init zsh)"
+```
+
+如果你有使用过 `autojump` 或者 `z` 之类的 zsh 插件，官方也有[导入数据的功能](https://github.com/ajeetdsouza/zoxide#step-4-import-your-data-optional)
+
+```shell
+zoxide import --from [z|autojump] path/to/db
+```
+
+| OS      | Path                                                                             | Example                                              |
+| ------- | -------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Linux   | $XDG_DATA_HOME/autojump/autojump.txt or $HOME/.local/share/autojump/autojump.txt | /home/alice/.local/share/autojump/autojump.txt       |
+| macOS   | \$HOME/Library/autojump/autojump.txt                                             | /Users/Alice/Library/autojump/autojump.txt           |
+| Windows | %APPDATA%\autojump\autojump.txt                                                  | C:\Users\Alice\AppData\Roaming\autojump\autojump.txt |
+
 ### Starship
 
-starship 中 gitstatus 的配置，默认存储位置在`~/.config/starship.toml`
+首先在 `~/.zshrc` 中配置以指明使用的 shell 客户端。
+
+```shell
+eval $(starship init zsh)
+```
+
+starship 中 gitstatus 的配置，默认存储位置在`~/.config/starship.toml`，我的配置如下：
 
 ```toml
 [git_status]
-conflicted = "!=${count} "
-untracked = "[?${count}](bright-red) "
-stashed = "[\\$$count](underline #666666) "
-modified = "[!${count}](bright-yellow) "
-staged = "[+${count}](bright-blue) "
-renamed = "[»${count}](yellow) "
-deleted = "[✘${count}](red) "
+conflicted = "!=${count}"
+untracked = "[?${count}](blue)"
+stashed = "[\\$$count](underline #666666)"
+modified = "[!${count}](yellow)"
+staged = "[+${count}](green)"
+renamed = "[»${count}](underline yellow)"
+deleted = "[✘${count}](red)"
 # ahead_behind
-up_to_date = "✅"
-behind = "⏬${count}"
-ahead = "⏫${count}"
-diverged = "⏫${ahead_count}⏬${behind_count}"
+up_to_date = ""
+behind = "${count}"
+ahead = "${count}"
+diverged = "${ahead_count}${behind_count}"
 ```
 
 ### Sheldon
@@ -86,10 +113,6 @@ apply = ["defer"]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
 
-[plugins.auto-ls]
-github = 'desyncr/auto-ls'
-apply = ["defer", "source"]
-
 [plugins.alias-tips]
 github = "djui/alias-tips"
 apply = ["defer"]
@@ -102,10 +125,13 @@ apply = ["defer"]
 github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]
 
-[plugins.autojump]
-github = "wting/autojump"
-dir = "bin"
-apply = ["defer", "PATH", "source"]
+[plugins.cd-ls]
+github = "zshzoo/cd-ls"
+apply = ["defer"]
+
+[plugins.extract]
+remote = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/extract/extract.plugin.zsh"
+apply = ["defer"]
 ```
 
 ### Bat
@@ -152,14 +178,9 @@ colorscheme onedark
 
   提供命令行语法高亮
 
-- auto-ls
+- cd-ls
 
   在你使用`cd`命令之后自动触发`ls`
-
-  ```shell
-  # 指定cd命令之后自动执行的命令
-  AUTO_LS_COMMANDS=(ls)
-  ```
 
 - alias-tips
 
