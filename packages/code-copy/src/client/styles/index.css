@@ -1,10 +1,9 @@
 .code-copy-button {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 2rem;
+  height: 2rem;
   top: 2rem;
   right: 0.5rem;
-  margin: auto;
   text-align: center;
   margin: auto;
   border-radius: 4px;
@@ -22,7 +21,14 @@ div[class*=language-]:hover > .code-copy-button{
   background-color: rgba(230, 230, 230, 0.1);
 }
 
+/* .code-copy-button:hover::before {
+  content: "复制";
+  position: absolute;
+} */
+
 .code-copy-button > svg {
+  width: 1rem;
+  height: 1rem;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
