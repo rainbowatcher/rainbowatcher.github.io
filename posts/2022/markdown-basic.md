@@ -149,7 +149,7 @@ export default {
   markdown: {
     lineNumbers: true,
   },
-};
+}
 ```
 
 ## Link 链接

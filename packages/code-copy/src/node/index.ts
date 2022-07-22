@@ -1,3 +1,3 @@
-import { copyCodePlugin } from "./plugin";
+import { copyCodePlugin } from './plugin'
 
 export default copyCodePlugin
