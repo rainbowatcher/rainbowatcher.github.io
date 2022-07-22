@@ -198,7 +198,7 @@ export default defineUserConfig({
 </CodeGroupItem>
 </CodeGroup>
 
-这时候博客主页还不会显示任何东西，仍需要进行一些[基本配置](https://vuepress-theme-gungnir-rainbowatcher.vercel.app/zh/docs/basic/config.html)
+这时候博客主页还不会显示任何东西，仍需要进行一些[基本配置](https://v2-vuepress-theme-gungnir.vercel.app/zh/docs/basic/config.html)
 
 ### 作者信息
 
