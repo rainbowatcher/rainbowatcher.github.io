@@ -1,0 +1,2 @@
+extends: '@antfu'
+ignorePatterns: ['**/lib/*']
