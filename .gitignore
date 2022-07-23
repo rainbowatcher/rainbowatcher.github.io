@@ -1,5 +1,11 @@
+# vuepress temp file
 .cache
 .temp
-.vscode
+
+# node
 node_modules
+
+# build
 dist
+lib/
+*.tsbuildinfo
