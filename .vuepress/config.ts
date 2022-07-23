@@ -5,7 +5,7 @@ import mermaidPlugin from "@renovamen/vuepress-plugin-mermaid";
 import mdPlusPlugin from "@renovamen/vuepress-plugin-md-plus";
 import giscusPlugin from "vuepress-plugin-giscus";
 import themeConfig from "./theme";
-import copyCodePlugin from "../packages/code-copy/src/node";
+import copyCodePlugin from "@rainbowatcher/vuepress-plugin-code-copy";
 
 export default defineUserConfig({
   title: "ClubSheep",

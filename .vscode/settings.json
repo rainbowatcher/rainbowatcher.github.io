@@ -1,0 +1,10 @@
+{
+  "prettier.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": [
+    "gungnir",
+    "renovamen"
+  ]
+}

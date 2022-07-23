@@ -13,6 +13,6 @@ export const copyCodePlugin = (
       // CODE_COPY_LOCALES: userCopyCodeLocales,
     }),
 
-    clientConfigFile: path.resolve(__dirname, '../client/index.ts'),
+    clientConfigFile: path.resolve(__dirname, '../client/index.js'),
   }
 }
