@@ -1,7 +1,7 @@
 {
-  "name": "@rainbowatcher/vuepress-plugin-code-copy",
+  "name": "vuepress-plugin-code-copy",
   "version": "0.0.1",
-  "description": "code copy plugin for vuepress",
+  "description": "Code copy plugin for vuepress",
   "author": "rainbowatcher <wwh33516@gmail.com>",
   "license": "MIT",
   "keywords": [
