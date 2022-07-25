@@ -15,7 +15,10 @@
     "noUnusedParameters": true,
 
     // Modules
-    "baseUrl": "./",
+    "baseUrl": ".",
+    "paths": {
+      "tslib": ["./node_modules/.pnpm/tslib@1.14.1/node_modules/tslib/tslib.d.ts"]
+    },
     "module": "es2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,

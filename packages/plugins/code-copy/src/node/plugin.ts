@@ -2,11 +2,11 @@ import type { PluginFunction } from 'vuepress'
 import { path } from '@vuepress/utils'
 import type { ACodeCopyOptions } from '../shared/types'
 
-export const copyCodePlugin = (
+export const codeCopyPlugin = (
   options: Partial<ACodeCopyOptions> = {},
 ): PluginFunction => (_app) => {
   return {
-    name: 'vuepress-plugin-copy-code',
+    name: '@rainbowatcher/vuepress-plugin-code-copy',
 
     define: (): Record<string, unknown> => ({
       CODE_COPY_OPTIONS: options,

@@ -14,6 +14,15 @@ Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比�
 
 <!-- more -->
 
+::: normal-demo 样本
+
+```html
+hello
+```
+
+:::
+
+
 ## 优秀 Rust Shell 项目
 
 先放几个项目链接
