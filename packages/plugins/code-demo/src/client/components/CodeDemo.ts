@@ -118,8 +118,7 @@ export default defineComponent({
 
     onMounted(() => {
       setTimeout(() => {
-        // eslint-disable-next-line no-void
-        void loadDemo()
+        loadDemo()
       }, MARKDOWN_ENHANCE_DELAY)
     })
 
