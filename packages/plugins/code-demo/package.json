@@ -23,14 +23,13 @@
     "@vuepress/shared": "2.0.0-beta.49",
     "@vuepress/utils": "2.0.0-beta.49",
     "balloon-css": "^1.2.0",
-    "markdown-it": "^13.0.1"
+    "markdown-it": "^13.0.1",
+    "vue": "^3.2.37"
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@types/babel__core": "^7.1.19",
     "@vuepress/core": "2.0.0-beta.49",
-    "@vuepress/markdown": "2.0.0-beta.49",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.7.4"
+    "@vuepress/markdown": "2.0.0-beta.49"
   }
 }

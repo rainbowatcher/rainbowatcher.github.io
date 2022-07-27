@@ -1,12 +1,11 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-       "./*"
-      ]
-     }
+      "@/*": ["./*"]
+    }
   },
-  "include": ["**/*.ts", "**/*.vue"]
+  "include": ["**/*.ts", "**/*.vue"],
+  "exclude": ["node_modules", ".temp", "lib", "dist"]
 }
