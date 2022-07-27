@@ -2,7 +2,8 @@ import type { GungnirThemeOptions } from 'vuepress-theme-gungnir'
 
 const themeConfig: Partial<GungnirThemeOptions> = {
   repo: 'https://github.com/rainbowatcher/rainbowatcher.github.io',
-  repoLabel: '项目',
+  docsDir: 'docs',
+  // repoLabel: '项目',
   // 编辑页面配置
   docsRepo: 'https://github.com/rainbowatcher/rainbowatcher.github.io',
   docsBranch: 'main',
@@ -12,10 +13,10 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   lastUpdated: true,
   lastUpdatedText: '最后更新',
   backToHome: '返回主页',
-  toggleDarkMode: '切换主题',
+  // toggleDarkMode: '切换主题',
   notFound: ['页面走丢了', '没发现你要的页面', '没找到呢'],
-  mermaid: true,
-  katex: true,
+  // mermaid: true,
+  // katex: true,
   personalInfo: {
     name: 'Rainbow Watcher',
     avatar: '/img/avatar.jpg',

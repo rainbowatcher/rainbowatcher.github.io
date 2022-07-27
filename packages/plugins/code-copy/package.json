@@ -19,7 +19,7 @@
     "lint": "eslint .",
     "clean": "rimraf ./lib ./*.tsbuildinfo",
     "build": "tsc -b tsconfig.build.json",
-    "copy": "cpx \"src/**/*.css\" lib"
+    "copy": "cpx \"src/**/*.{css,scss,less}\" lib"
   },
   "dependencies": {
     "@vuepress/client": "2.0.0-beta.48",

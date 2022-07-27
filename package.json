@@ -12,10 +12,11 @@
   },
   "scripts": {
     "clean": "pnpm --stream -r clean",
-    "build": "pnpm --stream -r build && pnpm --parallel --stream -r copy",
+    "check": "pnpm exec lychee -c lychee.toml -f markdown .",
+    "build": "pnpm build:packages && pnpm docs:build",
+    "build:packages": "pnpm --stream -r build && pnpm --parallel --stream -r copy",
     "docs:dev": "pnpm --filter docs docs:dev",
     "docs:build": "pnpm --filter docs docs:build",
-    "check": "pnpm exec lychee -c lychee.toml -f markdown .",
     "preview": "serve docs/.vuepress/dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
