@@ -11,7 +11,7 @@ import {
 } from '../utils'
 
 import type { CodeDemoOptions } from '../../shared'
-import { CODEPEN_SVG, JSFIDDLE_SVG, LOADING_SVG } from './icons'
+import { CODEPEN_SVG, JSFIDDLE_SVG, LOADING_SVG, TOGGLE_SVG } from './icons'
 
 import 'balloon-css/balloon.css'
 import '../styles/code-demo.scss'
@@ -101,17 +101,20 @@ export default defineComponent({
       loaded.value = true
     }
 
-    const loadDemo = (): Promise<void> => {
+    const loadDemo = async (): Promise<void> => {
       switch (props.type) {
         case 'react': {
-          return loadReact(code.value).then(() => initDom())
+          await loadReact(code.value)
+          return initDom()
         }
         case 'vue': {
-          return loadVue(code.value).then(() => initDom())
+          await loadVue(code.value)
+          return initDom()
         }
 
         default: {
-          return loadNormal(code.value).then(() => initDom(true))
+          await loadNormal(code.value)
+          return initDom(true)
         }
       }
     }
@@ -140,6 +143,7 @@ export default defineComponent({
                   : `${codeContainer.value!.clientHeight + 13.8}px`
                 isExpanded.value = !isExpanded.value
               },
+              innerHTML: TOGGLE_SVG,
             })
             : null,
           props.title
