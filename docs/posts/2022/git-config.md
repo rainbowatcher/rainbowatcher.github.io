@@ -62,12 +62,12 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 
 ```toml
 [user]
-        name = your name
-        email = rainbow-w@qq.com
+        name = your_name
+        email = email_address@orgnization.com
 [core]
         autocrlf = input
         quotepath = false
-        excludesfile = /Users/rainb/.gitignore_global
+        excludesfile = /Users/username/.gitignore_global
         editor = code --wait
 [init]
         defaultBranch = main
@@ -76,12 +76,14 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
         smudge = git-lfs smudge -- %f
         process = git-lfs filter-process
         required = true
+[pull]
+        ff = only
+[includeIf "gitdir:~/WorkSpace/"]
+        path = ~/.config/git/.gitconfig_company
 [http]
         proxy = http://127.0.0.1:8889
 [https]
         proxy = https://127.0.0.1:8889
-[pull]
-        rebase = true
 ```
 
 <!-- ## rebase
@@ -97,6 +99,85 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
    - pull 拉取代码时远程和本地会出现分叉，会进⾏分⽀合并，就会产⽣`Merge branch 'master' of …`信息。解决⽅法使⽤ `git pull --rebase` 命令。
    - 如果没有冲突,则会直接合并，如果存在冲突，⼿动解决冲突即可，不会再产⽣那条多余的信息。
    - 如果你不想每次都 rebase，可以在 git bash ⾥执⾏ git config --global pull.rebase true 这个配置就是告诉 git 在每次 pull 前先进⾏ rebase 操作 -->
+
+## 条件配置
+
+Git 提供 includeIf 选项来指定条件配置，在切换多个项目工作的情况下非常有用
+
+```toml
+# ~/.gitconfig
+...you global config...
+[includeIf "gitdir:~/WorkSpace/"]
+        path = ~/.config/git/.gitconfig_company
+```
+
+`~/.gitconfig` 中的配置为全局配置，当条件符合 `includeIf` 选项中的判断条件时将 path 对应的配置文件加载到项目配置。
+
+- `gitdir`: Git 项目路径规则
+- `gitdir/i`: 与 gitdir 相似，只是不区分大小写
+- `onbranch`: 在指定分支下应用的规则
+- `hasconfig:remote.*.url:`: 关键字为`hasconfig`，意为包含某些配置时应用规则
+
+示例配置：
+
+```toml
+# Core variables
+[core]
+	; Don't trust file modes
+	filemode = false
+
+# Our diff algorithm
+[diff]
+	external = /usr/local/bin/diff-wrapper
+	renames = true
+
+[branch "devel"]
+	remote = origin
+	merge = refs/heads/devel
+
+# Proxy settings
+[core]
+	gitProxy="ssh" for "kernel.org"
+	gitProxy=default-proxy ; for the rest
+
+[include]
+	path = /path/to/foo.inc ; include by absolute path
+	path = foo.inc ; find "foo.inc" relative to the current file
+	path = ~/foo.inc ; find "foo.inc" in your `$HOME` directory
+
+; include if $GIT_DIR is /path/to/foo/.git
+[includeIf "gitdir:/path/to/foo/.git"]
+	path = /path/to/foo.inc
+
+; include for all repositories inside /path/to/group
+[includeIf "gitdir:/path/to/group/"]
+	path = /path/to/foo.inc
+
+; include for all repositories inside $HOME/to/group
+[includeIf "gitdir:~/to/group/"]
+	path = /path/to/foo.inc
+
+; relative paths are always relative to the including
+; file (if the condition is true); their location is not
+; affected by the condition
+[includeIf "gitdir:/path/to/group/"]
+	path = foo.inc
+
+; include only if we are in a worktree where foo-branch is
+; currently checked out
+[includeIf "onbranch:foo-branch"]
+	path = foo.inc
+
+; include only if a remote with the given URL exists (note
+; that such a URL may be provided later in a file or in a
+; file read after this file is read, as seen in this example)
+[includeIf "hasconfig:remote.*.url:https://example.com/**"]
+	path = foo.inc
+[remote "origin"]
+	url = https://example.com/git
+```
+
+更多配置方式参考[官方配置文档](https://git-scm.com/docs/git-config#_includes)。
 
 ## 我的配置
 
