@@ -43,21 +43,22 @@ export const setupCodeCopy = (): void => {
   const getCopyButton = () => {
     const selector = options.selector || 'div[class*="language-"] pre'
 
-    setTimeout(() => {
+    const unset = setTimeout(() => {
       document.querySelectorAll<HTMLElement>(selector)
         .forEach((t) => {
           insertCopyButton(t)
         })
+      clearTimeout(unset)
     }, 500)
   }
 
   onMounted(() => {
     if (!isMobile())
       getCopyButton()
-  })
 
-  watch(() => route.path, () => {
-    if (!isMobile())
-      getCopyButton()
+    watch(() => route.path, () => {
+      if (!isMobile())
+        getCopyButton()
+    })
   })
 }
