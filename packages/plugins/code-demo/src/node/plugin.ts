@@ -31,21 +31,12 @@ export const codeDemoPlugin
           },
         }),
 
-        // extendsBundlerOptions: (config: unknown, app): void => {
-        // },
-
         extendsMarkdown: (md): void => {
           md.use(normalDemo)
           md.use(vueDemo)
           md.use(reactDemo)
         },
 
-        // onInitialized: async (app): Promise<void> => {
-        //   if (shouldCheckLinks)
-        //     app.pages.forEach(page => checkLinks(page, app))
-
-        //   await prepareRevealPluginFile(app, revealPlugins)
-        // },
         clientConfigFile: async (app) => {
           return await app.writeTemp(
             'md-enhance/config.js',

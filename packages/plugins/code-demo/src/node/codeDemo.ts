@@ -17,41 +17,38 @@ export const CODE_DEMO_DEFAULT_SETTING: CodeDemoOptions = {
   reactDOM: 'https://unpkg.com/react-dom/umd/react-dom.production.min.js',
 }
 
-const getPlugin
-  = (name: string): PluginSimple =>
-    md =>
-      container(md, {
-        name,
-        openRender: (tokens: Token[], index: number): string => {
-          const title = tokens[index].info.trimStart().slice(name.length).trim()
+const getPlugin = (name: string): PluginSimple =>
+  md => container(md,
+    {
+      name,
+      openRender: (tokens: Token[], index: number): string => {
+        const title = tokens[index].info.trimStart().slice(name.length).trim()
 
-          let config = ''
-          const code: Record<string, string> = {}
+        let config = ''
+        const code: Record<string, string> = {}
 
-          for (let i = index; i < tokens.length; i++) {
-            const { type, content, info } = tokens[i]
+        for (let i = index; i < tokens.length; i++) {
+          const { type, content, info } = tokens[i]
 
-            if (type === `container_${name}_close`)
-              break
-            if (!content)
-              continue
-            if (type === 'fence') {
-              if (info === 'json')
-                config = encodeURIComponent(content)
-              else code[info] = content
-            }
+          if (type === `container_${name}_close`)
+            break
+          if (!content)
+            continue
+          if (type === 'fence') {
+            if (info === 'json')
+              config = encodeURIComponent(content)
+            else code[info] = content
           }
+        }
 
-          return `
-<CodeDemo id="code-demo-${hash(code)}" type="${name.split('-')[0]}"${
-          title ? ` title="${encodeURIComponent(title)}"` : ''
+        return `
+          <CodeDemo id="code-demo-${hash(code)}" type="${name.split('-')[0]}"${title ? ` title="${encodeURIComponent(title)}"` : ''
         }${config ? ` config="${config}"` : ''} code="${encodeURIComponent(
           JSON.stringify(code),
-        )}">
-`
-        },
-        closeRender: () => '</CodeDemo>',
-      })
+        )}">`
+      },
+      closeRender: () => '</CodeDemo>',
+    })
 
 export const normalDemo: PluginSimple = getPlugin('normal-demo')
 
