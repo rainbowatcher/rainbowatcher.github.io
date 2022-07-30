@@ -10,3 +10,4 @@ dist
 lib/
 *.tsbuildinfo
 .vercel
+*.code-workspace
