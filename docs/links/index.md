@@ -14,7 +14,7 @@ links:
         desc: Vue 驱动的静态网站生成器
       - sitename: Vite
         url: https://cn.vitejs.dev/
-        img: https://cn.vitejs.dev/logo.svg
+        img: https://vitejs.dev/logo-with-shadow.png
         desc: 下一代前端开发与构建工具
       - sitename: Vitest
         url: https://cn.vitest.dev/
