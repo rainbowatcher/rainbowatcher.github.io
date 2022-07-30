@@ -15,7 +15,7 @@
     "check": "pnpm exec lychee -c lychee.toml -f markdown .",
     "build": "pnpm build:packages && pnpm docs:build",
     "build:packages": "pnpm --stream -r build && pnpm --parallel --stream -r copy",
-    "docs:dev": "pnpm build:packages && pnpm --filter docs docs:dev",
+    "docs:dev": "pnpm --filter docs docs:dev",
     "docs:build": "pnpm --filter docs docs:build",
     "preview": "serve docs/.vuepress/dist",
     "lint": "eslint .",
