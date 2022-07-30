@@ -3,7 +3,7 @@ layout: Post
 title: Java 元注解源码解析
 date: 2022-05-26
 useHeaderImage: true
-headerImage: /img/java-logo.png
+headerImage: /img/java.png
 headerMask: rgba(0, 0, 0, .4)
 catalog: false
 hide: true

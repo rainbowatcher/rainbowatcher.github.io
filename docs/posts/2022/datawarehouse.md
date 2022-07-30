@@ -3,7 +3,7 @@ layout: Post
 title: 数据仓库、数据湖、湖仓一体以及他们的区别
 date: 2022-06-25
 permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/2022/datawarehouse/datalake.png
+headerImage: /img/datalake.png
 useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
 hide: false

@@ -2,7 +2,7 @@
 layout: Post
 title: 关于这个博客搭建过程的点滴
 subtitle: 我的小伙伴们可能好奇这个博客的搭建过程，就写了个小攻略
-headerImage: /img/2022/about-this-post/blog.jpg
+headerImage: /img/blog.jpg
 useHeaderImage: true
 headerMask: rgba(0,0,0,0.4)
 date: 2022-05-20

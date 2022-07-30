@@ -2,7 +2,7 @@
 layout: Post
 title: 软件工程总结
 subtitle: 总结一下工作中碰到的问题
-headerImage: /img/2022/engineering/2.jpg
+headerImage: /img/2.jpg
 useHeaderImage: true
 headerMask: rgba(100, 100, 100, .618)
 date: 2022-05-04
