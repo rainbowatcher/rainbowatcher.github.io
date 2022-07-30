@@ -5,7 +5,7 @@ date: 2022-06-12
 useHeaderImage: true
 headerImage: /img/markdown.png
 headerMask: rgba(0, 0, 0, .4)
-hide: hide
+hide: true
 tags: [Asciinema, CLI, Gif]
 ---
 

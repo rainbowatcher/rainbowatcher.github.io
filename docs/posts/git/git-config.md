@@ -1,9 +1,11 @@
 ---
 layout: Post
 title: Git 常用的配置项
+subtitle: 
 date: 2022-05-24
-useHeaderImage: true
+permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/git.png
+useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
 hide: false
 tags: [Git, CLI]
