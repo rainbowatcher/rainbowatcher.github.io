@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, onMounted, ref } from 'vue'
+import { computed, defineComponent, h, onMounted, reactive, ref } from 'vue'
 import type { PropType, VNode } from 'vue'
 import { loadNormal, loadReact, loadVue } from '../composables'
 import {
@@ -51,7 +51,6 @@ export default defineComponent({
     const isExpanded = ref(false)
     const demoWrapper = ref<HTMLDivElement | null>(null)
     const codeContainer = ref<HTMLDivElement | null>(null)
-    const height = ref('0')
     const loaded = ref(false)
 
     const config = computed(
@@ -78,6 +77,10 @@ export default defineComponent({
     )
 
     const isLegal = computed(() => code.value.isLegal)
+    const code_wrapper = reactive({
+      overflow: 'hidden',
+      height: '0',
+    })
 
     const initDom = (innerHTML = false): void => {
       // attach a shadow root to demo
@@ -94,9 +97,9 @@ export default defineComponent({
         injectCSS(shadowRoot, code.value)
         injectScript(props.id, shadowRoot, code.value)
 
-        height.value = '0'
+        code_wrapper.height = '0'
       }
-      else { height.value = 'auto' }
+      else { code_wrapper.height = 'auto' }
 
       loaded.value = true
     }
@@ -119,6 +122,32 @@ export default defineComponent({
       }
     }
 
+    const codepen_data = JSON.stringify({
+      html: code.value.html,
+      js: code.value.js,
+      css: code.value.css,
+
+      js_external: code.value.jsLib.join(';'),
+
+      css_external: code.value.cssLib.join(';'),
+      layout: code.value.codepenLayout,
+
+      html_pre_processor: codeType.value
+        ? codeType.value.html[1]
+        : 'none',
+
+      js_pre_processor: codeType.value
+        ? codeType.value.js[1]
+        : code.value.jsx
+          ? 'babel'
+          : 'none',
+
+      css_pre_processor: codeType.value
+        ? codeType.value.css[1]
+        : 'none',
+      editors: code.value.codepenEditors,
+    })
+
     onMounted(() => {
       setTimeout(() => {
         loadDemo()
@@ -127,21 +156,24 @@ export default defineComponent({
 
     return (): VNode =>
       h('div', { class: 'code-demo-wrapper', id: props.id }, [
-        loaded.value
-          ? null
-          : h('div', {
-            class: ['loading'],
-            innerHTML: LOADING_SVG,
-          }),
         h('div', { class: 'code-demo-header' }, [
           code.value.isLegal
             ? h('button', {
               class: ['toggle-button', isExpanded.value ? 'down' : 'right'],
               onClick: () => {
-                height.value = isExpanded.value
-                  ? '0'
-                  : `${codeContainer.value!.clientHeight + 13.8}px`
                 isExpanded.value = !isExpanded.value
+                if (isExpanded.value) {
+                  code_wrapper.height = `${codeContainer.value!.clientHeight + 13.8}px`
+                  setTimeout(() => {
+                    code_wrapper.overflow = 'visible'
+                  }, 200)
+                }
+                else {
+                  code_wrapper.overflow = 'hidden'
+                  setTimeout(() => {
+                    code_wrapper.height = '0'
+                  }, 100)
+                }
               },
               innerHTML: TOGGLE_SVG,
             })
@@ -208,31 +240,7 @@ export default defineComponent({
                 h('input', {
                   type: 'hidden',
                   name: 'data',
-                  value: JSON.stringify({
-                    html: code.value.html,
-                    js: code.value.js,
-                    css: code.value.css,
-
-                    js_external: code.value.jsLib.join(';'),
-
-                    css_external: code.value.cssLib.join(';'),
-                    layout: code.value.codepenLayout,
-
-                    html_pre_processor: codeType.value
-                      ? codeType.value.html[1]
-                      : 'none',
-
-                    js_pre_processor: codeType.value
-                      ? codeType.value.js[1]
-                      : code.value.jsx
-                        ? 'babel'
-                        : 'none',
-
-                    css_pre_processor: codeType.value
-                      ? codeType.value.css[1]
-                      : 'none',
-                    editors: code.value.codepenEditors,
-                  }),
+                  value: codepen_data,
                 }),
                 h('button', {
                   'type': 'submit',
@@ -246,6 +254,13 @@ export default defineComponent({
             : null,
         ]),
 
+        loaded.value
+          ? null
+          : h('div', {
+            class: ['loading'],
+            innerHTML: LOADING_SVG,
+          }),
+
         h('div', {
           ref: demoWrapper,
           class: 'code-demo-container',
@@ -256,7 +271,7 @@ export default defineComponent({
 
         h(
           'div',
-          { class: 'code-demo-code-wrapper', style: { height: height.value } },
+          { class: 'code-demo-code-wrapper', style: { height: code_wrapper.height, overflow: code_wrapper.overflow } },
           h(
             'div',
             {

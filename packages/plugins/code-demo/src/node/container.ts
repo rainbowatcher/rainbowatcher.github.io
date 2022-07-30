@@ -75,7 +75,7 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
 ) => {
   const MIN_MARKER_NUM = 3
   const markerStart = marker[0]
-  const markerLength = marker.length
+  const marker_len = marker.length
 
   const container: RuleBlock = (state, startLine, endLine, silent) => {
     let start = state.bMarks[startLine] + state.tShift[startLine]
@@ -91,17 +91,17 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
 
     // Check out the rest of the marker string
     while (pos <= max) {
-      if (marker[(pos - start) % markerLength] !== state.src[pos])
+      if (marker[(pos - start) % marker_len] !== state.src[pos])
         break
       pos += 1
     }
 
-    const markerCount = Math.floor((pos - start) / markerLength)
+    const markerCount = Math.floor((pos - start) / marker_len)
 
     if (markerCount < MIN_MARKER_NUM)
       return false
 
-    pos -= (pos - start) % markerLength
+    pos -= (pos - start) % marker_len
 
     const markup = state.src.slice(start, pos)
     const params = state.src.slice(pos, max)
@@ -141,14 +141,14 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
       ) {
         // check rest of marker
         for (pos = start + 1; pos <= max; pos++) {
-          if (marker[(pos - start) % markerLength] !== state.src[pos])
+          if (marker[(pos - start) % marker_len] !== state.src[pos])
             break
         }
 
         // closing code fence must be at least as long as the opening one
-        if (Math.floor((pos - start) / markerLength) >= markerCount) {
+        if (Math.floor((pos - start) / marker_len) >= markerCount) {
           // make sure tail has spaces only
-          pos -= (pos - start) % markerLength
+          pos -= (pos - start) % marker_len
           pos = state.skipSpaces(pos)
 
           if (pos >= max) {

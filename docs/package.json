@@ -1,10 +1,12 @@
 {
-  "name": "docs",
-  "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "name": "rainboatcher-blog",
+  "version": "0.0.2",
+  "description": "Rainbow Watcher's personal blog",
+  "author": "rainbowatcher <wwh33516@gmail.com>",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "blog"
+  ],
   "main": "index.js",
   "scripts": {
     "docs:dev": "vuepress dev --clean-cache",
