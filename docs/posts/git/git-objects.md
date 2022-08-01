@@ -315,4 +315,6 @@ subgraph tips
 end
 ```
 
-本文大量参考高见龙先生的[《为你自己学 Git》](https://gitbook.tw/)。
+## 参考
+
+- [《为你自己学 Git》- 高见龙](https://gitbook.tw/)。

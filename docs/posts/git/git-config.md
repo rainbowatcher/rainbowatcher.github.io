@@ -200,3 +200,8 @@ alias gbrn='git branch -m'
 alias gho='git hash-object'
 alias gcat='git cat-file'
 ```
+
+## 参考
+
+- [如何在一台电脑上配置多个GitHub账号 - HowToStartOpenSource](https://eryajf.github.io/HowToStartOpenSource/pages/8658cd/#%E4%B8%8D%E5%90%8C%E6%89%98%E7%AE%A1%E7%AB%99)
+- [官方配置文档](https://git-scm.com/docs/git-config#_includes)
