@@ -1,7 +1,7 @@
 ---
 layout: Post
 title: Git 常用的配置项
-subtitle: 
+subtitle:
 date: 2022-05-24
 permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/git.png
@@ -29,13 +29,52 @@ git config user.email "another@email.com"
 
 ## 查看配置
 
-用户的 Git 配置文件存在 `~/gitconfig` 目录，可以使用编辑器打开手动修改。
+用户的 Git 配置文件存在 `~/gitconfig` 目录，可以使用编辑器打开手动修改
 
 查看配置可以直接打开配置文件，也可以使用命令 `git config --list`
 
 ## 默认编辑器
 
 Git 默认编辑器是 Vim，通过 `git config --global core.editor emacs` 可以将默认编辑器改为 emacs。如果要将默认编辑器改为 Vscode，首先需要确认 `code` 命令可用，然后执行 `git config --global core.editor "code --wait"`
+
+## Fast-forward
+
+```shell
+git config --global --add merge.ff false
+```
+
+意思是使用 `git merge` 时不要使用 fast-forward（快进）模式
+
+```shell
+git config --global --add pull.ff only
+```
+
+意思是在 `git pull` 时仅支持 fast-forward 模式
+
+fast-forward 的合并使追踪分支的历史记录变得更困难。因此在合并时应该避免使用 fast-forward 合并
+但是，在大多数情况下，fast-forward 拉取并不会让情况变得复杂。所以推荐设置在拉取的时候仅使用 fast-forward
+
+## 显示行号
+
+在使用 `git grep` 时显示代码的行号
+
+```shell
+git config --global grep.lineNumber true
+```
+
+## 显示空白字符变更
+
+```shell
+git config diff.wsErrorHighlight all
+```
+
+## 全局 gitignore
+
+```shell
+git config --global core.excludesfile ~/.gitignore_global
+```
+
+可以让 `~/.gitignore_global` 中设置的忽略策略全局生效
 
 ## 别名
 
@@ -113,7 +152,7 @@ Git 提供 includeIf 选项来指定条件配置，在切换多个项目工作�
         path = ~/.config/git/.gitconfig_company
 ```
 
-`~/.gitconfig` 中的配置为全局配置，当条件符合 `includeIf` 选项中的判断条件时将 path 对应的配置文件加载到项目配置。
+`~/.gitconfig` 中的配置为全局配置，当条件符合 `includeIf` 选项中的判断条件时将 path 对应的配置文件加载到项目配置
 
 - `gitdir`: Git 项目路径规则
 - `gitdir/i`: 与 gitdir 相似，只是不区分大小写
@@ -179,7 +218,7 @@ Git 提供 includeIf 选项来指定条件配置，在切换多个项目工作�
 	url = https://example.com/git
 ```
 
-更多配置方式参考[官方配置文档](https://git-scm.com/docs/git-config#_includes)。
+更多配置方式参考[官方配置文档](https://git-scm.com/docs/git-config#_includes)
 
 ## 我的配置
 
@@ -203,5 +242,5 @@ alias gcat='git cat-file'
 
 ## 参考
 
-- [如何在一台电脑上配置多个GitHub账号 - HowToStartOpenSource](https://eryajf.github.io/HowToStartOpenSource/pages/8658cd/#%E4%B8%8D%E5%90%8C%E6%89%98%E7%AE%A1%E7%AB%99)
+- [如何在一台电脑上配置多个 GitHub 账号 - HowToStartOpenSource](https://eryajf.github.io/HowToStartOpenSource/pages/8658cd/#%E4%B8%8D%E5%90%8C%E6%89%98%E7%AE%A1%E7%AB%99)
 - [官方配置文档](https://git-scm.com/docs/git-config#_includes)
