@@ -1,11 +1,15 @@
+import Align from './components/Align.vue';
 import { defineClientConfig } from '@vuepress/client'
 import { addIcons } from 'oh-vue-icons'
-import Align from './components/Align.vue'
+import { setupDynamicStyle } from './composables'
 import { RiBookMarkFill } from 'oh-vue-icons/icons'
-addIcons(RiBookMarkFill)
 
+addIcons(RiBookMarkFill)
 export default defineClientConfig({
-    enhance: ({app})=>{
+    enhance: ({ app }) => {
         app.component('Align', Align)
+    },
+    setup: () => {
+        setupDynamicStyle()
     }
 })
