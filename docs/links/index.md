@@ -14,7 +14,7 @@ links:
         desc: Vue 驱动的静态网站生成器
       - sitename: Vite
         url: https://cn.vitejs.dev/
-        img: https://vitejs.dev/logo-with-shadow.png
+        img: https://vitejs.dev/logo.svg
         desc: 下一代前端开发与构建工具
       - sitename: Vitest
         url: https://cn.vitest.dev/
@@ -67,14 +67,24 @@ links:
         img: https://avatars.githubusercontent.com/in/106117
         desc: GitHub Discussions 驱动的评论系统
 
-  - title: Other Versions
+  - title: Cli
     items:
-      - sitename: VuePress 1
-        url: https://vuepress-theme-gungnir.vercel.app
-        img: https://vuepress-theme-gungnir.vercel.app/img/avatar.jpeg
-        desc: VuePress 1 theme
-      - sitename: Jekyll
-        url: https://jekyll-theme-gungnir.vercel.app
-        img: https://vuepress-theme-gungnir.vercel.app/img/avatar.jpeg
-        desc: Jekyll theme
+      - sitename: Asciinema
+        url: https://asciinema.org/
+        img: https://asciinema.org/images/logo-red-949d10005bb389d1ae900a13b5ac53d7.svg
+        desc: 命令行录像工具
+
+  - title: CSS
+    items:
+      - sitename: CSS tricks
+        url: https://qishaoxuan.github.io/css_tricks/
+        img: https://raw.githubusercontent.com/QiShaoXuan/css_tricks/master/logo.png
+        desc: 总结一些常用的 CSS 样式
+
+  - title: 前端博客
+    items:
+      - sitename: CSS tricks
+        url: https://qishaoxuan.github.io/css_tricks/
+        img: https://raw.githubusercontent.com/QiShaoXuan/css_tricks/master/logo.png
+        desc: 总结一些常用的 CSS 样式
 ---
