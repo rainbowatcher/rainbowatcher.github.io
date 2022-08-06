@@ -86,6 +86,11 @@ const themeConfig: Partial<GungnirThemeOptions> = {
       link: 'https://notes-rainbowatcher.vercel.app',
     },
   ],
+  themePlugins: {
+    search: {
+      isSearchable: (page) => !page.frontmatter['hide'] as boolean
+    },
+  },
   // 页脚配置
   footer: `
   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
