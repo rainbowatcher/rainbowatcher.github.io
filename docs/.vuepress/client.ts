@@ -6,10 +6,11 @@ import { RiBookMarkFill } from 'oh-vue-icons/icons'
 
 addIcons(RiBookMarkFill)
 export default defineClientConfig({
-    enhance: ({ app }) => {
+    enhance: ({ app, /* router, siteData */ }) => {
         app.component('Align', Align)
     },
     setup: () => {
         setupDynamicStyle()
-    }
+    },
+    rootComponents: []
 })

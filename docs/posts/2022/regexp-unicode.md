@@ -28,6 +28,6 @@ tags: [RegExp]
 
 ## 参考
 
-- [Notes - Anthony Fu](https://antfu.me/notes#match-chinese-characters)
+- [Notes - Anthony Fu](https://antfu.me/posts/match-chinese-characters)
 - [Unicode property escapes - MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions/Unicode_Property_Escapes)
 - [Regexp Tutorial - Unicode Characters and Properties](https://www.regular-expressions.info/unicode.html)
