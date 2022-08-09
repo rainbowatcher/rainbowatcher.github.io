@@ -1,11 +1,12 @@
-import codeDemoPlugin from 'vuepress-plugin-code-demo'
 import { defineUserConfig } from 'vuepress'
 import { gungnirTheme } from 'vuepress-theme-gungnir'
 import katexPlugin from '@renovamen/vuepress-plugin-katex'
 import mermaidPlugin from '@renovamen/vuepress-plugin-mermaid'
 import mdPlusPlugin from '@renovamen/vuepress-plugin-md-plus'
 import giscusPlugin from 'vuepress-plugin-giscus'
+import codeDemoPlugin from 'vuepress-plugin-code-demo'
 import codeCopyPlugin from 'vuepress-plugin-code-copy'
+import docsearchPlugin from '@vuepress/plugin-docsearch'
 import themeConfig from './theme'
 
 export default defineUserConfig({
@@ -37,5 +38,12 @@ export default defineUserConfig({
     }),
     codeCopyPlugin(),
     codeDemoPlugin(),
+    docsearchPlugin({
+      appId: 'PWK0GS2RV3',
+      apiKey: '717c1b6e81a459e928476df7c6eb16a5',
+      indexName: 'posts',
+      placeholder: 'Search',
+      // disableUserPersonalization: true,
+    }),
   ],
 })
