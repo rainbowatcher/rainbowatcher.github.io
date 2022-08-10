@@ -11,3 +11,7 @@ lib/
 *.tsbuildinfo
 .vercel
 *.code-workspace
+
+# secret
+.env
+algolia.js
