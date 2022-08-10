@@ -43,10 +43,6 @@ export default defineUserConfig({
       indexName: 'posts',
       apiKey: '717c1b6e81a459e928476df7c6eb16a5',
       placeholder: 'Search',
-      searchParameters: {
-        facetFilters: 'lang:'
-      }
-      // disableUserPersonalization: true,
     }),
   ],
 })

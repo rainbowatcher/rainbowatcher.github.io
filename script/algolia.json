@@ -1,0 +1,30 @@
+{
+  "index_name": "posts",
+  "start_urls": ["https://blog-rainbowatcher.vercel.app/"],
+  "stop_urls": ["https://blog-rainbowatcher.vercel.app/posts/hide/*"],
+  "scrape_start_urls": false,
+  "strip_chars": " .,;:#",
+  "selectors": {
+    "lvl0": {
+      "selector": ".article-header-content h1",
+      "global": true,
+      "default_value": "Documentation"
+    },
+    "lvl1": ".article-header-content p",
+    "lvl2": ".theme-gungnir-content h2",
+    "lvl3": ".theme-gungnir-content h3",
+    "lvl4": ".theme-gungnir-content h4",
+    "lvl5": ".theme-gungnir-content h5",
+    "lvl6": ".theme-gungnir-content h6",
+    "text": ".theme-gungnir-content p, .theme-gungnir-content li",
+    "lang": {
+      "selector": "/html/@lang",
+      "type": "xpath",
+      "global": true,
+      "default_value": "en-US"
+    }
+  },
+  "custom_settings": {
+    "attributesForFaceting": ["type", "lang"]
+  }
+}
