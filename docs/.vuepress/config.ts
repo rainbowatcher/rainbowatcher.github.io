@@ -14,7 +14,7 @@ export default defineUserConfig({
   lang: 'zh-CN',
   description: 'Sheep Sheep Sheep',
   theme: gungnirTheme(themeConfig),
-  head: [['link', { rel: 'icon', href: 'sheep.svg' }]],
+  head: [['link', { rel: 'icon', href: 'sheep.svg' }], ['meta', { name: 'docsearch:language', content: 'zh' }]],
   markdown: {
     code: {
       lineNumbers: true,
@@ -40,9 +40,12 @@ export default defineUserConfig({
     codeDemoPlugin(),
     docsearchPlugin({
       appId: 'PWK0GS2RV3',
-      apiKey: '717c1b6e81a459e928476df7c6eb16a5',
       indexName: 'posts',
+      apiKey: '717c1b6e81a459e928476df7c6eb16a5',
       placeholder: 'Search',
+      searchParameters: {
+        facetFilters: 'lang:'
+      }
       // disableUserPersonalization: true,
     }),
   ],
