@@ -87,10 +87,7 @@ const themeConfig: Partial<GungnirThemeOptions> = {
     },
   ],
   themePlugins: {
-    search: {
-      isSearchable: (page) => !page.frontmatter['hide'] as boolean,
-      getExtraFields: (page) => page.frontmatter['tags'] as string[] ?? []
-    },
+    search: false,
   },
   // 页脚配置
   footer: `

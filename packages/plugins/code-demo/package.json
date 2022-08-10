@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-code-demo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Code demo block for vuepress",
   "author": "rainbowatcher <wwh33516@gamil.com>",
   "license": "MIT",
