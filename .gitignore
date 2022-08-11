@@ -9,9 +9,9 @@ node_modules
 dist
 lib/
 *.tsbuildinfo
-.vercel
 *.code-workspace
 
 # secret
+.vercel
 .env
 algolia.js
