@@ -2,6 +2,7 @@
 layout: Post
 title: 在 Github 贡献代码如何维护代码版本
 date: 2022-05-28
+permalinkPattern: /post/:year/:month/:day/:slug/
 useHeaderImage: true
 headerImage: /img/git.png
 headerMask: rgba(0, 0, 0, .4)

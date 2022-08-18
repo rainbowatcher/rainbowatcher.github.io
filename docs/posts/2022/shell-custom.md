@@ -2,6 +2,7 @@
 layout: Post
 title: Shell 定制折腾记录
 subtitle:
+permalinkPattern: /post/:year/:month/:day/:slug/
 date: 2022-06-12
 useHeaderImage: true
 headerImage: /img/shell.jpg

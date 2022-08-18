@@ -74,18 +74,59 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   },
   navbar: [
     {
+      text: '首页',
+      link: '/'
+    },
+    {
+      text: '归档',
+      link: '/archives/'
+    },
+    // {
+    //   text: '文档',
+    //   link: '/docs/'
+    // },
+    {
       text: '标签',
-      link: '/tags/',
+      link: '/tags/'
     },
     {
       text: '链接',
-      link: '/links/',
+      link: '/links/'
     },
     {
       text: '笔记',
-      link: 'https://notes-rainbowatcher.vercel.app',
+      link: 'https://notes-rainbowatcher.vercel.app'
     },
   ],
+  sidebar: {
+    "/archives/": [
+      {
+        text: "操作系统",
+        children: [
+          {
+            text: "Linux",
+            children: [
+              '/posts/2022/linux-command.html',
+              '/posts/2022/linux-install.html'
+            ]
+          }
+        ],
+      },
+      {
+        text: '工具',
+        children: [
+          {
+            text: "Git",
+            children: []
+          },
+          {
+            text: "Docker",
+            children: []
+          }
+        ]
+      }
+    ]
+  },
   themePlugins: {
     search: false,
   },

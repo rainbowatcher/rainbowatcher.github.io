@@ -2,11 +2,12 @@
 layout: Post
 title: JUnit5 注解使用案例
 date: 2022-05-24
+permalinkPattern: /post/:year/:month/:day/:slug/
 useHeaderImage: true
 headerImage: /img/junit.png
 headerMask: rgba(0, 0, 0, .4)
 catalog: false
-hide: true
+# hide: true
 tags: [JUnit, Java, Test]
 ---
 
@@ -54,7 +55,7 @@ classDiagram
 
 ## Custom Argument Provider
 
-传递测试参数的另一种高级方法是使用叫做 argumentsProvider 的接口的自定义实现：
+传递测试参数的另一种高级方法是使用叫做 ArgumentsProvider 的接口的自定义实现：
 
 ```java
 @ParameterizedTest
@@ -63,9 +64,8 @@ void name(String str, Class<?> clazz) {
   System.out.println(str);
   System.out.println(clazz);
 }
-```
 
-```java
+
 class ArgProvider implements ArgumentsProvider {
 
   @Override
@@ -77,17 +77,43 @@ class ArgProvider implements ArgumentsProvider {
         Arguments.of("CN", CN.class));
   }
 }
-```
 
-::: details Output
-
-<pre style="padding:0;margin:0;border:0;">
+// Output
 US
 class com.example.US
 UK
 class com.example.UK
 CN
 class com.example.CN
-</pre>
+```
 
-:::
+## 忽略测试
+
+JUnit5提供了`@Disabled`注解来是测试不生效
+
+```java
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@API(
+  status = Status.STABLE,
+  since = "5.0"
+)
+public @interface Disabled {
+  String value() default "";
+}
+```
+
+JUnit4中使用的注解为`@Ignore`
+
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE})
+public @interface Ignore {
+  String value() default "";
+}
+```
+
+根据元注解可以知道这两个注解都可以被标注在方法和类上
+
+两者在大多数情况下是一致的，唯一的区别是在IDE中测试时显示效果JUnit5要更友好一点

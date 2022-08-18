@@ -20,8 +20,11 @@ export default defineUserConfig({
       lineNumbers: true,
     },
   },
+  alias: {},
   plugins: [
-    katexPlugin(),
+    katexPlugin({
+      strict: false
+    }),
     mermaidPlugin({
       token: 'mermaid',
       theme: 'classic',
@@ -38,6 +41,7 @@ export default defineUserConfig({
     }),
     codeCopyPlugin(),
     codeDemoPlugin(),
+    // algorithmVisualizerPlugin(),
     docsearchPlugin({
       appId: 'PWK0GS2RV3',
       indexName: 'posts',

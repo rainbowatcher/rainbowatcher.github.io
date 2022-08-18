@@ -2,6 +2,7 @@
 layout: Post
 title: JUnit4 注解使用案例
 date: 2022-05-26
+permalinkPattern: /post/:year/:month/:day/:slug/
 useHeaderImage: true
 headerImage: /img/junit.png
 headerMask: rgba(0, 0, 0, .4)
