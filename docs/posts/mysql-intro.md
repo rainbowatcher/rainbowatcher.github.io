@@ -88,7 +88,7 @@ A((数据库管理系统)) -->B[(数据库)]-->C[表]-->D>行和列]
 
    path=原来的环境变量后面添加
 
-   ```bat
+   ```batch
    ;C:\Program Files\MySQL\MySQL Server 5.7\bin;
    ```
 
@@ -108,7 +108,7 @@ A((数据库管理系统)) -->B[(数据库)]-->C[表]-->D>行和列]
 
 1. 卸载 mariadb，否则安装 mysql 会出现冲突
 
-   ```sql
+   ```sh
    rpm -qa | grep mariadb
 
    rpm -e --nodeps mariadb-libs-5.5.44-2.el7.centos.x86_64
@@ -120,13 +120,13 @@ A((数据库管理系统)) -->B[(数据库)]-->C[表]-->D>行和列]
 
    以 centos7 安装 mysql5.7 为例：
 
-   ```sql
+   ```sh
    vi /etc/yum.repos.d/mysql-community.repo
    ```
 
    将以下内容粘贴进去并保存
 
-   ```sql
+   ```ini
    [mysql56-community]
    name=MySQL 5.7 Community Server
    baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
@@ -137,38 +137,38 @@ A((数据库管理系统)) -->B[(数据库)]-->C[表]-->D>行和列]
 
    centos7 安装 mysql5.7：
 
-   ```sql
+   ```ini
    baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
    ```
 
    centos6 安装 mysql5.6：
 
-   ```sql
+   ```ini
    baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/6/$basearch/
    ```
 
    centos6 安装 mysql5.7：
 
-   ```sql
+   ```ini
    baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/6/$basearch/
    ```
 
 3. 安装
 
-   ```sql
+   ```sh
    sudo yum install -y mysql-community-server
    ```
 
 4. 启动
 
-   ```sqlsh
+   ```sh
    sudo service mysqld start
    systemctl enable mysqld
    ```
 
 5. 设置密码
 
-   ```sqlsh
+   ```sh
    mysqladmin -u root -p password 你的新密码
    ```
 
@@ -176,7 +176,7 @@ A((数据库管理系统)) -->B[(数据库)]-->C[表]-->D>行和列]
 
    使用命令 `grep 'temporary password' /var/log/mysqld.log` 读出来即可。
 
-   ```sqlsql
+   ```sql
    --直接改密码会报错
    SHOW VARIABLES LIKE 'validate_password%';
    set global validate_password_policy=LOW;
@@ -251,23 +251,22 @@ A((数据库管理系统)) -->B[(数据库)]-->C[表]-->D>行和列]
    | --- | ---- | --- | --- |
 
 
-   ```text
-   查询所有年龄为18岁的人的姓名
-   只有id索引：
-       查询所有id将所有18岁的人的id过滤出来
-       通过id查找对应的姓名
-   有年龄索引：
-       直接通过年龄查找所有的姓名
-   ```
+查询所有年龄为 18 岁的人的姓名
 
-5. AUTO_INCREMENT
+- 只有 id 索引：
+  - 查询所有 id 将所有 18 岁的人的 id 过滤出来
+  - 通过 id 查找对应的姓名
+- 有年龄索引：
+  - 直接通过年龄查找所有的姓名
+
+1. AUTO_INCREMENT
 
    自动增长，修饰某一列
 
    - 必须为主键
    - 类型必须为 int 类型
 
-6. FOREIGN KEY
+2. FOREIGN KEY
 
    外键，修饰某一列
 
@@ -291,7 +290,7 @@ A((数据库管理系统)) -->B[(数据库)]-->C[表]-->D>行和列]
   常规情况下可以省略
 - 单引号：一般用于值（字符串）
 
-```sqlsql
+```sql
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
