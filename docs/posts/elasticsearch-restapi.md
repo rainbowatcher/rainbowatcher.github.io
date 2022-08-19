@@ -156,6 +156,19 @@ POST /index_name/_search/
 }
 ```
 
+### Exists
+
+```http
+GET /index_name/_search
+{
+  "query": {
+    "exists": {
+      "field": "KC_EMPHASIS"
+    }
+  }
+}
+```
+
 ## 更新 mapping
 
 ```http
