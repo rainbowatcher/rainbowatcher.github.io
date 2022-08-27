@@ -25,9 +25,9 @@
     "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
-    "@babel/core": "^7.18.9",
+    "@babel/core": "^7.18.13",
     "@types/babel__core": "^7.1.19",
+    "@types/markdown-it": "^12.2.3",
     "@vuepress/core": "2.0.0-beta.49",
     "@vuepress/markdown": "2.0.0-beta.49"
   }
