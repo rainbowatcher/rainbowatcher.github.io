@@ -98,35 +98,7 @@ const themeConfig: Partial<GungnirThemeOptions> = {
       link: 'https://notes-rainbowatcher.vercel.app'
     },
   ],
-  sidebar: {
-    "/archives/": [
-      {
-        text: "操作系统",
-        children: [
-          {
-            text: "Linux",
-            children: [
-              '/posts/2022/linux-command.html',
-              '/posts/2022/linux-install.html'
-            ]
-          }
-        ],
-      },
-      {
-        text: '工具',
-        children: [
-          {
-            text: "Git",
-            children: []
-          },
-          {
-            text: "Docker",
-            children: []
-          }
-        ]
-      }
-    ]
-  },
+  sidebar: false,
   themePlugins: {
     search: false,
   },
