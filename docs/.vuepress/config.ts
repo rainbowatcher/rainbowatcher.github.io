@@ -20,8 +20,11 @@ export default defineUserConfig({
       lineNumbers: true,
     },
   },
+  alias: {},
   plugins: [
-    katexPlugin(),
+    katexPlugin({
+      strict: false
+    }),
     mermaidPlugin({
       token: 'mermaid',
       theme: 'classic',
@@ -38,10 +41,11 @@ export default defineUserConfig({
     }),
     codeCopyPlugin(),
     codeDemoPlugin(),
+    // algorithmVisualizerPlugin(),
     docsearchPlugin({
-      appId: 'PWK0GS2RV3',
-      indexName: 'posts',
-      apiKey: '717c1b6e81a459e928476df7c6eb16a5',
+      appId: '3BGNB9V5MC',
+      indexName: 'rainbowatcher',
+      apiKey: 'f757c625852758ee96aaf2268959166e',
       placeholder: 'Search',
     }),
   ],

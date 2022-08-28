@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Rainbow Watcher's personal blog",
   "author": "rainbowatcher <wwh33516@gmail.com>",
   "license": "MIT",
@@ -14,9 +14,9 @@
     "clean": "rimraf .vuepress/.temp .vuepress/.cache .vuepress/dist"
   },
   "devDependencies": {
-    "@renovamen/vuepress-plugin-katex": "^2.0.0-alpha.25",
-    "@renovamen/vuepress-plugin-md-plus": "^2.0.0-alpha.25",
-    "@renovamen/vuepress-plugin-mermaid": "^2.0.0-alpha.25",
+    "@renovamen/vuepress-plugin-katex": "2.0.0-alpha.25",
+    "@renovamen/vuepress-plugin-md-plus": "2.0.0-alpha.25",
+    "@renovamen/vuepress-plugin-mermaid": "2.0.0-alpha.25",
     "@vuepress/client": "2.0.0-beta.48",
     "@vuepress/plugin-docsearch": "2.0.0-beta.48",
     "oh-vue-icons": "1.0.0-rc3",
@@ -24,7 +24,7 @@
     "vuepress": "2.0.0-beta.48",
     "vuepress-plugin-code-copy": "workspace:*",
     "vuepress-plugin-code-demo": "workspace:*",
-    "vuepress-plugin-giscus": "^2.0.0-alpha.25",
-    "vuepress-theme-gungnir": "^2.0.0-alpha.25"
+    "vuepress-plugin-giscus": "2.0.0-alpha.25",
+    "vuepress-theme-gungnir": "2.0.0-alpha.25"
   }
 }

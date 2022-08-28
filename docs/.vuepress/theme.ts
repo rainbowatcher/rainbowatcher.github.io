@@ -74,18 +74,31 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   },
   navbar: [
     {
+      text: '首页',
+      link: '/'
+    },
+    {
+      text: '归档',
+      link: '/archives/'
+    },
+    // {
+    //   text: '文档',
+    //   link: '/docs/'
+    // },
+    {
       text: '标签',
-      link: '/tags/',
+      link: '/tags/'
     },
     {
       text: '链接',
-      link: '/links/',
+      link: '/links/'
     },
     {
       text: '笔记',
-      link: 'https://notes-rainbowatcher.vercel.app',
+      link: 'https://notes-rainbowatcher.vercel.app'
     },
   ],
+  sidebar: false,
   themePlugins: {
     search: false,
   },
