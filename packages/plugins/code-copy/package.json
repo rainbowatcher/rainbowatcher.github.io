@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-code-copy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Code copy plugin for vuepress",
   "author": "rainbowatcher <wwh33516@gmail.com>",
   "license": "MIT",
