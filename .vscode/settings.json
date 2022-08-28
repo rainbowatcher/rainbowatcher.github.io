@@ -4,9 +4,17 @@
     "source.fixAll.eslint": true
   },
   "cSpell.words": [
+    "ajeetdsouza",
+    "bitnami",
     "CPGQS",
     "DOHBYF",
     "gungnir",
-    "renovamen"
-  ]
+    "kuma",
+    "renovamen",
+    "Schniz",
+    "sharkdp",
+    "uutils",
+    "zoxide"
+  ],
+  "autoHide.autoHideSideBar": false
 }
