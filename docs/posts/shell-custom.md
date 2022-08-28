@@ -26,6 +26,7 @@ Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比�
 - [uutils/coreutils](https://github.com/uutils/coreutils): 跨平台 Rust 重写 GNU coreutils ![GitHub Repo stars](https://img.shields.io/github/stars/uutils/coreutils?style=plastic)
 - [rossmacarthur/sheldon](https://github.com/rossmacarthur/sheldon): 快速、可配置化的插件管理器 ![GitHub Repo stars](https://img.shields.io/github/stars/rossmacarthur/sheldon?style=plastic)
 - [ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide): 更智能的 cd 命令。支持所有主要的 shell。![GitHub Repo stars](https://img.shields.io/github/stars/ajeetdsouza/zoxide?style=plastic)
+- [Schniz/fnm](https://github.com/Schniz/fnm): 快速简单的 Node.js 版本管理器，内置 Rust ![GitHub Repo stars](https://img.shields.io/github/stars/Schniz/fnm?style=plastic)
 
 [更多项目](https://github.com/rust-unofficial/awesome-rust)
 
@@ -34,7 +35,7 @@ Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比�
 折腾了两天，整理一套自己的 zsh 配置，首先是必备的软件安装
 
 ```shell
-brew install starship sheldon zoxide
+brew install starship sheldon zoxide fnm
 ```
 
 最终选用了 Rust 写的 [rossmacarthur/sheldon](https://github.com/rossmacarthur/sheldon) 项目来做 zsh 插件管理。看了很多 zsh 插件管理器，很多作者都几年没有更新了，甚至还有想 zinit 这种作者弃坑的开源项目，为了能找一个长久更新、有活力的插件管理器，就选了 sheldon，这个项目虽然 star 数量不多，但是他是使用 Rust (毕竟 Rust 才是未来:dog:) 编写的，有一定的学习价值，也希望这个项目能越来越好。
@@ -54,6 +55,10 @@ brew install bat fd ripgrep
 ```shell
 eval "$(zoxide init zsh)"
 ```
+
+::: tip
+Sheldon 支持本地插件和行内插件，文中所有插件的加载统一使用了 [Sheldon 配置文件](#sheldon) 的形式。
+:::
 
 如果你有使用过 `autojump` 或者 `z` 之类的 zsh 插件，官方也有[导入数据的功能](https://github.com/ajeetdsouza/zoxide#step-4-import-your-data-optional)
 
@@ -106,10 +111,6 @@ defer = { value = 'zsh-defer source "{{ file }}"', each = true }
 [plugins.zsh-defer]
 github = 'romkatv/zsh-defer'
 
-[plugins.zsh-nvm]
-github = "lukechilds/zsh-nvm"
-apply = ["defer"]
-
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
@@ -122,6 +123,11 @@ apply = ["defer"]
 github = "marlonrichert/zsh-autocomplete"
 apply = ["defer"]
 
+# 由于该项目的自动完成于我个人来收并没有太多用所以这里没有启用
+# [plugins.zsh-completions]
+# github = "zsh-users/zsh-completions"
+# apply = ["defer"]
+
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]
@@ -133,6 +139,15 @@ apply = ["defer"]
 [plugins.extract]
 remote = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/extract/extract.plugin.zsh"
 apply = ["defer"]
+
+[plugins.starship]
+inline = "eval \"$(starship init zsh)\""
+
+[plugins.fnm]
+inline = "eval \"$(fnm env --use-on-cd)\""
+
+[plugins.zoxide]
+inline = "eval \"$(zoxide init zsh)\""
 ```
 
 ### Bat
@@ -191,7 +206,7 @@ colorscheme onedark
 
   为 zsh 提供实时自动补全功能
 
-  ![autocomplete](../../.vuepress/public/img/2022/shell-custom/autocomplete.gif)
+  ![autocomplete](../../docs/.vuepress/public/img/2022/shell-custom/autocomplete.gif)
 
 - zsh-autosuggestions
 
@@ -203,7 +218,7 @@ colorscheme onedark
 
 ## 最终效果演示
 
-![demo](../../.vuepress/public/img/2022/shell-custom/demo.gif)
+![demo](../../docs/.vuepress/public/img/2022/shell-custom/demo.gif)
 
 <style>
   img {

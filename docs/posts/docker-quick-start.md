@@ -73,10 +73,12 @@ docker run -tid \
 
 ```shell
 docker network create elk
+id=$(docker ps -aqf 'name=elasticsearch7');[ $id ] && docker rm $id
 docker run -d \
   --name elasticsearch7 \
   --net elk \
   -e TZ=Asia/Shanghai \
+  -v ~/DockerVolumes/elk/es:/usr/share/elasticsearch/data \
   -p 9200:9200 \
   -p 9300:9300 \
   -e "discovery.type=single-node" \
@@ -124,4 +126,34 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   --name opengrok \
   opengrok/docker:latest
+```
+
+## zookeeper [<Badge type="tip" text="tags" vertical="middle">](https://hub.docker.com/r/bitnami/zookeeper)
+
+```shell
+id=$(docker ps -aqf 'name=zookeeper');[ $id ] && docker rm $id
+docker run -d --name zookeeper \
+  -p 2181:2181 \
+  -e ALLOW_ANONYMOUS_LOGIN=yes \
+  bitnami/zookeeper:latest
+```
+
+## kafka [<Badge type="tip" text="tags" vertical="middle">](https://hub.docker.com/r/bitnami/kafka)
+
+```shell
+id=$(docker ps -aqf 'name=kafka');[ $id ] && docker rm $id
+docker run -d --name kafka \
+    -e ALLOW_PLAINTEXT_LISTENER=yes \
+    -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true \
+    -e KAFKA_ENABLE_KRAFT=yes \
+    -e KAFKA_CFG_PROCESS_ROLES=broker,controller \
+    -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
+    -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
+    -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+    -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092 \
+    -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@127.0.0.1:9093 \
+    -e KAFKA_BROKER_ID=1 \
+    -p 9092:9092 \
+    -v ~/DockerVolumes/kafka:/bitnami/kafka \
+    bitnami/kafka:latest
 ```

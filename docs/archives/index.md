@@ -1,5 +1,9 @@
 # Archives
 
+## 计算机
+
+- [计算机基础](computer/basic/)
+  
 ## 操作系统
 
 - [Linux](system/linux/)
@@ -13,7 +17,3 @@
 
 - [Typescript](lang/typescript/)
 - [HTML](lang/html/)
-
-## 计算机
-
-- [计算机基础](computer/index.md)
