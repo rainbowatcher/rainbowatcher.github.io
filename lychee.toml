@@ -40,7 +40,7 @@ insecure = false
 
 # Only test links with the given schemes (e.g. https)
 # Omit to check links with any scheme
-#scheme = [ "https" ]
+scheme = ["https", "http", "file"]
 
 # Request method
 method = "get"
@@ -53,7 +53,7 @@ headers = []
 ### Exclusions
 ###
 # Exclude URLs from checking (supports regex)
-exclude = ["godaddy.com", ".*git$", "maven.apache.org", "cyc2018"]
+exclude = ["godaddy.com", ".*git$", "maven.apache.org", "cyc2018", "PLAINTEXT"]
 
 # Exclude URLs contained in a file from checking
 # If a file named `.lycheeignore` exists in the current working directory,
