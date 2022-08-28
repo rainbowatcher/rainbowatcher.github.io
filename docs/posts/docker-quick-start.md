@@ -128,7 +128,7 @@ docker run -d \
   opengrok/docker:latest
 ```
 
-## zookeeper [<Badge type="tip" text="tags" vertical="middle">](https://hub.docker.com/r/bitnami/zookeeper)
+## zookeeper [<Badge type="tip" text="tags" vertical="middle" />](https://hub.docker.com/r/bitnami/zookeeper)
 
 ```shell
 id=$(docker ps -aqf 'name=zookeeper');[ $id ] && docker rm $id
@@ -138,7 +138,7 @@ docker run -d --name zookeeper \
   bitnami/zookeeper:latest
 ```
 
-## kafka [<Badge type="tip" text="tags" vertical="middle">](https://hub.docker.com/r/bitnami/kafka)
+## kafka [<Badge type="tip" text="tags" vertical="middle" />](https://hub.docker.com/r/bitnami/kafka)
 
 ```shell
 id=$(docker ps -aqf 'name=kafka');[ $id ] && docker rm $id
