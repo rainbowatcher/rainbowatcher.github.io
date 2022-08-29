@@ -49,7 +49,7 @@ jobs:
       # 目前的缓存命中似乎有问题
       - name: Install dependencies
         if: steps.pnpm-cache.outputs.cache-hit != 'true'
-        run: pnpm install --no-lockfile
+        run: pnpm install
 
       # 运行构建脚本
       - name: Build VuePress site
