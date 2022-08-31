@@ -73,7 +73,7 @@ docker run -tid \
 
 ```shell
 docker network create elk
-id=$(docker ps -aqf 'name=elasticsearch7');[ $id ] && docker rm $id
+id=$(docker ps -aqf 'name=elasticsearch7');[ $id ] && docker stop $id;docker rm $id
 docker run -d \
   --name elasticsearch7 \
   --net elk \

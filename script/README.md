@@ -16,5 +16,5 @@
 OK，下面的命令需要在`.env`文件所在目录执行
 
 ```shell
-id=$(docker ps -aqf 'name=docsearch');[ $id ] && docker rm $id;docker run -it --name docsearch --env-file=.env -e "CONFIG=$(cat algolia.json | jq -r tostring)" algolia/docsearch-scraper
+id=$(docker ps -aqf 'name=docsearch');[ $id ] && docker stop $id;docker rm $id;docker run -it --name docsearch --env-file=.env -e "CONFIG=$(cat algolia.json | jq -r tostring)" algolia/docsearch-scraper
 ```
