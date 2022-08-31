@@ -8,7 +8,7 @@ on:
   # workflow_dispatch:
 
 jobs:
-  docs:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,23 +30,6 @@ jobs:
           version: 7
           run_install: false
 
-      # - name: Get pnpm store directory
-      #   id: cache-store
-      #   run: |
-      #     echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
-
-      # # 缓存 node_modules
-      # - name: Setup pnpm cache
-      #   uses: actions/cache@v3
-      #   id: pnpm-cache
-      #   with:
-      #     path: ${{ steps.cache-store.outputs.pnpm_cache_dir }}
-      #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pnpm-store-
-
-      # 如果缓存没有命中，安装依赖
-      # 目前的缓存命中似乎有问题
       - name: Install dependencies
         if: steps.pnpm-cache.outputs.cache-hit != 'true'
         run: pnpm install
@@ -55,15 +38,21 @@ jobs:
       - name: Build VuePress site
         run: pnpm build
 
-      # 查看 workflow 的文档来获取更多信息
-      # @see https://github.com/crazy-max/ghaction-github-pages
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2.6.0
-        with:
-          # 部署到 gh-pages 分支
-          target_branch: gh-pages
-          # 部署目录为 VuePress 的默认输出目录
-          build_dir: docs/.vuepress/dist
-        env:
-          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: deployment
+        uses: actions/deploy-pages@v1
