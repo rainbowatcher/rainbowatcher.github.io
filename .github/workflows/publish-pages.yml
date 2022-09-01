@@ -1,11 +1,21 @@
-name: docs
+name: Deploy Blog Site
 
 on:
   # 每当 push 到 main 分支时触发部署
   push:
     branches: [main]
-  # 手动触发部署
-  # workflow_dispatch:
+  # 允许手动触发部署
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -37,7 +47,7 @@ jobs:
       # 运行构建脚本
       - name: Build VuePress site
         run: pnpm build
-        
+
       - name: Upload artifact
         id: upload
         uses: actions/checkout@v3
@@ -47,16 +57,10 @@ jobs:
   deploy:
     needs: build
 
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
-
-    # Deploy to the github-pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
