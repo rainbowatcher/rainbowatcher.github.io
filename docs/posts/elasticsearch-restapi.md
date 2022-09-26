@@ -27,13 +27,26 @@ DELETE /index_name
 
 ## Document Api
 
-### 删除 Document
+### 删除
 
 ```http
 DELETE /index_name/label/N310108198708302043
 ```
 
-### 添加数据
+### 批量删除
+
+```http
+POST /index_name/_delete_by_query
+{
+  "query": {
+    "match": {
+      "field_name": "field_value"
+    }
+  }
+}
+```
+
+### 添加
 
 ```http
 POST /index_name/label/N310108198708302043
