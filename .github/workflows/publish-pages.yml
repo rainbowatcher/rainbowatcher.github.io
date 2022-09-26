@@ -45,14 +45,14 @@ jobs:
         run: pnpm install
 
       # 运行构建脚本
-      - name: Build VuePress site
+      - name: Build site
         run: pnpm build
 
       - name: Upload artifact
         id: upload
         uses: actions/checkout@v3
         with:
-          path: "docs/.vuepress/dist"
+          path: "./docs/.vuepress/dist"
 
   deploy:
     needs: build
