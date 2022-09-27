@@ -7,7 +7,7 @@ permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/markdown.png
 useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
-hide: true
+# hide: true
 tags: [JavaScript, Browser, Dark Mode]
 ---
 

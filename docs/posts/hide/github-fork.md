@@ -6,7 +6,7 @@ permalinkPattern: /post/:year/:month/:day/:slug/
 useHeaderImage: true
 headerImage: /img/git.png
 headerMask: rgba(0, 0, 0, .4)
-hide: true
+# hide: true
 tags: [Git]
 ---
 

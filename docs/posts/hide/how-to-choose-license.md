@@ -6,7 +6,7 @@ permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/2022/how-to-choose-license/opensource.png
 useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
-hide: true
+# hide: true
 tags: [License, OpenSource]
 ---
 

@@ -7,11 +7,11 @@ permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/flink.png
 useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
-hide: true
+# hide: true
 tags: [Flink]
 ---
 
-## 
+## 代码
 
 ```java
 StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

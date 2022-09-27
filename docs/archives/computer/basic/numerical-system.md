@@ -67,9 +67,9 @@ $$
 & 2 | 11 &\to 1 \\
 & 2 | 5  &\to 1 \\
 & 2 | 2  &\to 0 \\
-& 1
-\end{aligned}\\
-\text{结果：}1011110
+& 1 \\
+&\text{结果：} &1011110
+\end{aligned}
 $$
 
 ### 二进制转换其他进制
@@ -77,7 +77,7 @@ $$
 八进制本质是将二进制数字分成三个一组，十进制则是将其分为 4 个数一组。
 
 $$
-\begin{array}{l}
+\begin{array}{cccc}
 \text{二进制}
 & \color {navy} 100
 & \color {green} 101
@@ -90,11 +90,11 @@ $$
 $$
 
 $$
-\begin{array}l
+\begin{array}{cccc}
 \text{二进制}
 &\color {navy} 0001
 &\color {green} 0010
-&1001\\
+&1001 \\
 \text{十进制}
 &\color {navy} 1
 &\color {green} 2

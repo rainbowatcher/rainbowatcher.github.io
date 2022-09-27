@@ -6,9 +6,7 @@ useHeaderImage: true
 headerMask: rgba(100, 100, 100, .618)
 date: 2022-05-04
 permalinkPattern: /post/:year/:month/:day/:slug/
-tags:
-  - Git
-  - CLI
+tags: [Git, CLI]
 ---
 
 使用 Git 过程中经常会碰到提交过程中，手抖或者忽略了一些东西导致提交的结果是不理想的，后悔了要怎么办呢？
