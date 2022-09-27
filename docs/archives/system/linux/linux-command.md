@@ -91,9 +91,10 @@ cat /etc/issue
 
 ## 终端相关
 
-| 命令    | 全称            | 描述                      | 示例                      |
-| ------- | --------------- | ------------------------- | ------------------------- |
-| clear   |                 | 用于清屏,同快捷键`ctrl+l` | clear                     |
-| history |                 | 用于查看自己运行过的命令  | history                   |
-| echo    |                 | 输出内容到终端            | echo hello                |
-| printf  | print formatted | 格式化输出内容到终端      | printf "hello %s\n" world |
+| 命令    | 全称            | 描述                              | 示例                      |
+| ------- | --------------- | --------------------------------- | ------------------------- |
+| clear   |                 | 用于清屏,同快捷键`ctrl+l`         | clear                     |
+| history |                 | 用于查看自己运行过的命令          | history                   |
+| echo    |                 | 输出内容到终端                    | echo hello                |
+| printf  | print formatted | 格式化输出内容到终端              | printf "hello %s\n" world |
+| declare |                 | 用于声明或显示已存在的 shell 变量 | declare key="value"       |
