@@ -1,8 +1,6 @@
+import { viteBundler } from "@vuepress/bundler-vite";
 import { defineUserConfig } from 'vuepress'
 import { gungnirTheme } from 'vuepress-theme-gungnir'
-import katexPlugin from '@renovamen/vuepress-plugin-katex'
-import mermaidPlugin from '@renovamen/vuepress-plugin-mermaid'
-import mdPlusPlugin from '@renovamen/vuepress-plugin-md-plus'
 import codeDemoPlugin from 'vuepress-plugin-code-demo'
 import codeCopyPlugin from 'vuepress-plugin-code-copy'
 import docsearchPlugin from '@vuepress/plugin-docsearch'
@@ -13,24 +11,15 @@ export default defineUserConfig({
   lang: 'zh-CN',
   description: 'Sheep Sheep Sheep',
   theme: gungnirTheme(themeConfig),
-  head: [['link', { rel: 'icon', href: 'sheep.svg' }], ['meta', { name: 'docsearch:language', content: 'zh' }]],
+  head: [['link', { rel: 'icon', href: '/sheep.svg' }], ['meta', { name: 'docsearch:language', content: 'zh' }]],
   markdown: {
     code: {
       lineNumbers: true,
     },
   },
   alias: {},
+  bundler: viteBundler(),
   plugins: [
-    katexPlugin({
-      strict: false
-    }),
-    mermaidPlugin({
-      token: 'mermaid',
-      theme: 'classic',
-    }),
-    mdPlusPlugin({
-      all: true,
-    }),
     codeCopyPlugin(),
     codeDemoPlugin(),
     // algorithmVisualizerPlugin(),

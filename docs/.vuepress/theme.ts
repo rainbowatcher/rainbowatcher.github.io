@@ -2,7 +2,7 @@ import type { GungnirThemeOptions } from 'vuepress-theme-gungnir'
 
 const themeConfig: Partial<GungnirThemeOptions> = {
   repo: 'https://github.com/rainbowatcher/rainbowatcher.github.io',
-  docsDir: 'docs',
+  docsDir: 'posts',
   // repoLabel: '项目',
   // 编辑页面配置
   docsRepo: 'https://github.com/rainbowatcher/rainbowatcher.github.io',
@@ -102,6 +102,14 @@ const themeConfig: Partial<GungnirThemeOptions> = {
   // https://giscus.app/zh-CN
   themePlugins: {
     search: false,
+    katex: true,
+    mermaid: {
+      token: 'mermaid',
+      theme: 'forest',
+    },
+    mdPlus: {
+      all: true
+    },
     giscus: {
       repo: "This-is-an-Apple/gitalk-comments",
       repoId: "MDEwOlJlcG9zaXRvcnkyMTA1MjQyMTQ=",
