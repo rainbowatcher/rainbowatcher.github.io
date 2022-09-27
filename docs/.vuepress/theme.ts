@@ -99,8 +99,16 @@ const themeConfig: Partial<GungnirThemeOptions> = {
     },
   ],
   sidebar: false,
+  // https://giscus.app/zh-CN
   themePlugins: {
     search: false,
+    giscus: {
+      repo: "This-is-an-Apple/gitalk-comments",
+      repoId: "MDEwOlJlcG9zaXRvcnkyMTA1MjQyMTQ=",
+      category: "Announcements",
+      categoryId: "DIC_kwDODIxYNs4CAO1u",
+      lazyLoad: true
+    },
   },
   // 页脚配置
   footer: `
