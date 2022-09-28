@@ -38,16 +38,16 @@ cat /etc/issue
 
 文件系统通常分为目录和文件，但是 linux 中一切都是文件，所以这里列出操作文件的命令和可以同时操作文件和目录的命令。
 
-| 命令    | 全称   | 描述                             | 示例                        |
-| ------- | ------ | -------------------------------- | --------------------------- |
-| touch   |        | 创建文件                         | touch filename              |
-| rm      | remove | 删除文件或目录                   | rm filename                 |
-| cp      | copy   | 复制文件到指定目录               | cp source target            |
-| mv      | move   | 移动文件到指定目录               | mv source target            |
-| find    |        | 从指定目录查找文件               | find /home -name "\\\*.txt" |
-| whereis |        | 用于查看某个命令和帮助文档的位置 | whereis ls                  |
-| which   |        | 查找并显示给定命令的绝对路径     | which ls                    |
-| ln      | link   | 创建硬连接和符号链接             | ln source target            |
+| 命令    | 全称   | 描述                             | 示例                          |
+| ------- | ------ | -------------------------------- | ----------------------------- |
+| touch   |        | 创建文件                         | `touch filename`              |
+| rm      | remove | 删除文件或目录                   | `rm filename`                 |
+| cp      | copy   | 复制文件到指定目录               | `cp source target`            |
+| mv      | move   | 移动文件到指定目录               | `mv source target`            |
+| find    |        | 从指定目录查找文件               | `find /home -name "\\\*.txt"` |
+| whereis |        | 用于查看某个命令和帮助文档的位置 | `whereis ls`                  |
+| which   |        | 查找并显示给定命令的绝对路径     | `which ls`                    |
+| ln      | link   | 创建硬连接和符号链接             | `ln source target`            |
 
 ### 硬链接与软链接
 
@@ -66,35 +66,40 @@ cat /etc/issue
 
 ### 读文件
 
-| 命令 | 全称                        | 描述                                                                | 示例              |
-| ---- | --------------------------- | ------------------------------------------------------------------- | ----------------- |
-| more |                             | more 命令是一个基于 vi 编辑器文本过滤器，支持 vi 中的关键字定位操作 | more filename     |
-| less |                             | 与 more 十分相似，不同的是 less 命令允许用户向前或向后浏览文件      | less filename     |
-| head |                             | 查看文件的头部内容                                                  | head -10 filename |
-| tail |                             | 查看文件的尾部内容                                                  | tail -10 filename |
-| cat  | concatenate files and print | 连接文件并打印，通常用来一次性打印文件内的所有内容                  | cat filename      |
+| 命令 | 全称                        | 描述                                                                | 示例                |
+| ---- | --------------------------- | ------------------------------------------------------------------- | ------------------- |
+| more |                             | more 命令是一个基于 vi 编辑器文本过滤器，支持 vi 中的关键字定位操作 | `more filename`     |
+| less |                             | 与 more 十分相似，不同的是 less 命令允许用户向前或向后浏览文件      | `less filename`     |
+| head |                             | 查看文件的头部内容                                                  | `head -10 filename` |
+| tail |                             | 查看文件的尾部内容                                                  | `tail -10 filename` |
+| cat  | concatenate files and print | 连接文件并打印，通常用来一次性打印文件内的所有内容                  | `cat filename`      |
 
 ### 写文件
 
-| 命令   | 全称 | 描述           | 示例        |
-| ------ | ---- | -------------- | ----------- |
-| vi/vim |      | 内置文本编辑器 | vi filename |
+| 命令   | 全称 | 描述           | 示例          |
+| ------ | ---- | -------------- | ------------- |
+| vi/vim |      | 内置文本编辑器 | `vi filename` |
+| \>     |      |                |               |
+| \>>    |      |                |               |
 
 ## 目录
 
-| 命令  | 全称                 | 描述                 | 示例           |
-| ----- | -------------------- | -------------------- | -------------- |
-| ls    | list                 | 列举一个目录或者文件 | ls -l          |
-| cd    | change directory     | 切换工作目录         | cd target_path |
-| pwd   | print work directory | 打印当前工作目录     | pwd            |
-| mkdir | make directory       | 创建文件夹           | mkdir die_name |
+| 命令  | 全称                 | 描述                 | 示例             |
+| ----- | -------------------- | -------------------- | ---------------- |
+| ls    | list                 | 列举一个目录或者文件 | `ls -l`          |
+| cd    | change directory     | 切换工作目录         | `cd target_path` |
+| pwd   | print work directory | 打印当前工作目录     | `pwd`            |
+| mkdir | make directory       | 创建文件夹           | `mkdir die_name` |
 
 ## 终端相关
 
-| 命令    | 全称            | 描述                              | 示例                      |
-| ------- | --------------- | --------------------------------- | ------------------------- |
-| clear   |                 | 用于清屏,同快捷键`ctrl+l`         | clear                     |
-| history |                 | 用于查看自己运行过的命令          | history                   |
-| echo    |                 | 输出内容到终端                    | echo hello                |
-| printf  | print formatted | 格式化输出内容到终端              | printf "hello %s\n" world |
-| declare |                 | 用于声明或显示已存在的 shell 变量 | declare key="value"       |
+| 命令    | 全称            | 描述                              | 示例                        |
+| ------- | --------------- | --------------------------------- | --------------------------- |
+| clear   |                 | 用于清屏,同快捷键`ctrl+l`         | `clear`                     |
+| history |                 | 用于查看自己运行过的命令          | `history`                   |
+| echo    |                 | 输出内容到终端                    | `echo hello`                |
+| printf  | print formatted | 格式化输出内容到终端              | `printf "hello %s\n" world` |
+| declare |                 | 用于声明或显示已存在的 shell 变量 | `declare key="value"`       |
+| command |                 | 调用并执行命令                    | `command -v zsh`            |
+| time    |                 | 统计命令运行的时间                | `time zsh -i -c exit`       |
+| unset   | undo set        | 删除指定的shell变量或函数         | `unset var`                 |

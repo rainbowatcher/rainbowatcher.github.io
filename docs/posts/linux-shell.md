@@ -1,6 +1,6 @@
 ---
 layout: Post
-title: Linux Shell 基本语法
+title: Unix Shell 基本语法
 subtitle:
 date: 2022-09-26
 permalinkPattern: /post/:year/:month/:day/:slug/
@@ -45,19 +45,19 @@ echo $key # value
 
 ### 变量默认值
 
-| 表达式             | 含义                                                             |
-| ------------------ | ---------------------------------------------------------------- |
-| `${var}`           | 变量 var 的值，与、`$var` 相同                                   |
-| `${var-$DEFAULT}`  | 如果 var 没有被声明，那么就以、`$DEFAULT` 作为其值               |
-| `${var:-$DEFAULT}` | 如果 var 没有被声明，或者其值为空，那么就以、`$DEFAULT` 作为其值 |
-| `${var=$DEFAULT}`  | 如果 var 没有被声明，那么就以、`$DEFAULT` 作为其值               |
-| `${var:=$DEFAULT}` | 如果 var 没有被声明，或者其值为空，那么就以、`$DEFAULT` 作为其值 |
-| `${var+$OTHER}`    | 如果 var 声明了，那么其值就是、`$OTHER`, 否则就为 null 字符串    |
-| `${var:+$OTHER}`   | 如果 var 被设置了，那么其值就是、`$OTHER`, 否则就为 null 字符串  |
-| `${var?ERR_MSG}`   | 如果 var 没被声明，那么就打印、`$ERR_MSG`                        |
-| `${var:?ERR_MSG}`  | 如果 var 没被设置，那么就打印、`$ERR_MSG`                        |
-| `${!varprefix*}`   | 匹配之前所有以 varprefix 开头进行声明的变量(zsh 中为 event)      |
-| `${!varprefix@}`   | 匹配之前所有以 varprefix 开头进行声明的变量(zsh 中为 event)      |
+| 表达式             | 含义                                                          |
+| ------------------ | ------------------------------------------------------------- |
+| `${var}`           | 变量 var 的值，与`$var`相同                                   |
+| `${var-$DEFAULT}`  | 如果 var 没有被声明，那么就以`$DEFAULT`作为其值               |
+| `${var:-$DEFAULT}` | 如果 var 没有被声明，或者其值为空，那么就以`$DEFAULT`作为其值 |
+| `${var=$DEFAULT}`  | 如果 var 没有被声明，那么就以`$DEFAULT`作为其值               |
+| `${var:=$DEFAULT}` | 如果 var 没有被声明，或者其值为空，那么就以`$DEFAULT`作为其值 |
+| `${var+$OTHER}`    | 如果 var 声明了，那么其值就是`$OTHER`, 否则就为 null 字符串   |
+| `${var:+$OTHER}`   | 如果 var 被设置了，那么其值就是`$OTHER`, 否则就为 null 字符串 |
+| `${var?ERR_MSG}`   | 如果 var 没被声明，那么就打印`$ERR_MSG`                       |
+| `${var:?ERR_MSG}`  | 如果 var 没被设置，那么就打印`$ERR_MSG`                       |
+| `${!varprefix*}`   | 匹配之前所有以 varprefix 开头进行声明的变量(zsh 中为 event)   |
+| `${!varprefix@}`   | 匹配之前所有以 varprefix 开头进行声明的变量(zsh 中为 event)   |
 
 ```shell
 unset key
@@ -156,9 +156,12 @@ test $num = 100 && echo y || echo n # y
 ```shell
 a=1
 b=2
+echo $[ $a + $b ] # 3
 echo `expr $a + $b` # 3
 echo $(expr $b - $a) # 1
-echo $((( $num + 1 ))) # 2
+echo $(( $num + 1 )) # 2
+echo $((a+b)) / $(($a+$b)) # 3 / 3
+echo $(expr $((a+b)) / $(($a+$b))) # 1
 ```
 
 ### 字符串
@@ -169,25 +172,58 @@ str="foo"
 
 #### 字符串操作
 
-| 表达式                             | 含义                                                                                            |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `${#string}`                       | `$string` 的长度                                                                                |
-| `${string:position}`               | 在、`$string` 中，从位置、`$position` 开始提取子串                                                  |
-| `${string:position:length}`        | 在、`$string` 中，从位置、`$position` 开始提取长度为、`$length` 的子串                              |
-| `${string#substring}`              | 从变量、`$string` 的开头，删除最短匹配、`$substring` 的子串                                         |
-| `${string##substring}`             | 从变量、`$string` 的开头，删除最长匹配、`$substring` 的子串                                         |
-| `${string%substring}`              | 从变量、`$string` 的结尾，删除最短匹配、`$substring` 的子串                                         |
-| `${string%%substring}`             | 从变量、`$string` 的结尾，删除最长匹配、`$substring` 的子串                                         |
-| `${string/substring/replacement}`  | 使用、`$replacement`, 来代替第一个匹配的 `$substring`                                            |
-| `${string//substring/replacement}` | 使用、`$replacement`, 代替所有匹配的 `$substring`                                                |
-| `${string/#substring/replacement}` | 如果 ​`$string` 的前缀匹配 ​`$substring`, 那么就用 ​`$replacement` 来代替匹配到的 ​`$substring` |
-| `${string/%substring/replacement}` | 如果 ​`$string` 的后缀匹配 ​`$substring`, 那么就用 ​`$replacement` 来代替匹配到的、`$substring` |
+| 表达式                             | 含义                                                                                      |
+| ---------------------------------- | ----------------------------------------------------------------------------------------- |
+| `${#string}`                       | `$string`的长度                                                                           |
+| `${string:position}`               | 在`$string`中，从位置`$position`开始提取子串                                              |
+| `${string:position:length}`        | 在`$string`中，从位置`$position`开始提取长度为`$length`的子串                             |
+| `${string#substring}`              | 从变量`$string`的开头，删除最短匹配`$substring`的子串                                     |
+| `${string##substring}`             | 从变量`$string`的开头，删除最长匹配`$substring`的子串                                     |
+| `${string%substring}`              | 从变量`$string`的结尾，删除最短匹配`$substring`的子串                                     |
+| `${string%%substring}`             | 从变量`$string`的结尾，删除最长匹配`$substring`的子串                                     |
+| `${string/substring/replacement}`  | 使用`$replacement`, 来代替第一个匹配的`$substring`                                        |
+| `${string//substring/replacement}` | 使用`$replacement`, 代替所有匹配的`$substring`                                            |
+| `${string/#substring/replacement}` | 如果​`$string`的前缀匹配​`$substring`, 那么就用​`$replacement`来代替匹配到的​`$substring` |
+| `${string/%substring/replacement}` | 如果`$string`的后缀匹配​`$substring`, 那么就用​`$replacement`来代替匹配到的`$substring`   |
 
 ### 数组
 
 ```shell
 arr=(a b c)
+# 只给第 3、5、10 个元素赋值，数组长度为 3
+arr=([3]=24 [5]=19 [10]=12)
 ```
+
+数组操作
+
+```shell
+# 取出数组值
+echo ${arr[1]} # a
+# 数组切片
+echo ${arr[1,2]} # a b
+echo ${arr[*]:1:2} # H c  不推荐
+# 数组长度
+echo ${#arr[@]} # 3
+# 输出数组为字符串
+echo "$arr" # zsh中输出整个数组 a b c  bash中数组第一个元素 a
+# 输出数组中的每个元素
+echo ${arr[@]}
+# 数组赋值
+arr[2]="H"
+echo ${arr[@]} # a H c
+# 删除元素
+unset arr[1] # 仅bash 中生效
+echo ${arr[@]} # H c
+# 合并数组
+arr1=(23 56)
+arr2=(99 "shell")
+arr_new=(${arr1[@]} ${arr2[*]})
+echo ${arr_new[@]} # 23 56 99 shell
+```
+
+::: tip
+zsh 中数组下标从 1 开始，而 bash 中数组下标从 0 开始
+:::
 
 ### Map
 
@@ -251,6 +287,54 @@ if [ condition1 -o condition2]; then
 fi
 ```
 
+#### 条件表达式
+
+类 Unix 系统提供 test 命令来测试条件表达式
+
+```shell
+if test 1 -eq 1; then
+  echo "equal"
+else
+  echo "not equal"
+fi
+
+# equal
+```
+
+其效果等同于
+
+```shell
+if [ 1 -eq 1 ]; then
+  echo "equal"
+else
+  echo "not equal"
+fi
+
+# 高级条件表达式 支持 ==、!=、>=、<=、>、< 操作符
+if ((1==1)); then
+  echo "equal"
+else
+  echo "not equal"
+fi
+```
+
+下面是常用的条件操作符
+
+| 操作符 | 描述           |
+| ------ | -------------- |
+| `-eq`  | 等于           |
+| `-ne`  | 不等于         |
+| `-gt`  | 大于           |
+| `-ge`  | 大于等于       |
+| `-lt`  | 小于           |
+| `-le`  | 小于等于       |
+| `-f`   | 是否是一个文件 |
+| `-d`   | 是否是一个目录 |
+| `-e`   | 是否存在       |
+| `-w`   | 是否可写     |
+| `-r`   | 是否可读       |
+| `-x`   | 是否可执行     |
+
 ### switch 语句
 
 ```shell
@@ -305,3 +389,7 @@ done
 ## 管道符
 
 ## 脚本的执行
+
+## 参考
+
+- [Shell 数组 - 菜鸟教程](https://www.runoob.com/linux/linux-shell-array.html)
