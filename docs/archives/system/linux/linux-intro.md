@@ -22,7 +22,7 @@ tags: [Linux]
 
 可以在环境变量 PATH 中声明可执行文件的路径，路径之间用 : 分隔。
 
-```
+```shell
 /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/username/.local/bin:/home/username/bin
 ```
 
