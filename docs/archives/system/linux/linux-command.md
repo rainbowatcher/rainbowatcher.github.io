@@ -13,18 +13,19 @@ tags: [Linux, CLI]
 
 ## 帮助
 
-| 命令 | 全称   | 描述                                                                                       | 示例     |
-| ---- | ------ | ------------------------------------------------------------------------------------------ | -------- |
-| man  | manual | Linux 下的帮助指令，通过 man 指令可以查看 Linux 中的指令帮助、配置文件帮助和编程帮助等信息 | man echo |
-| help |        | 用于显示 shell 内部命令的帮助信息                                                          | help cd  |
+| 命令 | 全称   | 描述                                                                                       | 示例       |
+| ---- | ------ | ------------------------------------------------------------------------------------------ | ---------- |
+| man  | manual | Linux 下的帮助指令，通过 man 指令可以查看 Linux 中的指令帮助、配置文件帮助和编程帮助等信息 | `man echo` |
+| help |        | 用于显示 shell 内部命令的帮助信息                                                          | `help cd`  |
 
 ## 系统信息
 
-| 命令          | 全称                        | 描述                | 示例           |
-| ------------- | --------------------------- | ------------------- | -------------- |
-| lsb_release   | Linux Standard Base Release | 显示发行版本信息    | lsb_release -a |
-| uname         |                             | 显示 Linux 系统信息 | uname -a       |
-| kernelversion | Kernel Version              | 显示内核版本信息    |                |
+| 命令          | 全称                        | 描述                   | 示例             |
+| ------------- | --------------------------- | ---------------------- | ---------------- |
+| lsb_release   | Linux Standard Base Release | 显示发行版本信息       | `lsb_release -a` |
+| uname         |                             | 显示 Linux 系统信息    | `uname -a`       |
+| kernelversion | Kernel Version              | 显示内核版本信息       |                  |
+| top           |                             | 显示或管理执行中的程序 |
 
 有的发行版会在下面的目录中存放版本信息
 
@@ -38,16 +39,18 @@ cat /etc/issue
 
 文件系统通常分为目录和文件，但是 linux 中一切都是文件，所以这里列出操作文件的命令和可以同时操作文件和目录的命令。
 
-| 命令    | 全称   | 描述                             | 示例                          |
-| ------- | ------ | -------------------------------- | ----------------------------- |
-| touch   |        | 创建文件                         | `touch filename`              |
-| rm      | remove | 删除文件或目录                   | `rm filename`                 |
-| cp      | copy   | 复制文件到指定目录               | `cp source target`            |
-| mv      | move   | 移动文件到指定目录               | `mv source target`            |
-| find    |        | 从指定目录查找文件               | `find /home -name "\\\*.txt"` |
-| whereis |        | 用于查看某个命令和帮助文档的位置 | `whereis ls`                  |
-| which   |        | 查找并显示给定命令的绝对路径     | `which ls`                    |
-| ln      | link   | 创建硬连接和符号链接             | `ln source target`            |
+| 命令    | 全称                            | 描述                             | 示例                          |
+| ------- | ------------------------------- | -------------------------------- | ----------------------------- |
+| touch   |                                 | 创建文件                         | `touch filename`              |
+| rm      | remove                          | 删除文件或目录                   | `rm filename`                 |
+| cp      | copy                            | 复制文件到指定目录               | `cp source target`            |
+| mv      | move                            | 移动文件到指定目录               | `mv source target`            |
+| find    |                                 | 从指定目录查找文件               | `find /home -name "\\\*.txt"` |
+| whereis |                                 | 用于查看某个命令和帮助文档的位置 | `whereis ls`                  |
+| which   |                                 | 查找并显示给定命令的绝对路径     | `which ls`                    |
+| ln      | link                            | 创建硬连接和符号链接             | `ln source target`            |
+| du      | display file space usage        | 显示每个文件和目录的磁盘使用空间 | `du -h .`                     |
+| df      | display file system space usage | 显示磁盘的相关信息               | `df -h`                       |
 
 ### 硬链接与软链接
 
@@ -76,11 +79,11 @@ cat /etc/issue
 
 ### 写文件
 
-| 命令   | 全称 | 描述           | 示例          |
-| ------ | ---- | -------------- | ------------- |
-| vi/vim |      | 内置文本编辑器 | `vi filename` |
-| \>     |      |                |               |
-| \>>    |      |                |               |
+| 命令   | 全称 | 描述                 | 示例          |
+| ------ | ---- | -------------------- | ------------- |
+| vi/vim |      | 内置文本编辑器       | `vi filename` |
+| >      |      | 输出重定向，覆盖输出 |               |
+| >>     |      | 输出重定向，追加输出 |               |
 
 ## 目录
 
@@ -102,4 +105,34 @@ cat /etc/issue
 | declare |                 | 用于声明或显示已存在的 shell 变量 | `declare key="value"`       |
 | command |                 | 调用并执行命令                    | `command -v zsh`            |
 | time    |                 | 统计命令运行的时间                | `time zsh -i -c exit`       |
-| unset   | undo set        | 删除指定的shell变量或函数         | `unset var`                 |
+| unset   | undo set        | 删除指定的 shell 变量或函数       | `unset var`                 |
+
+## 设备管理
+
+:exclamation: 操作设备相对危险
+
+| 命令  | 全称             | 描述                                                 | 示例                            |
+| ----- | ---------------- | ---------------------------------------------------- | ------------------------------- |
+| mount |                  | 用于挂载 Linux 系统外的文件                          | `mount /dev/sdb1 /primary_part` |
+| fdisk |                  | 查看磁盘使用情况和磁盘分区，命令执行会进入交互式界面 | `fdisk /dev/sdb`                |
+| mkfs  | make file system | 用于在设备上创建 Linux 文件系统                      | `mkfs -t ext3 /dev/sda6`        |
+
+## 服务管理
+
+| 命令      | 全称 | 描述               | 示例                                 |
+| --------- | ---- | ------------------ | ------------------------------------ |
+| systemctl |      | 系统服务管理器指令 | `systemctl list-units –type=service` |
+
+## 网络管理
+
+| 命令     | 全称 | 描述                          | 示例                        |
+| -------- | ---- | ----------------------------- | --------------------------- |
+| ifconfig |      | 用于查看和配置网络信息        | `ifconfig -a`               |
+| route    |      | 显示并设置 Linux 中静态路由表 |
+| netstat  |      | 查看 Linux 中网络系统状态信息 | `netstat -atunlp | grep 22` |
+
+## 进程管理
+
+| 命令 | 全称 | 描述                   | 示例         |
+| ---- | ---- | ---------------------- | ------------ |
+| kill |      | 删除执行中的工作或进程 | `kill 12345` |

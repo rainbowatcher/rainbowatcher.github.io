@@ -172,19 +172,19 @@ str="foo"
 
 #### 字符串操作
 
-| 表达式                             | 含义                                                                                      |
-| ---------------------------------- | ----------------------------------------------------------------------------------------- |
-| `${#string}`                       | `$string`的长度                                                                           |
-| `${string:position}`               | 在`$string`中，从位置`$position`开始提取子串                                              |
-| `${string:position:length}`        | 在`$string`中，从位置`$position`开始提取长度为`$length`的子串                             |
-| `${string#substring}`              | 从变量`$string`的开头，删除最短匹配`$substring`的子串                                     |
-| `${string##substring}`             | 从变量`$string`的开头，删除最长匹配`$substring`的子串                                     |
-| `${string%substring}`              | 从变量`$string`的结尾，删除最短匹配`$substring`的子串                                     |
-| `${string%%substring}`             | 从变量`$string`的结尾，删除最长匹配`$substring`的子串                                     |
-| `${string/substring/replacement}`  | 使用`$replacement`, 来代替第一个匹配的`$substring`                                        |
-| `${string//substring/replacement}` | 使用`$replacement`, 代替所有匹配的`$substring`                                            |
-| `${string/#substring/replacement}` | 如果​`$string`的前缀匹配​`$substring`, 那么就用​`$replacement`来代替匹配到的​`$substring` |
-| `${string/%substring/replacement}` | 如果`$string`的后缀匹配​`$substring`, 那么就用​`$replacement`来代替匹配到的`$substring`   |
+| 表达式                             | 含义                                                                                          |
+| ---------------------------------- | --------------------------------------------------------------------------------------------- |
+| `${#string}`                       | `$string`的长度                                                                               |
+| `${string:position}`               | 在`$string`中，从位置`$position`开始提取子串                                                  |
+| `${string:position:length}`        | 在`$string`中，从位置`$position`开始提取长度为`$length`的子串                                 |
+| `${string#substring}`              | 从变量`$string`的开头，删除最短匹配`$substring`的子串                                         |
+| `${string##substring}`             | 从变量`$string`的开头，删除最长匹配`$substring`的子串                                         |
+| `${string%substring}`              | 从变量`$string`的结尾，删除最短匹配`$substring`的子串                                         |
+| `${string%%substring}`             | 从变量`$string`的结尾，删除最长匹配`$substring`的子串                                         |
+| `${string/substring/replacement}`  | 使用`$replacement`, 来代替第一个匹配的`$substring`                                            |
+| `${string//substring/replacement}` | 使用`$replacement`, 代替所有匹配的`$substring`                                                |
+| `${string/#substring/replacement}` | 如果 ​`$string`的前缀匹配 ​`$substring`, 那么就用 ​`$replacement`来代替匹配到的 ​`$substring` |
+| `${string/%substring/replacement}` | 如果`$string`的后缀匹配 ​`$substring`, 那么就用 ​`$replacement`来代替匹配到的`$substring`     |
 
 ### 数组
 
@@ -331,7 +331,9 @@ fi
 | `-f`   | 是否是一个文件 |
 | `-d`   | 是否是一个目录 |
 | `-e`   | 是否存在       |
-| `-w`   | 是否可写     |
+| `-z`   | 是否为空       |
+| `-n`   | 是否不为空     |
+| `-w`   | 是否可写       |
 | `-r`   | 是否可读       |
 | `-x`   | 是否可执行     |
 
@@ -386,9 +388,19 @@ while [ condition ]; do
 done
 ```
 
-## 管道符
+## 操作符
+
+| 操作符 | 描述                                         | 示例                          |
+| ------ | -------------------------------------------- | ----------------------------- |
+| `.`    | 表示当前目录                                 | `./foo.sh`                    |
+| `..`   | 表示上一级目录                               | `../foo.sh`                   |
+| `~`    | 代表家目录                                   | `cd ~`                        |
+| `\|`   | 管道符，上一个命令的输出作为下一个命令的输入 | `echo "hello world" \| wc -w` |
+| \      | 通常放在行末，用来连接下一行                 |
 
 ## 脚本的执行
+
+- [ ] TODO
 
 ## 参考
 

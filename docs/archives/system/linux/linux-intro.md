@@ -1,7 +1,7 @@
 ---
 layout: Post
 title: Linux 基本概览介绍
-subtitle: 
+subtitle:
 date: 2022-08-11
 permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/ubuntu.svg
@@ -13,16 +13,7 @@ tags: [Linux]
 
 关于 Linux 的介绍见[百科词条](https://baike.baidu.com/item/Linux)，常见发行版可以参考[DistroWatch 的点击排行榜](https://distrowatch.com/dwres.php?resource=popularity)。一般来说商用 Linux 主要采用 RedHat 系和 Oracle 系。
 
-## 相关资料
-
-- [Linux Tutorials](https://www.linux.org/forums/#linux-tutorials.122)
-- [CS-Notes Linux](https://www.cyc2018.xyz/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Linux/Linux.html)
-- [鸟哥的 Linux 私房菜](https://linux.vbird.org/)
-- [Linus Shell](http://billie66.github.io/TLCL/book/)
-
 ## 目录结构
-
-参考：
 
 - [Linux 目录结构|菜鸟教程](https://www.runoob.com/linux/linux-system-contents.html)
 - [快乐的 Linux 命令行|探究操作系统](http://billie66.github.io/TLCL/book/chap04.html)
@@ -32,7 +23,7 @@ tags: [Linux]
 可以在环境变量 PATH 中声明可执行文件的路径，路径之间用 : 分隔。
 
 ```
-/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin:/home/dmtsai/bin
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/username/.local/bin:/home/username/bin
 ```
 
 ## sudo
@@ -56,3 +47,10 @@ RPM 和 DPKG 为最常见的两类软件包管理工具：
 > -- [In Linux, Everything is a File](https://www.linux.org/threads/in-linux-everything-is-a-file.4251/)
 
 在 Linux 里，不仅你上传到电脑的照片是文件，你的显示器同样是一个文件，所有的东西都是文件。
+
+## 相关资料
+
+- [Linux Tutorials](https://www.linux.org/forums/#linux-tutorials.122)
+- [CS-Notes Linux](https://www.cyc2018.xyz/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Linux/Linux.html)
+- [鸟哥的 Linux 私房菜](https://linux.vbird.org/)
+- [Linus Shell](http://billie66.github.io/TLCL/book/)
