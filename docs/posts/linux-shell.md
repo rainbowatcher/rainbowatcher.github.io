@@ -4,7 +4,7 @@ title: Unix Shell 基本语法
 subtitle:
 date: 2022-09-26
 permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/Linux.png
+headerImage: /img/linux.png
 useHeaderImage: true
 headerMask: rgba(0, 0, 0, .4)
 # hide: true
