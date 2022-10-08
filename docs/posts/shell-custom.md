@@ -216,6 +216,24 @@ colorscheme onedark
 
   自动跳转到目录
 
+## zsh 配置
+
+1. 配置 zsh 忽略注释代码
+
+   ```shell
+   setopt interactivecomments
+   ```
+
+2. 记录 zsh 加载日志
+
+   ```shell
+   zmodload zsh/zprof
+   ```
+
+## zsh 脚本
+
+详情查看 [scripts 仓库](https://github.com/rainbowatcher/scripts)
+
 ## 最终效果演示
 
 ![demo](../../docs/.vuepress/public/img/2022/shell-custom/demo.gif)
