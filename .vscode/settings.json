@@ -8,14 +8,19 @@
     "ajeetdsouza",
     "bitnami",
     "CPGQS",
+    "djui",
     "DOHBYF",
     "gungnir",
     "kuma",
     "renovamen",
+    "romkatv",
     "Schniz",
     "sharkdp",
     "uutils",
-    "zoxide"
+    "zmodload",
+    "zoxide",
+    "zprof",
+    "zshzoo"
   ],
   "autoHide.autoHideSideBar": false
 }
