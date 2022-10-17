@@ -100,13 +100,13 @@ diverged = "${ahead_count}${behind_count}"
 
 ### Sheldon
 
-接下来是 Sheldon 的配置，默认存储位置在`~/.sheldon/plugins.toml`
+接下来是 Sheldon 的配置，~~默认存储位置在`~/.sheldon/plugins.toml`~~，`0.7.0`版本之后默认配置路径更改为`~/.config/sheldon/`以适配[XDG 基本目录规范](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
 
 ```toml
 shell = "zsh"
 
 [templates]
-defer = { value = 'zsh-defer source "{{ file }}"', each = true }
+defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
 
 [plugins.zsh-defer]
 github = 'romkatv/zsh-defer'
@@ -122,11 +122,6 @@ apply = ["defer"]
 [plugins.zsh-autocomplete]
 github = "marlonrichert/zsh-autocomplete"
 apply = ["defer"]
-
-# 由于该项目的自动完成于我个人来收并没有太多用所以这里没有启用
-# [plugins.zsh-completions]
-# github = "zsh-users/zsh-completions"
-# apply = ["defer"]
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
@@ -147,7 +142,7 @@ inline = "eval \"$(starship init zsh)\""
 inline = "eval \"$(fnm env --use-on-cd)\""
 
 [plugins.zoxide]
-inline = "eval \"$(zoxide init zsh)\""
+inline = "eval \"$(zoxide init zsh --cmd cd)\""
 ```
 
 ### Bat
