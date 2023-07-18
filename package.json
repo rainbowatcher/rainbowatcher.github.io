@@ -1,7 +1,7 @@
 {
   "name": "rainbowatcher.github.io",
   "version": "0.0.4",
-  "packageManager": "pnpm@7.33.0",
+  "packageManager": "pnpm@8.6.8",
   "author": "rainbowatcher <rainbow-w@qq.com>",
   "license": "MIT",
   "repository": "https://github.com/rainbowatcher/rainbowatcher.github.io.git",
@@ -17,17 +17,18 @@
     "build:packages": "pnpm --stream -r build && pnpm --parallel --stream -r copy",
     "docs:dev": "pnpm --filter docs docs:dev",
     "docs:build": "pnpm --filter docs docs:build",
+    "dev": "pnpm docs:dev",
     "preview": "serve docs/.vuepress/dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.27.0",
+    "@antfu/eslint-config": "^0.39.8",
     "cpx": "^1.5.0",
-    "eslint": "^8.42.0",
-    "rimraf": "^3.0.2",
+    "eslint": "^8.45.0",
+    "rimraf": "^5.0.1",
     "serve": "^14.2.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.6"
   },
   "eslintConfig": {
     "extends": "@antfu",
