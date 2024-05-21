@@ -24,8 +24,17 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
+    "@rainbowatcher/eslint-config": "^0.6.3",
+    "@rainbowatcher/eslint-config-ignore": "^0.6.3",
+    "@rainbowatcher/eslint-config-js": "^0.6.3",
+    "@rainbowatcher/eslint-config-json": "^0.6.3",
+    "@rainbowatcher/eslint-config-md": "^0.6.3",
+    "@rainbowatcher/eslint-config-prettier": "^0.6.3",
+    "@rainbowatcher/eslint-config-ts": "^0.6.3",
+    "@rainbowatcher/eslint-config-unocss": "^0.6.3",
+    "@rainbowatcher/eslint-config-vue": "^0.6.3",
     "cpx": "^1.5.0",
-    "eslint": "^8.45.0",
+    "eslint": "^9.3.0",
     "rimraf": "^5.0.1",
     "serve": "^14.2.0",
     "typescript": "^5.1.6"

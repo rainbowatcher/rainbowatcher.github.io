@@ -1,8 +1,8 @@
 {
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
+    "source.fixAll.eslint": "explicit"
+},
   "editor.formatOnSave": false,
   "cSpell.words": [
     "ajeetdsouza",
@@ -17,5 +17,16 @@
     "uutils",
     "zoxide"
   ],
-  "autoHide.autoHideSideBar": false
+  "autoHide.autoHideSideBar": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "json",
+    "jsonc",
+    "markdown",
+    "yaml"
+  ]
 }
