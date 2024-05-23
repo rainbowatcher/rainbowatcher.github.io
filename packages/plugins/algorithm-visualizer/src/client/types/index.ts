@@ -1,43 +1,43 @@
-type AxisType = 'category' | 'time' | 'log' | 'value'
+type AxisType = "category" | "log" | "time" | "value"
 
-interface Data {
-  value: number
-  itemStyle: {
-    color: string
-  }
+type Data = {
+    itemStyle: {
+        color: string
+    }
+    value: number
 }
 
-interface ChartOption {
-  xAxis: {
-    type: AxisType
-    data: Array<unknown>
-    axisLine?: {
-      show: boolean
+type ChartOption = {
+    [key: string]: unknown
+    series: [
+        {
+            [key: string]: unknown
+            data: Array<Data | number> | undefined
+            type: string
+        },
+    ]
+    xAxis: {
+        axisLine?: {
+            show: boolean
+        }
+        axisTick?: {
+            show: boolean
+        }
+        data: unknown[]
+        type: AxisType
     }
-    axisTick?: {
-      show: boolean
+    yAxis: {
+        axisLine?: {
+            show: boolean
+        }
+        axisTick?: {
+            show: boolean
+        }
+        splitLine?: {
+            show: boolean
+        }
+        type: AxisType
     }
-  }
-  yAxis: {
-    type: AxisType
-    axisLine?: {
-      show: boolean
-    }
-    axisTick?: {
-      show: boolean
-    }
-    splitLine?: {
-      show: boolean
-    }
-  }
-  series: [
-    {
-      data: Array<Data | number> | undefined
-      type: string
-      [key: string]: unknown
-    },
-  ]
-  [key: string]: unknown
 }
 
-export { ChartOption, Data }
+export type { ChartOption, Data }

@@ -1,155 +1,141 @@
-import type { CodeDemoOptions } from '../../../shared'
-import type { Code } from './typings'
+import type { Code } from "./typings"
+import type { CodeDemoOptions } from "../../../shared"
 
 declare const CODE_DEMO_OPTIONS: CodeDemoOptions
 
 export const options = CODE_DEMO_OPTIONS
 
-export type PreProcessorType = 'html' | 'js' | 'css'
+export type PreProcessorType = "css" | "html" | "js"
 
 export const preProcessorConfig: Record<
-  PreProcessorType,
-  {
-    types: string[]
-    map: Record<string, string | undefined>
-  }
-> = {
-  html: {
-    types: ['html', 'slim', 'haml', 'md', 'markdown', 'vue'],
-    map: {
-      html: 'none',
-      vue: 'none',
-      md: 'markdown',
-    },
-  },
-  js: {
-    types: [
-      'js',
-      'javascript',
-      'coffee',
-      'coffeescript',
-      'ts',
-      'typescript',
-      'ls',
-      'livescript',
-    ],
-    map: {
-      js: 'none',
-      javascript: 'none',
-      coffee: 'coffeescript',
-      ls: 'livescript',
-      ts: 'typescript',
-    },
-  },
-  css: {
-    types: ['css', 'less', 'sass', 'scss', 'stylus', 'styl'],
-    map: {
-      css: 'none',
-      styl: 'stylus',
-    },
-  },
-}
-
-export const h = (
-  tag: string,
-  attrs: Record<string, string>,
-  children?: HTMLElement[],
-): HTMLElement => {
-  const node = document.createElement(tag)
-
-  attrs
-    && Object.keys(attrs).forEach((key) => {
-      if (!key.indexOf('data')) {
-        const k = key.replace('data', '')
-
-        node.dataset[k] = attrs[key]
-      }
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      else { node[key] = attrs[key] }
-    })
-
-  if (children) {
-    children.forEach((child) => {
-      node.appendChild(child)
-    })
-  }
-
-  return node
-}
-
-export const getConfig = (
-  config: Partial<CodeDemoOptions>,
-): CodeDemoOptions => ({
-  ...options,
-  ...config,
-  jsLib: Array.from(
-    new Set([...(options.jsLib || []), ...(config.jsLib || [])]),
-  ),
-  cssLib: Array.from(
-    new Set([...(options.cssLib || []), ...(config.cssLib || [])]),
-  ),
-})
-
-export const loadScript = (
-  state: Record<string, Promise<void>>,
-  link: string,
-): Promise<void> => {
-  if (state[link] !== undefined)
-    return state[link]
-
-  const loadEvent = new Promise<void>((resolve) => {
-    const script = document.createElement('script')
-
-    script.src = link
-    document.querySelector('body')?.appendChild(script)
-
-    script.onload = (): void => {
-      resolve()
+    PreProcessorType,
+    {
+        map: Record<string, string | undefined>
+        types: string[]
     }
-  })
-
-  state[link] = loadEvent
-
-  return loadEvent
+> = {
+    css: {
+        map: {
+            css: "none",
+            styl: "stylus",
+        },
+        types: ["css", "less", "sass", "scss", "stylus", "styl"],
+    },
+    html: {
+        map: {
+            html: "none",
+            md: "markdown",
+            vue: "none",
+        },
+        types: ["html", "slim", "haml", "md", "markdown", "vue"],
+    },
+    js: {
+        map: {
+            coffee: "coffeescript",
+            javascript: "none",
+            js: "none",
+            ls: "livescript",
+            ts: "typescript",
+        },
+        types: [
+            "js",
+            "javascript",
+            "coffee",
+            "coffeescript",
+            "ts",
+            "typescript",
+            "ls",
+            "livescript",
+        ],
+    },
 }
 
-export const injectCSS = (shadowRoot: ShadowRoot, code: Code): void => {
-  if (
-    code.css
-    // style not injected
-    && Array.from(shadowRoot.childNodes).every(
-      element => element.nodeName !== 'STYLE',
-    )
-  ) {
-    const style = h('style', { innerHTML: code.css })
+export function h(
+    tag: string,
+    attrs: Record<string, string>,
+    children?: HTMLElement[],
+): HTMLElement {
+    const node = document.createElement(tag)
+    attrs
+    // eslint-disable-next-line unicorn/no-array-for-each
+    && Object.keys(attrs).forEach((key) => {
+        // @ts-expect-error type
+        if (key.indexOf("data")) { node[key] = attrs[key] } else {
+            const k = key.replace("data", "")
+            node.dataset[k] = attrs[key]
+        }
+    })
 
-    shadowRoot.appendChild(style)
-  }
+    if (children) {
+        for (const child of children) {
+            node.append(child)
+        }
+    }
+
+    return node
 }
 
-export const injectScript = (
-  id: string,
-  shadowRoot: ShadowRoot,
-  code: Code,
-): void => {
-  const scriptText = code.getScript()
+export function getConfig(config: Partial<CodeDemoOptions>): CodeDemoOptions {
+    return {
+        ...options,
+        ...config,
+        cssLib: [...new Set([...options.cssLib || [], ...config.cssLib || []])],
+        jsLib: [...new Set([...options.jsLib || [], ...config.jsLib || []])],
+    }
+}
 
-  if (
-    scriptText
-    // style not injected
-    && Array.from(shadowRoot.childNodes).every(
-      element => element.nodeName !== 'SCRIPT',
-    )
-  ) {
-    const script = document.createElement('script')
+export function loadScript(
+    state: Record<string, Promise<void>>,
+    link: string,
+): Promise<void> {
+    if (state[link] !== undefined) return state[link]
 
-    script.appendChild(
-      document.createTextNode(
+    const loadEvent = new Promise<void>((resolve) => {
+        const script = document.createElement("script")
+
+        script.src = link
+        document.querySelector("body")?.append(script)
+
+        script.addEventListener("load", (): void => {
+            resolve()
+        })
+    })
+
+    state[link] = loadEvent
+
+    return loadEvent
+}
+
+export function injectCSS(shadowRoot: ShadowRoot, code: Code): void {
+    if (
+        code.css
+        // style not injected
+        // @ts-expect-error type
+        && [...shadowRoot.childNodes].every(element => element.nodeName !== "STYLE")
+    ) {
+        const style = h("style", { innerHTML: code.css })
+
+        shadowRoot.append(style)
+    }
+}
+
+export function injectScript(
+    id: string,
+    shadowRoot: ShadowRoot,
+    code: Code,
+): void {
+    const scriptText = code.getScript()
+
+    if (
+        scriptText
+        // style not injected
+        // @ts-expect-error type
+        && [...shadowRoot.childNodes].every(element => element.nodeName !== "SCRIPT")
+    ) {
+        const script = document.createElement("script")
         // here we are fixing `document` variable back to shadowDOM
-        `{const document = window.document.querySelector('#${id} .code-demo-container').shadowRoot;\n${scriptText}}`,
-      ),
-    )
-    shadowRoot.appendChild(script)
-  }
+        const node = `{const document = window.document.querySelector('#${id} .code-demo-container').shadowRoot;\n${scriptText}}`
+        script.append(document.createTextNode(node))
+        shadowRoot.append(script)
+    }
 }

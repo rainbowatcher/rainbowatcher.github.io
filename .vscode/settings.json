@@ -1,32 +1,38 @@
 {
-  "prettier.enable": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-},
-  "editor.formatOnSave": false,
-  "cSpell.words": [
-    "ajeetdsouza",
-    "bitnami",
-    "CPGQS",
-    "DOHBYF",
-    "gungnir",
-    "kuma",
-    "renovamen",
-    "Schniz",
-    "sharkdp",
-    "uutils",
-    "zoxide"
-  ],
-  "autoHide.autoHideSideBar": false,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "json",
-    "jsonc",
-    "markdown",
-    "yaml"
-  ]
+    "prettier.enable": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+    },
+    "editor.formatOnSave": false,
+    "cSpell.words": [
+        "ajeetdsouza",
+        "bitnami",
+        "CPGQS",
+        "DOHBYF",
+        "gungnir",
+        "kuma",
+        "nuxi",
+        "rainbowather",
+        "renovamen",
+        "Schniz",
+        "sharkdp",
+        "uutils",
+        "zoxide",
+    ],
+    "autoHide.autoHideSideBar": false,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "json",
+        "jsonc",
+        "markdown",
+        "yaml",
+        "css",
+        "sass",
+        "scss",
+        "less",
+    ],
 }

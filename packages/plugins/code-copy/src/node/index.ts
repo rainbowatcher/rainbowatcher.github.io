@@ -1,3 +1,3 @@
-import { codeCopyPlugin } from './plugin'
+import { codeCopyPlugin } from "./plugin"
 
 export default codeCopyPlugin

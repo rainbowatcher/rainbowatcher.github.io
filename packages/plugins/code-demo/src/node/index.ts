@@ -1,3 +1,3 @@
-import { codeDemoPlugin } from './plugin'
+import { codeDemoPlugin } from "./plugin"
 
 export default codeDemoPlugin

@@ -1,17 +1,17 @@
-import type { CodeDemoOptions } from '../../../shared'
+import type { CodeDemoOptions } from "../../../shared"
 
-export interface CodeType {
-  html: [code: string, type: string] | []
-  js: [code: string, type: string] | []
-  css: [code: string, type: string] | []
-  isLegal: boolean
+export type CodeType = {
+    css: [code: string, type: string] | string[]
+    html: [code: string, type: string] | string[]
+    isLegal: boolean
+    js: [code: string, type: string] | string[]
 }
 
-export interface Code extends CodeDemoOptions {
-  html: string
-  js: string
-  css: string
-  isLegal: boolean
-  jsx?: boolean
-  getScript: () => string
-}
+export type Code = {
+    css: string
+    getScript: () => string
+    html: string
+    isLegal: boolean
+    js: string
+    jsx?: boolean
+} & CodeDemoOptions

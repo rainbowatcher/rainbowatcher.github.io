@@ -1,287 +1,280 @@
-import { computed, defineComponent, h, onMounted, reactive, ref } from 'vue'
-import type { PropType, VNode } from 'vue'
-import { loadNormal, loadReact, loadVue } from '../composables'
+/* eslint-disable unicorn/filename-case */
+/* eslint-disable ts/dot-notation */
+/* eslint-disable style-ts/no-extra-parens */
+
 import {
-  getCode,
-  getNormalCode,
-  getReactCode,
-  getVueCode,
-  injectCSS,
-  injectScript,
-} from '../utils'
+    computed, defineComponent, h, onMounted, reactive, ref,
+} from "vue"
+import { loadNormal, loadReact, loadVue } from "../composables"
+import {
+    getCode,
+    getNormalCode,
+    getReactCode,
+    getVueCode,
+    injectCSS,
+    injectScript,
+} from "../utils"
 
-import type { CodeDemoOptions } from '../../shared'
-import { CODEPEN_SVG, JSFIDDLE_SVG, LOADING_SVG, TOGGLE_SVG } from './icons'
+import {
+    CODEPEN_SVG, JSFIDDLE_SVG, LOADING_SVG, TOGGLE_SVG,
+} from "./icons"
+import type { CodeDemoOptions } from "../../shared"
+import type { PropType, VNode } from "vue"
 
-import 'balloon-css/balloon.css'
-import '../styles/code-demo.scss'
+import "balloon-css/balloon.css"
+import "../styles/code-demo.scss"
 
 declare const MARKDOWN_ENHANCE_DELAY: number
 
 export default defineComponent({
-  name: 'CodeDemo',
+    name: "CodeDemo",
 
-  props: {
-    id: {
-      type: String,
-      required: true,
+    props: {
+        code: {
+            required: true,
+            type: String,
+        },
+        config: {
+            default: "",
+            type: String,
+        },
+
+        id: {
+            required: true,
+            type: String,
+        },
+
+        title: {
+            default: "",
+            type: String,
+        },
+
+        type: {
+            default: "normal",
+            type: String as PropType<"normal" | "react" | "vue">,
+        },
     },
-    type: {
-      type: String as PropType<'normal' | 'vue' | 'react'>,
-      default: 'normal',
-    },
 
-    title: {
-      type: String,
-      default: '',
-    },
+    setup(props, { slots }) {
+        const isExpanded = ref(false)
+        const demoWrapper = ref<HTMLDivElement | undefined>()
+        const codeContainer = ref<HTMLDivElement | undefined>()
+        const loaded = ref(false)
 
-    config: {
-      type: String,
-      default: '',
-    },
+        const config = computed(() => JSON.parse(decodeURIComponent(props.config || "{}")) as Partial<CodeDemoOptions>)
 
-    code: {
-      type: String,
-      required: true,
-    },
-  },
+        const codeType = computed(() => {
+            const codeConfig = JSON.parse(decodeURIComponent(props.code || "{}")) as Record<string, string>
 
-  setup(props, { slots }) {
-    const isExpanded = ref(false)
-    const demoWrapper = ref<HTMLDivElement | null>(null)
-    const codeContainer = ref<HTMLDivElement | null>(null)
-    const loaded = ref(false)
+            return getCode(codeConfig)
+        })
 
-    const config = computed(
-      () =>
-        JSON.parse(
-          decodeURIComponent(props.config || '{}'),
-        ) as Partial<CodeDemoOptions>,
-    )
+        const code = computed(() => (props.type === "react"
+            ? getReactCode(codeType.value, config.value)
+            : (props.type === "vue"
+                ? getVueCode(codeType.value, config.value)
+                : getNormalCode(codeType.value, config.value))))
 
-    const codeType = computed(() => {
-      const codeConfig = JSON.parse(
-        decodeURIComponent(props.code || '{}'),
-      ) as Record<string, string>
+        const isLegal = computed(() => code.value.isLegal)
+        const codeWrapper = reactive({
+            height: "0",
+            overflow: "hidden",
+        })
 
-      return getCode(codeConfig)
-    })
+        const initDom = (innerHTML = false): void => {
+            // attach a shadow root to demo
 
-    const code = computed(() =>
-      props.type === 'react'
-        ? getReactCode(codeType.value, config.value)
-        : props.type === 'vue'
-          ? getVueCode(codeType.value, config.value)
-          : getNormalCode(codeType.value, config.value),
-    )
+            const shadowRoot = demoWrapper.value!.attachShadow({ mode: "open" })
+            const appElement = document.createElement("div")
 
-    const isLegal = computed(() => code.value.isLegal)
-    const code_wrapper = reactive({
-      overflow: 'hidden',
-      height: '0',
-    })
+            appElement.classList.add("code-demo-app")
+            shadowRoot.append(appElement)
 
-    const initDom = (innerHTML = false): void => {
-      // attach a shadow root to demo
+            if (isLegal.value) {
+                if (innerHTML) appElement.innerHTML = code.value.html
+                injectCSS(shadowRoot, code.value)
+                injectScript(props.id, shadowRoot, code.value)
 
-      const shadowRoot = demoWrapper.value!.attachShadow({ mode: 'open' })
-      const appElement = document.createElement('div')
+                codeWrapper.height = "0"
+            } else { codeWrapper.height = "auto" }
 
-      appElement.classList.add('code-demo-app')
-      shadowRoot.appendChild(appElement)
-
-      if (isLegal.value) {
-        if (innerHTML)
-          appElement.innerHTML = code.value.html
-        injectCSS(shadowRoot, code.value)
-        injectScript(props.id, shadowRoot, code.value)
-
-        code_wrapper.height = '0'
-      }
-      else { code_wrapper.height = 'auto' }
-
-      loaded.value = true
-    }
-
-    const loadDemo = async (): Promise<void> => {
-      switch (props.type) {
-        case 'react': {
-          await loadReact(code.value)
-          return initDom()
-        }
-        case 'vue': {
-          await loadVue(code.value)
-          return initDom()
+            loaded.value = true
         }
 
-        default: {
-          await loadNormal(code.value)
-          return initDom(true)
-        }
-      }
-    }
-
-    const codepen_data = JSON.stringify({
-      html: code.value.html,
-      js: code.value.js,
-      css: code.value.css,
-
-      js_external: code.value.jsLib.join(';'),
-
-      css_external: code.value.cssLib.join(';'),
-      layout: code.value.codepenLayout,
-
-      html_pre_processor: codeType.value
-        ? codeType.value.html[1]
-        : 'none',
-
-      js_pre_processor: codeType.value
-        ? codeType.value.js[1]
-        : code.value.jsx
-          ? 'babel'
-          : 'none',
-
-      css_pre_processor: codeType.value
-        ? codeType.value.css[1]
-        : 'none',
-      editors: code.value.codepenEditors,
-    })
-
-    onMounted(() => {
-      setTimeout(() => {
-        loadDemo()
-      }, MARKDOWN_ENHANCE_DELAY)
-    })
-
-    return (): VNode =>
-      h('div', { class: 'code-demo-wrapper', id: props.id }, [
-        h('div', { class: 'code-demo-header' }, [
-          code.value.isLegal
-            ? h('button', {
-              class: ['toggle-button', isExpanded.value ? 'down' : 'right'],
-              onClick: () => {
-                isExpanded.value = !isExpanded.value
-                if (isExpanded.value) {
-                  code_wrapper.height = `${codeContainer.value!.clientHeight + 13.8}px`
-                  setTimeout(() => {
-                    code_wrapper.overflow = 'visible'
-                  }, 200)
+        const loadDemo = async (): Promise<void> => {
+            switch (props.type) {
+                case "react": {
+                    await loadReact(code.value)
+                    initDom(); return
                 }
-                else {
-                  code_wrapper.overflow = 'hidden'
-                  setTimeout(() => {
-                    code_wrapper.height = '0'
-                  }, 100)
+                case "vue": {
+                    await loadVue(code.value)
+                    initDom(); return
                 }
-              },
-              innerHTML: TOGGLE_SVG,
-            })
-            : null,
-          props.title
-            ? h('span', { class: 'title' }, decodeURIComponent(props.title))
-            : null,
 
-          code.value.isLegal && code.value.jsfiddle !== false
-            ? h(
-              'form',
-              {
-                class: 'code-demo-jsfiddle',
-                target: '_blank',
-                action: 'https://jsfiddle.net/api/post/library/pure/',
-                method: 'post',
-              },
-              [
-                h('input', {
-                  type: 'hidden',
-                  name: 'html',
-                  value: code.value.html,
-                }),
-                h('input', {
-                  type: 'hidden',
-                  name: 'js',
-                  value: code.value.js,
-                }),
-                h('input', {
-                  type: 'hidden',
-                  name: 'css',
-                  value: code.value.css,
-                }),
-                h('input', { type: 'hidden', name: 'wrap', value: '1' }),
-                h('input', { type: 'hidden', name: 'panel_js', value: '3' }),
-                h('input', {
-                  type: 'hidden',
-                  name: 'resources',
-                  value: [...code.value.cssLib, ...code.value.jsLib].join(
-                    ',',
-                  ),
-                }),
-                h('button', {
-                  'type': 'submit',
-                  'class': 'jsfiddle-button',
-                  'innerHTML': JSFIDDLE_SVG,
-                  'aria-label': 'JSFiddle',
-                  'data-balloon-pos': 'up',
-                }),
-              ],
-            )
-            : null,
+                default: {
+                    await loadNormal(code.value)
+                    initDom(true); return
+                }
+            }
+        }
 
-          !code.value.isLegal || code.value.codepen !== false
-            ? h(
-              'form',
-              {
-                class: 'code-demo-codepen',
-                target: '_blank',
-                action: 'https://codepen.io/pen/define',
-                method: 'post',
-              },
-              [
-                h('input', {
-                  type: 'hidden',
-                  name: 'data',
-                  value: codepen_data,
+        const codepenData = JSON.stringify({
+            css: code.value.css,
+            css_external: code.value.cssLib.join(";"),
+            css_pre_processor: codeType.value
+                ? codeType.value.css[1]
+                : "none",
+
+            editors: code.value.codepenEditors,
+
+            html: code.value.html,
+            html_pre_processor: codeType.value
+                ? codeType.value.html[1]
+                : "none",
+
+            js: code.value.js,
+
+            js_external: code.value.jsLib.join(";"),
+
+            js_pre_processor: codeType.value
+                ? codeType.value.js[1]
+                : (code.value.jsx
+                    ? "babel"
+                    : "none"),
+            layout: code.value.codepenLayout,
+        })
+
+        onMounted(() => {
+            setTimeout(async () => {
+                await loadDemo()
+            }, MARKDOWN_ENHANCE_DELAY)
+        })
+
+        return (): VNode => h("div", { class: "code-demo-wrapper", id: props.id }, [
+            h("div", { class: "code-demo-header" }, [
+                code.value.isLegal
+                    ? h("button", {
+                        class: ["toggle-button", isExpanded.value ? "down" : "right"],
+                        innerHTML: TOGGLE_SVG,
+                        onClick: () => {
+                            isExpanded.value = !isExpanded.value
+                            if (isExpanded.value) {
+                                codeWrapper.height = `${codeContainer.value!.clientHeight + 13.8}px`
+                                setTimeout(() => {
+                                    codeWrapper.overflow = "visible"
+                                }, 200)
+                            } else {
+                                codeWrapper.overflow = "hidden"
+                                setTimeout(() => {
+                                    codeWrapper.height = "0"
+                                }, 100)
+                            }
+                        },
+                    })
+                    : null,
+                props.title
+                    ? h("span", { class: "title" }, decodeURIComponent(props.title))
+                    : null,
+
+                code.value.isLegal && code.value.jsfiddle !== false
+                    ? h(
+                        "form",
+                        {
+                            action: "https://jsfiddle.net/api/post/library/pure/",
+                            class: "code-demo-jsfiddle",
+                            method: "post",
+                            target: "_blank",
+                        },
+                        [
+                            h("input", {
+                                name: "html",
+                                type: "hidden",
+                                value: code.value.html,
+                            }),
+                            h("input", {
+                                name: "js",
+                                type: "hidden",
+                                value: code.value.js,
+                            }),
+                            h("input", {
+                                name: "css",
+                                type: "hidden",
+                                value: code.value.css,
+                            }),
+                            h("input", { name: "wrap", type: "hidden", value: "1" }),
+                            h("input", { name: "panel_js", type: "hidden", value: "3" }),
+                            h("input", {
+                                name: "resources",
+                                type: "hidden",
+                                value: [...code.value.cssLib, ...code.value.jsLib].join(","),
+                            }),
+                            h("button", {
+                                "aria-label": "JSFiddle",
+                                class: "jsfiddle-button",
+                                "data-balloon-pos": "up",
+                                innerHTML: JSFIDDLE_SVG,
+                                type: "submit",
+                            }),
+                        ],
+                    )
+                    : null,
+
+                !code.value.isLegal || code.value.codepen !== false
+                    ? h(
+                        "form",
+                        {
+                            action: "https://codepen.io/pen/define",
+                            class: "code-demo-codepen",
+                            method: "post",
+                            target: "_blank",
+                        },
+                        [
+                            h("input", {
+                                name: "data",
+                                type: "hidden",
+                                value: codepenData,
+                            }),
+                            h("button", {
+                                "aria-label": "Codepen",
+                                class: "codepen-button",
+                                "data-balloon-pos": "up",
+                                innerHTML: CODEPEN_SVG,
+                                type: "submit",
+                            }),
+                        ],
+                    )
+                    : null,
+            ]),
+
+            loaded.value
+                ? null
+                : h("div", {
+                    class: ["loading"],
+                    innerHTML: LOADING_SVG,
                 }),
-                h('button', {
-                  'type': 'submit',
-                  'innerHTML': CODEPEN_SVG,
-                  'class': 'codepen-button',
-                  'aria-label': 'Codepen',
-                  'data-balloon-pos': 'up',
-                }),
-              ],
-            )
-            : null,
-        ]),
 
-        loaded.value
-          ? null
-          : h('div', {
-            class: ['loading'],
-            innerHTML: LOADING_SVG,
-          }),
+            h("div", {
+                class: "code-demo-container",
+                ref: demoWrapper,
+                style: {
+                    display: isLegal.value && loaded.value ? "block" : "none",
+                },
+            }),
 
-        h('div', {
-          ref: demoWrapper,
-          class: 'code-demo-container',
-          style: {
-            display: isLegal.value && loaded.value ? 'block' : 'none',
-          },
-        }),
+            h(
+                "div",
+                { class: "code-demo-code-wrapper", style: { height: codeWrapper.height, overflow: codeWrapper.overflow } },
+                h(
+                    "div",
+                    {
+                        class: "code-demo-codes",
+                        ref: codeContainer,
+                    },
 
-        h(
-          'div',
-          { class: 'code-demo-code-wrapper', style: { height: code_wrapper.height, overflow: code_wrapper.overflow } },
-          h(
-            'div',
-            {
-              ref: codeContainer,
-              class: 'code-demo-codes',
-            },
-            // eslint-disable-next-line dot-notation
-            slots['default']?.(),
-          ),
-        ),
-      ])
-  },
+                    slots["default"]?.(),
+                ),
+            ),
+        ])
+    },
 })

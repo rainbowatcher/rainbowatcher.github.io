@@ -15,3 +15,5 @@ lib/
 .vercel
 .env
 algolia.js
+.nuxt
+.output

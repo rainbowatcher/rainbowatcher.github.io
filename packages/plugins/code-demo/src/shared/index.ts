@@ -1,3 +1,3 @@
-import { CodeDemoOptions } from './codeDemo'
+import type { CodeDemoOptions } from "./codeDemo"
 
-export { CodeDemoOptions }
+export type { CodeDemoOptions }

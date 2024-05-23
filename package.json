@@ -1,42 +1,60 @@
 {
-  "name": "rainbowatcher.github.io",
-  "version": "0.0.4",
-  "packageManager": "pnpm@9.1.2",
-  "author": "rainbowatcher <rainbow-w@qq.com>",
-  "license": "MIT",
-  "repository": "https://github.com/rainbowatcher/rainbowatcher.github.io.git",
-  "main": "index.js",
-  "engines": {
-    "node": ">=14",
-    "pnpm": ">=7"
-  },
-  "scripts": {
-    "clean": "pnpm --stream -r clean",
-    "check": "pnpm exec lychee -c lychee.toml -f markdown .",
-    "build": "pnpm build:packages && pnpm docs:build",
-    "build:packages": "pnpm --stream -r build && pnpm --parallel --stream -r copy",
-    "docs:dev": "pnpm --filter docs docs:dev",
-    "docs:build": "pnpm --filter docs docs:build",
-    "dev": "pnpm docs:dev",
-    "preview": "serve docs/.vuepress/dist",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^0.39.8",
-    "@rainbowatcher/eslint-config": "^0.6.3",
-    "@rainbowatcher/eslint-config-ignore": "^0.6.3",
-    "@rainbowatcher/eslint-config-js": "^0.6.3",
-    "@rainbowatcher/eslint-config-json": "^0.6.3",
-    "@rainbowatcher/eslint-config-md": "^0.6.3",
-    "@rainbowatcher/eslint-config-prettier": "^0.6.3",
-    "@rainbowatcher/eslint-config-ts": "^0.6.3",
-    "@rainbowatcher/eslint-config-unocss": "^0.6.3",
-    "@rainbowatcher/eslint-config-vue": "^0.6.3",
-    "cpx": "^1.5.0",
-    "eslint": "^9.3.0",
-    "rimraf": "^5.0.7",
-    "serve": "^14.2.3",
-    "typescript": "^5.4.5"
-  }
+    "name": "rainbowatcher.github.io",
+    "type": "module",
+    "version": "0.0.4",
+    "packageManager": "pnpm@9.1.2",
+    "author": "rainbowatcher <rainbow-w@qq.com>",
+    "license": "MIT",
+    "repository": "https://github.com/rainbowatcher/rainbowatcher.github.io.git",
+    "main": "index.js",
+    "engines": {
+        "node": ">=14",
+        "pnpm": ">=7"
+    },
+    "scripts": {
+        "clean": "pnpm --stream -r clean",
+        "check": "pnpm exec lychee -c lychee.toml -f markdown .",
+        "build": "pnpm build:packages && pnpm docs:build",
+        "generate": "nuxi generate",
+        "prepare": "nuxi prepare && simple-git-hooks",
+        "preview": "nuxi preview",
+        "build:packages": "pnpm --stream -r build && pnpm --parallel --stream -r copy",
+        "docs:dev": "pnpm --filter docs docs:dev",
+        "docs:build": "pnpm --filter docs docs:build",
+        "dev": "nuxi dev",
+        "lint": "eslint ."
+    },
+    "devDependencies": {
+        "@commitlint/config-conventional": "^19.2.2",
+        "@nuxt/content": "^2.12.1",
+        "@nuxt/eslint": "^0.3.13",
+        "@nuxtjs/algolia": "^1.10.2",
+        "@rainbowatcher/eslint-config": "^0.6.9",
+        "@rainbowatcher/eslint-config-ignore": "^0.6.9",
+        "@rainbowatcher/eslint-config-js": "^0.6.9",
+        "@rainbowatcher/eslint-config-json": "^0.6.9",
+        "@rainbowatcher/eslint-config-md": "^0.6.9",
+        "@rainbowatcher/eslint-config-prettier": "^0.6.9",
+        "@rainbowatcher/eslint-config-ts": "^0.6.9",
+        "@rainbowatcher/eslint-config-unocss": "^0.6.9",
+        "@rainbowatcher/eslint-config-vue": "^0.6.9",
+        "@unocss/nuxt": "^0.60.3",
+        "@vueuse/nuxt": "^10.9.0",
+        "commitlint": "^19.3.0",
+        "cpx": "^1.5.0",
+        "eslint": "^9.3.0",
+        "lint-staged": "^15.2.4",
+        "nuxt": "^3.11.2",
+        "rimraf": "^5.0.7",
+        "serve": "^14.2.3",
+        "simple-git-hooks": "^2.11.1",
+        "typescript": "^5.4.5"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "npx lint-staged",
+        "commit-msg": "npx commitlint --edit $1"
+    },
+    "lint-staged": {
+        "*.{ts,json}": "eslint"
+    }
 }
