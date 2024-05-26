@@ -1,12 +1,6 @@
 import {
-    defineConfig,
-    presetAttributify,
-    presetIcons,
-    presetTypography,
-    presetUno,
-    presetWebFonts,
-    transformerDirectives,
-    transformerVariantGroup,
+    defineConfig, presetAttributify, presetIcons, presetTypography, presetUno,
+    presetWebFonts, transformerDirectives, transformerVariantGroup,
 } from "unocss"
 
 export default defineConfig({
@@ -17,18 +11,9 @@ export default defineConfig({
             scale: 1.2,
         }),
         presetTypography(),
-        presetWebFonts({
-            // fonts: {
-            //     mono: "DM Mono",
-            //     sans: "DM Sans",
-            //     serif: "DM Serif Display",
-            // },
-        }),
+        presetWebFonts({}),
     ],
-    shortcuts: [
-        ["btn", "px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50"],
-        ["icon-btn", "inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600"],
-    ],
+    shortcuts: [],
     theme: {
         borderRadius: {
             lg: "var(--radius)",
@@ -37,37 +22,37 @@ export default defineConfig({
         },
         colors: {
             accent: {
-                DEFAULT: "hsl(var(--accent))",
-                foreground: "hsl(var(--accent-foreground))",
+                DEFAULT: "var(--accent)",
+                foreground: "var(--accent-foreground)",
             },
-            background: "hsl(var(--background))",
-            border: "hsl(var(--border))",
+            background: "var(--background)",
+            border: "var(--border)",
             card: {
-                DEFAULT: "hsl(var(--card))",
-                foreground: "hsl(var(--card-foreground))",
+                DEFAULT: "var(--card)",
+                foreground: "var(--card-foreground)",
             },
             destructive: {
-                DEFAULT: "hsl(var(--destructive))",
-                foreground: "hsl(var(--destructive-foreground))",
+                DEFAULT: "var(--destructive)",
+                foreground: "var(--destructive-foreground)",
             },
-            foreground: "hsl(var(--foreground))",
-            input: "hsl(var(--input))",
+            foreground: "var(--foreground)",
+            input: "var(--input)",
             muted: {
-                DEFAULT: "hsl(var(--muted))",
-                foreground: "hsl(var(--muted-foreground))",
+                DEFAULT: "var(--muted)",
+                foreground: "var(--muted-foreground)",
             },
             popover: {
-                DEFAULT: "hsl(var(--popover))",
-                foreground: "hsl(var(--popover-foreground))",
+                DEFAULT: "var(--popover)",
+                foreground: "var(--popover-foreground)",
             },
             primary: {
-                DEFAULT: "hsl(var(--primary))",
-                foreground: "hsl(var(--primary-foreground))",
+                DEFAULT: "var(--primary)",
+                foreground: "var(--primary-foreground)",
             },
-            ring: "hsl(var(--ring))",
+            ring: "var(--ring)",
             secondary: {
-                DEFAULT: "hsl(var(--secondary))",
-                foreground: "hsl(var(--secondary-foreground))",
+                DEFAULT: "var(--secondary)",
+                foreground: "var(--secondary-foreground)",
             },
         },
     },

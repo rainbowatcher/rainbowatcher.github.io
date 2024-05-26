@@ -1,26 +1,26 @@
 <script lang="ts" setup>
 defineProps({
-    type: {
-        type: String,
-        required: false,
-        default: "tip",
-    },
     text: {
-        type: String,
-        required: false,
         default: "",
+        required: false,
+        type: String,
+    },
+    type: {
+        default: "tip",
+        required: false,
+        type: String,
     },
     vertical: {
-        type: String,
-        required: false,
         default: undefined,
+        required: false,
+        type: String,
     },
 })
 </script>
 
 <template>
     <span
-        class="color-forground inline-block rounded-md vertical-top text-sm [&.danger]:bg-[#F87171] [&.tip]:bg-[#4ADE80] [&.warning]:bg-[#FACC15]" :class="[type]" :style="{
+        class="inline-block rounded-full px-1 vertical-top text-sm color-foreground outline [&.danger]:bg-[#F87171] [&.info]:bg-[#60A5FA] [&.tip]:bg-[#4ADE80] [&.warning]:bg-[#FACC15]" :class="[type]" :style="{
             verticalAlign: vertical,
         }"
     >
