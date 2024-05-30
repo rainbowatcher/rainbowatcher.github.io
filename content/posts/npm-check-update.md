@@ -22,7 +22,7 @@ npm-check-updates 是 package.json 中依赖更新管理工具，结局 `npm upd
 
 [<Badge text="Github 地址" vertical="middle" type="danger"/>](https://github.com/raineorshine/npm-check-updates)
 
-![](../../docs/.vuepress/public/img/2022/npm-check-update/ncu.png)
+![](/img/2022/npm-check-update/ncu.png)
 
 - Red = major upgrade (and all major version zero)
 - Cyan = minor upgrade

@@ -113,10 +113,10 @@ _斜体_
 ## Emoji 表情
 
 ```markdown
-真好笑！ :joy:
+真好玩！ :joy:
 ```
 
-真好笑！ :joy:
+真好玩！ :joy:
 
 ::: tip 提示
 更多表情参考[表情符号简码列表](https://gist.github.com/rxaviers/7360908)。
@@ -175,6 +175,22 @@ export default {
 ```
 
 ![Github](https://github.com/fluidicon.png)
+
+## Github Flavored Markdown
+
+### Container
+
+> [!NOTE]
+> this is a note container
+
+> [!IMPORTANT]
+> this is a warning container
+
+> ![ERROR]
+> this is a error container
+
+> ![ERROR]
+> this is a error container
 
 ## Container 容器
 

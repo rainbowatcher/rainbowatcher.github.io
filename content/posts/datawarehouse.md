@@ -61,7 +61,7 @@ tags: [Data Warehouse, DataLake, LakeHouse]
 
 前面提到数据湖多基于 HDFS、AWS 对象存储等，由于这些存储架构对于节点配置要求不高，且原生支持分布式部署，能自适应的扩容节点，可以存储任意类型的数据，自然数据湖也就具备了这些特点。再搭配上 Mahout、QuickSight、SageMaker、FLink ML 等实现对数据的机器学习和预测分析等，下面放一张 Amazon 的数据湖架构图作为参考
 
-![amazon-lakehouse](../../docs/.vuepress/public/img/2022/datawarehouse/amazon-lakehouse.png)
+![amazon-lakehouse](/img/2022/datawarehouse/amazon-lakehouse.png)
 
 数据湖的缺点也很明显，一方面大量松散数据存放在其中，需要有序的管理才能让数据湖不至于变成数据藻泽。另一方面数据湖的各项功能分散在不同的组件中，如果是使用云平台的话，每一个组件都需要学习如何使用；如果是自己搭建数据湖，这会需要巨大的运维成本。
 

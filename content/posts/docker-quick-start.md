@@ -11,7 +11,7 @@ hide: false
 tags: [Docker, Container]
 ---
 
-## MySQL [<VBadge type="tip" text="tags" vertical="middle"/>](https://hub.docker.com/_/mysql?tab=tags)
+## MySQL [<Badge type="tip" text="tags" vertical="middle"/>](https://hub.docker.com/_/mysql?tab=tags)
 
 ```shell
 id=$(docker ps -aqf 'name=mysql5.7');[ $id ] && docker rm $id

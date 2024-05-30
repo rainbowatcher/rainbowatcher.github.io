@@ -10,6 +10,58 @@ headerMask: rgba(0, 0, 0, .4)
 tags: [Markdown, Syntax]
 ---
 
+## Code Block Extra
+
+````markdown
+```js [index.ts]{4} meta-info=val
+import { defineConfig } from "vite"
+
+export default defineConfig({
+    name: "remark-it",
+})
+```
+````
+
+```js [index.ts]{4} meta-info=val
+import { defineConfig } from "vite"
+
+export default defineConfig({
+    name: "remark-it",
+})
+```
+
+### Shiki transformer notation diff
+
+````markdown
+```ts
+console.log("hewwo") // [!code --]
+console.log("hello") // [!code ++]
+console.log("goodbye")
+```
+````
+
+```ts
+console.log("hewwo") // [!code --]
+console.log("hello") // [!code ++]
+console.log("goodbye")
+```
+
+### Shiki highlight
+
+````markdown
+```ts
+console.log("Not highlighted")
+console.log("Highlighted") // [!code highlight]
+console.log("Not highlighted")
+```
+````
+
+```ts
+console.log("Not highlighted")
+console.log("Highlighted") // [!code highlight]
+console.log("Not highlighted")
+```
+
 ## Sub & Sup 上下标
 
 ```markdown
@@ -67,6 +119,15 @@ Java[^1]
 [[_TOC_]]
 
 ## Define 定义
+
+```markdown
+First Term
+: This is the definition of the first term.
+
+Second Term
+: This is one definition of the second term.
+: This is another definition of the second term.
+```
 
 First Term
 : This is the definition of the first term.

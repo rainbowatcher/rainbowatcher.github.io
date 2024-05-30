@@ -19,14 +19,14 @@ Rust 在命令行各个领域产生了很多优秀的 shell 替代产品，比�
 
 先放几个项目链接
 
-- [sharkdp/bat](https://github.com/sharkdp/bat): 文件查看工具，cat 命令的替代 ![GitHub Repo stars](https://img.shields.io/github/stars/sharkdp/bat?style=plastic)
-- [sharkdp/fd](https://github.com/sharkdp/fd): find 命令的一个简单友好快速的替代 ![GitHub Repo stars](https://img.shields.io/github/stars/sharkdp/fd?style=plastic)
-- [BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep): ripgrep 是 grep 的替代 ![GitHub Repo stars](https://img.shields.io/github/stars/BurntSushi/ripgrep?style=plastic)
-- [starship/starship](https://github.com/starship/starship): 迷你、快速、自由定义的跨平台 shell 提示符! ![GitHub Repo stars](https://img.shields.io/github/stars/starship/starship?style=plastic)
-- [uutils/coreutils](https://github.com/uutils/coreutils): 跨平台 Rust 重写 GNU coreutils ![GitHub Repo stars](https://img.shields.io/github/stars/uutils/coreutils?style=plastic)
-- [rossmacarthur/sheldon](https://github.com/rossmacarthur/sheldon): 快速、可配置化的插件管理器 ![GitHub Repo stars](https://img.shields.io/github/stars/rossmacarthur/sheldon?style=plastic)
-- [ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide): 更智能的 cd 命令。支持所有主要的 shell。![GitHub Repo stars](https://img.shields.io/github/stars/ajeetdsouza/zoxide?style=plastic)
-- [Schniz/fnm](https://github.com/Schniz/fnm): 快速简单的 Node.js 版本管理器，内置 Rust ![GitHub Repo stars](https://img.shields.io/github/stars/Schniz/fnm?style=plastic)
+- [sharkdp/bat](https://github.com/sharkdp/bat): 文件查看工具，cat 命令的替代 ![GitHub Repo stars](https://img.shields.io/github/stars/sharkdp/bat?style=plastic){width=60}
+- [sharkdp/fd](https://github.com/sharkdp/fd): find 命令的一个简单友好快速的替代 ![GitHub Repo stars](https://img.shields.io/github/stars/sharkdp/fd?style=plastic){width=60}
+- [BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep): ripgrep 是 grep 的替代 ![GitHub Repo stars](https://img.shields.io/github/stars/BurntSushi/ripgrep?style=plastic){width=60}
+- [starship/starship](https://github.com/starship/starship): 迷你、快速、自由定义的跨平台 shell 提示符! ![GitHub Repo stars](https://img.shields.io/github/stars/starship/starship?style=plastic){width=60}
+- [uutils/coreutils](https://github.com/uutils/coreutils): 跨平台 Rust 重写 GNU coreutils ![GitHub Repo stars](https://img.shields.io/github/stars/uutils/coreutils?style=plastic){width=60}
+- [rossmacarthur/sheldon](https://github.com/rossmacarthur/sheldon): 快速、可配置化的插件管理器 ![GitHub Repo stars](https://img.shields.io/github/stars/rossmacarthur/sheldon?style=plastic){width=60}
+- [ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide): 更智能的 cd 命令。支持所有主要的 shell。![GitHub Repo stars](https://img.shields.io/github/stars/ajeetdsouza/zoxide?style=plastic){width=60}
+- [Schniz/fnm](https://github.com/Schniz/fnm): 快速简单的 Node.js 版本管理器，内置 Rust ![GitHub Repo stars](https://img.shields.io/github/stars/Schniz/fnm?style=plastic){width=60}
 
 [更多项目](https://github.com/rust-unofficial/awesome-rust)
 
@@ -201,7 +201,7 @@ colorscheme onedark
 
   为 zsh 提供实时自动补全功能
 
-  ![autocomplete](../../docs/.vuepress/public/img/2022/shell-custom/autocomplete.gif)
+  ![autocomplete](/img/2022/shell-custom/autocomplete.gif)
 
 - zsh-autosuggestions
 
@@ -231,7 +231,7 @@ colorscheme onedark
 
 ## 最终效果演示
 
-![demo](../../docs/.vuepress/public/img/2022/shell-custom/demo.gif)
+![demo](/img/2022/shell-custom/demo.gif)
 
 <style>
   img {

@@ -18,7 +18,7 @@ tags: [DNS, Network]
 
 国内也有域名注册服务，但是国内注册域名是需要备案的，对备案过程不了解，这里就选择国外的域名服务商了。我选择的是[GoDaddy](https://www.godaddy.com/en-sg)，有折扣的域名比较便宜
 
-![godaddy-price](../../docs/.vuepress/public/img/2022/dns-records/godaddy-price.png)
+![godaddy-price](/img/2022/dns-records/godaddy-price.png)
 
 官网支持支付宝支付（如果遇到支付错误，很有可能是勾选了信用卡优惠码导致的）。
 
@@ -28,7 +28,7 @@ tags: [DNS, Network]
 
 ## 配置 DNS 解析记录
 
-购买好了之后点击头像进入 My Products 就可以看到已购买到的域名。找到 manage DNS![domain-card](../../docs/.vuepress/public/img/2022/dns-records/domain-card.png)
+购买好了之后点击头像进入 My Products 就可以看到已购买到的域名。找到 manage DNS![domain-card](/img/2022/dns-records/domain-card.png)
 
 点击后打开的页面分为四个板块，分别是 DNS Records、Nameservers、Forwarding、Premium DNS。
 
