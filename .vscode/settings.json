@@ -1,25 +1,32 @@
 {
-    "prettier.enable": false,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit",
-    },
-    "editor.formatOnSave": false,
+    "autoHide.autoHideSideBar": false,
     "cSpell.words": [
         "ajeetdsouza",
+        "Attributify",
         "bitnami",
         "CPGQS",
         "DOHBYF",
         "gungnir",
         "kuma",
+        "leqno",
+        "mathml",
         "nuxi",
+        "nuxtjs",
         "rainbowather",
+        "rehype",
         "renovamen",
         "Schniz",
         "sharkdp",
         "uutils",
         "zoxide",
     ],
-    "autoHide.autoHideSideBar": false,
+    "css.customData": [
+        ".vscode/uno.json",
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+    },
+    "editor.formatOnSave": false,
     "eslint.validate": [
         "javascript",
         "javascriptreact",
@@ -35,4 +42,5 @@
         "scss",
         "less",
     ],
+    "prettier.enable": false,
 }
