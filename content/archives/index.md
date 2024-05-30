@@ -2,18 +2,18 @@
 
 ## 计算机
 
-- [计算机基础](computer/basic/)
+- [计算机基础](../archives/computer/basic/index.md)
 
 ## 操作系统
 
-- [Linux](system/linux/)
+- [Linux](../archives/system/linux/index.md)
 
 ## 工具
 
-- [Git](tools/git/)
-- [Docker](tools/docker/)
+- [Git](../archives/tools/git/index.md)
+- [Docker](../archives/tools/docker/index.md)
 
 ## 语言
 
-- [Typescript](lang/typescript/)
-- [HTML](lang/html/)
+- [Typescript](../archives/lang/typescript/index.md)
+- [HTML](../archives/lang/html/index.md)

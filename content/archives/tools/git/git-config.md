@@ -101,7 +101,7 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 
 这些 alias 也可以在 `~/.gitconfig` 里修改
 
-```toml
+```ini [~/.gitconfig]
 [user]
         name = your_name
         email = email_address@orgnization.com
@@ -145,8 +145,7 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 
 Git 提供 includeIf 选项来指定条件配置，在切换多个项目工作的情况下非常有用
 
-```toml
-# ~/.gitconfig
+```ini [~/.gitconfig]
 ...you global config...
 [includeIf "gitdir:~/WorkSpace/"]
         path = ~/.config/git/.gitconfig_company
@@ -161,7 +160,7 @@ Git 提供 includeIf 选项来指定条件配置，在切换多个项目工作�
 
 示例配置：
 
-```toml
+```ini [~/.gitconfig]
 # Core variables
 [core]
 	; Don't trust file modes
