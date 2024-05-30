@@ -1,17 +1,28 @@
 import {
     defineConfig, presetAttributify, presetIcons, presetTypography, presetUno,
-    presetWebFonts, transformerDirectives, transformerVariantGroup,
+    transformerDirectives, transformerVariantGroup,
 } from "unocss"
 
 export default defineConfig({
+    layers: {
+        default: 0,
+        icons: 8,
+        preflights: 1,
+        typography: 7,
+    },
     presets: [
         presetUno(),
         presetAttributify(),
         presetIcons({
+            extraProperties: {
+                display: "inline-block",
+                height: "1.2em",
+                "vertical-align": "text-bottom",
+                width: "1.2em",
+            },
             scale: 1.2,
         }),
         presetTypography(),
-        presetWebFonts({}),
     ],
     shortcuts: [],
     theme: {
