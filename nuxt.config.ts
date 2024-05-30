@@ -1,10 +1,3 @@
-import path from "node:path"
-import url from "node:url"
-
-function require(name: string) {
-    return path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), name)
-}
-
 export default defineNuxtConfig({
     colorMode: {
         classSuffix: "",
@@ -14,26 +7,61 @@ export default defineNuxtConfig({
             // island: true,
             path: "~/components",
             pathPrefix: false,
-            // preload: true,
         },
     ],
     content: {
+        csv: false,
+        defaultLocale: "CN",
+        highlight: {
+            langs: ["astro", "batch", "c", "c#", "c++", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "yaml", "zig", "zsh"],
+            theme: {
+                dark: "aurora-x",
+                default: "github-light",
+            },
+        },
         ignores: [
             "hide/*",
         ],
+        locales: ["CN", "EN"],
+        markdown: {
+            anchorLinks: true,
+            rehypePlugins: [
+                // ["rehype-parse", { fragment: true }],
+                ["rehype-katex", {
+                    fleqn: true,
+                    leqno: true,
+                    output: "html",
+                    strict: "warn",
+                }],
+                ["rehype-external-links", { rel: ["nofollow"] }],
+                // ["rehype-stringify", {}],
+            ],
+            remarkPlugins: [
+                ["remark-gfm", { singleTilde: false }],
+                "remark-flexible-containers",
+                "remark-math",
+                // ["remark-rehype", {}],
+            ],
+        },
         sources: {
-            content: {
-                base: require("content/posts"),
+            archives: {
+                base: "./content/archives",
                 driver: "fs",
-                prefix: "/posts", // All contents inside this source will be prefixed with `/docs`
+                prefix: "/archives",
+            },
+            posts: {
+                base: "./content/posts",
+                driver: "fs",
+                prefix: "/posts",
             },
         },
+        yaml: false,
     },
     css: [
         "@unocss/reset/tailwind.css",
     ],
     devtools: {
-        enabled: true,
+        enabled: false,
     },
     eslint: {
         config: {
@@ -48,7 +76,13 @@ export default defineNuxtConfig({
     },
     features: {
         // For UnoCSS
-        inlineStyles: false,
+        inlineStyles: true,
+    },
+    fonts: {
+        assets: {
+            // The prefix where your fonts will be accessible
+            prefix: "/_fonts",
+        },
     },
     modules: [
         "@nuxtjs/algolia",
@@ -57,6 +91,19 @@ export default defineNuxtConfig({
         "@nuxt/eslint",
         "@nuxt/content",
         "@nuxtjs/color-mode",
+        "@nuxt/image",
+        "@nuxt/fonts",
     ],
+    router: {
+        options: {
+            scrollBehaviorType: "smooth",
+        },
+    },
     srcDir: "src/",
+    telemetry: false,
+    vite: {
+        build: {
+            minify: false,
+        },
+    },
 })

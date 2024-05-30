@@ -17,3 +17,4 @@ lib/
 algolia.js
 .nuxt
 .output
+.data
