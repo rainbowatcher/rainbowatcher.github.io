@@ -10,6 +10,8 @@ useHead({
     }],
 })
 
+const getActiveClasses = (path: string) => (route.fullPath.startsWith(path) ? "bg-[size:100%_0.75em] op-100" : "op-30")
+
 function toggleDark() {
     color.preference = color.value === "dark" ? "light" : "dark"
 }
@@ -23,7 +25,7 @@ const navItems = [
 </script>
 
 <template>
-    <header class="w-full flex flex-row flex-nowrap justify-between md:px-12 md:py-4 xl:py8">
+    <header class="w-full flex flex-row flex-nowrap items-center justify-between md:px-12 md:py-4 xl:py8">
         <nav class="">
             <ol flex="~ row nowrap gap-x-6" class="select-none uppercase">
                 <li>
@@ -33,8 +35,8 @@ const navItems = [
                 </li>
                 <li v-for="{ label, path } in navItems" :key="label">
                     <NuxtLink
-                        :class="{ active: route.fullPath.startsWith(path) }"
-                        class="hidden font-400 op-30 md:inline-block [&.active]:(bg-[size:100%_0.75em] op-100) focus:(bg-[size:100%_0.75em] op-100) hover:op-100" :href="path"
+                        :class="[getActiveClasses(path)]"
+                        class="hidden font-400 md:inline-block hover:op-100" :href="path"
                     >
                         {{ label }}
                     </NuxtLink>
