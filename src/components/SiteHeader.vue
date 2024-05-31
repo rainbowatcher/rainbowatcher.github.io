@@ -44,9 +44,9 @@ const navItems = [
             </ol>
         </nav>
         <div class="mla hidden gap-2 rounded-full bg-card px4 py2 op-75 transition-opacity duration-300 md:(flex flex-row flex-nowrap) hover:op-100">
-            <a class="i-line-md:twitter bg-none" href="https://x.com/_rainbowatcher" target="_blank" rel="noreferrer" />
-            <a class="i-line-md:github bg-none" href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer" />
-            <i :class="$colorMode.value === 'dark' ? 'i-line-md-moon-filled-alt-loop' : 'i-line-md-sun-rising-loop'" class="cursor-pointer" @click="toggleDark()" />
+            <a class="i-ph-twitter-logo bg-none" title="Twitter" href="https://x.com/_rainbowatcher" target="_blank" rel="noreferrer" />
+            <a class="i-ph-github-logo bg-none" title="GitHub" href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer" />
+            <i :class="$colorMode.value === 'dark' ? 'i-line-md-moon-filled-alt-loop' : 'i-line-md-sun-rising-loop'" title="Toggle dark mode" class="cursor-pointer" @click="toggleDark()" />
         </div>
     </header>
 </template>
