@@ -2,11 +2,11 @@
 // const { data: page } = await useAsyncData("page-data", () => queryContent(route.path).findOne())
 import "katex/dist/katex.min.css"
 
-const route = useRoute()
+const route = useRoute("posts-post")
 const { data: navigation } = await useAsyncData("navigation", () => fetchContentNavigation())
-
+const postsIndex = computed(() => navigation.value?.findIndex(i => i._path === "/posts") ?? 1)
 const nextPost = computed< any >(() => {
-    const posts = navigation.value?.[0].children ?? []
+    const posts = navigation.value?.[postsIndex.value].children ?? []
     const currentIdx = posts?.findIndex(i => i._path === route.fullPath)
     // eslint-disable-next-line unicorn/prefer-ternary
     if (currentIdx === undefined || currentIdx === posts?.length - 1) {
@@ -16,7 +16,7 @@ const nextPost = computed< any >(() => {
     }
 })
 const previousPost = computed< any >(() => {
-    const posts = navigation.value?.[0].children ?? []
+    const posts = navigation.value?.[postsIndex.value].children ?? []
     const currentIdx = posts?.findIndex(i => i._path === route.fullPath)
     // eslint-disable-next-line unicorn/prefer-ternary
     if (currentIdx === undefined || currentIdx === 0) {
