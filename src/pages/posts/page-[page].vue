@@ -38,7 +38,10 @@ function page(list: any[], pageNum = 1) {
                 </NuxtLink>
                 <span class="float-left ml--5rem mr-4 vertical-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
                 <div class="post-tags flex flex-(row nowrap) gap-x-4">
-                    <NuxtLink v-for="tag in post.tags" :key="tag" class="bg-none text-xs c-input italic op-75 hover:op-100">
+                    <NuxtLink
+                        v-for="tag in post.tags" :key="tag" :to="`/posts/tags/${tag}`"
+                        class="bg-none text-xs c-input italic op-75 hover:op-100"
+                    >
                         {{ `#${tag}` }}
                     </NuxtLink>
                 </div>

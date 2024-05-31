@@ -37,7 +37,10 @@ const previousPost = computed< any >(() => {
                 {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
             </span>
             <span class="space-x-4">
-                <NuxtLink v-for="tag in doc.tags" :key="tag" class="bg-none text-sm c-input italic op-75 hover:op-100">
+                <NuxtLink
+                    v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
+                    class="bg-none text-sm c-input italic op-75 hover:op-100"
+                >
                     {{ `#${tag}` }}
                 </NuxtLink>
                 <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
