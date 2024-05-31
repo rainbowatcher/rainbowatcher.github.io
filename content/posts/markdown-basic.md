@@ -210,7 +210,7 @@ export default {
 :::
 ```
 
-::: warning
+::: warning 警告
 警告容器
 :::
 
@@ -225,12 +225,22 @@ export default {
 :::
 
 ```markdown
-::: details
+::: details {details} 点击查看详情 {summary}
 详情容器
 :::
 ```
 
-::: details
+::: details {details} 点击查看详情 {summary}
+详情容器
+:::
+
+```markdown
+::: info {details} 点击查看详情 {summary}
+详情容器
+:::
+```
+
+::: info {details} 点击查看详情 {summary}
 详情容器
 :::
 
