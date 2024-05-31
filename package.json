@@ -8,8 +8,8 @@
     "repository": "https://github.com/rainbowatcher/rainbowatcher.github.io.git",
     "main": "index.js",
     "engines": {
-        "node": ">=14",
-        "pnpm": ">=7"
+        "node": ">=20",
+        "pnpm": ">=9"
     },
     "scripts": {
         "clean": "nuxi cleanup && pnpm --stream -r clean",
