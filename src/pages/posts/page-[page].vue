@@ -7,11 +7,11 @@ useHead({
 // })
 
 const routePathPrefix = "/posts/page-"
-const route = useRoute()
+const route = useRoute("posts-page-page")
 const { data: list } = await useAsyncData("posts", () => queryContent("/posts").find())
 const pageSize = 12
 const maxPage = computed(() => Math.ceil((list.value?.length ?? 1) / pageSize))
-const pageNum = computed(() => ("page" in route.params ? Number(route.params.page ?? 1) : 1))
+const pageNum = computed(() => (Number.isNaN(Number(route.params.page)) ? 1 : Number(route.params.page)))
 const nextNavItem = computed(() => (pageNum.value < maxPage.value ? { _path: `${routePathPrefix}${pageNum.value + 1}`, title: "" } : undefined))
 const previousNavItem = computed(() => (pageNum.value > 1 ? { _path: `${routePathPrefix}${pageNum.value - 1}`, title: "" } : undefined))
 
@@ -21,8 +21,12 @@ function sortByDate(list: any[]) {
     })
 }
 
-function page(list: any[], pageNum = 1) {
-    return sortByDate(list).slice((pageNum - 1) * pageSize, pageNum * pageSize)
+/**
+ * get current page
+ */
+function page(list: any[], pageNum: number | string = 1) {
+    const num = Number(pageNum)
+    return sortByDate(list).slice((num - 1) * pageSize, num * pageSize)
 }
 </script>
 
@@ -30,7 +34,7 @@ function page(list: any[], pageNum = 1) {
     <section class="blog-list min-w-0 lt-sm:mx-6 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4">
         <template v-if="list?.length">
             <div
-                v-for="post in page(list ?? [], ($route.params as any).page)"
+                v-for="post in page(list ?? [], route.params.page)"
                 :key="post._path" class="post-item first:mt-8"
             >
                 <NuxtLink class="text-lg font-400" :href="post._path" role="link">
