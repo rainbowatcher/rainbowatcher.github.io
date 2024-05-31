@@ -2,7 +2,7 @@
     "name": "rainbowatcher.github.io",
     "type": "module",
     "version": "0.0.4",
-    "packageManager": "pnpm@9.1.3",
+    "packageManager": "pnpm@9.1.4",
     "author": "rainbowatcher <rainbow-w@qq.com>",
     "license": "MIT",
     "repository": "https://github.com/rainbowatcher/rainbowatcher.github.io.git",
@@ -25,6 +25,8 @@
     },
     "devDependencies": {
         "@commitlint/config-conventional": "^19.2.2",
+        "@docsearch/css": "^3.6.0",
+        "@docsearch/js": "^3.6.0",
         "@iconify-json/line-md": "^1.1.37",
         "@iconify-json/ph": "^1.1.13",
         "@nuxt/content": "^2.12.1",

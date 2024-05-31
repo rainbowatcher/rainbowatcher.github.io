@@ -1,4 +1,11 @@
 export default defineNuxtConfig({
+    algolia: {
+        apiKey: "f757c625852758ee96aaf2268959166e",
+        applicationId: "3BGNB9V5MC",
+        docSearch: {
+            indexName: "rainbowatcher",
+        },
+    },
     colorMode: {
         classSuffix: "",
     },
