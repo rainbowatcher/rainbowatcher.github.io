@@ -11,13 +11,17 @@ const props = defineProps({
         default: undefined,
         type: [String, Number],
     },
+    lazy: {
+        default: "lazy",
+        type: String,
+    },
     src: {
         default: "",
         type: String,
     },
     width: {
         default: undefined,
-        type: [String, Number],
+        type: [String, Number, Boolean],
     },
 })
 
@@ -39,5 +43,6 @@ const refinedSrc = computed(() => {
         :alt="alt"
         :width="width"
         :height="height"
+        :loading="lazy"
     />
 </template>
