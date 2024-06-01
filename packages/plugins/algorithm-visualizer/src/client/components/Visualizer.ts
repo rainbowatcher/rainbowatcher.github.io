@@ -1,162 +1,165 @@
-/* eslint-disable no-console */
+/* eslint-disable unicorn/filename-case */
+/* eslint-disable ts/naming-convention */
 // <script setup lang="ts">
-import type { VNode } from 'vue'
-import { computed, defineComponent, h, onMounted, ref } from 'vue'
-import * as echarts from 'echarts/core'
-import type { Command } from '../composables'
-import type { ChartOption, Data } from '../types'
-import { sleep } from '../utils'
+import * as echarts from "echarts/core"
+import {
+    computed, defineComponent, h, onMounted, ref,
+} from "vue"
+import { sleep } from "../utils"
+import type { Command } from "../composables"
+import type { ChartOption, Data } from "../types"
+import type { VNode } from "vue"
 
 export default defineComponent({
-  setup() {
-    const props = defineProps<{
-      options: string
-      commands: string
-    }>()
+    setup() {
+        const props = defineProps<{
+            commands: string
+            options: string
+        }>()
 
-    const container = ref()
-    let chart: echarts.ECharts
-    const _options = computed(() => JSON.parse(decodeURIComponent(props.options)) as ChartOption)
-    const _commands = computed(() => JSON.parse(decodeURIComponent(props.commands)) as Array<Command>)
+        const container = ref()
+        let chart: echarts.ECharts
+        const _options = computed(() => JSON.parse(decodeURIComponent(props.options)) as ChartOption)
+        const _commands = computed(() => JSON.parse(decodeURIComponent(props.commands)) as Command[])
 
-    onMounted(() => {
-      chart = echarts.init(container.value, 'vintage', { renderer: 'canvas' })
-      chart.setOption({ ..._options })
-    })
+        onMounted(() => {
+            chart = echarts.init(container.value, "vintage", { renderer: "canvas" })
+            chart.setOption({ ..._options })
+        })
 
-    let current_cmd_idx = 0
-    let previous_command_args: number[] = []
-    const delay_level = ref(2)
-    const delay_ms = computed(() => 800 / delay_level.value)
-    let _data = [..._options.value.series[0].data ?? []]
-    let canceled = false
-    const cmd_count = props.commands.length
+        let currentCmdIdx = 0
+        let previousCommandArgs: number[] = []
+        const delayLevel = ref(2)
+        const delayMs = computed(() => 800 / delayLevel.value)
+        let _data = [..._options.value.series[0].data ?? []]
+        let canceled = false
+        const cmdCount = props.commands.length
 
-    const select = (data: Array<number | Data>, color: string) => {
-      if (previous_command_args.length > 0)
-        restore(data)
+        const select = (data: Array<Data | number>, color: string) => {
+            if (previousCommandArgs.length > 0) restore(data)
 
-      const cmd = _commands.value[current_cmd_idx]
+            const cmd = _commands.value[currentCmdIdx]
 
-      for (const idx of cmd.args) {
-        const value = data[idx] as number
-        data[idx] = { value, itemStyle: { color } }
-      }
-      previous_command_args = cmd.args
-    }
-
-    function restore(data: Array<number | Data>) {
-      for (const idx of previous_command_args) {
-        if (typeof data[idx] === 'object')
-          data[idx] = (data[idx] as Data).value
-      }
-    }
-
-    const swap = (data: Array<number | Data>, left: number, right: number) => {
-      const tmp = data[left]
-      data[left] = data[right]
-      data[right] = tmp
-    }
-
-    const swapAction = (cmd: Command) => {
-      const [left, right] = cmd.args
-      select(_data, '#a4a')
-      swap(_data, left, right)
-    }
-
-    const mapActions = () => {
-      const cmd = _commands.value[current_cmd_idx]
-      switch (cmd.type) {
-        case 'select':
-          select(_data, 'blue')
-          break
-        case 'swap': {
-          swapAction(cmd)
-          break
+            for (const idx of cmd.args) {
+                const value = data[idx] as number
+                data[idx] = { itemStyle: { color }, value }
+            }
+            previousCommandArgs = cmd.args
         }
-        default:
-          break
-      }
-    }
 
-    // button
+        function restore(data: Array<Data | number>) {
+            for (const idx of previousCommandArgs) {
+                if (typeof data[idx] === "object") data[idx] = (data[idx] as Data).value
+            }
+        }
 
-    const next = () => {
-      const reach_end = current_cmd_idx >= cmd_count
-      if (reach_end && _data.every(item => typeof item === 'number')) {
-        return
-      }
-      else if (reach_end) {
-        restore(_data)
-      }
-      else {
-        mapActions()
-        console.log(props.commands[current_cmd_idx])
-        current_cmd_idx++
-      }
-      chart.setOption({ series: { data: _data } })
-    }
+        const swap = (data: Array<Data | number>, left: number, right: number) => {
+            const tmp = data[left]
+            data[left] = data[right]
+            data[right] = tmp
+        }
 
-    const previous = () => {
-      if (current_cmd_idx > 0) {
-        current_cmd_idx--
-      }
-      else {
-        restore(_data)
-        chart.setOption({ series: { data: _data } })
-        return
-      }
-      console.log(props.commands[current_cmd_idx])
-      mapActions()
-      chart.setOption({ series: { data: _data } })
-    }
+        const swapAction = (cmd: Command) => {
+            const [left, right] = cmd.args
+            select(_data, "#a4a")
+            swap(_data, left, right)
+        }
 
-    const play = async () => {
-      canceled = false
-      for (let i = 0; i < _commands.value.length; i++) {
-        if (canceled)
-          return
-        // if (current_cmd_idx > cmd_count) return
-        next()
-        await sleep(delay_ms.value)
-      }
-      // next()
-    }
+        const mapActions = () => {
+            const cmd = _commands.value[currentCmdIdx]
+            switch (cmd.type) {
+                case "select": {
+                    select(_data, "blue")
+                    break
+                }
+                case "swap": {
+                    swapAction(cmd)
+                    break
+                }
+                default: {
+                    break
+                }
+            }
+        }
 
-    const reset = () => {
-      canceled = true
-      chart.setOption(_options.value)
-      // chart.dispatchAction({ type: 'restore' })
-      _data = [..._options.value.series[0].data ?? []]
-      current_cmd_idx = 0
-    }
+        // button
 
-    return (): VNode =>
-      h('div', { class: 'algorithm-visualizer' }, [
-        h('div', {},
-          h('cavans', { id: 'myChart', ref: 'container', width: '600', height: '400' }),
-        ),
-        h('div', { class: 'btn-group' }, [
-          h('button', { onClick: previous, innerHTML: 'previous' }),
-          h('button', { onClick: next, innerHTML: 'next' }),
-          h('button', { onClick: play, innerHTML: 'play' }),
-          h('button', { onClick: reset, innerHTML: 'reset' }),
-        ]),
-        h('input', { value: delay_level, type: 'range', max: 8, min: 1, list: 'marks' }),
-        h('datalist', { id: 'marks' }, [
-          h('option', { value: '1' }),
-          h('option', { value: '2' }),
-          h('option', { value: '3' }),
-          h('option', { value: '4' }),
-          h('option', { value: '5' }),
-          h('option', { value: '6' }),
-          h('option', { value: '7' }),
-          h('option', { value: '8' }),
-        ]),
-        h('p', { innerHTML: `倍速 ${delay_level.value}` }),
-      ],
-      )
-  },
+        const next = () => {
+            const reach_end = currentCmdIdx >= cmdCount
+            if (reach_end && _data.every(item => typeof item === "number")) {
+                return
+            } else if (reach_end) {
+                restore(_data)
+            } else {
+                mapActions()
+                console.log(props.commands[currentCmdIdx])
+                currentCmdIdx++
+            }
+            chart.setOption({ series: { data: _data } })
+        }
+
+        const previous = () => {
+            if (currentCmdIdx > 0) {
+                currentCmdIdx--
+            } else {
+                restore(_data)
+                chart.setOption({ series: { data: _data } })
+                return
+            }
+            console.log(props.commands[currentCmdIdx])
+            mapActions()
+            chart.setOption({ series: { data: _data } })
+        }
+
+        const play = async () => {
+            canceled = false
+            for (let i = 0; i < _commands.value.length; i++) {
+                if (canceled) return
+
+                // if (current_cmd_idx > cmd_count) return
+                next()
+                // eslint-disable-next-line no-await-in-loop
+                await sleep(delayMs.value)
+            }
+
+            // next()
+        }
+
+        const reset = () => {
+            canceled = true
+            chart.setOption(_options.value)
+
+            // chart.dispatchAction({ type: 'restore' })
+            _data = [..._options.value.series[0].data ?? []]
+            currentCmdIdx = 0
+        }
+
+        return (): VNode => h("div", { class: "algorithm-visualizer" }, [
+            h("div", {}, h("cavans", {
+                height: "400", id: "myChart", ref: "container", width: "600",
+            })),
+            h("div", { class: "btn-group" }, [
+                h("button", { innerHTML: "previous", onClick: previous }),
+                h("button", { innerHTML: "next", onClick: next }),
+                h("button", { innerHTML: "play", onClick: play }),
+                h("button", { innerHTML: "reset", onClick: reset }),
+            ]),
+            h("input", {
+                list: "marks", max: 8, min: 1, type: "range", value: delayLevel,
+            }),
+            h("datalist", { id: "marks" }, [
+                h("option", { value: "1" }),
+                h("option", { value: "2" }),
+                h("option", { value: "3" }),
+                h("option", { value: "4" }),
+                h("option", { value: "5" }),
+                h("option", { value: "6" }),
+                h("option", { value: "7" }),
+                h("option", { value: "8" }),
+            ]),
+            h("p", { innerHTML: `倍速 ${delayLevel.value}` }),
+        ])
+    },
 })
 
 // </script>

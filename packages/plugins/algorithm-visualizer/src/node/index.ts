@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-empty-file */
 // import { ensureEndingSlash } from '@vuepress/shared'
 // import { hash, path } from '@vuepress/utils'
 // import type { PluginFunction } from 'vuepress'
@@ -76,4 +77,3 @@
 //       },
 //     }
 //   }
-

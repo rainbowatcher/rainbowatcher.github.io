@@ -1,0 +1,19 @@
+import { defineConfig } from "@rainbowatcher/eslint-config"
+import nuxt from "./.nuxt/eslint.config.mjs"
+
+export default nuxt(defineConfig({
+    css: true,
+    gitignore: true,
+    json: true,
+    markdown: true,
+    style: true,
+    typescript: true,
+    unocss: true,
+    vue: true,
+    yaml: true,
+}), {
+    files: ["**/*.vue"],
+    rules: {
+        "vue/no-multiple-template-root": "off",
+    },
+})

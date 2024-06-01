@@ -1,22 +1,25 @@
-interface Command {
-  // key: string
-  type: string
-  args: Array<number>
-  reverse?: string
+type Command = {
+    args: number[]
+    reverse?: string
+
+    // key: string
+    type: string
 }
 
 abstract class Commander {
-  protected commands: Array<Command> = []
 
-  command(type: string, args: number[], reverse?: string) {
-    this.commands.push({ type, args, reverse: reverse ?? type })
-  }
+    protected commands: Command[] = []
 
-  getCommands() {
-    return this.commands
-  }
+    command(type: string, args: number[], reverse?: string) {
+        this.commands.push({ args, reverse: reverse ?? type, type })
+    }
 
-  abstract toJson(): unknown
+    getCommands() {
+        return this.commands
+    }
+
+    abstract toJson(): unknown
+
 }
 
 export { Commander }

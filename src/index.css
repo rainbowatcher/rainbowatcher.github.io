@@ -1,0 +1,192 @@
+@layer base {
+    :root {
+        --background: hsl(169, 100%, 99%);
+        --foreground: hsl(216, 97%, 15%);
+
+        --card: hsl(192, 56%, 83%);
+        --card-foreground: hsl(216, 97%, 15%);
+
+        --popover: hsl(98, 33%, 93%);
+        --popover-foreground: hsl(216, 97%, 15%);
+
+        --primary: hsl(200, 77%, 58%);
+        --primary-foreground: hsl(197, 97%, 22%);
+
+        --secondary: hsl(188, 74%, 57%);
+        --secondary-foreground: hsl(204, 55%, 28%);
+
+        --muted: hsl(197, 24%, 66%);
+        --muted-foreground: hsl(203, 67%, 18%);
+
+        --accent: hsl(59, 65%, 71%);
+        --accent-foreground: hsl(63, 97%, 13%);
+
+        --destructive: hsl(0, 84.2%, 60.2%);
+        --destructive-foreground: hsl(0, 100%, 97%);
+
+        --border: hsl(198, 35%, 93%);
+        --input: hsl(174, 67%, 41%);
+        --ring: hsl(215, 16%, 87%);
+
+        --radius: 0.45rem;
+    }
+
+    .dark {
+        --background: hsl(203, 60%, 12%);
+        --foreground: hsl(0, 0%, 87%);
+
+        --card: hsl(207, 50%, 30%);
+        --card-foreground: hsl(187, 30%, 77%);
+
+        --popover: hsl(203, 20%, 8%);
+        --popover-foreground: hsl(0, 0%, 87%);
+
+        --primary: hsl(205, 54%, 48%);
+        --primary-foreground: hsl(0, 0%, 87%);
+
+        --secondary: hsl(187, 73%, 38%);
+        --secondary-foreground: hsl(203, 60%, 12%);
+
+        --muted: hsl(194, 28%, 52%);
+        --muted-foreground: hsl(203, 60%, 22%);
+
+        --accent: hsl(53, 63%, 38%);
+        --accent-foreground: hsl(203, 60%, 12%);
+
+        --destructive: hsl(0, 62.8%, 30.6%);
+        --destructive-foreground: hsl(0, 60%, 87%);
+
+        --border: hsl(207, 58%, 21%);
+        --input: hsl(164, 36%, 61%);
+        --ring: hsl(215, 16%, 25%);
+    }
+}
+
+#__nuxt {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+html.dark {
+    color-scheme: dark;
+}
+
+html {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family:
+        "Red Hat Display",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif,
+        ui-sans-serif,
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        Segoe UI Symbol,
+        Noto Color Emoji;
+}
+
+a {
+    cursor: pointer;
+    background: linear-gradient(0deg, var(--primary), var(--primary)) no-repeat right bottom / 0 0.75em;
+    background-origin: content-box;
+    text-decoration: none;
+    font-weight: 600;
+    text-wrap: pretty;
+    transition:
+        background-size 300ms linear,
+        opacity 300ms;
+}
+
+a:where(:hover, :active) {
+    background-size: 100% 0.75em;
+    background-position-x: left;
+}
+
+a[target="_blank"]::after {
+    content: "";
+    vertical-align: text-top;
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath stroke-dasharray='36' stroke-dashoffset='36' d='M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' dur='0.6s' values='36;0'/%3E%3C/path%3E%3Cpath stroke-dasharray='12' stroke-dashoffset='12' d='M13 11L20 4'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.6s' dur='0.3s' values='12;0'/%3E%3C/path%3E%3Cpath stroke-dasharray='8' stroke-dashoffset='8' d='M21 3H15M21 3V9'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.9s' dur='0.2s' values='8;0'/%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+
+/* containers */
+.remark-container {
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    padding: 1rem 1rem 0.75rem;
+    margin: 0 0 1.5rem;
+
+    > .remark-container-title {
+        font-weight: 700;
+        margin: 0;
+    }
+
+    &.info {
+        border-color: var(--ring);
+        /* color: var(--foreground); */
+        /* background-color: var(--background); */
+    }
+
+    &.tip {
+        border-color: var(--border);
+        color: var(--secondary-foreground);
+        background-color: var(--secondary);
+    }
+
+    &.warning {
+        border-color: var(--border);
+        color: var(--accent-foreground);
+        background-color: var(--accent);
+    }
+
+    &.danger {
+        border-color: var(--border);
+        color: var(--destructive-foreground);
+        background-color: var(--destructive);
+    }
+
+    &.details {
+        border-color: var(--ring);
+        /* color: var(--foreground); */
+        /* background-color: #1e293b60; */
+        padding: 8px 16px;
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+    }
+
+    p + p {
+        margin: 8px 0;
+    }
+
+    a {
+        color: inherit;
+        font-weight: 600;
+    }
+
+    a:hover {
+        opacity: 0.6;
+    }
+}

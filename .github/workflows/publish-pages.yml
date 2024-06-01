@@ -18,27 +18,37 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.10.0
+        with:
+          args: --no-progress pages
+          format: markdown
+          fail: true
+
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
           fetch-depth: 0
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.0.1
-        id: pnpm-install
+        uses: pnpm/action-setup@v2
         with:
-          version: 7
-          run_install: false
+          node-version: 20
+          cache: pnpm
 
       - name: Install dependencies
         if: steps.pnpm-cache.outputs.cache-hit != 'true'
@@ -52,10 +62,13 @@ jobs:
         id: upload
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "./docs/.vuepress/dist"
+          path: dist
 
   deploy:
     needs: build
+    permissions:
+      pages: write
+      id-token: write
 
     environment:
       name: github-pages
@@ -65,4 +78,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

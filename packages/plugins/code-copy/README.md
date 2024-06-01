@@ -16,11 +16,11 @@ pnpm i @rainbowatcher/vuepress-plugin-code-copy
 add plugin to `config.ts`
 
 ```typescript
-import copyCodePlugin from "@rainbowatcher/vuepress-plugin-code-copy";
+import copyCodePlugin from "@rainbowatcher/vuepress-plugin-code-copy"
 
 export default defineUserConfig({
-  plugins: [copyCodePlugin(/*{ options }*/)],
-});
+    plugins: [copyCodePlugin(/* { options } */)],
+})
 ```
 
 ## Options

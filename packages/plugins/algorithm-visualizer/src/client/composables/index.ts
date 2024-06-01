@@ -1,2 +1,2 @@
-export * from './commander'
-export * from './barChartTracer'
+export * from "./barChartTracer"
+export * from "./commander"
