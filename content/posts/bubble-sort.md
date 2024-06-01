@@ -18,9 +18,7 @@ tags: [Algorithm, Sort, Java]
 
 从左到右把相邻的元素两两比较，当一个元素大于右侧相邻元素时，交换它们的位置；当一个元素小于或等于右侧相邻元素时，位置不变。
 
-![冒泡排序](https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif)
-
-<Align place='center'> 图片来源：<a href="https://www.runoob.com/w3cnote/bubble-sort.html">菜鸟教程</a> </Align>
+![冒泡排序](https://github.com/hustcc/JS-Sorting-Algorithm/raw/master/res/bubbleSort.gif){width=400}
 
 ### 经典实现
 
@@ -258,4 +256,5 @@ public class OptimizedCocktailSort {
 ## 参考
 
 - [十大排序算法 - 菜鸟教程](https://www.runoob.com/w3cnote/ten-sorting-algorithm.html)
+- [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm/blob/master/1.bubbleSort.md)
 - [第四章 - 排序算法 - 漫画算法](#)

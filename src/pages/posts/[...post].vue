@@ -28,6 +28,7 @@ const previousPost = computed< any >(() => {
 </script>
 
 <template>
+    <section class="ma">
     <article class="relative min-w-0 lt-sm:mx-6 sm:(mx-6 w-fit) lg:w-3xl md:w-2xl xl:w-5xl md:self-center">
         <ContentDoc v-slot="{ doc }">
             <h1 class="z-1 mt-12 text-6xl font-bold">
@@ -49,4 +50,5 @@ const previousPost = computed< any >(() => {
         </ContentDoc>
     </article>
     <PageNav :previous="previousPost" :next="nextPost" use-title />
+    </section>
 </template>

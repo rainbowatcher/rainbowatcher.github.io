@@ -25,8 +25,8 @@ const navItems = [
 </script>
 
 <template>
-    <header class="w-full flex flex-row flex-nowrap items-center justify-between md:px-12 md:py-4 xl:py8">
-        <nav class="">
+    <header class="w-full flex flex-row flex-nowrap items-center justify-between md:px-12 md:py-4 xl:py8" role="banner">
+        <nav class="" role="navigation">
             <ol flex="~ row nowrap gap-x-6" class="select-none uppercase">
                 <li>
                     <NuxtLink to="/" class="bg-none font-400">

@@ -25,7 +25,7 @@ docker run -tid \
   -d mysql:5.7
 ```
 
-## Portainer [<Badge type="tip" text="tags" vertical="middle"/>](https://hub.docker.com/_/portainer?tab=tags)
+## Portainer [<Badge type="tip" text="tags" vertical="middle"/>](https://hub.docker.com/r/portainer/portainer/tags)
 
 [portainer.io](http://portainer.io/) 一个可视化的 Docker 管理工具
 
