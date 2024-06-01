@@ -5,7 +5,10 @@ const route = useRoute("posts-tags-tag")
 const { data: list } = await useAsyncData("tags", () => queryContent("/posts").find())
 const tags = ref<Map<string, number>>(new Map())
 const sortedTags = computed(() => [...tags.value.entries()].sort((a, b) => b[1] - a[1]))
-const postList = computed(() => list.value?.filter(i => i.tags.includes(route.params.tag as string)) ?? [])
+const postList = computed(() => {
+    return list.value?.filter(i => i.tags.includes(route.params.tag as string))
+        .sort((i, j) => new Date(j.date).getTime() - new Date(i.date).getTime()) ?? []
+})
 onMounted(() => {
     if (list.value) {
         for (const post of list.value) {
