@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <footer class="py-8">
+    <footer class="py-8" role="contentinfo">
         <div class="md:mx-12">
             <a
                 rel="license" title="Creative Commons BY-NC-SA 4.0"
