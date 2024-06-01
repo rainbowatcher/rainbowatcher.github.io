@@ -117,7 +117,8 @@ dracut:/#
 
 ## 参考资料
 
-- [安装 Ubuntu Linux 分区的推荐方案和方法 - 博客园](https://www.cnblogs.com/sinferwu/p/7953853.html)
+<!-- - [安装 Ubuntu Linux 分区的推荐方案和方法 - 博客园](https://www.cnblogs.com/sinferwu/p/7953853.html) not reachable -->
+
 - [Deepin 安装指南 - 深度系统](https://www.deepin.org/installation/)
 - [UEFI+GPT、Legacy+MBR 引导模式介绍 & 引导修复 - 百度贴吧](http://tieba.baidu.com/p/5003454493?pid=104792401528&cid=0#104792401528)
 - [计算机的启动过程](http://blog.szm.me/misc/the_starting_process_of_a_computer/)
