@@ -63,6 +63,15 @@ useHead(globalHead)
 
 <template>
     <NuxtLayout>
-        <NuxtPage />
+        <NuxtPage
+            class="transition duration-300"
+            :transition="{
+                enterActiveClass: 'ease-in-out',
+                enterFromClass: 'opacity-0 blur-sm translate-y-1',
+                leaveActiveClass: 'ease-in-out',
+                leaveToClass: 'opacity-0 blur-sm translate-y-1',
+                mode: 'out-in',
+            }"
+        />
     </NuxtLayout>
 </template>

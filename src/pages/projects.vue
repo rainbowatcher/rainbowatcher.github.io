@@ -3,7 +3,9 @@
 </script>
 
 <template>
-    projects
+    <p class="ma">
+        projects
+    </p>
 </template>
 
 <style>
