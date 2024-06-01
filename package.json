@@ -13,7 +13,7 @@
     },
     "scripts": {
         "clean": "nuxi cleanup && pnpm --stream -r clean",
-        "check": "pnpm exec lychee -c lychee.toml -f markdown .",
+        "check": "pnpm exec lychee -c lychee.toml -f markdown content",
         "build": "pnpm generate",
         "generate": "nuxi generate",
         "prepare": "nuxi prepare && simple-git-hooks",
