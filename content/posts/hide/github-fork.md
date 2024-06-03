@@ -13,7 +13,8 @@ tags: [Git]
 ## 置顶链接
 
 [如何参与Tianchi(天池)项目以及如何贡献代码](http://www.qtcn.org/bbs/simple/?t53628.html)
-[Mr.Hope - Git](https://mrhope.site/software/git/)
+
+<!-- [Mr.Hope - Git](https://mrhope.site/software/git) -->
 
 ## 建立分支库
 

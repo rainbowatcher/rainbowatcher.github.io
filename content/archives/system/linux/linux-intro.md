@@ -15,7 +15,8 @@ tags: [Linux]
 
 ## 目录结构
 
-- [Linux 目录结构|菜鸟教程](https://www.runoob.com/linux/linux-system-contents.html)
+<!-- - [Linux 目录结构|菜鸟教程](https://www.runoob.com/linux/linux-system-contents.html) -->
+
 - [快乐的 Linux 命令行|探究操作系统](http://billie66.github.io/TLCL/book/chap04.html)
 
 ## 环境变量 PATH
