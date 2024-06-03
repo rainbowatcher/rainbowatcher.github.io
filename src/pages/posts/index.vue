@@ -37,7 +37,7 @@ function getPage(list: any[], pageNum: number | string = 1) {
                     v-for="post in currPage"
                     :key="post._path" class="post-item first:mt-8"
                 >
-                    <NuxtLink class="text-lg font-400" :href="post._path" role="link">
+                    <NuxtLink class="text-lg font-400" :href="post._path" role="link" prefetch>
                         {{ post.title }}
                     </NuxtLink>
                     <span class="float-left ml--5rem mr-4 vertical-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
