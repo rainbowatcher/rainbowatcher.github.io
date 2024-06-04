@@ -3,8 +3,7 @@ withDefaults(defineProps<{
     class?: string
     code?: string
     filename?: string
-    // eslint-disable-next-line style-js/function-call-spacing
-    highlights?: () => number[]
+    highlights?: number[]
     language?: string
     meta?: string
     style?: Record<string, string>
