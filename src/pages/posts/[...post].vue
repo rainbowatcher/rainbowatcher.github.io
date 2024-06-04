@@ -1,54 +1,50 @@
 <script setup lang="ts">
-// const { data: page } = await useAsyncData("page-data", () => queryContent(route.path).findOne())
 import "katex/dist/katex.min.css"
 
 const route = useRoute("posts-post")
-const { data: navigation } = await useAsyncData("navigation", () => fetchContentNavigation())
-const postsIndex = computed(() => navigation.value?.findIndex(i => i._path === "/posts") ?? 1)
-const nextPost = computed< any >(() => {
-    const posts = navigation.value?.[postsIndex.value].children ?? []
-    const currentIdx = posts?.findIndex(i => i._path === route.fullPath)
-    // eslint-disable-next-line unicorn/prefer-ternary
-    if (currentIdx === undefined || currentIdx === posts?.length - 1) {
-        return posts?.[0]
-    } else {
-        return posts?.[currentIdx + 1]
-    }
+const { data: posts } = await useAsyncData("posts", usePosts())
+
+const path = computed(() => posts.value?.find(i => [i._path, i.permalink].includes(route.fullPath))?._path)
+const postsIndex = computed(() => posts.value?.findIndex(i => i._path === path.value) ?? 0)
+const nextPost = computed(() => {
+    if (!posts.value) return
+    return postsIndex.value === posts.value.length - 1 ? posts.value[0] : posts.value[postsIndex.value + 1]
 })
-const previousPost = computed< any >(() => {
-    const posts = navigation.value?.[postsIndex.value].children ?? []
-    const currentIdx = posts?.findIndex(i => i._path === route.fullPath)
-    // eslint-disable-next-line unicorn/prefer-ternary
-    if (currentIdx === undefined || currentIdx === 0) {
-        return posts?.at(-1)
-    } else {
-        return posts?.[currentIdx - 1]
-    }
+const previousPost = computed(() => {
+    if (!posts.value) return
+    return postsIndex.value === posts.value.length - 1 ? posts.value.at(-1) : posts.value[postsIndex.value - 1]
+})
+
+onMounted(() => {
+    console.log(posts.value)
 })
 </script>
 
 <template>
-    <section class="ma">
-    <article class="relative min-w-0 lt-sm:mx-6 sm:(mx-6 w-fit) lg:w-3xl md:w-2xl xl:w-5xl md:self-center">
-        <ContentDoc v-slot="{ doc }">
-            <h1 class="z-1 mt-12 text-6xl font-bold">
-                {{ doc.title }}
-            </h1>
-            <span class="text-stroke-offset-2 absolute right-1em top--.35em z--1 select-none text-6rem color-transparent font-900 text-stroke-2 text-stroke-neutral op-10 lt-md:hidden">
-                {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
-            </span>
-            <span class="space-x-4">
-                <NuxtLink
-                    v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
-                    class="bg-none text-sm c-input italic op-75 hover:op-100"
-                >
-                    {{ `#${tag}` }}
-                </NuxtLink>
-                <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
-            </span>
-            <ContentRenderer :value="doc" class="md-doc mt-18 space-y-4" />
-        </ContentDoc>
-    </article>
-    <PageNav :previous="previousPost" :next="nextPost" use-title />
+    <section class="flex flex-1 flex-col">
+        <article class="relative min-w-0 lt-sm:mx-6 sm:(mx-6 w-fit) lg:w-3xl md:w-2xl xl:w-5xl md:self-center">
+            <ContentDoc v-slot="{ doc }" :path="path">
+                <h1 class="z-1 mt-12 text-6xl font-bold">
+                    {{ doc.title }}
+                </h1>
+                <span class="text-stroke-offset-2 absolute right-1em top--.35em z--1 select-none text-6rem color-transparent font-900 text-stroke-2 text-stroke-muted op-10 lt-md:hidden">
+                    {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
+                </span>
+                <span class="space-x-4">
+                    <NuxtLink
+                        v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
+                        class="bg-none text-sm c-input italic op-75 hover:op-100"
+                    >
+                        {{ `#${tag}` }}
+                    </NuxtLink>
+                    <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
+                </span>
+                <p v-if="doc.subtitle" class="c-coolGray">
+                    {{ doc.subtitle }}
+                </p>
+                <ContentRenderer :value="doc" class="md-doc mt-18 space-y-4" />
+            </ContentDoc>
+        </article>
+        <PageNav :previous="previousPost" :next="nextPost" use-title use-permalink />
     </section>
 </template>

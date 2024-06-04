@@ -1,17 +1,14 @@
 <script lang="ts" setup>
-definePageMeta({
-    alias: "/posts/page-1",
-})
 const route = useRoute("posts")
 const pageNum = computed(() => (Number.isNaN(Number(route.query.page)) ? 1 : Number(route.query.page)))
-const routePathPrefix = "/posts/?page="
-const { data: list } = await useAsyncData("posts", () => queryContent("/posts").find())
+const routePathPrefix = "/posts?page="
+const { data: posts } = await useAsyncData("posts", usePosts())
 const pageSize = 12
-const maxPage = computed(() => Math.ceil((list.value?.length ?? 1) / pageSize))
+const maxPage = computed(() => Math.ceil((posts.value?.length ?? 1) / pageSize))
 const nextNavItem = computed(() => (pageNum.value < maxPage.value ? { _path: `${routePathPrefix}${pageNum.value + 1}`, title: "" } : undefined))
 const previousNavItem = computed(() => (pageNum.value > 1 ? { _path: `${routePathPrefix}${pageNum.value - 1}`, title: "" } : undefined))
 const currPage = computed(() => {
-    return getPage(list.value ?? [], pageNum.value)
+    return getPage(posts.value ?? [], pageNum.value)
 })
 
 function sortByDate(list: any[]) {
@@ -31,13 +28,13 @@ function getPage(list: any[], pageNum: number | string = 1) {
 
 <template>
     <section>
-        <div class="blog-list min-w-0 lt-sm:mx-6 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4">
-            <template v-if="list?.length">
+        <div class="post-list min-w-0 lt-sm:mx-6 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4">
+            <template v-if="posts?.length">
                 <div
                     v-for="post in currPage"
                     :key="post._path" class="post-item first:mt-8"
                 >
-                    <NuxtLink class="text-lg font-400" :href="post._path" role="link" prefetch>
+                    <NuxtLink class="text-lg font-400" :href="post.permalink" role="link" prefetch>
                         {{ post.title }}
                     </NuxtLink>
                     <span class="float-left ml--5rem mr-4 vertical-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
