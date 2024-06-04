@@ -53,43 +53,43 @@ cd vuepress-starter
 
 2.  初始化项目
 
-<CodeGroup>
-<CodeGroupItem title="YARN">
+<!-- <CodeGroup>
+<CodeGroupItem title="YARN"> -->
 
 ```shell
 git init
 yarn init
 ```
 
-</CodeGroupItem>
-<CodeGroupItem title="NPM">
+<!-- </CodeGroupItem> -->
+<!-- <CodeGroupItem title="NPM"> -->
 
 ```shell
 git init
 npm init
 ```
 
-</CodeGroupItem>
-</CodeGroup>
+<!-- </CodeGroupItem>
+</CodeGroup> -->
 
 3.  添加 VuePress 依赖
 
-<CodeGroup>
-<CodeGroupItem title="YARN">
+<!-- <CodeGroup>
+<CodeGroupItem title="YARN"> -->
 
 ```shell
 yarn add -D vuepress@next
 ```
 
-</CodeGroupItem>
-<CodeGroupItem title="NPM">
+<!-- </CodeGroupItem>
+<CodeGroupItem title="NPM"> -->
 
 ```shell
 npm i -D vuepress@next
 ```
 
-</CodeGroupItem>
-</CodeGroup>
+<!-- </CodeGroupItem>
+</CodeGroup> -->
 
 4.  配置 Git 忽略 VuePress 的临时文件
 
@@ -123,80 +123,80 @@ echo '.cache' >> .gitignore
 
 VuePress 内置了 theme-default 主题，这个主题不是我们要的，我们要去挑选一个博客主题，先看看我们有什么主题。
 
-::: link {/img/icon/awesome-vuepress.jpg} [Awesome VuePress - V2 Themes](https://github.com/vuepress/awesome-vuepress/blob/main/v2.md#themes)
+<!-- ::: link {/img/icon/awesome-vuepress.jpg} [Awesome VuePress - V2 Themes](https://github.com/vuepress/awesome-vuepress/blob/main/v2.md#themes)
 
 Awesome VuePress 列表
 
-:::
+::: -->
 
 我的博客就选择了其中的`vuepress-theme-gungnir`主题。我们可以去[主题的文档页](https://v2-vuepress-theme-gungnir.vercel.app/zh/docs/basic/intro.html)看看如何安装这个主题。
 
 第一步当让是添加依赖
 
-<CodeGroup>
-<CodeGroupItem title="PNPM">
+<!-- <CodeGroup>
+<CodeGroupItem title="PNPM"> -->
 
 ```shell
 pnpm add -D vuepress-theme-gungnir@next
 ```
 
-</CodeGroupItem>
-<CodeGroupItem title="YARN">
+<!-- </CodeGroupItem>
+<CodeGroupItem title="YARN"> -->
 
 ```shell
 yarn add -D vuepress-theme-gungnir@next
 ```
 
-</CodeGroupItem>
-<CodeGroupItem title="NPM">
+<!-- </CodeGroupItem>
+<CodeGroupItem title="NPM"> -->
 
 ```shell
 npm install -D vuepress-theme-gungnir@next
 ```
 
-</CodeGroupItem>
-</CodeGroup>
+<!-- </CodeGroupItem>
+</CodeGroup> -->
 
 ## 主题配置
 
 然后在 `.vuepress/config.js` 或 `.vuepress/config.ts`（如果你在使用 TypeScript 的话）中指定主题：
 
-<CodeGroup>
-<CodeGroupItem title="JS" active>
+<!-- <CodeGroup>
+<CodeGroupItem title="JS" active> -->
 
-```js{7}
+```js {7}
 // .vuepress/config.js
 
-const { gungnirTheme } = require("vuepress-theme-gungnir");
+const { gungnirTheme } = require("vuepress-theme-gungnir")
 
 module.exports = {
-  ...
-  theme: gungnirTheme({
+    // ...
+    theme: gungnirTheme({
     // 你的主题配置
-  })
+    }),
 }
 ```
 
-</CodeGroupItem>
+<!-- </CodeGroupItem>
 
-<CodeGroupItem title="TS">
+<CodeGroupItem title="TS"> -->
 
-```ts{8}
+```ts []{8}
 // .vuepress/config.ts
 
-import { defineUserConfig } from "vuepress";
-import { gungnirTheme } from "vuepress-theme-gungnir";
+import { defineUserConfig } from "vuepress"
+import { gungnirTheme } from "vuepress-theme-gungnir"
 
 export default defineUserConfig({
-  ...
-  theme: gungnirTheme({
+    // ...
+    theme: gungnirTheme({
     // 你的主题配置
-  })
-});
+    }),
+})
 ```
 
-</CodeGroupItem>
-</CodeGroup>
+<!-- </CodeGroupItem>
+</CodeGroup> -->
 
 这时候博客主页还不会显示任何东西，仍需要进行一些[基本配置](https://v2-vuepress-theme-gungnir.vercel.app/zh/docs/basic/config.html)
 
@@ -243,29 +243,29 @@ const themeConfig: GungnirThemeOptions = {
 
 在加上这个配置之后启动项目就可以看到主页了
 
-<CodeGroup>
-<CodeGroupItem title="PNPM">
+<!-- <CodeGroup>
+<CodeGroupItem title="PNPM"> -->
 
 ```shell
 pnpm docs:dev
 ```
 
-</CodeGroupItem>
-<CodeGroupItem title="NPM">
+<!-- </CodeGroupItem>
+<CodeGroupItem title="NPM"> -->
 
 ```shell
 npm run docs:dev
 ```
 
-</CodeGroupItem>
-<CodeGroupItem title="YARN">
+<!-- </CodeGroupItem>
+<CodeGroupItem title="YARN"> -->
 
 ```shell
 yarn docs:dev
 ```
 
-</CodeGroupItem>
-</CodeGroup>
+<!-- </CodeGroupItem>
+</CodeGroup> -->
 
 不过这个时候还没有头像、页面背景图和博文。还需要根据主题文档继续配置，这里就不废话了。
 
