@@ -15,10 +15,10 @@ defineProps({
 </script>
 
 <template>
-    <NuxtLink
+    <ANuxtLink
         :href="href"
         :target="target"
     >
         <slot />
-    </NuxtLink>
+    </ANuxtLink>
 </template>

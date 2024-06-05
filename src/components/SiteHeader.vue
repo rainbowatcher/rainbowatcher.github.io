@@ -29,24 +29,24 @@ const navItems = [
         <nav class="" role="navigation">
             <ol flex="~ row nowrap gap-x-6" class="select-none uppercase">
                 <li>
-                    <NuxtLink to="/" class="bg-none font-400">
+                    <ANuxtLink to="/" class="bg-none font-400">
                         Rainbow watcher
-                    </NuxtLink>
+                    </ANuxtLink>
                 </li>
                 <li v-for="{ label, path } in navItems" :key="label">
-                    <NuxtLink
+                    <ANuxtLink
                         :class="[getActiveClasses(path)]"
                         class="hidden font-400 md:inline-block hover:op-100" :href="path"
                     >
                         {{ label }}
-                    </NuxtLink>
+                    </ANuxtLink>
                 </li>
             </ol>
         </nav>
         <div class="mla hidden gap-2 rounded-full bg-card px4 py2 op-75 transition-opacity duration-300 md:(flex flex-row flex-nowrap) hover:op-100">
             <SearchBar title="Search" />
-            <NuxtLink class="i-ph-twitter-logo bg-none" title="Twitter" href="https://x.com/_rainbowatcher" target="_blank" rel="noreferrer" />
-            <NuxtLink class="i-ph-github-logo bg-none" title="GitHub" href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer" />
+            <ANuxtLink class="i-ph-twitter-logo bg-none" title="Twitter" href="https://x.com/_rainbowatcher" target="_blank" rel="noreferrer" />
+            <ANuxtLink class="i-ph-github-logo bg-none" title="GitHub" href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer" />
             <button :class="$colorMode.value === 'dark' ? 'i-line-md-moon-filled-alt-loop' : 'i-line-md-sun-rising-loop'" title="Toggle dark mode" class="cursor-pointer" @click="toggleDark()" />
         </div>
     </header>

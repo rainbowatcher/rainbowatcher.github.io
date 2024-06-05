@@ -14,10 +14,6 @@ const previousPost = computed(() => {
     if (!posts.value) return
     return postsIndex.value === posts.value.length - 1 ? posts.value.at(-1) : posts.value[postsIndex.value - 1]
 })
-
-onMounted(() => {
-    console.log(posts.value)
-})
 </script>
 
 <template>
@@ -31,12 +27,12 @@ onMounted(() => {
                     {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
                 </span>
                 <span class="space-x-4">
-                    <NuxtLink
+                    <ANuxtLink
                         v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
                         class="bg-none text-sm c-input italic op-75 hover:op-100"
                     >
                         {{ `#${tag}` }}
-                    </NuxtLink>
+                    </ANuxtLink>
                     <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
                 </span>
                 <p v-if="doc.subtitle" class="c-coolGray">

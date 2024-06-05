@@ -38,9 +38,9 @@ import "katex/dist/katex.min.css"
                     {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
                 </span>
                 <span class="space-x-4">
-                    <NuxtLink v-for="tag in doc.tags" :key="tag" class="bg-none text-sm c-input italic op-75 hover:op-100">
+                    <ANuxtLink v-for="tag in doc.tags" :key="tag" class="bg-none text-sm c-input italic op-75 hover:op-100">
                         {{ `#${tag}` }}
-                    </NuxtLink>
+                    </ANuxtLink>
                     <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
                 </span>
                 <ContentRenderer :value="doc" class="md-doc mt-18 space-y-4" />

@@ -10,13 +10,13 @@
                 href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"
             >CC BY-NC-SA 4.0</a>
             2022-PRESENT &copy;
-            <NuxtLink href="https://github.com/rainbowatcher" target="_blank">
+            <ANuxtLink href="https://github.com/rainbowatcher" target="_blank">
                 Rainbowatcher
-            </NuxtLink>
+            </ANuxtLink>
             Powered by
-            <NuxtLink href="https://nuxt.com" target="_blank">
+            <ANuxtLink href="https://nuxt.com" target="_blank">
                 Nuxt
-            </NuxtLink>
+            </ANuxtLink>
         </div>
     </footer>
 </template>
