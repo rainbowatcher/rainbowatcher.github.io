@@ -51,7 +51,7 @@ export default defineConfig({
             "--un-enter-translate-y": "initial",
             "animation-duration": "var(--un-animate-duration)",
             "animation-name": "animate-enter",
-            "animation-timing-function": "ease-in",
+            "animation-timing-function": "ease-in-out",
         }],
         ["animate-out", {
             "--un-animate-duration": "150ms",
@@ -62,7 +62,7 @@ export default defineConfig({
             "--un-enter-translate-y": "initial",
             "animation-duration": "var(--un-animate-duration)",
             "animation-name": "animate-exit",
-            "animation-timing-function": "ease-out",
+            "animation-timing-function": "ease-in-out",
         }],
         [/^fade-in-?(.+)?$/, ([, d]) => ({ "--un-enter-opacity": `${Number(handleMatchNumber(d) || 0) / 100}` })],
         [/^fade-out-?(.+)?$/, ([, d]) => ({ "--un-exit-opacity": `${Number(handleMatchNumber(d) || 0) / 100}` })],

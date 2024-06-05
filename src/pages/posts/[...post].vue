@@ -3,8 +3,7 @@ import "katex/dist/katex.min.css"
 
 const route = useRoute("posts-post")
 const { data: posts } = await useAsyncData("posts", usePosts())
-
-const path = computed(() => posts.value?.find(i => [i._path, i.permalink].includes(route.fullPath))?._path)
+const path = computed(() => posts.value?.find(i => [i._path, i.permalink].includes(route.path))?._path)
 const postsIndex = computed(() => posts.value?.findIndex(i => i._path === path.value) ?? 0)
 const nextPost = computed(() => {
     if (!posts.value) return

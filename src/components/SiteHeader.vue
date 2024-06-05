@@ -10,7 +10,7 @@ useHead({
     }],
 })
 
-const getActiveClasses = (path: string) => (route.fullPath.startsWith(path) ? "bg-[size:100%_0.75em] op-100" : "op-30")
+const getActiveClasses = (path: string) => (route.path.startsWith(path) ? "bg-[size:100%_0.75em] op-100" : "op-30")
 
 function toggleDark() {
     color.preference = color.value === "dark" ? "light" : "dark"
