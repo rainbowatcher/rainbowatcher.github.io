@@ -79,7 +79,11 @@ export default defineConfig({
         [/^slide-out-to-left-?(.+)?$/, ([, d]) => ({ "--un-exit-translate-x": `-${handleMatchRem(d)}` })],
         [/^slide-out-to-right-?(.+)?$/, ([, d]) => ({ "--un-exit-translate-x": handleMatchRem(d) })],
     ],
-    shortcuts: [],
+    safelist: ["show"],
+    shortcuts: [
+        ["show-up", "translate-y-2 op-0 [transition-property:transform,opacity] duration-300 ease-out"],
+        ["show", "translate-y-0 op-100"],
+    ],
     theme: {
         borderRadius: {
             lg: "var(--radius)",

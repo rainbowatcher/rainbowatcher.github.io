@@ -54,15 +54,5 @@ export const globalHead: UseHeadInput<MergeHead> = {
             name: "theme-color",
         },
     ],
-    script: [
-        {
-            innerHTML: `const fadeUps = document.querySelectorAll("fade-up")
-        for (let i = 0; i <= fadeUps.length; i++) {
-            setTimeout(() => {
-                fadeUps[i].classList.toggle("animate-in")
-            }, i * 100)
-        }`,
-        },
-    ],
     title,
 }

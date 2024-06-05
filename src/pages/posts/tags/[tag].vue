@@ -34,7 +34,7 @@ const postList = computed(() => {
             </NuxtLink>
         </div>
         <div class="post-list mt-8 lt-sm:mx-6 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4">
-            <div v-for="post in postList" :key="post._path">
+            <div v-for="post in postList" :key="post._path" class="show-up">
                 <NuxtLink class="text-lg font-400" :href="post._path" role="link">
                     {{ post.title }}
                 </NuxtLink>

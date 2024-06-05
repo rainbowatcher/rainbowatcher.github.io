@@ -20,13 +20,13 @@ const previousPost = computed(() => {
     <section class="flex flex-1 flex-col">
         <article class="relative min-w-0 lt-sm:mx-6 sm:(mx-6 w-fit) lg:w-3xl md:w-2xl xl:w-5xl md:self-center">
             <ContentDoc v-slot="{ doc }" :path="path">
-                <h1 class="z-1 mt-12 text-6xl font-bold">
+                <h1 class="show-up z-1 mt-12 text-6xl font-bold">
                     {{ doc.title }}
                 </h1>
-                <span class="text-stroke-offset-2 absolute right-1em top--.35em z--1 select-none text-6rem color-transparent font-900 text-stroke-2 text-stroke-muted op-10 lt-md:hidden">
+                <span class="absolute right-1em top--.35em z--1 select-none text-6rem color-transparent font-900 text-stroke-2 text-stroke-muted op-10 lt-md:hidden">
                     {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
                 </span>
-                <span class="space-x-4">
+                <span class="show-up space-x-4">
                     <NuxtLink
                         v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
                         class="bg-none text-sm c-input italic op-75 hover:op-100"
@@ -35,12 +35,12 @@ const previousPost = computed(() => {
                     </NuxtLink>
                     <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
                 </span>
-                <p v-if="doc.subtitle" class="c-coolGray">
+                <p v-if="doc.subtitle" class="show-up c-coolGray">
                     {{ doc.subtitle }}
                 </p>
-                <ContentRenderer :value="doc" class="md-doc mt-18 space-y-4" />
+                <ContentRenderer :value="doc" class="md-doc show-up mt-18 space-y-4" />
             </ContentDoc>
         </article>
-        <PageNav :previous="previousPost" :next="nextPost" use-title use-permalink />
+        <PageNav class="show-up" :previous="previousPost" :next="nextPost" use-title use-permalink />
     </section>
 </template>

@@ -32,7 +32,7 @@ function getPage(list: any[], pageNum: number | string = 1) {
             <template v-if="posts?.length">
                 <div
                     v-for="post in currPage"
-                    :key="post._path" class="post-item first:mt-8"
+                    :key="post._path" class="show-up post-item first:mt-8"
                 >
                     <NuxtLink class="text-lg font-400" :href="post.permalink" role="link" prefetch>
                         {{ post.title }}
@@ -52,6 +52,6 @@ function getPage(list: any[], pageNum: number | string = 1) {
                 <p>Can't found any posts</p>
             </template>
         </div>
-        <PageNav :previous="previousNavItem" :next="nextNavItem" />
+        <PageNav class="show-up" :previous="previousNavItem" :next="nextNavItem" />
     </section>
 </template>
