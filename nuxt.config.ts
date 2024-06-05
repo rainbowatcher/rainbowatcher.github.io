@@ -101,6 +101,9 @@ export default defineNuxtConfig({
         "@nuxt/image",
         "@nuxt/fonts",
     ],
+    routeRules: {
+        "/**": { isr: true, prerender: true },
+    },
     router: {
         options: {
             scrollBehaviorType: "smooth",
