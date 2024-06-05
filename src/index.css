@@ -62,12 +62,6 @@
     }
 }
 
-#__nuxt {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 html.dark {
     color-scheme: dark;
 }
@@ -93,6 +87,11 @@ html {
         Segoe UI Emoji,
         Segoe UI Symbol,
         Noto Color Emoji;
+}
+
+body,
+#__nuxt {
+    min-height: 100vh;
 }
 
 a {
