@@ -121,6 +121,10 @@ export default defineConfig({
                 foreground: "var(--secondary-foreground)",
             },
         },
+        fontFamily: {
+            mono: "Fira Code",
+            serif: "Red Hat Display",
+        },
     },
     transformers: [
         transformerDirectives(),
