@@ -34,17 +34,17 @@ function getPage(list: any[], pageNum: number | string = 1) {
                     v-for="post in currPage"
                     :key="post._path" class="post-item first:mt-8"
                 >
-                    <ANuxtLink class="text-lg font-400" :href="post.permalink" role="link" prefetch>
+                    <NuxtLink class="text-lg font-400" :href="post.permalink" role="link" prefetch>
                         {{ post.title }}
-                    </ANuxtLink>
+                    </NuxtLink>
                     <span class="float-left ml--5rem mr-4 vertical-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
                     <div class="post-tags flex flex-(row nowrap) gap-x-4">
-                        <ANuxtLink
+                        <NuxtLink
                             v-for="tag in post.tags" :key="tag" :to="`/posts/tags/${tag}`"
                             class="bg-none text-xs c-input italic op-75 hover:op-100"
                         >
                             {{ `#${tag}` }}
-                        </ANuxtLink>
+                        </NuxtLink>
                     </div>
                 </div>
             </template>
