@@ -27,7 +27,7 @@ const postList = computed(() => {
         <div class="tag-list flex flex-row flex-wrap gap-x-4 lt-sm:mx-6 sm:(ml-[calc(3rem)] w-3xl) md:w-5xl">
             <NuxtLink
                 v-for="tag in tags" :key="tag[0]"
-                class="tag-item bg-none text-nowrap c-input op75 hover:op100" :to="`/posts/tags/${tag[0]}`"
+                class="tag-item bg-none text-nowrap c-input font-sans italic op75 hover:op100" :to="`/posts/tags/${tag[0]}`"
             >
                 #{{ tag[0] }}
                 <sup>{{ tag[1] }}</sup>
@@ -35,7 +35,7 @@ const postList = computed(() => {
         </div>
         <div class="post-list mt-8 lt-sm:mx-6 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4">
             <div v-for="post in postList" :key="post._path" class="show-up">
-                <NuxtLink class="text-lg font-400" :href="post._path" role="link">
+                <NuxtLink class="text-lg font-400 font-serif" :href="post._path" role="link">
                     {{ post.title }}
                 </NuxtLink>
                 <span class="float-left ml--5rem mr-4 vertical-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
