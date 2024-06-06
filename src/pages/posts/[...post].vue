@@ -11,7 +11,7 @@ const nextPost = computed(() => {
 })
 const previousPost = computed(() => {
     if (!posts.value) return
-    return postsIndex.value === posts.value.length - 1 ? posts.value.at(-1) : posts.value[postsIndex.value - 1]
+    return postsIndex.value === 0 ? posts.value.at(-1) : posts.value[postsIndex.value - 1]
 })
 </script>
 
