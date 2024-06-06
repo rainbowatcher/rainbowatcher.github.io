@@ -21,13 +21,13 @@ export default defineNuxtPlugin((app) => {
     //     // console.log("app:redirected")
     // })
     // app.hook("app:rendered", (_ctx) => {
-    //     console.log("app:rendered")
+    //     console.log("app:rendered", _ctx)
     // })
     // app.hook("app:beforeMount", (_ctx) => {
-    //     console.log("app:beforeMount")
+    //     console.log("app:beforeMount", _ctx)
     // })
     // app.hook("app:mounted", (_ctx) => {
-    //     console.log("app:mounted")
+    //     console.log("app:mounted", _ctx)
     // })
     // app.hook("app:suspense:resolve", (_ctx) => {
     //     console.log("app:suspense:resolve")

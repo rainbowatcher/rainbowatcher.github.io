@@ -1,15 +1,12 @@
-Hi, I'm <strong class="bg-rainbow">Rainbow Watcher</strong><br>
+Hi, I'm <strong class="bg-rainbow">Rainbow Watcher</strong>.<br>
 I'm an developer and open-source maintainer that fond of adventurous exploration.
 
 <br>
 
-I write `Typescript`, `Rust`, `Python`, `Go`, and will learn `Swift` in the distant future, and finally i don't like `Java`.
+I write `Typescript`, `Rust`, `Python`, `Go`, and will learn `Swift` in the distant future,  
+and finally i don't like `Java`.
 
 <style lang="css">
-main, code {
-    font-size: 2rem !important;
-}
-
 .bg-rainbow {
     font-weight: 900;
     background:

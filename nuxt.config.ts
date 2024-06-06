@@ -109,9 +109,6 @@ export default defineNuxtConfig({
             scrollBehaviorType: "smooth",
         },
     },
-    runtimeConfig: {
-        buildTime: new Date().toISOString(),
-    },
     srcDir: "src/",
     telemetry: false,
     vite: {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const runtimeConfig = useRuntimeConfig()
+import buildInfo from "public/build-info.json"
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const runtimeConfig = useRuntimeConfig()
             Nuxt
         </NuxtLink>
         <span class="absolute bottom-1 right-0 ml-auto inline text-sm text-muted op70">
-            BUILD TIME: {{ useDateFormat(runtimeConfig.buildTime, 'YYYY-MM-DD HH:mm:ss').value }}
+            BUILD TIME: {{ useDateFormat(buildInfo.time, 'YYYY-MM-DD HH:mm:ss').value }}
         </span>
     </footer>
 </template>
