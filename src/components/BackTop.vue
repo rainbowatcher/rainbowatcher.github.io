@@ -19,7 +19,7 @@ watch(y, () => {
 
 <template>
     <div
-        class="fixed bottom-8 right-14 z-99 items-center rounded-full bg-card p1.5 animate-in fade-in slide-in-from-bottom-10 active:bg-accent"
+        class="[transition-property:background-color,color] fixed bottom-8 right-14 z-99 items-center rounded-full bg-ring p1.5 duration-300 animate-in fade-in slide-in-from-bottom-10 hover:(bg-secondary c-secondary-foreground) hover:active:(bg-input c-background)"
         :class="[show]" @click="backToTop"
     >
         <i i-line-md-arrow-up />

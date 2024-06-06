@@ -38,7 +38,7 @@
         --card: hsl(207, 50%, 30%);
         --card-foreground: hsl(187, 30%, 77%);
 
-        --popover: hsl(203, 20%, 8%);
+        --popover: hsl(203, 30%, 9%);
         --popover-foreground: hsl(0, 0%, 87%);
 
         --primary: hsl(205, 54%, 48%);
@@ -56,19 +56,26 @@
         --destructive: hsl(0, 62.8%, 30.6%);
         --destructive-foreground: hsl(0, 60%, 87%);
 
-        --border: hsl(207, 58%, 21%);
+        --border: hsl(207, 58%, 18%);
         --input: hsl(164, 36%, 61%);
         --ring: hsl(215, 16%, 25%);
     }
 }
 
-html.dark {
-    color-scheme: dark;
-}
-
 html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     background-color: var(--background);
     color: var(--foreground);
+}
+
+html.dark {
+    color-scheme: dark;
 }
 
 body,
