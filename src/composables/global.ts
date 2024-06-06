@@ -8,6 +8,7 @@ const url = `https://${domain}/`
 const image = "/favicon.svg"
 
 export const globalHead: UseHeadInput<MergeHead> = {
+    htmlAttrs: { lang: "zh" },
     link: [
         {
             href: "/favicon-dark.svg",
