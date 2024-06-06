@@ -8,7 +8,7 @@ const generate = computed(() => props.id && headings?.anchorLinks?.h1)
 </script>
 
 <template>
-    <h3 :id="id" class="group my-4 text-xl font-600 leading-[1.5]">
+    <h3 :id="id" class="group my-4 text-xl font-600 leading-[1.5] font-sans">
         <slot />
         <DocTitleAnchor :id="id" :generate="generate" />
     </h3>

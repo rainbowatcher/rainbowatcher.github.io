@@ -3,7 +3,7 @@ const runtimeConfig = useRuntimeConfig()
 </script>
 
 <template>
-    <footer class="relative py-8 font-serif md:mx-12" role="contentinfo">
+    <footer class="relative py-8 font-sans md:mx-12" role="contentinfo">
         <a
             rel="license" title="Creative Commons BY-NC-SA 4.0"
             href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"

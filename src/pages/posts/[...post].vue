@@ -19,25 +19,25 @@ const previousPost = computed(() => {
     <section class="flex flex-1 flex-col">
         <article class="relative min-w-0 lt-sm:mx-6 sm:(mx-6 w-fit) lg:w-3xl md:w-2xl xl:w-5xl md:self-center">
             <ContentDoc v-slot="{ doc }" :path="path">
-                <h1 class="show-up z-1 mt-12 text-6xl font-bold">
+                <h1 class="show-up z-1 mt-12 text-6xl font-800 font-serif">
                     {{ doc.title }}
                 </h1>
-                <span class="absolute right-1em top--.35em z--1 select-none text-6rem color-transparent font-900 text-stroke-2 text-stroke-muted op-10 lt-md:hidden">
+                <span class="absolute right-1em top--.35em z--1 select-none text-6rem c-transparent font-900 font-sans text-stroke-1.5 text-stroke-muted op-10 lt-md:hidden">
                     {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
                 </span>
                 <span class="show-up space-x-4">
                     <NuxtLink
                         v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
-                        class="bg-none text-sm c-input italic op-75 hover:op-100"
+                        class="bg-none text-sm c-input font-sans italic op-75 hover:op-100"
                     >
                         {{ `#${tag}` }}
                     </NuxtLink>
                     <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
                 </span>
-                <p v-if="doc.subtitle" class="show-up c-coolGray">
+                <p v-if="doc.subtitle" class="show-up c-coolGray leading-8 font-serif">
                     {{ doc.subtitle }}
                 </p>
-                <ContentRenderer :value="doc" class="md-doc show-up mt-18 space-y-4" />
+                <ContentRenderer :value="doc" class="md-doc show-up mt-18 font-serif space-y-4" />
             </ContentDoc>
         </article>
         <PageNav class="show-up" :previous="previousPost" :next="nextPost" use-title use-permalink />
