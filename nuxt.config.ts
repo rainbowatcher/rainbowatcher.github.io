@@ -79,7 +79,7 @@ export default defineNuxtConfig({
         payloadExtraction: false,
         renderJsonPayloads: true,
         typedPages: true,
-        viewTransition: true,
+        // viewTransition: true,
     },
     features: {
         // For UnoCSS

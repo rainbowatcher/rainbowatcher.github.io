@@ -19,7 +19,7 @@ const previousPost = computed(() => {
     <section class="flex flex-1 flex-col">
         <article class="relative min-w-0 lt-sm:mx-6 sm:(mx-6 w-fit) lg:w-3xl md:w-2xl xl:w-5xl md:self-center">
             <ContentDoc v-slot="{ doc }" :path="path">
-                <h1 class="show-up z-1 mt-12 text-6xl font-800 font-serif">
+                <h1 class="[view-transition-name:title] show-up z-1 mt-12 text-6xl font-800 font-serif">
                     {{ doc.title }}
                 </h1>
                 <span class="absolute right-1em top--.35em z--1 select-none text-6rem c-transparent font-900 font-sans text-stroke-1.5 text-stroke-muted op-10 lt-md:hidden">

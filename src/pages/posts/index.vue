@@ -10,6 +10,7 @@ const previousNavItem = computed(() => (pageNum.value > 1 ? { _path: `${routePat
 const currPage = computed(() => {
     return getPage(posts.value ?? [], pageNum.value)
 })
+const active = useState<string | undefined>()
 
 function sortByDate(list: any[]) {
     return list.sort((a: any, b: any) => {
@@ -34,7 +35,10 @@ function getPage(list: any[], pageNum: number | string = 1) {
                     v-for="post in currPage"
                     :key="post._path" class="post-item show-up first:mt-8"
                 >
-                    <NuxtLink class="text-lg font-400 font-serif" :href="post.permalink" role="link" prefetch>
+                    <NuxtLink
+                        class="text-lg font-400 font-serif [&.active]:[view-transition-name:title]" :class="{ active: active === post._path }"
+                        :href="post.permalink" role="link" prefetch @click="active = post._path"
+                    >
                         {{ post.title }}
                     </NuxtLink>
                     <span class="float-left ml--5rem mr-4 vertical-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
