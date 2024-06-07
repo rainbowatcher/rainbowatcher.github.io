@@ -2,16 +2,18 @@
 import "katex/dist/katex.min.css"
 
 const route = useRoute("posts-post")
-const { data: posts } = await useAsyncData("posts", usePosts())
+const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
+const { data: post } = await useAsyncData("post", () => queryContent(route.path).findOne())
 const path = computed(() => posts.value?.find(i => [i._path, i.permalink].includes(route.path))?._path)
-const postsIndex = computed(() => posts.value?.findIndex(i => i._path === path.value) ?? 0)
+const currIdx = computed(() => posts.value?.findIndex(i => i._path === path.value) ?? 0)
+useContentHead(post.value ?? { _id: "", body: null, title: "Not Found" })
 const nextPost = computed(() => {
     if (!posts.value) return
-    return postsIndex.value === posts.value.length - 1 ? posts.value[0] : posts.value[postsIndex.value + 1]
+    return currIdx.value === posts.value.length - 1 ? posts.value[0] : posts.value[currIdx.value + 1]
 })
 const previousPost = computed(() => {
     if (!posts.value) return
-    return postsIndex.value === 0 ? posts.value.at(-1) : posts.value[postsIndex.value - 1]
+    return currIdx.value === 0 ? posts.value.at(-1) : posts.value[currIdx.value - 1]
 })
 </script>
 

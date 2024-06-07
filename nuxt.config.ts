@@ -1,3 +1,5 @@
+import { isDevelopment } from "std-env"
+
 export default defineNuxtConfig({
     algolia: {
         apiKey: "f757c625852758ee96aaf2268959166e",
@@ -6,9 +8,11 @@ export default defineNuxtConfig({
             indexName: "rainbowatcher",
         },
     },
+
     colorMode: {
         classSuffix: "",
     },
+
     components: [
         {
             // island: true,
@@ -17,6 +21,7 @@ export default defineNuxtConfig({
         },
     ],
     content: {
+        contentHead: false,
         csv: false,
         defaultLocale: "CN",
         highlight: {
@@ -51,6 +56,10 @@ export default defineNuxtConfig({
             ],
         },
         sources: {
+            about: {
+                base: "./content/about",
+                driver: "fs",
+            },
             archives: {
                 base: "./content/archives",
                 driver: "fs",
@@ -64,9 +73,11 @@ export default defineNuxtConfig({
         },
         yaml: false,
     },
+
     css: [
         "@unocss/reset/tailwind.css",
     ],
+
     devtools: {
         enabled: false,
     },
@@ -75,6 +86,7 @@ export default defineNuxtConfig({
             standalone: false,
         },
     },
+
     experimental: {
         payloadExtraction: false,
         renderJsonPayloads: true,
@@ -102,18 +114,21 @@ export default defineNuxtConfig({
         "@nuxt/fonts",
     ],
     routeRules: {
-        "/**": { isr: true, prerender: true },
+        "/**": { prerender: true, ssr: true },
     },
+
     router: {
         options: {
             scrollBehaviorType: "smooth",
         },
     },
-    srcDir: "src/",
+
+    srcDir: "src",
+    ssr: true,
     telemetry: false,
     vite: {
         build: {
-            minify: false,
+            minify: !isDevelopment,
         },
     },
 })

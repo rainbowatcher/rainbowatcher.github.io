@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import type { ParsedContent } from "@nuxt/content/types"
+
 const route = useRoute("posts")
 const pageNum = computed(() => (Number.isNaN(Number(route.query.page)) ? 1 : Number(route.query.page)))
 const routePathPrefix = "/posts?page="
-const { data: posts } = await useAsyncData("posts", usePosts())
+const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
 const pageSize = 12
 const maxPage = computed(() => Math.ceil((posts.value?.length ?? 1) / pageSize))
 const nextNavItem = computed(() => (pageNum.value < maxPage.value ? { _path: `${routePathPrefix}${pageNum.value + 1}`, title: "" } : undefined))
@@ -12,8 +14,8 @@ const currPage = computed(() => {
 })
 const active = useState<string | undefined>()
 
-function sortByDate(list: any[]) {
-    return list.sort((a: any, b: any) => {
+function sortByDate(list: Array<Partial<ParsedContent>>) {
+    return list.sort((a: Partial<ParsedContent>, b: Partial<ParsedContent>) => {
         return new Date(b.date).valueOf() - new Date(a.date).valueOf()
     })
 }
@@ -21,7 +23,7 @@ function sortByDate(list: any[]) {
 /**
  * get current page
  */
-function getPage(list: any[], pageNum: number | string = 1) {
+function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string = 1) {
     const num = Number(pageNum)
     return sortByDate(list).slice((num - 1) * pageSize, num * pageSize)
 }
