@@ -57,3 +57,5 @@ export const globalHead: UseHeadInput<MergeHead> = {
     ],
     title,
 }
+
+export const preferredMotion = usePreferredReducedMotion()

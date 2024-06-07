@@ -81,8 +81,8 @@ export default defineConfig({
     ],
     safelist: ["show"],
     shortcuts: [
-        ["show-up", "translate-y-2 op-0 [transition-property:transform,opacity] duration-300 ease-out"],
-        ["show", "translate-y-0 op-100"],
+        ["show-up", "motion-safe-(translate-y-2 op-0 [transition-property:transform,opacity] duration-350 ease-out)"],
+        ["show", "motion-safe-(translate-y-0 op-100)"],
     ],
     theme: {
         borderRadius: {
