@@ -43,6 +43,9 @@ export default defineNuxtPlugin((app) => {
     // })
     app.hook("page:finish", () => {
         const { path } = useRoute()
+        if (path.startsWith("/posts")) {
+            addCodeCopy()
+        }
         if (path === "/posts") {
             showupAnimate(30)
         } else {
