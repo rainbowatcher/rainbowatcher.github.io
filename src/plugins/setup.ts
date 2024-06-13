@@ -1,5 +1,4 @@
-import { pageLoading, usePrefetch } from "#imports"
-import { usePageLoading } from "~/composables/global"
+import { usePageLoading, usePrefetch } from "#imports"
 
 export default defineNuxtPlugin((app) => {
     const route = useRoute()
