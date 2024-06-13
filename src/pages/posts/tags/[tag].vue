@@ -39,7 +39,7 @@ const postList = computed(() => {
                 <NuxtLink class="text-lg font-400" :href="post._path" role="link">
                     {{ post.title }}
                 </NuxtLink>
-                <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
+                <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
             </div>
         </div>
     </section>

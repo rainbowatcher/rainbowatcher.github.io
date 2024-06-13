@@ -20,8 +20,8 @@ const previousPost = computed(() => {
         <article class="font-mb relative min-w-0 w-100dvw">
             <ContentDoc v-slot="{ doc }" :path="path" :head="false">
                 <PageHead :title="`${doc.title} - Rainbow Watcher's Portfolio`" />
-                <span class="absolute right-50% top--.35em z--1 translate-x-50% select-none text-nowrap text-11vw c-cyan/12 font-900 show-up lt-md:hidden">
-                    {{ useDateFormat(doc.date, "YYYY MM DD").value }}
+                <span class="absolute right-50% top--.125em z--1 translate-x-50% select-none text-nowrap text-11vw c-cyan/12 font-900 show-up lt-md:hidden">
+                    {{ useDateFormat(doc.date, "YYYY MM DD", { locales: "zh-Hans-CN" }).value }}
                 </span>
                 <h1 class="page-title [view-transition-name:title] z-1 mx-6.5dvw mt-12dvh text-center text-pretty tracking-tight show-up lt-md:text-12vw md:text-7vw xl:text-5vw">
                     {{ doc.title }}
@@ -36,7 +36,7 @@ const previousPost = computed(() => {
                     >
                         {{ tag }}
                     </NuxtLink>
-                    <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
+                    <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
                 </span>
                 <ContentRenderer :value="doc" class="md-doc mt-24 min-w-0 font-sans show-up lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-4" />
             </ContentDoc>
