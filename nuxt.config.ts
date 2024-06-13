@@ -70,7 +70,7 @@ export default defineNuxtConfig({
     ],
 
     devtools: {
-        enabled: false,
+        enabled: true,
     },
     eslint: {
         config: {
@@ -80,21 +80,31 @@ export default defineNuxtConfig({
 
     experimental: {
         componentIslands: true,
+        defaults: {
+            useAsyncData: {
+                deep: false,
+            },
+        },
+        // noVueServer: true,
+        // inlineRouteRules: true,
         payloadExtraction: false,
         renderJsonPayloads: true,
         typedPages: true,
         // viewTransition: true,
     },
+
     features: {
         // For UnoCSS
         inlineStyles: true,
     },
-    fonts: {
-        assets: {
-            // The prefix where your fonts will be accessible
-            prefix: "/_fonts",
-        },
-    },
+
+    // fonts: {
+    //     assets: {
+    //         // The prefix where your fonts will be accessible
+    //         prefix: "/_fonts",
+    //     },
+    // },
+
     modules: [
         "@nuxtjs/algolia",
         "@vueuse/nuxt",
@@ -106,7 +116,7 @@ export default defineNuxtConfig({
         "@nuxt/fonts",
     ],
     routeRules: {
-        "/**": { prerender: true, ssr: true },
+        "/**": { isr: true },
     },
 
     router: {
@@ -115,8 +125,11 @@ export default defineNuxtConfig({
         },
     },
 
+    // sourcemap: false,
     srcDir: "src",
-    ssr: true,
+    // ssr: true,
+
+    // Nuxt collects anonymous telemetry data
     telemetry: false,
     vite: {
         build: {

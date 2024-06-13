@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import "uno.css"
-import "~/index.css"
+import "~/styles/index.css"
 
 useHead(globalHead)
 </script>

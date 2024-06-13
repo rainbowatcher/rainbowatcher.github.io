@@ -1,3 +1,5 @@
+@import url("./animations.css");
+
 @layer base {
     :root {
         --background: hsl(169, 100%, 99%);
@@ -42,6 +44,7 @@
         --popover-foreground: hsl(0, 0%, 87%);
 
         --primary: hsl(205, 54%, 48%);
+        /* --primary: #1e96bc; */
         --primary-foreground: hsl(0, 0%, 87%);
 
         --secondary: hsl(187, 73%, 38%);
@@ -57,6 +60,7 @@
         --destructive-foreground: hsl(0, 60%, 87%);
 
         --border: hsl(207, 58%, 18%);
+        /* --border: #20516a; */
         --input: hsl(164, 36%, 61%);
         --ring: hsl(215, 16%, 25%);
     }
@@ -91,7 +95,7 @@ a {
     font-weight: 600;
     text-wrap: pretty;
     transition:
-        background-size 300ms linear,
+        background 300ms linear,
         opacity 300ms;
 }
 
@@ -114,25 +118,6 @@ a[target="_blank"]::after {
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-}
-
-/* animate */
-@keyframes animate-enter {
-    from {
-        opacity: var(--un-enter-opacity, 1);
-        transform: translate3d(var(--un-enter-translate-x, 0), var(--un-enter-translate-y, 0), 0)
-            scale3d(var(--un-enter-scale, 1), var(--un-enter-scale, 1), var(--un-enter-scale, 1))
-            rotate(var(--un-enter-rotate, 0));
-    }
-}
-
-@keyframes animate-exit {
-    to {
-        opacity: var(--un-exit-opacity, 1);
-        transform: translate3d(var(--un-exit-translate-x, 0), var(--un-exit-translate-y, 0), 0)
-            scale3d(var(--un-exit-scale, 1), var(--un-exit-scale, 1), var(--un-exit-scale, 1))
-            rotate(var(--un-exit-rotate, 0));
-    }
 }
 
 /* containers */

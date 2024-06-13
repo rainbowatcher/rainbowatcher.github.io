@@ -39,7 +39,7 @@ export default defineConfig({
             },
             scale: 1.2,
         }),
-        presetTypography(),
+        // presetTypography(),
     ],
     rules: [
         ["animate-in", {
@@ -79,9 +79,9 @@ export default defineConfig({
         [/^slide-out-to-left-?(.+)?$/, ([, d]) => ({ "--un-exit-translate-x": `-${handleMatchRem(d)}` })],
         [/^slide-out-to-right-?(.+)?$/, ([, d]) => ({ "--un-exit-translate-x": handleMatchRem(d) })],
     ],
-    safelist: ["show"],
+    safelist: ["show", "i-line-md-clipboard", "i-line-md-clipboard-to-clipboard-check-transition"],
     shortcuts: [
-        ["show-up", "motion-safe-(translate-y-2 op-0 [transition-property:transform,opacity] duration-350 ease-out)"],
+        ["show-up", "motion-safe-([transition-property:transform,opacity] op-0 translate-y-2 duration-350 ease-out)"],
         ["show", "motion-safe-(translate-y-0 op-100)"],
     ],
     theme: {
@@ -132,7 +132,9 @@ export default defineConfig({
         },
     },
     transformers: [
+        // @apply @screen @theme
         transformerDirectives(),
+        // font-(light mono)
         transformerVariantGroup(),
     ],
 })
