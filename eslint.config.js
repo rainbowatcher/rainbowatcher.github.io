@@ -16,4 +16,9 @@ export default nuxt(defineConfig({
     rules: {
         "vue/no-multiple-template-root": "off",
     },
+}, {
+    files: ["nuxt.config.ts"],
+    rules: {
+        "ts/naming-convention": "off",
+    },
 })

@@ -3,10 +3,8 @@ import "katex/dist/katex.min.css"
 
 const route = useRoute("posts-post")
 const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
-const { data: post } = await useAsyncData("post", () => queryContent(route.path).findOne())
 const path = computed(() => posts.value?.find(i => [i._path, i.permalink].includes(route.path))?._path)
 const currIdx = computed(() => posts.value?.findIndex(i => i._path === path.value) ?? 0)
-useContentHead(post.value ?? { _id: "", body: null, title: "Not Found" })
 const nextPost = computed(() => {
     if (!posts.value) return
     return currIdx.value === posts.value.length - 1 ? posts.value[0] : posts.value[currIdx.value + 1]
@@ -19,27 +17,28 @@ const previousPost = computed(() => {
 
 <template>
     <section class="flex flex-1 flex-col">
-        <article class="relative min-w-0 lt-sm:mx-6 sm:(mx-6 w-fit) lg:w-3xl md:w-2xl xl:w-5xl md:self-center">
-            <ContentDoc v-slot="{ doc }" :path="path">
-                <h1 class="[view-transition-name:title] show-up z-1 mt-12 text-6xl font-800 font-serif">
+        <article class="relative min-w-0 w-100dvw">
+            <ContentDoc v-slot="{ doc }" :path="path" :head="false">
+                <PageHead :title="`${doc.title} - Rainbow Watcher's Portfolio`" />
+                <h1 class="page-title [view-transition-name:title] z-1 mx-6.5dvw mt-12dvh text-center text-balance tracking-tight font-serif show-up lt-md:text-12vw md:text-7vw xl:text-5vw">
                     {{ doc.title }}
                 </h1>
-                <span class="absolute right-1em top--.35em z--1 select-none text-6rem c-transparent font-900 font-sans text-stroke-1.5 text-stroke-muted op-10 lt-md:hidden">
+                <span class="absolute right-50% top--.35em z--1 translate-x-50% select-none text-11vw c-transparent font-900 text-stroke-1.5 text-stroke-slate5/10 show-up lt-md:hidden">
                     {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
                 </span>
-                <span class="show-up space-x-4">
+                <span class="mt-8 flex flex-row flex-wrap justify-center text-pretty show-up space-x-4">
                     <NuxtLink
                         v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
-                        class="bg-none text-sm c-input font-sans italic op-75 hover:op-100"
+                        class="bg-none text-nowrap text-sm c-input font-sans italic op-75 hover:op-100"
                     >
                         {{ `#${tag}` }}
                     </NuxtLink>
                     <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
                 </span>
-                <p v-if="doc.subtitle" class="show-up c-coolGray leading-8 font-serif">
+                <p v-if="doc.subtitle" class="text-center c-coolGray leading-8 font-serif show-up">
                     {{ doc.subtitle }}
                 </p>
-                <ContentRenderer :value="doc" class="md-doc show-up mt-18 font-serif space-y-4" />
+                <ContentRenderer :value="doc" class="md-doc mt-24 min-w-0 show-up lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-4" />
             </ContentDoc>
         </article>
         <PageNav class="show-up" :previous="previousPost" :next="nextPost" use-title use-permalink />

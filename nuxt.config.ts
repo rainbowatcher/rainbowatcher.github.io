@@ -115,6 +115,38 @@ export default defineNuxtConfig({
         "@nuxt/image",
         "@nuxt/fonts",
     ],
+
+    nitro: {
+        future: { nativeSWR: true },
+        hooks: {
+            "prerender:generate"(route) {
+                if (route.fileName?.endsWith(".html") && route.contents) {
+                    route.contents = route.contents.replaceAll(/(?:src|href|srcset)="\/_ipx[^"]+"/g, r => r.replaceAll("//", "/"))
+                }
+
+                if (route.error) {
+                    console.error(route.route, route.error, route)
+                }
+            },
+        },
+        prerender: {
+            autoSubfolderIndex: true,
+            // crawlLinks: true,
+            routes: ["/"],
+        },
+
+        // replace: {
+        //    "import.meta.test": isTest,
+        // },
+    },
+
+    postcss: {
+        plugins: {
+            "@unocss/postcss": {},
+            // "postcss-nesting": {},
+        },
+    },
+
     routeRules: {
         "/**": { isr: true },
     },

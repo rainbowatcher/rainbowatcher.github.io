@@ -44,18 +44,20 @@ export const globalHead: UseHeadInput<MergeHead> = {
         { content: domain, property: "twitter:domain" },
 
         { content: description, name: "description" },
-        {
-            content: "#ffffff",
-            media: "(prefers-color-scheme: light)",
-            name: "theme-color",
-        },
-        {
-            content: "#00aba9",
-            media: "(prefers-color-scheme: dark)",
-            name: "theme-color",
-        },
+        // {
+        //     content: "#ffffff",
+        //     media: "(prefers-color-scheme: light)",
+        //     name: "theme-color",
+        // },
+        // {
+        //     content: "#00aba9",
+        //     media: "(prefers-color-scheme: dark)",
+        //     name: "theme-color",
+        // },
+        { charset: "utf8" },
     ],
     title,
 }
 
 export const preferredMotion = usePreferredReducedMotion()
+export const usePageLoading = () => useState("pageLoading", () => false)
