@@ -1,9 +1,11 @@
 export function showupAnimate(interval = 50) {
     if (preferredMotion.value === "reduce") return
     const elements = document?.querySelectorAll(".show-up") ?? []
-    for (let i = 0; i <= elements.length; i++) {
+    for (const [i, element] of elements.entries()) {
+        if (!element) return
         setTimeout(() => {
-            elements[i]?.classList.toggle("show")
+            if (element?.classList.contains("show")) return
+            element?.classList.toggle("show")
         }, i * interval)
     }
 }
