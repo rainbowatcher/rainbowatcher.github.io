@@ -23,7 +23,7 @@ const previousPost = computed(() => {
                 <h1 class="page-title [view-transition-name:title] z-1 mx-6.5dvw mt-12dvh text-center text-balance tracking-tight font-serif show-up lt-md:text-12vw md:text-7vw xl:text-5vw">
                     {{ doc.title }}
                 </h1>
-                <span class="absolute right-50% top--.35em z--1 translate-x-50% select-none text-11vw c-transparent font-900 text-stroke-1.5 text-stroke-slate5/10 show-up lt-md:hidden">
+                <span class="absolute right-50% top--.35em z--1 translate-x-50% select-none text-11vw c-transparent font-900 font-[Red_Hat_Display] text-stroke-1.5 text-stroke-slate5/10 show-up lt-md:hidden">
                     {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
                 </span>
                 <span class="mt-8 flex flex-row flex-wrap justify-center text-pretty show-up space-x-4">
