@@ -1,21 +1,7 @@
 <script lang="ts" setup>
-const color = useColorMode()
 const route = useRoute()
 
-useHead({
-    meta: [{
-        content: () => (color.value === "dark" ? "#123549" : "#eeeeee"),
-        id: "theme-color",
-        name: "theme-color",
-    }],
-})
-
 const getActiveClasses = (path: string) => (route.path.startsWith(path) ? "bg-[size:100%_0.75em] op-100" : "op-30")
-
-function toggleDark() {
-    color.preference = color.value === "dark" ? "light" : "dark"
-}
-
 const navItems = [
     { label: "Blog", path: "/posts" },
     { label: "Uses", path: "/uses" },
@@ -25,7 +11,7 @@ const navItems = [
 </script>
 
 <template>
-    <header class="w-full flex flex-row flex-nowrap items-center justify-between md:px-12 md:py-4 xl:py8" role="banner">
+    <header class="w-full flex flex-row flex-nowrap items-center justify-between py4 lt-sm:(px-4) md:(px-12 py-6) sm:(px-8) xl:py8" role="banner">
         <nav class="font-sans" role="navigation">
             <ol flex="~ row nowrap gap-x-6" class="select-none uppercase">
                 <li>
@@ -43,11 +29,6 @@ const navItems = [
                 </li>
             </ol>
         </nav>
-        <div class="mla hidden gap-2 rounded-full bg-card px4 py2 op-75 transition-opacity duration-300 md:(flex flex-row flex-nowrap) hover:op-100">
-            <SearchBar title="Search" />
-            <NuxtLink class="i-ph-twitter-logo bg-none" title="Twitter" href="https://x.com/_rainbowatcher" target="_blank" rel="noreferrer" />
-            <NuxtLink class="i-ph-github-logo bg-none" title="GitHub" href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer" />
-            <button :class="$colorMode.value === 'dark' ? 'i-line-md-moon-filled-alt-loop' : 'i-line-md-sun-rising-loop'" title="Toggle dark mode" class="cursor-pointer" @click="toggleDark()" />
-        </div>
+        <SiteHeaderExtra />
     </header>
 </template>
