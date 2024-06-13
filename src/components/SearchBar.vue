@@ -6,6 +6,9 @@
 </template>
 
 <style>
+#docsearch {
+    line-height: normal;
+}
 #docsearch > .DocSearch-Button {
     @apply i-ph-magnifying-glass;
     height: 1.2em !important;
@@ -23,6 +26,6 @@
 }
 
 .DocSearch-Button-Container, .DocSearch-Button-Keys {
-    @apply !hidden !m0 overflow-hidden;
+    @apply !hidden !m0 of-hidden;
 }
 </style>
