@@ -88,6 +88,7 @@ export default defineNuxtConfig({
     },
 
     experimental: {
+        componentIslands: true,
         payloadExtraction: false,
         renderJsonPayloads: true,
         typedPages: true,
