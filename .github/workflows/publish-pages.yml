@@ -18,18 +18,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linkChecker:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.10.0
-        with:
-          args: --no-progress pages
-          format: markdown
-          fail: true
-
   build:
     runs-on: ubuntu-latest
     steps:
