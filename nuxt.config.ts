@@ -39,21 +39,18 @@ export default defineNuxtConfig({
         markdown: {
             anchorLinks: true,
             rehypePlugins: [
-                // ["rehype-parse", { fragment: true }],
                 ["rehype-katex", {
                     fleqn: true,
                     leqno: true,
                     output: "html",
                     strict: "warn",
                 }],
-                ["rehype-external-links", { rel: ["nofollow"] }],
-                // ["rehype-stringify", {}],
+                "rehype-external-links",
             ],
             remarkPlugins: [
                 ["remark-gfm", { singleTilde: false }],
                 "remark-flexible-containers",
                 "remark-math",
-                // ["remark-rehype", {}],
             ],
         },
         sources: {

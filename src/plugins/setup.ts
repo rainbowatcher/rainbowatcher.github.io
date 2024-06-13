@@ -39,7 +39,7 @@ export default defineNuxtPlugin((app) => {
     app.hook("link:prefetch", (to) => {
         const conn = (navigator as any).connection
         if (conn.saveData || /2g/.test(conn.effectiveType)) {
-        // Don't prefetch if using 2G or if Save-Data is enabled.
+            // Don't prefetch if using 2G or if Save-Data is enabled.
             return
         }
 
