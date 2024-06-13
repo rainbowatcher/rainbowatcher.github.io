@@ -95,7 +95,7 @@ a {
     font-weight: 600;
     text-wrap: pretty;
     transition:
-        background 300ms linear,
+        background-size 300ms linear,
         opacity 300ms;
 }
 

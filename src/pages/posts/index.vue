@@ -30,7 +30,7 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
 </script>
 
 <template>
-    <section>
+    <section class="font-mb">
         <div class="post-list min-w-0 lt-sm:mx-6 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4">
             <PageHead />
             <template v-if="posts?.length">
@@ -39,7 +39,7 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
                     :key="post._path" class="post-item show-up first:mt-8"
                 >
                     <NuxtLink
-                        class="text-lg font-400 font-serif [&.active]:[view-transition-name:title]" :class="{ active: active === post._path }"
+                        class="text-lg font-400 [&.active]:[view-transition-name:title]" :class="{ active: active === post._path }"
                         :href="post.permalink" role="link" prefetch @click="active = post._path"
                     >
                         {{ post.title }}
@@ -48,9 +48,9 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
                     <div class="post-tags flex flex-(row nowrap) gap-x-4">
                         <NuxtLink
                             v-for="tag in post.tags" :key="tag" :to="`/posts/tags/${tag}`"
-                            class="bg-none text-xs c-input font-sans italic op-75 hover:op-100"
+                            class="bg-none text-xs c-input tracking-widest italic op-75 hover:op-100"
                         >
-                            {{ `#${tag}` }}
+                            {{ tag }}
                         </NuxtLink>
                     </div>
                 </div>

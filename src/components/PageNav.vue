@@ -12,7 +12,7 @@ defineProps<PageNavProps>()
 </script>
 
 <template>
-    <div class="page-nav mt-auto flex justify-between py8 sm:(mx-[calc(5rem+3rem)] flex-row flex-nowrap) lt-sm:flex-col">
+    <div class="page-nav font-mb mt-auto flex justify-between py8 sm:(mx-[calc(5rem+3rem)] flex-row flex-nowrap) lt-sm:flex-col">
         <div v-if="previous" class="max-w-80 b-l b-l-border px8 py4">
             <NuxtLink prefetch @click="navigateTo(usePermalink ? previous?.permalink : previous?._path, { external: true })">
                 {{ useTitle ? previous.title : "Previous" }}

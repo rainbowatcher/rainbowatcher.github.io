@@ -23,20 +23,20 @@ const postList = computed(() => {
 </script>
 
 <template>
-    <section>
+    <section class="font-mb">
         <PageHead :title="`${route.params.tag} - Rainbow Watcher's Portfolio`" />
         <div class="tag-list mx4 flex flex-row flex-wrap gap-x-4 gap-y-1 of-hidden sm:(ml-[calc(3rem)])">
             <NuxtLink
                 v-for="tag in tags" :key="tag[0]"
-                class="tag-item bg-none text-nowrap c-input font-sans italic op75 hover:op100" :to="`/posts/tags/${tag[0]}`"
+                class="tag-item bg-none text-nowrap c-input tracking-widest italic op75 hover:op100" :to="`/posts/tags/${tag[0]}`"
             >
-                #{{ tag[0] }}
+                {{ tag[0] }}
                 <sup>{{ tag[1] }}</sup>
             </NuxtLink>
         </div>
         <div class="post-list mt-8 lt-sm:ml-26 sm:ml-[calc(5rem+3rem)] space-y-4">
             <div v-for="post in postList" :key="post._path" class="show-up">
-                <NuxtLink class="text-lg font-400 font-serif" :href="post._path" role="link">
+                <NuxtLink class="text-lg font-400" :href="post._path" role="link">
                     {{ post.title }}
                 </NuxtLink>
                 <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>

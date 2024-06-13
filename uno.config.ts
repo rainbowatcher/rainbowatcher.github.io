@@ -1,6 +1,6 @@
 import { h } from "@unocss/preset-mini/utils"
 import {
-    defineConfig, presetAttributify, presetIcons, presetTypography, presetUno,
+    defineConfig, presetAttributify, presetIcons, presetUno,
     transformerDirectives, transformerVariantGroup,
 } from "unocss"
 
@@ -126,8 +126,9 @@ export default defineConfig({
             },
         },
         fontFamily: {
-            mono: "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
-            sans: "\"Red Hat Display\", \"Chinese Quotes\", Inter, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\", \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            mb: "HongLeiXingShuJianTi",
+            mono: "'0xProto'",
+            sans: "ui-sans, \"Chinese Quotes\", Inter, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\", \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
             serif: "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
         },
     },

@@ -1,4 +1,4 @@
-import type { NavItem, ParsedContent } from "@nuxt/content/types"
+import type { ParsedContent } from "@nuxt/content/types"
 
 export type PageItem = {
     _path?: string

@@ -15,5 +15,5 @@ function toggleDark() {
 </script>
 
 <template>
-    <button class="dark:i-line-md-moon-filled-alt-loop i-line-md-sun-rising-loop cursor-pointer" title="Toggle dark mode" @click="toggleDark()" />
+    <button class="i-line-md-sun-rising-loop dark:i-line-md-moon-filled-alt-loop cursor-pointer" title="Toggle dark mode" @click="toggleDark()" />
 </template>

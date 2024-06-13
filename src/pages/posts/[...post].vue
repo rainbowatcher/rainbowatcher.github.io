@@ -17,28 +17,28 @@ const previousPost = computed(() => {
 
 <template>
     <section class="flex flex-1 flex-col">
-        <article class="relative min-w-0 w-100dvw">
+        <article class="font-mb relative min-w-0 w-100dvw">
             <ContentDoc v-slot="{ doc }" :path="path" :head="false">
                 <PageHead :title="`${doc.title} - Rainbow Watcher's Portfolio`" />
-                <h1 class="page-title [view-transition-name:title] z-1 mx-6.5dvw mt-12dvh text-center text-balance tracking-tight font-serif show-up lt-md:text-12vw md:text-7vw xl:text-5vw">
+                <span class="absolute right-50% top--.35em z--1 translate-x-50% select-none text-nowrap text-11vw c-cyan/12 font-900 show-up lt-md:hidden">
+                    {{ useDateFormat(doc.date, "YYYY MM DD").value }}
+                </span>
+                <h1 class="page-title [view-transition-name:title] z-1 mx-6.5dvw mt-12dvh text-center text-pretty tracking-tight show-up lt-md:text-12vw md:text-7vw xl:text-5vw">
                     {{ doc.title }}
                 </h1>
-                <span class="absolute right-50% top--.35em z--1 translate-x-50% select-none text-11vw c-transparent font-900 font-[Red_Hat_Display] text-stroke-1.5 text-stroke-slate5/10 show-up lt-md:hidden">
-                    {{ useDateFormat(doc.date, "YYYY.MM.DD").value }}
-                </span>
-                <span class="mt-8 flex flex-row flex-wrap justify-center text-pretty show-up space-x-4">
+                <p v-if="doc.subtitle" class="text-center c-coolGray leading-8 show-up">
+                    {{ doc.subtitle }}
+                </p>
+                <span class="mxa flex flex-row flex-wrap justify-center text-pretty show-up space-x-4">
                     <NuxtLink
                         v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
-                        class="bg-none text-nowrap text-sm c-input font-sans italic op-75 hover:op-100"
+                        class="bg-none text-nowrap text-sm c-input tracking-widest italic op-75 hover:op-100"
                     >
-                        {{ `#${tag}` }}
+                        {{ tag }}
                     </NuxtLink>
                     <span class="hidden op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
                 </span>
-                <p v-if="doc.subtitle" class="text-center c-coolGray leading-8 font-serif show-up">
-                    {{ doc.subtitle }}
-                </p>
-                <ContentRenderer :value="doc" class="md-doc mt-24 min-w-0 show-up lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-4" />
+                <ContentRenderer :value="doc" class="md-doc mt-24 min-w-0 font-sans show-up lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-4" />
             </ContentDoc>
         </article>
         <PageNav class="show-up" :previous="previousPost" :next="nextPost" use-title use-permalink />
