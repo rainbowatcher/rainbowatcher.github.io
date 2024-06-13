@@ -33,6 +33,7 @@ export default defineNuxtConfig({
         },
         ignores: [
             "hide/*",
+            "LICENSE",
         ],
         locales: ["CN", "EN"],
         markdown: {
@@ -56,19 +57,9 @@ export default defineNuxtConfig({
             ],
         },
         sources: {
-            about: {
-                base: "./content/about",
+            root: {
+                base: "./content/",
                 driver: "fs",
-            },
-            archives: {
-                base: "./content/archives",
-                driver: "fs",
-                prefix: "/archives",
-            },
-            posts: {
-                base: "./content/posts",
-                driver: "fs",
-                prefix: "/posts",
             },
         },
         yaml: false,

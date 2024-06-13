@@ -17,7 +17,6 @@ and finally i don't like `Java`.
     background-clip: text;
     color: transparent;
 }
-
 @keyframes flow {
     0% {
         background-position: 0 0;
