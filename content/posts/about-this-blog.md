@@ -164,9 +164,7 @@ npm install -D vuepress-theme-gungnir@next
 <!-- <CodeGroup>
 <CodeGroupItem title="JS" active> -->
 
-```js {7}
-// .vuepress/config.js
-
+```js [.vuepress/config.js]{5-7}
 const { gungnirTheme } = require("vuepress-theme-gungnir")
 
 module.exports = {
@@ -181,9 +179,7 @@ module.exports = {
 
 <CodeGroupItem title="TS"> -->
 
-```ts []{8}
-// .vuepress/config.ts
-
+```ts [.vuepress/config.ts]{6-8}
 import { defineUserConfig } from "vuepress"
 import { gungnirTheme } from "vuepress-theme-gungnir"
 
@@ -202,8 +198,7 @@ export default defineUserConfig({
 
 ### 作者信息
 
-```ts
-// .vuepress/config.js
+```ts [.vuepress/config.ts]
 import { GungnirThemeOptions } from "vuepress-theme-gungnir"
 
 const themeConfig: GungnirThemeOptions = {

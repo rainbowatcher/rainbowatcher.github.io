@@ -1,3 +1,4 @@
+import { breakpointsTailwind } from "@vueuse/core"
 import type { UseHeadInput } from "unhead"
 import type { MergeHead } from "zhead"
 
@@ -61,3 +62,5 @@ export const globalHead: UseHeadInput<MergeHead> = {
 
 export const preferredMotion = usePreferredReducedMotion()
 export const usePageLoading = () => useState("pageLoading", () => false)
+
+export const breakpoints = useBreakpoints(breakpointsTailwind)
