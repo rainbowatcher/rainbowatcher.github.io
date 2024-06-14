@@ -57,10 +57,10 @@ export default defineNuxtPlugin((app) => {
     //     console.log("page:start")
     // })
     app.hook("page:finish", () => {
-        if (route.path.startsWith("/posts")) {
+        if (route.name === "posts-post") {
             addCodeCopy()
         }
-        if (route.path === "/posts") {
+        if (route.name === "posts") {
             showupAnimate(30)
         } else {
             showupAnimate(100)

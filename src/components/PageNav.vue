@@ -28,7 +28,7 @@ function handleClick(e: Event, url?: Partial<NavItem>) {
 
 <template>
     <div class="page-nav mt-auto flex justify-between py8 font-mb lt-sm:(mx6 flex-col gap-2) sm:(mx-[calc(5rem+3rem)] flex-row flex-nowrap)">
-        <div v-if="previous" class="b-border px8 py4 transition-background-color sm:(max-w-80 b-l) lt-sm:(cursor-pointer b rounded-lg hover:bg-neutral/10)" @click="handleClick($event, previous)">
+        <div v-if="previous" class="b-border px8 py4 transition-color sm:(max-w-80 b-l) lt-sm:(cursor-pointer b rounded-lg hover:bg-neutral/10)" @click="handleClick($event, previous)">
             <div class="text-xs op-75 sm:hidden">
                 previous page
             </div>
@@ -36,7 +36,7 @@ function handleClick(e: Event, url?: Partial<NavItem>) {
                 <span>{{ useTitle ? previous.title : "Previous" }}</span>
             </NuxtLink>
         </div>
-        <div v-if="next" class="b-border px8 py4 transition-background-color sm:(mla max-w-80 b-r) lt-sm:(cursor-pointer b rounded-lg hover:bg-neutral/10)" @click="handleClick($event, next)">
+        <div v-if="next" class="b-border px8 py4 text-right transition-background-color sm:(mla max-w-80 b-r) lt-sm:(cursor-pointer b rounded-lg hover:bg-neutral/10)" @click="handleClick($event, next)">
             <div class="text-xs op-75 sm:hidden">
                 next page
             </div>

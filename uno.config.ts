@@ -128,7 +128,8 @@ export default defineConfig({
         fontFamily: {
             mb: "HongLeiXingShuJianTi",
             mono: "'0xProto'",
-            sans: "ui-sans, \"Chinese Quotes\", Inter, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\", \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            // sans: "ui-sans, \"Chinese Quotes\", Inter, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\", \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            sans: String.raw`tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif`,
             serif: "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
         },
     },

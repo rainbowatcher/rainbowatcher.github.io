@@ -69,11 +69,12 @@
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    text-rendering: geometricPrecision;
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    touch-action: auto;
     background-color: var(--background);
     color: var(--foreground);
 }
@@ -87,7 +88,7 @@ body,
     min-height: 100vh;
 }
 
-a {
+/* a {
     cursor: pointer;
     background: linear-gradient(0deg, var(--primary), var(--primary)) no-repeat right bottom / 0 0.75em;
     background-origin: content-box;
@@ -102,6 +103,11 @@ a {
 a:where(:hover, :active) {
     background-size: 100% 0.75em;
     background-position-x: left;
+} */
+
+a {
+    @apply underline-offset-3 font-bold hover:(underline decoration-primary) decoration-transparent decoration-dotted decoration-1;
+    @apply transition-colors duration-500;
 }
 
 a[target="_blank"]::after {

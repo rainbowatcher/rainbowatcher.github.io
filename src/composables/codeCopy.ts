@@ -1,5 +1,4 @@
 export function addCodeCopy() {
-    if (!breakpoints.smallerOrEqual("sm").value) return
     const { copied, copy, isSupported } = useClipboard()
     if (!isSupported) return
 
@@ -24,4 +23,5 @@ export function addCodeCopy() {
         }, { immediate: true })
         copyIconContainer?.append(copyIcon)
     }
+    console.log("addCodeCopy")
 }

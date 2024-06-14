@@ -31,12 +31,12 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
 
 <template>
     <section class="font-mb">
-        <div class="post-list min-w-0 lt-sm:mx-6 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4">
+        <div class="post-list min-w-0 sm:(ml-[calc(5rem+3rem)] w-3xl) md:w-5xl space-y-4 lt-sm:px-6">
             <PageHead />
             <template v-if="posts?.length">
                 <div
                     v-for="post in currPage"
-                    :key="post._path" class="post-item show-up first:mt-8"
+                    :key="post._path" class="post-item relative show-up first:mt-8"
                 >
                     <NuxtLink
                         class="text-lg font-400 [&.active]:[view-transition-name:title]" :class="{ active: active === post._path }"
@@ -44,7 +44,6 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
                     >
                         {{ post.title }}
                     </NuxtLink>
-                    <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
                     <div class="post-tags flex flex-(row nowrap) gap-x-4">
                         <NuxtLink
                             v-for="tag in post.tags" :key="tag" :to="`/posts/tags/${tag}`"
@@ -53,6 +52,7 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
                             {{ tag }}
                         </NuxtLink>
                     </div>
+                    <span class="text-slate4/50 lt-sm:(absolute bottom-0 right-0 select-none text-3xl leading-4) sm:(float-left my--2.75rem ml--5rem mr-4 v-text-bottom text-xs leading-7)">{{ useDateFormat(post.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
                 </div>
             </template>
             <template v-else>

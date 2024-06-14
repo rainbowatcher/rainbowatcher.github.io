@@ -111,6 +111,7 @@ export default defineNuxtConfig({
         "@nuxtjs/color-mode",
         "@nuxt/image",
         "@nuxt/fonts",
+        "@nuxtjs/i18n",
     ],
 
     nitro: {

@@ -6,7 +6,7 @@ watch(y, () => {
     if (show.value === "flex") {
         if (y.value < 800) {
             setTimeout(() => show.value = "hidden", 300)
-            show.value = "flex transition-opacity duration-300 op0"
+            show.value = "flex op0"
         }
     } else {
         if (y.value >= 800) {
@@ -19,13 +19,27 @@ watch(y, () => {
 
 <template>
     <div
-        class="[transition-property:background-color,color] fixed bottom-8 right-14 z-99 items-center rounded-full bg-ring p1.5 duration-300 animate-in fade-in slide-in-from-bottom-10 hover:(bg-secondary c-secondary-foreground) hover:active:(bg-input c-background)"
-        :class="[show]" @click="backToTop"
+        class="watermark-border fixed bottom-4dvh right-8dvw z-99"
+        :class="[show]" style="--un-animate-duration:500ms" @click="backToTop"
     >
         <i i-line-md-arrow-up />
     </div>
 </template>
 
-<style>
+<style lang="css">
+.watermark-border {
+    @apply [transition-property:background-color,color,opacity] duration-300 items-center rounded-full p1.5;
+    @apply animate-in fade-in slide-in-from-bottom-10;
+    /* @apply bg-ring; */
+    @apply bg-transparent;
+    @apply hover:(bg-secondary c-secondary-foreground before:blur-lg) hover:active:(bg-input c-background);
+    /* background-size: 400%; */
+}
 
+.watermark-border::before {
+    content: '';
+    @apply absolute inset-0 z-1 blur-xl;
+    background: linear-gradient(45deg, var(--background), var(--primary));
+    background-blend-mode: overlay;
+}
 </style>

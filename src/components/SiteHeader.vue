@@ -22,7 +22,7 @@ const navItems = [
                 <li v-for="{ label, path } in navItems" :key="label">
                     <NuxtLink
                         :class="[getActiveClasses(path)]"
-                        class="hidden font-400 md:inline-block hover:op-100" :href="path"
+                        class="hidden font-400 op75 transition-opacity md:inline-block hover:op-100" :href="path"
                     >
                         {{ label }}
                     </NuxtLink>

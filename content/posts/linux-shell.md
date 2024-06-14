@@ -128,7 +128,7 @@ echo ${!h*} # http_proxy https_proxy
 系统环境变量
 
 ```shell
-PATH=$PATH:$JAVA_HOME\bin
+PATH=$PATH:$JAVA_HOME/bin
 ```
 
 用户环境变量：每个用户拥有自己的环境变量，只对自己生效
