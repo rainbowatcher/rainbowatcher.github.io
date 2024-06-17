@@ -19,20 +19,20 @@ watch(y, () => {
 
 <template>
     <div
-        class="watermark-border fixed bottom-4dvh right-8dvw z-99"
+        class="watermark-border fixed bottom-8dvh z-99 op-75 lg:right-12 lt-sm:right-2 md:right-6 sm:right-4 xl:right-24"
         :class="[show]" style="--un-animate-duration:500ms" @click="backToTop"
     >
-        <i i-line-md-arrow-up />
+        <i class="i-ph-arrow-fat-up-fill" />
     </div>
 </template>
 
 <style lang="css">
 .watermark-border {
-    @apply [transition-property:background-color,color,opacity] duration-300 items-center rounded-full p1.5;
+    @apply c-ring;
+    @apply [transition-property:background-color,color,opacity] duration-500 items-center rounded-full p1.5;
     @apply animate-in fade-in slide-in-from-bottom-10;
     /* @apply bg-ring; */
-    @apply bg-transparent;
-    @apply hover:(bg-secondary c-secondary-foreground before:blur-lg) hover:active:(bg-input c-background);
+    @apply hover:(bg-secondary c-secondary-foreground before:blur-lg op-100) hover:active:(bg-input c-background);
     /* background-size: 400%; */
 }
 
