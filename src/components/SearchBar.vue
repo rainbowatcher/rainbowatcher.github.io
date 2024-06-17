@@ -1,8 +1,16 @@
 <script lang="ts" setup>
+// import { useAlgoliaSearch } from "#imports"
+
+// const { result, search } = useAlgoliaSearch("rainbowatcher")
+
+// onMounted(async () => {
+//     const a = await search({ query: "vue" })
+//     console.log({ a, result })
+// })
 </script>
 
 <template>
-    <AlgoliaDocSearch />
+    <AlgoliaDocSearch title="Search" class="leading-none" />
 </template>
 
 <style>
@@ -26,6 +34,6 @@
 }
 
 .DocSearch-Button-Container, .DocSearch-Button-Keys {
-    @apply !hidden !m0 of-hidden;
+    @apply !hidden !invisible of-hidden;
 }
 </style>
