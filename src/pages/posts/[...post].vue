@@ -17,10 +17,10 @@ const previousPost = computed(() => {
 
 <template>
     <section class="flex flex-1 flex-col">
-        <article class="relative min-w-0 w-100dvw font-mb">
+        <article class="relative min-w-0 w-full font-mb">
             <ContentDoc v-slot="{ doc }" :path="path" :head="false">
                 <PageHead :title="`${doc.title} - Rainbow Watcher's Portfolio`" />
-                <span class="absolute right-50% top--.125em z--1 translate-x-50% select-none text-nowrap text-11vw c-cyan/8 font-800 show-up lt-md:hidden">
+                <span class="absolute right-50% top--.125em z--1 translate-x-50% select-none text-nowrap text-11vw c-cyan/38 font-800 show-up lt-md:hidden dark:c-cyan/18">
                     {{ useDateFormat(doc.date, "YYYY MM DD", { locales: "zh-Hans-CN" }).value }}
                 </span>
                 <h1 class="page-title [view-transition-name:title] z-1 mx-6.5dvw mt-1.2em text-center text-pretty tracking-tight show-up lt-md:text-12vw md:text-7vw xl:text-5vw">

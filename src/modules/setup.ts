@@ -9,4 +9,13 @@ export default defineNuxtModule((_, nuxt) => {
         const buildInfo = { time: new Date().toISOString() }
         fs.writeFileSync(path.join(process.cwd(), "src/public/build-info.json"), JSON.stringify(buildInfo, null, 4))
     })
+    // nuxt.hook("schema:extend", (schemas: SchemaDefinition[]) => {
+    //     console.log("schemas", schemas)
+    // })
+    // nuxt.hook("schema:resolved", (schema) => {
+    //     console.log("schema:resolved", schema)
+    // })
+    // nuxt.hook("schema:beforeWrite", (schema) => {
+    //     console.log("schema:beforeWrite", schema)
+    // })
 })

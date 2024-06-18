@@ -102,17 +102,10 @@ export default defineNuxtConfig({
     //     },
     // },
 
-    modules: [
-        "@nuxtjs/algolia",
-        "@vueuse/nuxt",
-        "@unocss/nuxt",
-        "@nuxt/eslint",
-        "@nuxt/content",
-        "@nuxtjs/color-mode",
-        "@nuxt/image",
-        "@nuxt/fonts",
-        "@nuxtjs/i18n",
-    ],
+    i18n: {
+        vueI18n: "i18n.config.ts",
+    },
+
 
     nitro: {
         future: { nativeSWR: true },

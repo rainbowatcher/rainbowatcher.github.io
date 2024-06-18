@@ -10,6 +10,7 @@ export function addCodeCopy() {
         copyIconContainer?.classList.remove("hidden")
         const copyIcon = document.createElement("button")
         copyIcon.title = "Copy Code"
+        copyIcon.setAttribute("tabindex", "-1")
         copyIcon.classList.add("i-line-md-clipboard")
         copyIcon.addEventListener("click", () => copy(codePre?.textContent?.slice(0, -1) ?? ""))
         watch(copied, () => {
@@ -23,5 +24,4 @@ export function addCodeCopy() {
         }, { immediate: true })
         copyIconContainer?.append(copyIcon)
     }
-    console.log("addCodeCopy")
 }

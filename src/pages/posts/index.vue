@@ -52,7 +52,7 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
                             {{ tag }}
                         </NuxtLink>
                     </div>
-                    <span class="text-slate4/50 lt-sm:(absolute bottom-0 right-0 select-none text-3xl leading-4) sm:(float-left my--2.75rem ml--5rem mr-4 v-text-bottom text-xs leading-7)">{{ useDateFormat(post.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
+                    <span class="lt-sm:(absolute right-0 top-1.875rem select-none text-3xl c-cyan2/18 leading-4) sm:(float-left my--2.75rem ml--5rem mr-4 v-text-bottom text-xs c-cyan2/58 leading-7)">{{ useDateFormat(post.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
                 </div>
             </template>
             <template v-else>
