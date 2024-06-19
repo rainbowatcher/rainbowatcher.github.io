@@ -8,7 +8,7 @@ type NavItemsPassThrough = {
 const NavItems = defineNuxtComponent({
     methods: {
         getActiveClasses(path: string) {
-            return this.$route.path.startsWith(path) ? "bg-[size:100%_0.75em] op-100" : "op-30"
+            return this.$route.path.startsWith(path) ? "bg-[size:100%_0.75em] op-100" : "op-45"
         },
     },
     name: "SiteNavItems",
@@ -28,7 +28,7 @@ const NavItems = defineNuxtComponent({
                 {this.navItems.map(item => (
                     <li>
                         <NuxtLink
-                            class={`font-400 op75 transition-opacity hover:op-100 ${this.getActiveClasses(item.path)} ${this.pt?.li || ""}`}
+                            class={`font-400 transition-opacity hover:op-100 ${this.getActiveClasses(item.path)} ${this.pt?.li || ""}`}
                             to={item.path}
                         >
                             {this.$t(item.label)}
