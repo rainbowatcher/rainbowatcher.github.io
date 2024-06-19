@@ -1,4 +1,5 @@
-export function showupAnimate(interval = 50) {
+export function useShowupAnimate(interval = 50) {
+    const { preferredMotion } = useSiteState()
     if (preferredMotion.value === "reduce") return
     const elements = document?.querySelectorAll(".show-up") ?? []
     for (const [i, element] of elements.entries()) {

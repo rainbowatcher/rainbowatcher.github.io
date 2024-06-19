@@ -66,7 +66,7 @@
     }
 }
 
-html {
+:root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: geometricPrecision;
@@ -75,8 +75,10 @@ html {
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
     touch-action: auto;
+
     background-color: var(--background);
     color: var(--foreground);
+    --scrollbar-width: 1rem;
 }
 
 html.dark {
@@ -86,6 +88,13 @@ html.dark {
 body,
 #__nuxt {
     min-height: 100vh;
+}
+
+:focus-visible {
+    outline: 3px solid var(--muted);
+    box-shadow: none;
+    outline-offset: 4px;
+    border-radius: 9999px;
 }
 
 /* a {
@@ -107,10 +116,9 @@ a:where(:hover, :active) {
 
 a {
     @apply underline-offset-3 font-bold hover:(underline decoration-primary) decoration-transparent decoration-dotted decoration-1;
-    @apply transition-colors duration-500;
 }
 
-a[target="_blank"]::after {
+/* a[target="_blank"]::after {
     content: "";
     vertical-align: text-top;
     display: inline-block;
@@ -124,7 +132,7 @@ a[target="_blank"]::after {
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-}
+} */
 
 /* containers */
 .remark-container {
@@ -190,6 +198,14 @@ a[target="_blank"]::after {
 }
 
 /* docsearch */
+.DocSearch-Modal {
+    @apply animate-in fade-in slide-in-from-bottom-1 zoom-in-97;
+}
+
+body.DocSearch--active {
+    padding-right: var(--scrollbar-width);
+}
+
 html.light {
     /* --docsearch-searchbox-background: var(--background); */
     --docsearch-container-background: hsl(203, 20%, 32%, 80%);

@@ -1,11 +1,19 @@
-import { usePageLoading, usePrefetch } from "#imports"
+import { isClient } from "@vueuse/shared"
 
 export default defineNuxtPlugin((app) => {
     const route = useRoute()
-    const pageLoading = usePageLoading()
-    // app.hook("app:created", (_vueApp) => {
-    //     console.log("app:created")
-    // })
+    const { pageLoading } = useSiteState()
+    app.hook("app:created", (_vueApp) => {
+        // console.log("app:created")
+        if (isClient) {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+            const styleEl = document.createElement("style")
+            styleEl.textContent += ":root {"
+            styleEl.textContent += `--scrollbar-width: ${scrollbarWidth}px;`
+            styleEl.textContent += "}"
+            document.head.append(styleEl)
+        }
+    })
     // app.hook("app:error", (_err) => {
     //     console.log("app:error")
     // })
@@ -13,7 +21,7 @@ export default defineNuxtPlugin((app) => {
     //     console.log("app:error:cleared")
     // })
     // app.hook("vue:setup", () => {
-    //     console.log("vue:setup")
+    //     console.log("vue:setup", window)
     // })
     // app.hook("app:data:refresh", (_keys) => {
     //     console.log("app:data:refresh")
@@ -58,12 +66,12 @@ export default defineNuxtPlugin((app) => {
     // })
     app.hook("page:finish", () => {
         if (route.name === "posts-post") {
-            addCodeCopy()
+            useCodeCopyBtn()
         }
         if (route.name === "posts") {
-            showupAnimate(30)
+            useShowupAnimate(30)
         } else {
-            showupAnimate(100)
+            useShowupAnimate(100)
         }
         // console.log("page:finish")
     })

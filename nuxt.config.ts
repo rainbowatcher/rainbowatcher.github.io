@@ -1,13 +1,9 @@
-import { isDevelopment } from "std-env"
+import { isDevelopment, isProduction } from "std-env"
+import { algolia, appConfig } from "./siteConfig"
 
 export default defineNuxtConfig({
-    algolia: {
-        apiKey: "f757c625852758ee96aaf2268959166e",
-        applicationId: "3BGNB9V5MC",
-        docSearch: {
-            indexName: "rainbowatcher",
-        },
-    },
+    algolia,
+    appConfig,
 
     colorMode: {
         classSuffix: "",
@@ -15,17 +11,16 @@ export default defineNuxtConfig({
 
     components: [
         {
-            // island: true,
             path: "~/components",
             pathPrefix: false,
         },
     ],
+
     content: {
         contentHead: false,
         csv: false,
-        defaultLocale: "CN",
         highlight: {
-            langs: ["astro", "batch", "c", "c#", "c++", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "yaml", "zig", "zsh"],
+            langs: ["astro", "batch", "c", "c#", "c++", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
             theme: {
                 dark: "aurora-x",
                 default: "github-light",
@@ -35,7 +30,6 @@ export default defineNuxtConfig({
             "hide/*",
             "LICENSE",
         ],
-        locales: ["CN", "EN"],
         markdown: {
             anchorLinks: true,
             rehypePlugins: [
@@ -69,6 +63,7 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true,
     },
+
     eslint: {
         config: {
             standalone: false,
@@ -106,13 +101,26 @@ export default defineNuxtConfig({
         vueI18n: "i18n.config.ts",
     },
 
+    modules: [
+        "@nuxtjs/algolia",
+        "@nuxtjs/color-mode",
+        "@nuxtjs/i18n",
+
+        "@nuxt/eslint",
+        "@nuxt/content",
+        "@nuxt/image",
+        "@nuxt/fonts",
+
+        "@vueuse/nuxt",
+        "@unocss/nuxt",
+    ],
 
     nitro: {
         future: { nativeSWR: true },
         hooks: {
-            "prerender:generate"(route) {
+            "prerender:generate"(route: any) {
                 if (route.fileName?.endsWith(".html") && route.contents) {
-                    route.contents = route.contents.replaceAll(/(?:src|href|srcset)="\/_ipx[^"]+"/g, r => r.replaceAll("//", "/"))
+                    route.contents = route.contents.replaceAll(/(?:src|href|srcset)="\/_ipx[^"]+"/g, (r: string) => r.replaceAll("//", "/"))
                 }
 
                 if (route.error) {
@@ -148,12 +156,12 @@ export default defineNuxtConfig({
         },
     },
 
-    // sourcemap: false,
+    sourcemap: isProduction,
     srcDir: "src",
-    // ssr: true,
+    ssr: true,
 
     // Nuxt collects anonymous telemetry data
-    telemetry: false,
+    telemetry: !isProduction,
     vite: {
         build: {
             minify: !isDevelopment,

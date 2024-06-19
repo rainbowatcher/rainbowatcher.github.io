@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {
     DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuRoot, DropdownMenuTrigger,
-} from "#components"
+} from "radix-vue"
 
 const { locale } = useI18n({ useScope: "global" })
 
@@ -12,6 +12,7 @@ const items = [
 
 function handleClick(e: MouseEvent) {
     e.preventDefault()
+    // this check is because when use setLocale in @click or @select the nuxt will crash
     // @ts-expect-error property not exist on EventTarget
     if (e.target?.textContent === "简体中文") {
         locale.value = "cn"
@@ -29,7 +30,7 @@ function handleClick(e: MouseEvent) {
         <DropdownMenuPortal>
             <DropdownMenuContent
                 :side-offset="5"
-                class="b b-border rounded-lg bg-popover p2 shadow-md data-[state=open]:(animate-in fade-in zoom-in-97 slide-in-from-bottom-1) data-[state=closed]:(animate-out fade-out zoom-out-97 slide-out-to-bottom-1)"
+                class="z-99 b b-border rounded-lg bg-popover p2 shadow-md data-[state=open]:(animate-in fade-in zoom-in-97 slide-in-from-bottom-1) data-[state=closed]:(animate-out fade-out zoom-out-97 slide-out-to-bottom-1)"
             >
                 <DropdownMenuItem
                     v-for="item in items"

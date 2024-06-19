@@ -271,3 +271,8 @@ yarn docs:dev
 ## Vercel
 
 [Vercel](https://vercel.com/) 是什么，Vercel 是一个用于前端框架和静态站点的平台。他的优点很多，对我来说最突出的就是快，这个快不是构建、不是部署，而是他有香港的节点，所以国内访问会比较快 :+1:。他操作简单，还可以和 github 集成。基本没什么多说的，就连[Vuepress 官方部署教程](https://v2.vuepress.vuejs.org/zh/guide/deployment.html#vercel)都简单的不行。
+
+## Nuxt
+
+1. tailwind-reset 中的行高默认为 1.5 ?
+2. mask 直接应用在button上会导致button无法在`focus-visible`状态下显示outline

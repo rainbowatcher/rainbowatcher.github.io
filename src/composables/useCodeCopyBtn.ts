@@ -1,4 +1,4 @@
-export function addCodeCopy() {
+export function useCodeCopyBtn() {
     const { copied, copy, isSupported } = useClipboard()
     if (!isSupported) return
 
