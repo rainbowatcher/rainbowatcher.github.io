@@ -1,0 +1,32 @@
+export default defineI18nConfig(() => ({
+    availableLocales: ["cn", "en"],
+    locale: "cn",
+    messages: {
+        cn: {
+            archives: "归档",
+            blog: "博客",
+            close: "关闭",
+            hero: "看彩虹的人",
+            menu: "菜单",
+            name: "中文",
+            nextPage: "下一页",
+            previousPage: "上一页",
+            projects: "项目",
+            translate: "翻译",
+            uses: "在用",
+        },
+        en: {
+            archives: "Archives",
+            blog: "Blog",
+            close: "Close",
+            hero: "Rainbow Watcher",
+            menu: "Menu",
+            name: "English",
+            nextPage: "Next",
+            previousPage: "Previous",
+            projects: "Projects",
+            translate: "Translate",
+            uses: "Uses",
+        },
+    },
+}))
