@@ -5,7 +5,7 @@ const buildTime = useDateFormat(buildInfo.time, "YYYY-MM-DD HH:mm:ss", { locales
 </script>
 
 <template>
-    <footer class="font-mb relative lt-md:(mx-4 py-6) md:(mx-12 py-8)" role="contentinfo">
+    <footer class="relative font-mb lt-md:(mx-4 py-6) md:(mx-12 py-8)" role="contentinfo">
         <a
             rel="license" title="Creative Commons BY-NC-SA 4.0"
             href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"

@@ -16,6 +16,6 @@ function toggleDark() {
 
 <template>
     <button class="leading-none" title="Dark mode" @click="toggleDark()">
-        <i class="dark:i-ph-moon i-ph-sun" />
+        <i class="i-ph-sun dark:i-ph-moon" />
     </button>
 </template>

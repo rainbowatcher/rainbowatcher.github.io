@@ -5,6 +5,7 @@ export default nuxt(defineConfig({
     css: true,
     gitignore: true,
     json: true,
+    jsx: true,
     markdown: true,
     style: true,
     typescript: true,

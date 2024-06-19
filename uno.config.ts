@@ -79,7 +79,8 @@ export default defineConfig({
         [/^slide-out-to-left-?(.+)?$/, ([, d]) => ({ "--un-exit-translate-x": `-${handleMatchRem(d)}` })],
         [/^slide-out-to-right-?(.+)?$/, ([, d]) => ({ "--un-exit-translate-x": handleMatchRem(d) })],
     ],
-    safelist: ["show", "i-line-md-clipboard", "i-line-md-clipboard-to-clipboard-check-transition"],
+
+    safelist: ["show", "min-h-dvh", "i-line-md-clipboard", "i-line-md-clipboard-to-clipboard-check-transition"],
     shortcuts: [
         ["show-up", "motion-safe-([transition-property:transform,opacity] op-0 translate-y-2 duration-350 ease-out)"],
         ["show", "motion-safe-(translate-y-0 op-100)"],

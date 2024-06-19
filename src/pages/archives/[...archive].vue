@@ -29,7 +29,7 @@ import "katex/dist/katex.min.css"
 
 <template>
     <section class="ma">
-        <article class="font-mb relative min-w-0 w-100dvw">
+        <article class="relative min-w-0 w-full font-mb">
             <ContentDoc v-slot="{ doc }" :head="false">
                 <PageHead :title="`${doc.title} - Rainbow Watcher's Portfolio`" />
                 <span class="absolute right-50% top--.125em z--1 translate-x-50% select-none text-nowrap text-11vw c-cyan/12 font-900 show-up lt-md:hidden">

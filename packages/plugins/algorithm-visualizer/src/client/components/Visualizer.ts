@@ -53,6 +53,7 @@ export default defineComponent({
             }
         }
 
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         const swap = (data: Array<Data | number>, left: number, right: number) => {
             const tmp = data[left]
             data[left] = data[right]
