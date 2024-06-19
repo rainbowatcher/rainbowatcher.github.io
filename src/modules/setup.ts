@@ -10,10 +10,10 @@ export default defineNuxtModule((_, nuxt) => {
         const time = new Date()
         const shanghaiOffset = 8
         const utcOffset = time.getTimezoneOffset()
-        const shanghaiTime = time.getTime() - utcOffset + shanghaiOffset * 60
-        const formatted = useDateFormat(shanghaiTime, "YYYY-MM-DD HH:mm:ss GMT+8")
+        const shanghaiTime = time.getTime() - utcOffset + shanghaiOffset * 60 * 1000
+        const formatted = useDateFormat(shanghaiTime, "YYYY-MM-DD HH:mm:ss")
 
-        const buildInfo = { time: formatted.value }
+        const buildInfo = { time: `${formatted.value} GMT+8` }
         fs.writeFileSync(path.join(process.cwd(), "src/public/build-info.json"), JSON.stringify(buildInfo, null, 4))
     })
     // nuxt.hook("schema:extend", (schemas: SchemaDefinition[]) => {
