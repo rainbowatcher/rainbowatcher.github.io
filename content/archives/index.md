@@ -1,4 +1,6 @@
-# Archives
+---
+title: Archives
+---
 
 ## 计算机
 

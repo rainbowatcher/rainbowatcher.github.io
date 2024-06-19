@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import buildInfo from "public/build-info.json"
-
-const buildTime = useDateFormat(buildInfo.time, "YYYY-MM-DD HH:mm:ss", { locales: "zh-Hans-CN" })
 </script>
 
 <template>
@@ -19,7 +17,7 @@ const buildTime = useDateFormat(buildInfo.time, "YYYY-MM-DD HH:mm:ss", { locales
             Nuxt
         </NuxtLink>
         <span class="absolute bottom-1 right-0 ml-auto inline text-sm text-muted op70">
-            BUILD TIME: {{ buildTime }}
+            BUILD TIME: {{ buildInfo.time }}
         </span>
     </footer>
 </template>
