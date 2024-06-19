@@ -1,19 +1,11 @@
-import { isClient } from "@vueuse/shared"
+import { injectPageStyle } from "~/utils/style"
 
 export default defineNuxtPlugin((app) => {
     const route = useRoute()
     const { pageLoading } = useSiteState()
-    app.hook("app:created", (_vueApp) => {
-        // console.log("app:created")
-        if (isClient) {
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-            const styleEl = document.createElement("style")
-            styleEl.textContent += ":root {"
-            styleEl.textContent += `--scrollbar-width: ${scrollbarWidth}px;`
-            styleEl.textContent += "}"
-            document.head.append(styleEl)
-        }
-    })
+    // app.hook("app:created", (_vueApp) => {
+    //     console.log("app:created")
+    // })
     // app.hook("app:error", (_err) => {
     //     console.log("app:error")
     // })
@@ -73,6 +65,7 @@ export default defineNuxtPlugin((app) => {
         } else {
             useShowupAnimate(100)
         }
+        injectPageStyle()
         // console.log("page:finish")
     })
     app.hook("page:loading:end", () => {
