@@ -8,10 +8,13 @@ export default defineNuxtModule((_, nuxt) => {
     nuxt.hook("pages:extend", (_pages) => {})
     nuxt.hook("build:before", () => {
         const time = new Date()
-        const shanghaiOffset = 8
-        const utcOffset = time.getTimezoneOffset()
-        const shanghaiTime = time.getTime() - utcOffset + shanghaiOffset * 60 * 1000
-        const formatted = useDateFormat(shanghaiTime, "YYYY-MM-DD HH:mm:ss")
+        let formatted = useDateFormat(time, "YYYY-MM-DD HH:mm:ss")
+        if (time.getTimezoneOffset() / 60 !== -8) {
+            const shanghaiOffset = 8 * 60
+            const utcOffset = time.getTimezoneOffset()
+            const shanghaiTime = time.getTime() + (shanghaiOffset - utcOffset) * 60 * 1000
+            formatted = useDateFormat(shanghaiTime, "YYYY-MM-DD HH:mm:ss")
+        }
 
         const buildInfo = { time: `${formatted.value} GMT+8` }
         fs.writeFileSync(path.join(process.cwd(), "src/public/build-info.json"), JSON.stringify(buildInfo, null, 4))
