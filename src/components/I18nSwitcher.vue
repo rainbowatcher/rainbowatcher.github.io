@@ -35,7 +35,7 @@ function handleClick(e: MouseEvent) {
                 <DropdownMenuItem
                     v-for="item in items"
                     :key="item.label"
-                    class="relative h-6 w-full flex select-none items-center rounded px-6 text-sm leading-none outline-none data-[state=checked]:(bg-primary) data-[disabled]:opacity-50 data-[highlighted]:(ring-1 ring-ring) focus:(ring-1 ring-secondary)"
+                    class="relative h-6 w-full flex select-none items-center rounded px-6 text-sm leading-none outline-none data-[state=checked]:(bg-primary) data-[disabled]:op-50 data-[highlighted]:(ring-1 ring-ring) focus:(ring-1 ring-secondary)"
                     :text-value="item.label"
                     :value="item.value"
                     @click="handleClick"

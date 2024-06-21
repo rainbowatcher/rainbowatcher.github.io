@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useRoute } from "nuxt/app"
-
 const route = useRoute("posts-tags-tag")
 const { data: posts } = await useAsyncData("posts", usePosts())
 const tags = computed(() => {
@@ -28,7 +26,7 @@ const postList = computed(() => {
         <div class="tag-list mx4 flex flex-row flex-wrap gap-x-4 gap-y-1 of-hidden sm:(ml-[calc(3rem)])">
             <NuxtLink
                 v-for="tag in tags" :key="tag[0]"
-                class="tag-item bg-none text-nowrap c-input tracking-widest italic op75 hover:op100" :to="`/posts/tags/${tag[0]}`"
+                class="tag-item bg-none text-nowrap c-input tracking-widest op-65 [&.router-link-active]:(c-accent op-100) hover:op-100" :to="`/posts/tags/${tag[0].toLowerCase()}`"
             >
                 {{ tag[0] }}
                 <sup>{{ tag[1] }}</sup>
@@ -39,7 +37,7 @@ const postList = computed(() => {
                 <NuxtLink class="text-lg font-400" :href="post._path" role="link">
                     {{ post.title }}
                 </NuxtLink>
-                <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op55">{{ useDateFormat(post.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
+                <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op-55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
             </div>
         </div>
     </section>

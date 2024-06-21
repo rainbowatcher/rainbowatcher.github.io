@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+type BadgeType = "danger" | "info" | "note" | "tip" | "warning"
+
 defineProps({
     text: {
         default: "",
@@ -8,19 +10,19 @@ defineProps({
     type: {
         default: "tip",
         required: false,
-        type: String,
+        type: String as PropType<BadgeType>,
     },
     vertical: {
         default: undefined,
         required: false,
-        type: String,
+        type: String as PropType<"bottom" | "middle" | "top">,
     },
 })
 </script>
 
 <template>
     <span
-        class="inline-block rounded-full px-1 vertical-top text-sm color-foreground outline [&.danger]:bg-[#F87171] [&.info]:bg-[#60A5FA] [&.tip]:bg-[#4ADE80] [&.warning]:bg-[#FACC15]" :class="[type]" :style="{
+        class="text-semibold badge inline-block select-none rounded-full bg-slate5/20 px-2 py.5 v-text-bottom text-sm" :class="[type]" :style="{
             verticalAlign: vertical,
         }"
     >
@@ -29,6 +31,12 @@ defineProps({
 </template>
 
 <style lang="css">
+.badge {
+    @apply [&.danger]:(bg-destructive c-destructive-foreground);
+    @apply [&.info]:(bg-popover c-popover-foreground);
+    @apply [&.tip]:(bg-primary c-primary-foreground);
+    @apply [&.warning]:(bg-accent c-accent-foreground);
+}
 /* .badge {
    display: inline-block;
    font-size: 14px;

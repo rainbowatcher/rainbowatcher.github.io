@@ -47,12 +47,12 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
                     <div class="post-tags flex flex-(row nowrap) gap-x-4">
                         <NuxtLink
                             v-for="tag in post.tags" :key="tag" :to="`/posts/tags/${tag}`"
-                            class="bg-none text-xs c-input tracking-widest italic op-75 hover:op-100"
+                            class="bg-none text-xs c-input tracking-widest op-65 transition-opacity-300 hover:op-100"
                         >
                             {{ tag }}
                         </NuxtLink>
                     </div>
-                    <span class="lt-sm:(absolute right-0 top-1.875rem select-none text-3xl c-cyan2/18 leading-4) sm:(float-left my--2.75rem ml--5rem mr-4 v-text-bottom text-xs c-cyan2/58 leading-7)">{{ useDateFormat(post.date, "YYYY.MM.DD", { locales: "zh-Hans-CN" }).value }}</span>
+                    <span class="lt-sm:(absolute right-0 top-1.875rem select-none text-3xl c-cyan2/18 leading-4) sm:(float-left my--2.75rem ml--5rem mr-4 v-text-bottom text-xs c-cyan2/58 leading-7)">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
                 </div>
             </template>
             <template v-else>

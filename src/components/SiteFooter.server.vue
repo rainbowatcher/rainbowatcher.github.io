@@ -16,7 +16,7 @@ import buildInfo from "public/build-info.json"
         <NuxtLink href="https://nuxt.com" target="_blank">
             Nuxt
         </NuxtLink>
-        <span class="absolute bottom-1 right-0 ml-auto inline text-sm text-muted op70">
+        <span class="absolute bottom-1 right-0 ml-auto inline text-xs text-muted font-sans op-75">
             BUILD TIME: {{ buildInfo.time }}
         </span>
     </footer>

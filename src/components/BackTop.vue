@@ -6,7 +6,7 @@ watch(y, () => {
     if (show.value === "flex") {
         if (y.value < 800) {
             setTimeout(() => show.value = "hidden", 300)
-            show.value = "flex op0"
+            show.value = "flex op-0"
         }
     } else {
         if (y.value >= 800) {
