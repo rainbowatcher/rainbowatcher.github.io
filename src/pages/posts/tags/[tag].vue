@@ -15,7 +15,7 @@ const tags = computed(() => {
     return [...map.entries()].sort((a, b) => b[1] - a[1])
 })
 const postList = computed(() => {
-    return posts.value?.filter(i => i.tags?.includes(route.params.tag))
+    return posts.value?.filter(i => i.tags?.map((i: string) => i.toLowerCase()).includes(route.params.tag))
         .sort((i, j) => new Date(j.date).getTime() - new Date(i.date).getTime()) ?? []
 })
 </script>

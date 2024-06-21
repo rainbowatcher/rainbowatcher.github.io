@@ -90,12 +90,15 @@ export default defineNuxtConfig({
         inlineStyles: true,
     },
 
-    // fonts: {
+    fonts: {
     //     assets: {
     //         // The prefix where your fonts will be accessible
     //         prefix: "/_fonts",
     //     },
-    // },
+        defaults: {
+            preload: false,
+        },
+    },
 
     i18n: {
         vueI18n: "i18n.config.ts",
@@ -112,6 +115,7 @@ export default defineNuxtConfig({
         "@nuxt/fonts",
 
         "@vueuse/nuxt",
+        "@vueuse/motion/nuxt",
         "@unocss/nuxt",
     ],
 

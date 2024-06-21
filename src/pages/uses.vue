@@ -2,6 +2,13 @@
 </script>
 
 <template>
+    <div class="mx12 flex flex-row gap-4">
+        <Badge text="Tip" type="tip" />
+        <Badge text="Note" type="note" />
+        <Badge text="Warning" type="warning" />
+        <Badge text="Danger" type="danger" />
+        <Badge text="Info" type="info" />
+    </div>
     <div class="grid grid-cols-4 m12 gap-4">
         <div class="p4">
             Normal ipsum dolor sit amet consectetur adipisicing elit. Officiis laborum dicta consequuntur hic beatae recusandae quisquam sed est incidunt neque?
@@ -73,7 +80,3 @@
         </div>
     </div>
 </template>
-
-<style>
-
-</style>

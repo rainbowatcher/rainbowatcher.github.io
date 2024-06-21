@@ -10,5 +10,5 @@
             <i class="i-ph-github-logo" />
         </NuxtLink>
     </div>
-    <SiteHeaderMenu />
+    <SiteMenu />
 </template>

@@ -65,6 +65,9 @@ export default defineNuxtPlugin((app) => {
         } else {
             useShowupAnimate(100)
         }
+        useEventListener("resize", useDebounceFn(() => {
+            injectPageStyle()
+        }, 200))
         injectPageStyle()
         // console.log("page:finish")
     })
