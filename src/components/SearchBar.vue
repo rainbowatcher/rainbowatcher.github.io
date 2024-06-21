@@ -24,7 +24,7 @@
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
-    background-color: var(--foreground) !important;
+    background-color: hsl(var(--foreground)) !important;
     display: block;
 
     &:hover {

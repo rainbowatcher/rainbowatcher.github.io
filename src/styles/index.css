@@ -2,67 +2,67 @@
 
 @layer base {
     :root {
-        --background: hsl(169, 100%, 99%);
-        --foreground: hsl(216, 97%, 15%);
+        --background: 169 100% 99%;
+        --foreground: 216 97% 15%;
 
-        --card: hsl(192, 56%, 83%);
-        --card-foreground: hsl(216, 97%, 15%);
+        --card: 192 56% 83%;
+        --card-foreground: 216 97% 15%;
 
-        --popover: hsl(98, 33%, 93%);
-        --popover-foreground: hsl(216, 97%, 15%);
+        --popover: 98 33% 93%;
+        --popover-foreground: 216 97% 15%;
 
-        --primary: hsl(200, 77%, 58%);
-        --primary-foreground: hsl(197, 97%, 22%);
+        --primary: 200 77% 58%;
+        --primary-foreground: 197 97% 22%;
 
-        --secondary: hsl(188, 74%, 57%);
-        --secondary-foreground: hsl(204, 55%, 28%);
+        --secondary: 188 74% 57%;
+        --secondary-foreground: 204 55% 28%;
 
-        --muted: hsl(197, 24%, 66%);
-        --muted-foreground: hsl(203, 67%, 18%);
+        --muted: 197 24% 66%;
+        --muted-foreground: 203 67% 18%;
 
-        --accent: hsl(59, 65%, 71%);
-        --accent-foreground: hsl(63, 97%, 13%);
+        --accent: 59 65% 71%;
+        --accent-foreground: 63 97% 13%;
 
-        --destructive: hsl(0, 84.2%, 60.2%);
-        --destructive-foreground: hsl(0, 100%, 97%);
+        --destructive: 0 84% 60.2%;
+        --destructive-foreground: 0 100% 97%;
 
-        --border: hsl(198, 35%, 93%);
-        --input: hsl(174, 67%, 41%);
-        --ring: hsl(215, 16%, 87%);
+        --border: 198 35% 93%;
+        --input: 174 67% 41%;
+        --ring: 215 16% 87%;
 
         --radius: 0.45rem;
     }
 
     .dark {
-        --background: hsl(203, 60%, 12%);
-        --foreground: hsl(0, 0%, 87%);
+        --background: 203 60% 12%;
+        --foreground: 0 0% 87%;
 
-        --card: hsl(207, 50%, 30%);
-        --card-foreground: hsl(187, 30%, 77%);
+        --card: 207 50% 30%;
+        --card-foreground: 187 30% 77%;
 
-        --popover: hsl(203, 30%, 9%);
-        --popover-foreground: hsl(0, 0%, 87%);
+        --popover: 203 30% 9%;
+        --popover-foreground: 0 0% 87%;
 
-        --primary: hsl(205, 54%, 48%);
+        --primary: 205 54% 48%;
         /* --primary: #1e96bc; */
-        --primary-foreground: hsl(0, 0%, 87%);
+        --primary-foreground: 0 0% 87%;
 
-        --secondary: hsl(187, 73%, 38%);
-        --secondary-foreground: hsl(203, 60%, 12%);
+        --secondary: 187 73% 38%;
+        --secondary-foreground: 203 60% 12%;
 
-        --muted: hsl(194, 28%, 52%);
-        --muted-foreground: hsl(203, 60%, 22%);
+        --muted: 194 28% 52%;
+        --muted-foreground: 203 60% 22%;
 
-        --accent: hsl(53, 63%, 38%);
-        --accent-foreground: hsl(203, 60%, 12%);
+        --accent: 53 63% 38%;
+        --accent-foreground: 203 60% 12%;
 
-        --destructive: hsl(0, 62.8%, 30.6%);
-        --destructive-foreground: hsl(0, 60%, 87%);
+        --destructive: 0 63% 30.6%;
+        --destructive-foreground: 0 60% 87%;
 
-        --border: hsl(207, 58%, 18%);
+        --border: 207 58% 18%;
         /* --border: #20516a; */
-        --input: hsl(164, 36%, 61%);
-        --ring: hsl(215, 16%, 25%);
+        --input: 164 36% 61%;
+        --ring: 215 16% 25%;
     }
 }
 
@@ -76,8 +76,8 @@
     text-size-adjust: 100%;
     touch-action: auto;
 
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
 }
 
 html.dark {
@@ -157,32 +157,32 @@ a {
     }
 
     &.info {
-        border-color: var(--ring);
-        /* color: var(--foreground); */
-        /* background-color: var(--background); */
+        border-color: hsl(var(--ring));
+        /* color: hsl(var(--foreground)); */
+        /* background-color: hsl(var(--background)); */
     }
 
     &.tip {
-        border-color: var(--border);
-        color: var(--secondary-foreground);
-        background-color: var(--secondary);
+        border-color: hsl(var(--border));
+        color: hsl(var(--secondary-foreground));
+        background-color: hsl(var(--secondary));
     }
 
     &.warning {
-        border-color: var(--border);
-        color: var(--accent-foreground);
-        background-color: var(--accent);
+        border-color: hsl(var(--border));
+        color: hsl(var(--accent-foreground));
+        background-color: hsl(var(--accent));
     }
 
     &.danger {
-        border-color: var(--border);
-        color: var(--destructive-foreground);
-        background-color: var(--destructive);
+        border-color: hsl(var(--border));
+        color: hsl(var(--destructive-foreground));
+        background-color: hsl(var(--destructive));
     }
 
     &.details {
-        border-color: var(--ring);
-        /* color: var(--foreground); */
+        border-color: hsl(var(--ring));
+        /* color: hsl(var(--foreground)); */
         /* background-color: #1e293b60; */
         padding: 8px 16px;
 
@@ -217,45 +217,45 @@ body.DocSearch--active {
 }
 
 html.light {
-    /* --docsearch-searchbox-background: var(--background); */
+    /* --docsearch-searchbox-background: hsl(var(--background)); */
     --docsearch-container-background: hsl(203, 20%, 32%, 80%);
     --docsearch-key-gradient: none;
     --docsearch-key-shadow: none;
-    --docsearch-logo-color: var(--primary);
-    --docsearch-hit-background: var(--card);
-    --docsearch-hit-color: var(--card-foreground);
-    --docsearch-hit-active-color: var(--primary-foreground);
-    --docsearch-hit-active-background: var(--foreground);
-    --docsearch-highlight-color: var(--primary);
-    --docsearch-hit-shadow: 0 1px 3px 0 var(--border);
-    --docsearch-searchbox-shadow: inset 0 0 0 2px var(--border);
-    --docsearch-footer-background: var(--background);
-    --docsearch-footer-shadow: 0 -1px 0 0 var(--border), 0 0px 2px 0 var(--card);
-    --docsearch-searchbox-focus-background: var(--popover);
-    --docsearch-text-color: var(--foreground);
-    --docsearch-modal-background: var(--background);
+    --docsearch-logo-color: hsl(var(--primary));
+    --docsearch-hit-background: hsl(var(--card));
+    --docsearch-hit-color: hsl(var(--card-foreground));
+    --docsearch-hit-active-color: hsl(var(--primary-foreground));
+    --docsearch-hit-active-background: hsl(var(--foreground));
+    --docsearch-highlight-color: hsl(var(--primary));
+    --docsearch-hit-shadow: 0 1px 3px 0 hsl(var(--border));
+    --docsearch-searchbox-shadow: inset 0 0 0 2px hsl(var(--border));
+    --docsearch-footer-background: hsl(var(--background));
+    --docsearch-footer-shadow: 0 -1px 0 0 hsl(var(--border)), 0 0px 2px 0 hsl(var(--card));
+    --docsearch-searchbox-focus-background: hsl(var(--popover));
+    --docsearch-text-color: hsl(var(--foreground));
+    --docsearch-modal-background: hsl(var(--background));
     --docsearch-modal-shadow: none;
-    --docsearch-muted-color: var(--card-foreground);
+    --docsearch-muted-color: hsl(var(--card-foreground));
 }
 
 html.dark {
-    /* --docsearch-searchbox-background: var(--background); */
+    /* --docsearch-searchbox-background: hsl(var(--background)); */
     --docsearch-container-background: hsl(203, 20%, 32%, 80%);
     --docsearch-key-gradient: none;
     --docsearch-key-shadow: none;
-    --docsearch-logo-color: var(--primary);
-    --docsearch-hit-background: var(--card);
-    --docsearch-hit-color: var(--card-foreground);
-    --docsearch-hit-active-color: var(--primary-foreground);
-    --docsearch-hit-active-background: var(--foreground);
-    --docsearch-highlight-color: var(--primary);
-    --docsearch-hit-shadow: 0 1px 3px 0 var(--border);
-    --docsearch-searchbox-shadow: inset 0 0 0 2px var(--border);
-    --docsearch-footer-background: var(--background);
-    --docsearch-footer-shadow: 0 -1px 0 0 var(--border), 0 0 2px 0 var(--card);
-    --docsearch-searchbox-focus-background: var(--popover);
-    --docsearch-text-color: var(--foreground);
-    --docsearch-modal-background: var(--background);
+    --docsearch-logo-color: hsl(var(--primary));
+    --docsearch-hit-background: hsl(var(--card));
+    --docsearch-hit-color: hsl(var(--card-foreground));
+    --docsearch-hit-active-color: hsl(var(--primary-foreground));
+    --docsearch-hit-active-background: hsl(var(--foreground));
+    --docsearch-highlight-color: hsl(var(--primary));
+    --docsearch-hit-shadow: 0 1px 3px 0 hsl(var(--border));
+    --docsearch-searchbox-shadow: inset 0 0 0 2px hsl(var(--border));
+    --docsearch-footer-background: hsl(var(--background));
+    --docsearch-footer-shadow: 0 -1px 0 0 hsl(var(--border)), 0 0 2px 0 hsl(var(--card));
+    --docsearch-searchbox-focus-background: hsl(var(--popover));
+    --docsearch-text-color: hsl(var(--foreground));
+    --docsearch-modal-background: hsl(var(--background));
     --docsearch-modal-shadow: none;
-    --docsearch-muted-color: var(--card-foreground);
+    --docsearch-muted-color: hsl(var(--card-foreground));
 }
