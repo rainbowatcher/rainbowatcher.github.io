@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ParsedContent } from "@nuxt/content/types"
+import type { ParsedContent } from "@nuxt/content"
 
 const route = useRoute("posts")
 const pageNum = computed(() => (Number.isNaN(Number(route.query.page)) ? 1 : Number(route.query.page)))
@@ -12,6 +12,7 @@ const previousNavItem = computed(() => (pageNum.value > 1 ? { _path: `${routePat
 const currPage = computed(() => {
     return getPage(posts.value ?? [], pageNum.value)
 })
+// class for element add view transition id
 const active = useState<string | undefined>()
 
 function sortByDate(list: Array<Partial<ParsedContent>>) {
@@ -27,6 +28,12 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
     const num = Number(pageNum)
     return sortByDate(list).slice((num - 1) * pageSize, num * pageSize)
 }
+
+watch(() => route.query, () => {
+    nextTick(() => {
+        useShowupAnimate()
+    })
+}, { immediate: true })
 </script>
 
 <template>

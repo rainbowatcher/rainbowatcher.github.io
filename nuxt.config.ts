@@ -47,12 +47,6 @@ export default defineNuxtConfig({
                 "remark-math",
             ],
         },
-        sources: {
-            root: {
-                base: "./content/",
-                driver: "fs",
-            },
-        },
         yaml: false,
     },
 
@@ -90,14 +84,14 @@ export default defineNuxtConfig({
         inlineStyles: true,
     },
 
-    fonts: {
-    //     assets: {
-    //         // The prefix where your fonts will be accessible
-    //         prefix: "/_fonts",
+    // fonts: {
+    //     defaults: {
+    //         preload: true,
     //     },
-        defaults: {
-            preload: false,
-        },
+    // },
+
+    future: {
+        compatibilityVersion: 4,
     },
 
     i18n: {
@@ -161,7 +155,6 @@ export default defineNuxtConfig({
     },
 
     sourcemap: isProduction,
-    srcDir: "src",
     ssr: true,
 
     // Nuxt collects anonymous telemetry data

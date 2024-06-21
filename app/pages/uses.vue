@@ -37,7 +37,7 @@
         <div class="b b-border p4">
             Border ipsum dolor sit amet consectetur adipisicing elit. Obcaecati beatae magni tenetur modi voluptates est soluta ad ab a rerum.
         </div>
-        <div class="p4 ring">
+        <div class="p4 ring-1 ring-ring">
             Ring ipsum dolor, sit amet consectetur adipisicing elit. Dolor, iure molestiae tenetur suscipit fugit consequuntur culpa, saepe, quidem id est fuga modi eum et accusamus necessitatibus earum magnam sapiente delectus!
         </div>
         <div class="bg-input p4 c-background">

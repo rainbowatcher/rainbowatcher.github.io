@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import buildInfo from "public/build-info.json"
+import buildInfo from "assets/build-info.json"
 </script>
 
 <template>

@@ -31,13 +31,13 @@ watch(y, () => {
     @apply c-background bg-neutral4/25;
     @apply [transition-property:background-color,color,opacity] duration-500 items-center rounded-full p1.5;
     @apply animate-in fade-in slide-in-from-bottom-10;
-    @apply hover:(bg-neutral4/75 c-secondary-foreground before:blur-lg) hover:active:(bg-input c-background);
+    @apply hover:(bg-neutral4/75 c-background before:blur-lg) hover:active:(bg-input c-background);
 }
 
 .watermark-border::before {
     content: '';
     @apply absolute inset-0 z-1 blur-xl;
-    background: linear-gradient(45deg, var(--background), var(--primary));
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--primary)));
     background-blend-mode: overlay;
 }
 </style>

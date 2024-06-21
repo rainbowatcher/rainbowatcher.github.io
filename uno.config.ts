@@ -4,7 +4,7 @@ import {
     transformerDirectives, transformerVariantGroup,
 } from "unocss"
 
-function handleMatchNumber(v: string, defaultVal = "0") {
+function handleMatchNumber(v?: string, defaultVal = "0") {
     const num = h.bracket.cssvar.global.auto.fraction.number(v || defaultVal)
 
     if (!num) {
@@ -16,7 +16,7 @@ function handleMatchNumber(v: string, defaultVal = "0") {
     }
 }
 
-function handleMatchRem(v: string, defaultVal = "full") {
+function handleMatchRem(v?: string, defaultVal = "full") {
     return h.bracket.cssvar.global.auto.fraction.rem(v || defaultVal)
 }
 
@@ -125,10 +125,9 @@ export default defineConfig({
             },
         },
         fontFamily: {
-            mb: "HongLeiXingShuJianTi",
-            mono: "'0xProto'",
-            // sans: "ui-sans, \"Chinese Quotes\", Inter, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\", \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
-            sans: String.raw`tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif`,
+            mb: "'鸿雷行书简体'",
+            mono: "'Cascadia Code', '0xProto'",
+            sans: "ui-sans, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\", \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
             serif: "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
         },
     },

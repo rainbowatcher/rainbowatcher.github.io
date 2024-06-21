@@ -12,7 +12,7 @@ export function useCodeCopyBtn() {
         copyIcon.title = "Copy Code"
         copyIcon.setAttribute("tabindex", "-1")
         copyIcon.classList.add("i-line-md-clipboard")
-        copyIcon.addEventListener("click", () => copy(codePre?.textContent?.slice(0, -1) ?? ""))
+        copyIconContainer.addEventListener("click", () => copy(codePre?.textContent?.slice(0, -1) ?? ""))
         watch(copied, () => {
             if (copied.value) {
                 copyIcon.classList.remove("i-line-md-clipboard")

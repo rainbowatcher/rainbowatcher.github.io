@@ -17,7 +17,7 @@ export default defineNuxtModule((_, nuxt) => {
         }
 
         const buildInfo = { time: `${formatted.value} GMT+8` }
-        fs.writeFileSync(path.join(process.cwd(), "src/public/build-info.json"), JSON.stringify(buildInfo, null, 4))
+        fs.writeFileSync(path.join(process.cwd(), "/app/assets/build-info.json"), JSON.stringify(buildInfo, null, 4))
     })
     // nuxt.hook("schema:extend", (schemas: SchemaDefinition[]) => {
     //     console.log("schemas", schemas)
