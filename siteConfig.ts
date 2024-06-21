@@ -1,3 +1,4 @@
+import type { NuxtConfig } from "nuxt/schema"
 import type { UseHeadInput } from "unhead"
 import type { MergeHead } from "zhead"
 
@@ -8,7 +9,6 @@ const url = `https://${domain}/`
 const image = "/favicon.svg"
 
 const head = {
-    htmlAttrs: { lang: "zh" },
     link: [
         {
             href: "/favicon-dark.svg",
@@ -50,7 +50,7 @@ const head = {
 } satisfies UseHeadInput<MergeHead>
 
 
-export const algolia = {
+export const algolia: NuxtConfig["algolia"] = {
     apiKey: "f757c625852758ee96aaf2268959166e",
     applicationId: "3BGNB9V5MC",
     docSearch: {
@@ -58,6 +58,13 @@ export const algolia = {
     },
 }
 
-export const appConfig = {
+export const appConfig: NuxtConfig["appConfig"] = {
     head,
+}
+
+export const site: NuxtConfig["site"] = {
+    description: "Rainbow Watcher's Portfolio",
+    name: "Rainbow Watcher's Portfolio",
+    trailingSlash: false,
+    url: "https://blog-rainbowatcher.vercel.app",
 }

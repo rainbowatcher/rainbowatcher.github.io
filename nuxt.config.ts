@@ -1,5 +1,5 @@
 import { isDevelopment, isProduction } from "std-env"
-import { algolia, appConfig } from "./siteConfig"
+import { algolia, appConfig, site } from "./siteConfig"
 
 export default defineNuxtConfig({
     algolia,
@@ -102,15 +102,14 @@ export default defineNuxtConfig({
         "@nuxtjs/algolia",
         "@nuxtjs/color-mode",
         "@nuxtjs/i18n",
-
         "@nuxt/eslint",
         "@nuxt/content",
         "@nuxt/image",
         "@nuxt/fonts",
-
         "@vueuse/nuxt",
         "@vueuse/motion/nuxt",
         "@unocss/nuxt",
+        "@nuxtjs/seo",
     ],
 
     nitro: {
@@ -154,6 +153,7 @@ export default defineNuxtConfig({
         },
     },
 
+    site,
     sourcemap: isProduction,
     ssr: true,
 
