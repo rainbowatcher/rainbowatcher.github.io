@@ -30,13 +30,8 @@ const previousPost = computed(() => {
                     {{ doc.subtitle }}
                 </p>
                 <span class="mxa flex flex-row flex-wrap justify-center text-pretty show-up space-x-4">
-                    <NuxtLink
-                        v-for="tag in doc.tags" :key="tag" :to="`/posts/tags/${tag}`"
-                        class="bg-none text-nowrap text-sm c-input tracking-widest op-65 transition-opacity-300 hover:op-100"
-                    >
-                        {{ tag }}
-                    </NuxtLink>
-                    <span class="hidden text-sm op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
+                    <TagList :tags="doc.tags" class="text-lg" />
+                    <span class="hidden text-lg op-75 lt-md:inline">{{ useDateFormat(doc.date, "YYYY.MM.DD").value }}</span>
                 </span>
                 <ContentRenderer :value="doc" class="md-doc mt-24 min-w-0 font-sans show-up lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-4" />
             </ContentDoc>

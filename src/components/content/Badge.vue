@@ -22,7 +22,7 @@ defineProps({
 
 <template>
     <span
-        class="text-semibold badge inline-block select-none rounded-full bg-slate5/20 px-2 py.5 v-text-bottom text-sm" :class="[type]" :style="{
+        class="badge inline-block select-none rounded-full bg-slate5/20 px-2 py.5 v-text-bottom text-sm font-semibold" :class="[type]" :style="{
             verticalAlign: vertical,
         }"
     >

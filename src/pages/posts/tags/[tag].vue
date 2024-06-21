@@ -2,8 +2,8 @@
 const route = useRoute("posts-tags-tag")
 const { data: posts } = await useAsyncData("posts", usePosts())
 const tags = computed(() => {
-    const map = new Map()
-    if (!posts.value) return map
+    const map = new Map<string, number>()
+    if (!posts.value) return [...map.entries()]
 
     for (const post of posts.value) {
         if (!post.tags) continue
@@ -15,7 +15,7 @@ const tags = computed(() => {
     return [...map.entries()].sort((a, b) => b[1] - a[1])
 })
 const postList = computed(() => {
-    return posts.value?.filter(i => i.tags?.map((i: string) => i.toLowerCase()).includes(route.params.tag))
+    return posts.value?.filter(i => i.tags?.map((i: string) => i.toLocaleLowerCase()).includes(route.params.tag.toLocaleLowerCase()))
         .sort((i, j) => new Date(j.date).getTime() - new Date(i.date).getTime()) ?? []
 })
 </script>
@@ -23,14 +23,8 @@ const postList = computed(() => {
 <template>
     <section class="font-mb">
         <PageHead :title="`${route.params.tag} - Rainbow Watcher's Portfolio`" />
-        <div class="tag-list mx4 flex flex-row flex-wrap gap-x-4 gap-y-1 of-hidden sm:(ml-[calc(3rem)])">
-            <NuxtLink
-                v-for="tag in tags" :key="tag[0]"
-                class="tag-item bg-none text-nowrap c-input tracking-widest op-65 [&.router-link-active]:(c-accent op-100) hover:op-100" :to="`/posts/tags/${tag[0].toLowerCase()}`"
-            >
-                {{ tag[0] }}
-                <sup>{{ tag[1] }}</sup>
-            </NuxtLink>
+        <div class="tag-list flex flex-row flex-wrap gap-x-4 gap-y-1 of-hidden lt-sm:mx6 sm:(mx-[calc(3rem)])">
+            <TagList :tags="tags" class="lt-sm:text-sm sm:text-lg [&.router-link-active]:(c-accent op-100)" />
         </div>
         <div class="post-list mt-8 lt-sm:ml-26 sm:ml-[calc(5rem+3rem)] space-y-4">
             <div v-for="post in postList" :key="post._path" class="show-up">
