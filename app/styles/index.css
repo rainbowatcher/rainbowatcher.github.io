@@ -107,28 +107,11 @@ body,
 }
 
 /* links */
-/* a {
-    cursor: pointer;
-    background: linear-gradient(0deg, var(--primary), var(--primary)) no-repeat right bottom / 0 0.75em;
-    background-origin: content-box;
-    text-decoration: none;
-    font-weight: 600;
-    text-wrap: pretty;
-    transition:
-        background-size 300ms linear,
-        opacity 300ms;
-}
-
-a:where(:hover, :active) {
-    background-size: 100% 0.75em;
-    background-position-x: left;
-} */
-
 a {
-    @apply underline-offset-3 font-semibold hover:(underline decoration-primary) decoration-transparent decoration-dotted decoration-1;
+    @apply font-bold hover:(text-shadow-lg text-shadow-color-foreground/25) transition-(text-shadow,opacity) duration-300 ease-out;
 }
 
-/* a[target="_blank"]::after {
+:is(.md-doc, #__nuxt > div > footer) a[target="_blank"]::after {
     content: "";
     vertical-align: text-top;
     display: inline-block;
@@ -142,7 +125,7 @@ a {
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-} */
+}
 
 /* containers */
 .remark-container {

@@ -9,7 +9,7 @@ const NavItems = defineNuxtComponent({
     emits: ["navigator"],
     methods: {
         getActiveClasses(path: string) {
-            return this.$route.path.startsWith(path) ? "bg-[size:100%_0.75em] op-100" : "op-45"
+            return this.$route.path.startsWith(path) ? "text-shadow-lg text-shadow-color-foreground/38.2 op-100" : "op-45"
         },
     },
     name: "SiteNavItems",

@@ -24,7 +24,7 @@ function tagName(tag: [string, number] | string) {
 <template>
     <NuxtLink
         v-for="tag in tags" :key="tagName(tag)" :to="`/posts/tags/${tagName(tag).toLocaleLowerCase()}`"
-        :class="cn('bg-none text-nowrap text-xs c-input tracking-widest op-65 transition-opacity-300 hover:op-100', $props.class)"
+        :class="cn('bg-none text-nowrap text-xs c-input tracking-widest op-65 hover:op-100', $props.class)"
     >
         {{ tagName(tag) }}
         <sup v-if="tagNum(tag)">{{ tagNum(tag) }}</sup>
