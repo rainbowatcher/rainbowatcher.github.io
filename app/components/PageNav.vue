@@ -28,13 +28,13 @@ function handleClick(e: Event, url?: Partial<NavItem>) {
 </script>
 
 <template>
-    <div class="page-nav mt-auto flex justify-between py8 font-mb lt-sm:(mx6 flex-col gap-2) md:(mx-[calc(5rem+3rem)] flex-row flex-nowrap) sm:(mx-8 gap-2)">
+    <div class="page-nav mt-auto flex justify-between py8 font-mb lt-sm:(mx6 flex-col gap-4) md:(mx-[calc(5rem+3rem)] flex-row flex-nowrap) sm:(mx-8 gap-2)">
         <div
             v-if="previous"
             class="b-border px8 py4 transition-color md:(max-w-80 b-l) sm:(w-1/2 flex-1) lt-md:(cursor-pointer b rounded-lg hover:bg-neutral/10)"
             @click="handleClick($event, previous)"
         >
-            <div class="text-xs op-75 md:hidden">
+            <div v-if="useTitle" class="text-xs op-75 md:hidden">
                 {{ $t("previousPage") }}
             </div>
             <NuxtLink class="lt-sm:bg-none" :to="getLink(previous)" prefetch>
@@ -46,7 +46,7 @@ function handleClick(e: Event, url?: Partial<NavItem>) {
             class="b-border px8 py4 text-right transition-background-color md:(mla max-w-80 b-r) sm:(w-1/2 flex-1) lt-md:(cursor-pointer b rounded-lg hover:bg-neutral/10)"
             @click="handleClick($event, next)"
         >
-            <div class="text-xs op-75 md:hidden">
+            <div v-if="useTitle" class="text-xs op-75 md:hidden">
                 {{ $t("nextPage") }}
             </div>
             <NuxtLink class="lt-sm:bg-none" :to="getLink(next)" prefetch>
