@@ -25,7 +25,7 @@ function handleClick(e: MouseEvent) {
 <template>
     <DropdownMenuRoot>
         <DropdownMenuTrigger class="leading-none">
-            <i class="i-ph:translate bg-none" :title="$t('translate')" />
+            <i class="i-ph:translate" :title="$t('translate')" />
         </DropdownMenuTrigger>
         <DropdownMenuPortal>
             <DropdownMenuContent

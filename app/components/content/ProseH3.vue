@@ -9,7 +9,7 @@ const generate = computed(() => props.id && headings?.anchorLinks?.h1)
 </script>
 
 <template>
-    <h3 :id="id" class="my-4 text-xl font-600 leading-[1.5] font-mb [&>header-anchor]-hover:op-100">
+    <h3 :id="id" class="my-4 text-xl font-600 leading-[1.5] font-mb [&>.header-anchor]-hover:op-100">
         <slot />
         <AnchorLink :id="id" :generate="generate" />
     </h3>
