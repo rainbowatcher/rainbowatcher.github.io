@@ -2,10 +2,7 @@
 layout: Post
 title: 冒泡排序及鸡尾酒排序算法
 date: 2022-07-17
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/algorithm.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
 hide: false
 tags: [Algorithm, Sort, Java]
 ---
