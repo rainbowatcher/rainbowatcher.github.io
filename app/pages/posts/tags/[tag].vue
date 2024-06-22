@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute("posts-tags-tag")
-const { data: posts } = await useAsyncData("posts", usePosts())
+const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
 const tags = computed(() => {
     const map = new Map<string, number>()
     if (!posts.value) return [...map.entries()]
@@ -28,7 +28,7 @@ const postList = computed(() => {
         </div>
         <div class="post-list mt-8 lt-sm:ml-26 sm:ml-[calc(5rem+3rem)] space-y-4">
             <div v-for="post in postList" :key="post._path" class="show-up">
-                <NuxtLink class="text-lg font-400" :href="post._path" role="link">
+                <NuxtLink class="text-lg font-400" :href="post.permalink ?? post._path" role="link">
                     {{ post.title }}
                 </NuxtLink>
                 <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op-55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
@@ -36,7 +36,3 @@ const postList = computed(() => {
         </div>
     </section>
 </template>
-
-<style>
-
-</style>
