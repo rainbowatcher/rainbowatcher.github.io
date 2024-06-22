@@ -26,7 +26,7 @@ useEventListener("keydown", (e: KeyboardEvent) => {
             enter-active-class="animate-in-300 fade-in slide-in-from-bottom-2"
             leave-active-class="animate-out-300 fade-out slide-out-to-bottom-2"
         >
-            <div v-if="show" class="pointer-events-initial fixed inset-0 z-98 flex flex-col gap-4 bg-neutral9/75 py4 backdrop-blur lt-sm:(pl4 pr-[calc(var(--scrollbar-width)+1rem)]) sm:(pl-8 pr-[calc(var(--scrollbar-width)+2rem)])">
+            <div v-if="show" class="pointer-events-initial fixed inset-0 z-98 flex flex-col gap-4 bg-popover/85 py4 backdrop-blur lt-sm:(pl4 pr-[calc(var(--scrollbar-width)+1rem)]) sm:(pl-8 pr-[calc(var(--scrollbar-width)+2rem)])">
                 <div class="menu-header flex flex-(row)">
                     <div>test</div>
                     <button class="ml-auto" @click="toggleShow(false)">

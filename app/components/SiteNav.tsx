@@ -29,7 +29,7 @@ const NavItems = defineNuxtComponent({
                 {this.navItems.map(item => (
                     <li>
                         <NuxtLink
-                            class={`font-400 transition-opacity-300 hover:(op-100) ${this.getActiveClasses(item.path)} ${this.pt?.li || ""}`}
+                            class={`font-400 hover:(op-100) ${this.getActiveClasses(item.path)} ${this.pt?.li || ""}`}
                             onClick={() => this.$emit("navigator")}
                             to={item.path}
                         >
