@@ -95,6 +95,11 @@ export default defineNuxtConfig({
     },
 
     i18n: {
+        locales: [
+            { code: "cn", iso: "zh-CN", name: "简体中文" },
+            { code: "en", iso: "en-US", name: "English" },
+        ],
+        strategy: "no_prefix",
         vueI18n: "i18n.config.ts",
     },
 
