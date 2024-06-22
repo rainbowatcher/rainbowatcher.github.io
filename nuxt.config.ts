@@ -39,7 +39,7 @@ export default defineNuxtConfig({
                     output: "html",
                     strict: "warn",
                 }],
-                "rehype-external-links",
+                ["rehype-external-links", { target: "_blank" }],
             ],
             remarkPlugins: [
                 ["remark-gfm", { singleTilde: false }],
@@ -129,11 +129,15 @@ export default defineNuxtConfig({
                     console.error(route.route, route.error, route)
                 }
             },
+            "prerender:routes"(ctx) {
+                console.log("prerender:routes:", ctx)
+            },
         },
         prerender: {
             autoSubfolderIndex: true,
             // crawlLinks: true,
-            routes: ["/"],
+            // ignore: [],
+            routes: ["/", "/sitemap.xml"],
         },
 
         // replace: {
