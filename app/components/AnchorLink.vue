@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
     <a
-        v-if="generate" class="float-left ml--.87em touch-auto select-none pr-.23em c-foreground font-800 op-0 group-focus-within:op-100 group-focus:op-100 group-hover:op-100"
+        v-if="generate" class="header-anchor float-left ml--.87em touch-auto select-none bg-none pr-.23em font-800 op-0"
         :href="`#${id}`" aria-hidden="true" tabindex="-1"
     >
         #
