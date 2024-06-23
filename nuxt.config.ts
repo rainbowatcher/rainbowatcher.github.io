@@ -1,3 +1,4 @@
+import process from "node:process"
 import { isDevelopment, isProduction } from "std-env"
 import { algolia, appConfig, site } from "./siteConfig"
 
@@ -131,10 +132,9 @@ export default defineNuxtConfig({
 
                 if (route.error) {
                     console.error(route.route, route.error, route)
+                    // eslint-disable-next-line unicorn/no-process-exit
+                    process.exit(1)
                 }
-            },
-            "prerender:routes"(ctx) {
-                console.log("prerender:routes:", ctx)
             },
         },
         prerender: {
@@ -153,17 +153,16 @@ export default defineNuxtConfig({
         compatibility: {
             prerender: {},
             runtime: {
-                chromium: false,
+                chromium: true,
                 "css-inline": false,
                 resvg: false,
                 satori: false,
                 sharp: false,
             },
         },
-        fonts: [
-            "Barlow:400",
-            "Barlow:600",
-        ],
+        componentOptions: {
+            global: true,
+        },
     },
 
     postcss: {

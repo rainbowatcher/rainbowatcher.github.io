@@ -2,6 +2,10 @@
 import "katex/dist/katex.min.css"
 
 const route = useRoute("posts-post")
+if (!route.params.post) {
+    console.log(route.path)
+    navigateTo("/posts")
+}
 const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
 const { data: post } = await useAsyncData("post", () => queryContent(toOriginPath(route.path)).only(["title", "body", "date", "tags", "subtitle"])
     .findOne())
@@ -12,14 +16,7 @@ if (!post.value) {
         statusCode: 404,
     })
 }
-
-defineOgImageComponent("DefaultOgImg", {
-    date: useDateFormat(post.value.date, "YYYY.MM.DD").value,
-    tags: post.value.tags,
-    title: post.value.title,
-})
-const path = computed(() => toOriginPath(route.path))
-const currIdx = computed(() => posts.value?.findIndex(i => i._path === path.value) ?? 0)
+const currIdx = computed(() => posts.value?.findIndex(i => i._path === toOriginPath(route.path)) ?? 0)
 const nextPost = computed(() => {
     if (!posts.value) return
     return currIdx.value === posts.value.length - 1 ? posts.value[0] : posts.value[currIdx.value + 1]
@@ -34,6 +31,7 @@ const previousPost = computed(() => {
     <section class="flex flex-1 flex-col">
         <article class="relative min-w-0 w-full font-mb">
             <template v-if="post">
+                <OgImage :title="post.title" :date="post.date" :tags="post.tags" />
                 <span class="absolute right-50% top--.125em z--1 translate-x-50% select-none text-nowrap text-11vw c-cyan/38 font-800 show-up lt-md:hidden dark:c-cyan/18">
                     {{ useDateFormat(post.date, "YYYY MM DD", { locales: "zh-Hans-CN" }).value }}
                 </span>
