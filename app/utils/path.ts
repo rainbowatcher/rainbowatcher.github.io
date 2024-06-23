@@ -10,6 +10,7 @@ export function addPermalink(content: Array<Partial<ParsedContent>>) {
         const day = `${date.getDate()}`.padStart(2, "0")
         const filename = p._path?.split("/").at(-1)
         const permalink = `/posts/${year}/${month}/${day}/${filename}`
+        console.debug(permalink)
         p.permalink = permalink
         return p
     })
@@ -20,6 +21,7 @@ export function toOriginPath(permalink: string) {
         const hasStartSlash = permalink.startsWith("/")
         const slices = permalink.split("/")
         const parent = slices[hasStartSlash ? 1 : 0]
+        console.debug(`/${parent}/${slices.slice(5).join("/")}`)
         return `/${parent}/${slices.slice(5).join("/")}`
     } else {
         return permalink

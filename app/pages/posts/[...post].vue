@@ -7,12 +7,12 @@ if (!postName) {
     navigateTo("/posts")
 }
 const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
-const { data: post } = await useAsyncData(`post-${postName}`, () => queryContent(toOriginPath(route.path)).only(["title", "body", "date", "tags", "subtitle"])
+const path = computed(() => posts.value?.find(i => [i._path, i.permalink].includes(route.path))?._path)
+if (!path.value) throw createError({ fatal: true, statusCode: 404 })
+const { data: post } = await useAsyncData(`post-${postName}`, () => queryContent(path.value!).only(["title", "body", "date", "tags", "subtitle"])
     .findOne())
-
 if (!post.value) throw createError({ fatal: true, statusCode: 404 })
-
-const currIdx = computed(() => posts.value?.findIndex(i => i._path === toOriginPath(route.path)) ?? 0)
+const currIdx = computed(() => posts.value?.findIndex(i => i._path === path.value) ?? 0)
 const nextPost = computed(() => (currIdx.value === posts.value!.length - 1 ? posts.value![0] : posts.value![currIdx.value + 1]))
 const previousPost = computed(() => (currIdx.value === 0 ? posts.value!.at(-1) : posts.value![currIdx.value - 1]))
 </script>
