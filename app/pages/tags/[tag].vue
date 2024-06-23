@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const route = useRoute("posts-tags-tag")
+const route = useRoute("tags-tag")
 const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
 const tags = computed(() => {
     const map = new Map<string, number>()
