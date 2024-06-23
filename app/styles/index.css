@@ -242,3 +242,8 @@ html.dark {
     --docsearch-modal-shadow: none;
     --docsearch-muted-color: hsl(var(--card-foreground));
 }
+
+:is(.md-doc) .katex-display,
+.mermaid {
+    overflow: auto;
+}

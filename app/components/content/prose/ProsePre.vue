@@ -22,7 +22,7 @@ const id = useId()
 </script>
 
 <template>
-    <Mermaid v-if="language === 'mermaid'" :id="id" :graph="code" />
+    <Mermaid v-if="language === 'mermaid'" :id="id" class="mermaid" :graph="code" />
     <template v-else>
         <div class="group code-pre relative overflow-auto bg-popover lt-sm:mx--6 sm:rounded-lg">
             <span class="absolute right-6.5 top-2 select-none text-sm c-neutral5/90 font-sans transition-opacity duration-300 ease-in-out group-hover:(op-0 blur)">
