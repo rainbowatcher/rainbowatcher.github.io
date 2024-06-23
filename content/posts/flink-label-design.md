@@ -1,12 +1,7 @@
 ---
-layout: Post
 title: Flink 任务的程序设计和思考
 date: 2022-05-27
-permalinkPattern: /post/:year/:month/:day/:slug/
-useHeaderImage: true
 headerImage: /img/flink.png
-headerMask: rgba(0, 0, 0, .4)
-hide: false
 tags: [Flink, Engineering]
 ---
 

@@ -1,13 +1,8 @@
 ---
-layout: Post
 title: 传统企业数字化转型的障碍
 subtitle: 总结一下工作中碰到的问题
 headerImage: /img/2.jpg
-useHeaderImage: true
-headerMask: rgba(100, 100, 100, .618)
 date: 2022-05-04
-permalinkPattern: /post/:year/:month/:day/:slug/
-# hide: true
 tags: [Software Engineering]
 ---
 

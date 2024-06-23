@@ -1,13 +1,8 @@
 ---
-layout: Post
 title: Mysql 基本概念介绍
 subtitle:
 date: 2022-08-15
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/mysql.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-# hide: true
 tags: [Database, Mysql]
 ---
 

@@ -1,13 +1,8 @@
 ---
-layout: Post
 title: Flink 广播流使用
 subtitle: 
 date: 2022-08-30
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/flink.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-# hide: true
 tags: [Flink]
 ---
 

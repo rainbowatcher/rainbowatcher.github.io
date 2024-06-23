@@ -1,13 +1,8 @@
 ---
-layout: Post
 title: 检测系统主题模式
-subtitle: 
 date: 2022-07-30
 permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/markdown.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-# hide: true
 tags: [JavaScript, Browser, Dark Mode]
 ---
 

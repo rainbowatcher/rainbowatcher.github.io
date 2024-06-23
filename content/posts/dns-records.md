@@ -1,12 +1,7 @@
 ---
-layout: Post
 title: 域名购买和DNS设置过程记录
 date: 2022-05-21
-permalinkPattern: /post/:year/:month/:day/:slug/
-useHeaderImage: true
 headerImage: /img/dns.png
-headerMask: rgba(0, 0, 0, .4)
-hide: false
 tags: [DNS, Network]
 ---
 

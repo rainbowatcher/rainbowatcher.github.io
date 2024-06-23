@@ -1,12 +1,8 @@
 ---
-layout: Post
 title: 数据仓库、数据湖、湖仓一体以及他们的区别
+subtitle:
 date: 2022-06-25
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/datalake.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
 tags: [Data Warehouse, DataLake, LakeHouse]
 ---
 

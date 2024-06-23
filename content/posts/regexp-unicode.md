@@ -1,13 +1,8 @@
 ---
-layout: Post
 title: 正则表达式按 Unicode 类型匹配汉字、表情、拉丁文
 subtitle:
 date: 2022-07-03
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/regexp.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
 tags: [RegExp]
 ---
 

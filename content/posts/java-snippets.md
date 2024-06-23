@@ -1,13 +1,8 @@
 ---
-layout: Post
 title: Java 小技巧
 subtitle: 
 date: 2022-08-27
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/java.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: true
 tags: [Java]
 ---
 

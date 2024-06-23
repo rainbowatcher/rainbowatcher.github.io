@@ -1,13 +1,9 @@
 ---
-layout: Post
 title: 使用 Maven Bom 管理项目依赖
 subtitle: 
 date: 2022-07-30
 permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/java.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
 tags: [Java, Maven]
 ---
 

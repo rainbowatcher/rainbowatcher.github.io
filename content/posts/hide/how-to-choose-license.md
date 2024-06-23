@@ -1,12 +1,7 @@
 ---
-layout: Post
 title: 关于如何挑选合适的 License
 date: 2022-07-05
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/2022/how-to-choose-license/opensource.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-# hide: true
 tags: [License, OpenSource]
 ---
 

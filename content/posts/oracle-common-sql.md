@@ -1,13 +1,8 @@
 ---
-layout: Post
 title: Oracle 常用语句
 subtitle:
 date: 2022-08-02
-permalinkPattern: /post/:year/:month/:day/:slug/
 headerImage: /img/oracle.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
 tags: [Oracle, Database, SQL]
 ---
 
