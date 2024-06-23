@@ -22,7 +22,6 @@ const postList = computed(() => {
 
 <template>
     <section class="font-mb">
-        <!-- <PageHead :title="`${route.params.tag} - Rainbow Watcher's Portfolio`" /> -->
         <div class="tag-list flex flex-row flex-wrap gap-x-4 gap-y-1 of-hidden lt-sm:mx6 sm:(mx-[calc(3rem)])">
             <TagList :tags="tags" class="lt-sm:text-sm sm:text-lg [&.router-link-active]:(c-accent op-100)" />
         </div>
