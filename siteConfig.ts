@@ -1,53 +1,41 @@
-import type { Nuxt, NuxtConfig } from "nuxt/schema"
-import type { UseHeadInput } from "unhead"
-import type { MergeHead } from "zhead"
+import type { NuxtConfig } from "nuxt/schema"
+// import type { UseHeadInput } from "unhead"
+// import type { MergeHead } from "zhead"
 
-const title = "Rainbow Watcher's Portfolio"
-// const description = "Rainbow Watcher's Portfolio"
-// const domain = "rainbowatcher.github.io"
-// const url = `https://${domain}/`
-// const ogImage = "/og.png"
+const title = "Rainbow Watcher"
+// const description = "Portfolio for Rainbow Watcher"
+const domain = "rainbowatcher.github.io"
+const url = `https://${domain}/`
+const ogImage = "/og.png"
+// const siteIcon = "/favicon.svg"
+// const darkSiteIcon = "/favicon-dark.svg"
+// const licenseUrl = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 
-const head = {
-    link: [
-        {
-            href: "/favicon-dark.svg",
-            media: "(prefers-color-scheme: dark)",
-            rel: "icon",
-            type: "image/svg+xml",
-        },
-        {
-            href: "/favicon.svg",
-            media: "(prefers-color-scheme: light)",
-            rel: "icon",
-            type: "image/svg+xml",
-        },
-        {
-            href: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-            rel: "license",
-        },
-    ],
-    meta: [
-        { content: "#00aba9", name: "msapplication-TileColor" },
-        // facebook
-        // { content: "website", property: "og:type" },
-        // { content: title, property: "og:title" },
-        // { content: description, property: "og:description" },
-        // { content: url, property: "og:url" },
-        // { content: ogImage, property: "og:image" },
-        // twitter / x
-        // { content: "summary_large_image", name: "twitter:card" },
-        // { content: title, name: "twitter:title" },
-        // { content: description, name: "twitter:description" },
-        // { content: ogImage, name: "twitter:image" },
-        // { content: url, property: "twitter:url" },
-        // { content: domain, property: "twitter:domain" },
-
-        // { content: description, name: "description" },
-        { charset: "utf8" },
-    ],
-    title,
-} satisfies UseHeadInput<MergeHead>
+// const head = {
+//     link: [
+//         {
+//             href: darkSiteIcon,
+//             media: "(prefers-color-scheme: dark)",
+//             rel: "icon",
+//             type: "image/svg+xml",
+//         },
+//         {
+//             href: siteIcon,
+//             media: "(prefers-color-scheme: light)",
+//             rel: "icon",
+//             type: "image/svg+xml",
+//         },
+//         {
+//             href: licenseUrl,
+//             rel: "license",
+//         },
+//     ],
+//     meta: [
+//         { content: "#00aba9", name: "msapplication-TileColor" },
+//         { charset: "utf8" },
+//     ],
+//     title,
+// } satisfies UseHeadInput<MergeHead>
 
 
 export const algolia: NuxtConfig["algolia"] = {
@@ -60,17 +48,20 @@ export const algolia: NuxtConfig["algolia"] = {
 
 export const app: NuxtConfig["app"] = {
     head: {
-        title,
+        meta: [
+            { content: ogImage, property: "og:image" },
+            // { content: description, property: "description" },
+        ],
+        // title,
     },
 }
 
 export const appConfig: NuxtConfig["appConfig"] = {
-    head,
+    // head,
 }
 
 export const site: NuxtConfig["site"] = {
-    // description: "Rainbow Watcher's Portfolio",
-    name: "Rainbow Watcher's Portfolio",
+    name: title,
     trailingSlash: false,
-    url: "https://blog-rainbowatcher.vercel.app",
+    url,
 }

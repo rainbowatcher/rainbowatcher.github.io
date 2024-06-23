@@ -22,9 +22,9 @@ const postList = computed(() => {
 
 <template>
     <section class="font-mb">
-        <PageHead :title="`${route.params.tag} - Rainbow Watcher's Portfolio`" />
+        <!-- <PageHead :title="`${route.params.tag} - Rainbow Watcher's Portfolio`" /> -->
         <div class="tag-list flex flex-row flex-wrap gap-x-4 gap-y-1 of-hidden lt-sm:mx6 sm:(mx-[calc(3rem)])">
-            <TagList :tags="tags" class="lt-sm:text-sm sm:text-lg [&.router-link-active]:(c-accent text-shadow-lg text-shadow-color-foreground/25 op-100)" />
+            <TagList :tags="tags" class="lt-sm:text-sm sm:text-lg [&.router-link-active]:(c-accent op-100)" />
         </div>
         <div class="post-list mt-8 lt-sm:ml-26 sm:ml-[calc(5rem+3rem)] space-y-4">
             <div v-for="post in postList" :key="post._path" class="show-up">

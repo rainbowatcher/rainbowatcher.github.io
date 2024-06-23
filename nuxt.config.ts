@@ -1,25 +1,16 @@
 import process from "node:process"
 import { isDevelopment, isProduction } from "std-env"
-import { algolia, appConfig, site } from "./siteConfig"
+import {
+    algolia, app, appConfig, site,
+} from "./siteConfig"
 
 export default defineNuxtConfig({
     algolia,
+    app,
     appConfig,
-
-    colorMode: {
-        classSuffix: "",
-    },
-
-    components: [
-        {
-            path: "~/components",
-            pathPrefix: false,
-        },
-    ],
+    colorMode: { classSuffix: "" },
 
     content: {
-        contentHead: true,
-        csv: false,
         highlight: {
             langs: ["astro", "batch", "c", "c#", "c++", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
             theme: {
@@ -48,12 +39,9 @@ export default defineNuxtConfig({
                 "remark-math",
             ],
         },
-        yaml: false,
     },
 
-    css: [
-        "@unocss/reset/tailwind.css",
-    ],
+    css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
 
     devtools: {
         enabled: true,
@@ -72,6 +60,7 @@ export default defineNuxtConfig({
                 deep: false,
             },
         },
+        headNext: true,
         // noVueServer: true,
         // inlineRouteRules: true,
         payloadExtraction: false,
@@ -84,12 +73,6 @@ export default defineNuxtConfig({
         // For UnoCSS
         inlineStyles: true,
     },
-
-    // fonts: {
-    //     defaults: {
-    //         preload: true,
-    //     },
-    // },
 
     future: {
         compatibilityVersion: 4,
@@ -140,35 +123,16 @@ export default defineNuxtConfig({
         prerender: {
             autoSubfolderIndex: true,
             // crawlLinks: true,
-            // ignore: [],
             routes: ["/", "/sitemap.xml"],
         },
-
-        // replace: {
-        //    "import.meta.test": isTest,
-        // },
     },
 
-    ogImage: {
-        compatibility: {
-            prerender: {},
-            runtime: {
-                chromium: true,
-                "css-inline": false,
-                resvg: false,
-                satori: false,
-                sharp: false,
-            },
-        },
-        componentOptions: {
-            global: true,
-        },
-    },
+    // because i'm using permalink for my posts, and og-image not support custom route path yet
+    ogImage: { enabled: false },
 
     postcss: {
         plugins: {
             "@unocss/postcss": {},
-            // "postcss-nesting": {},
         },
     },
 
