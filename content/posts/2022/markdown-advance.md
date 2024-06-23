@@ -6,6 +6,56 @@ headerImage: /img/markdown.png
 tags: [Markdown, Syntax]
 ---
 
+## Code Group
+
+::code-group
+
+```zsh
+echo A
+```
+
+```bash
+printf B
+```
+
+::
+
+::code-group
+
+```shell [nuxt.config.ts]
+echo A
+```
+
+```shell [vite.confit5.ts]
+printf B
+```
+
+```shell [vite.confit4.ts]
+printf B
+```
+
+```shell [vite.confit3.ts]
+printf B
+```
+
+```shell [vite.confit2.ts]
+printf B
+```
+
+::
+
+::code-group
+
+```shell label=echo
+echo A
+```
+
+```shell label=printf
+printf B
+```
+
+::
+
 ## Code Block Extra
 
 ````markdown
