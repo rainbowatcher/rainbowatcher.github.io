@@ -103,6 +103,10 @@ export default defineNuxtConfig({
         vueI18n: "i18n.config.ts",
     },
 
+    linkChecker: {
+        enabled: false,
+    },
+
     modules: [
         "@nuxtjs/algolia",
         "@nuxtjs/color-mode",
