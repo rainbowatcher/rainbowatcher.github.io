@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     ],
 
     content: {
-        contentHead: false,
+        contentHead: true,
         csv: false,
         highlight: {
             langs: ["astro", "batch", "c", "c#", "c++", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
@@ -143,6 +143,23 @@ export default defineNuxtConfig({
         // replace: {
         //    "import.meta.test": isTest,
         // },
+    },
+
+    ogImage: {
+        compatibility: {
+            prerender: {},
+            runtime: {
+                chromium: false,
+                "css-inline": false,
+                resvg: false,
+                satori: false,
+                sharp: false,
+            },
+        },
+        fonts: [
+            "Barlow:400",
+            "Barlow:600",
+        ],
     },
 
     postcss: {

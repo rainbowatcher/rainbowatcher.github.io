@@ -1,12 +1,12 @@
-import type { NuxtConfig } from "nuxt/schema"
+import type { Nuxt, NuxtConfig } from "nuxt/schema"
 import type { UseHeadInput } from "unhead"
 import type { MergeHead } from "zhead"
 
 const title = "Rainbow Watcher's Portfolio"
-const description = "Rainbow Watcher's Portfolio"
-const domain = "rainbowatcher.github.io"
-const url = `https://${domain}/`
-const image = "/favicon.svg"
+// const description = "Rainbow Watcher's Portfolio"
+// const domain = "rainbowatcher.github.io"
+// const url = `https://${domain}/`
+// const ogImage = "/og.png"
 
 const head = {
     link: [
@@ -30,20 +30,20 @@ const head = {
     meta: [
         { content: "#00aba9", name: "msapplication-TileColor" },
         // facebook
-        { content: "website", property: "og:type" },
-        { content: title, property: "og:title" },
-        { content: description, property: "og:description" },
-        { content: url, property: "og:url" },
-        { content: image, property: "og:image" },
+        // { content: "website", property: "og:type" },
+        // { content: title, property: "og:title" },
+        // { content: description, property: "og:description" },
+        // { content: url, property: "og:url" },
+        // { content: ogImage, property: "og:image" },
         // twitter / x
-        { content: "summary_large_image", name: "twitter:card" },
-        { content: title, name: "twitter:title" },
-        { content: description, name: "twitter:description" },
-        { content: image, name: "twitter:image" },
-        { content: url, property: "twitter:url" },
-        { content: domain, property: "twitter:domain" },
+        // { content: "summary_large_image", name: "twitter:card" },
+        // { content: title, name: "twitter:title" },
+        // { content: description, name: "twitter:description" },
+        // { content: ogImage, name: "twitter:image" },
+        // { content: url, property: "twitter:url" },
+        // { content: domain, property: "twitter:domain" },
 
-        { content: description, name: "description" },
+        // { content: description, name: "description" },
         { charset: "utf8" },
     ],
     title,
@@ -58,12 +58,18 @@ export const algolia: NuxtConfig["algolia"] = {
     },
 }
 
+export const app: NuxtConfig["app"] = {
+    head: {
+        title,
+    },
+}
+
 export const appConfig: NuxtConfig["appConfig"] = {
     head,
 }
 
 export const site: NuxtConfig["site"] = {
-    description: "Rainbow Watcher's Portfolio",
+    // description: "Rainbow Watcher's Portfolio",
     name: "Rainbow Watcher's Portfolio",
     trailingSlash: false,
     url: "https://blog-rainbowatcher.vercel.app",

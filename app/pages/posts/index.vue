@@ -39,7 +39,7 @@ watch(() => route.query, () => {
 <template>
     <section class="font-mb">
         <div class="post-list min-w-0 md:(ml-[calc(5rem+3rem)] w-5xl) sm:(ml-[calc(5rem+2rem)] max-w-3xl) space-y-4 lt-sm:px-6">
-            <PageHead />
+            <!-- <PageHead /> -->
             <template v-if="posts?.length">
                 <div
                     v-for="post in currPage"

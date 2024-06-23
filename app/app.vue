@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { ConfigProvider } from "radix-vue"
+import { joinURL } from "ufo"
 import "uno.css"
 import "~/styles/index.css"
 
-const { head } = useAppConfig()
+const route = useRoute()
+// const { head } = useAppConfig()
 const useIdFunction = () => useId()
-useHead(head)
+// useHead(head)
+
+defineOgImageComponent("DefaultOgImg", {
+    date: "",
+    tags: [],
+    title: "Rainbow Watcher",
+})
+
+if (import.meta.server) {
+    prerenderRoutes(joinURL("/__og-image__/image", route.path, "og.png"))
+}
 </script>
 
 <template>
