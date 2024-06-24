@@ -1,8 +1,9 @@
 import type { NuxtConfig } from "nuxt/schema"
 
 const title = "Rainbow Watcher"
-const domain = "rainbowatcher.github.io"
-const url = `https://${domain}/`
+// const githubAddress = "rainbowatcher.github.io"
+// const githubUrl = `https://${githubAddress}/`
+const vercelUrl = "https://blog-rainbowatcher.vercel.app"
 const ogImage = "/og.webp"
 const licenseUrl = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 
@@ -32,5 +33,5 @@ export const appConfig: NuxtConfig["appConfig"] = {
 export const site: NuxtConfig["site"] = {
     name: title,
     trailingSlash: false,
-    url,
+    url: vercelUrl,
 }
