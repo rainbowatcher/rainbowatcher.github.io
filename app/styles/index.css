@@ -76,6 +76,7 @@
     text-size-adjust: 100%;
     touch-action: auto;
 
+    overflow-y: scroll;
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
 }
@@ -193,10 +194,6 @@ a {
 /* docsearch */
 .DocSearch-Modal {
     @apply animate-in fade-in slide-in-from-bottom-1 zoom-in-97;
-}
-
-body.DocSearch--active {
-    padding-right: var(--scrollbar-width);
 }
 
 html.light {
