@@ -115,18 +115,21 @@ docker run -d \
 OpenGrok 是一个源代码查看的工具，感觉优势主要是轻量吧。
 
 ```shell
+id=$(docker ps -qf name=opengrok);[ $id ] && docker stop $id;
+id=$(docker ps -qaf name=opengrok);[ $id ] && docker rm $id;
 docker run -d \
+  --name opengrok \
   -v ~/DockerVolumes/opengrok/src:/opengrok/src \
   -p 8080:8080 \
   -e TZ=Asia/Shanghai \
-  --name opengrok \
   opengrok/docker:latest
 ```
 
 ## zookeeper [<Badge type="tip" text="tags" vertical="middle" />](https://hub.docker.com/r/bitnami/zookeeper)
 
 ```shell
-id=$(docker ps -aqf 'name=zookeeper');[ $id ] && docker rm $id
+id=$(docker ps -qf name=zookeeper);[ $id ] && docker stop $id;
+id=$(docker ps -qaf name=zookeeper);[ $id ] && docker rm $id;
 docker run -d --name zookeeper \
   -p 2181:2181 \
   -e ALLOW_ANONYMOUS_LOGIN=yes \
@@ -136,19 +139,18 @@ docker run -d --name zookeeper \
 ## kafka [<Badge type="tip" text="tags" vertical="middle" />](https://hub.docker.com/r/bitnami/kafka)
 
 ```shell
-id=$(docker ps -aqf 'name=kafka');[ $id ] && docker rm $id
+id=$(docker ps -qf name=kafka);[ $id ] && docker stop $id;
+id=$(docker ps -qaf name=kafka);[ $id ] && docker rm $id;
 docker run -d --name kafka \
-    -e ALLOW_PLAINTEXT_LISTENER=yes \
-    -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true \
-    -e KAFKA_ENABLE_KRAFT=yes \
-    -e KAFKA_CFG_PROCESS_ROLES=broker,controller \
+    --hostname kafka \
+    -e KAFKA_CFG_NODE_ID=0 \
+    -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
+    -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093 \
+    -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094 \
+    -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094 \
+    -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT \
     -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
-    -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
-    -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
-    -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092 \
-    -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@127.0.0.1:9093 \
-    -e KAFKA_BROKER_ID=1 \
-    -p 9092:9092 \
+    -p 9094:9094 \
     -v ~/DockerVolumes/kafka:/bitnami/kafka \
     bitnami/kafka:latest
 ```
