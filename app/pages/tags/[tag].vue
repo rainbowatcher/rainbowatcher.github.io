@@ -8,6 +8,7 @@ const tags = computed(() => {
     for (const post of posts.value) {
         if (!post.tags) continue
         for (const tag of post.tags) {
+            // TODO: May be better to use lowercase tags
             map.set(tag, (map.get(tag) ?? 0) + 1)
         }
     }
