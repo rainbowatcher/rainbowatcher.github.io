@@ -5,9 +5,41 @@ import {
 } from "./siteConfig"
 
 export default defineNuxtConfig({
+    $development: {
+        devtools: {
+            enabled: true,
+        },
+
+        // Nuxt collects anonymous telemetry data
+        telemetry: true,
+        vite: {
+            build: {
+                minify: false,
+            },
+        },
+    },
+
+    $production: {
+        nitro: {
+            future: { nativeSWR: true },
+            prerender: {
+                autoSubfolderIndex: true,
+                // crawlLinks: true,
+                routes: ["/", "/sitemap.xml"],
+            },
+        },
+        routeRules: {
+            "/**": { isr: isProduction },
+        },
+        sourcemap: isProduction,
+        ssr: isProduction,
+    },
+
     algolia,
     app,
+
     appConfig,
+
     colorMode: { classSuffix: "" },
 
     content: {
@@ -43,9 +75,6 @@ export default defineNuxtConfig({
 
     css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
 
-    devtools: {
-        enabled: true,
-    },
 
     eslint: {
         config: {
@@ -106,7 +135,6 @@ export default defineNuxtConfig({
     ],
 
     nitro: {
-        future: { nativeSWR: true },
         hooks: {
             "prerender:generate"(route: any) {
                 if (route.fileName?.endsWith(".html") && route.contents) {
@@ -120,11 +148,6 @@ export default defineNuxtConfig({
                 }
             },
         },
-        prerender: {
-            autoSubfolderIndex: true,
-            // crawlLinks: true,
-            routes: ["/", "/sitemap.xml"],
-        },
     },
 
     // because i'm using permalink for my posts, and og-image not support custom route path yet
@@ -136,9 +159,6 @@ export default defineNuxtConfig({
         },
     },
 
-    routeRules: {
-        "/**": { isr: true },
-    },
 
     router: {
         options: {
@@ -147,14 +167,4 @@ export default defineNuxtConfig({
     },
 
     site,
-    sourcemap: isProduction,
-    ssr: true,
-
-    // Nuxt collects anonymous telemetry data
-    telemetry: !isProduction,
-    vite: {
-        build: {
-            minify: !isDevelopment,
-        },
-    },
 })
