@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
     class?: string
-    tags: Array<[string, number] | string>
+    tags?: Array<[string, number] | string>
 }>()
 
 function tagNum(tag: [string, number] | string) {
