@@ -17,7 +17,7 @@ tags: [RegExp]
 ::: tip
 
 - 以上脚本都是大小写敏感的
-- JavaScript 环境下可能需要将 `\p{Han}` 替换成 `\p{Script=Han}` 才能生效。
+- JavaScript 环境下需要将 `\p{Han}` 替换成 `\p{Script=Han}` 并且添加 `unicode` 支持才能生效, 例如 `const RE = /\p{Script=Han}/u`。
 
 :::
 
