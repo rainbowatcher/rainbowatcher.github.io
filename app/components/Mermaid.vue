@@ -31,8 +31,7 @@ onMounted(async () => {
             const imgs = [...imgElements]
             if (imgs.length > 0) {
                 Promise.all(imgs.filter(img => !img.complete).map(img => new Promise((resolve) => {
-                    // eslint-disable-next-line unicorn/prefer-add-event-listener
-                    img.addEventListener("load", img.onerror = resolve)
+                    img.addEventListener("load", () => img.addEventListener("error", resolve))
                 }))).then(() => {
                     renderChart()
                 })
