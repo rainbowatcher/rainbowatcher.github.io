@@ -5,7 +5,7 @@ import {
 } from "unocss"
 
 function handleMatchNumber(v?: string, defaultVal = "0") {
-    const num = h.bracket.cssvar.global.auto.fraction.number(v || defaultVal)
+    const num = h.bracket.cssvar.global.auto.fraction.number(v ?? defaultVal)
 
     if (!num) {
         return
@@ -17,7 +17,7 @@ function handleMatchNumber(v?: string, defaultVal = "0") {
 }
 
 function handleMatchRem(v?: string, defaultVal = "full") {
-    return h.bracket.cssvar.global.auto.fraction.rem(v || defaultVal)
+    return h.bracket.cssvar.global.auto.fraction.rem(v ?? defaultVal)
 }
 
 export default defineConfig({
@@ -48,7 +48,7 @@ export default defineConfig({
             "--un-enter-scale": "initial",
             "--un-enter-translate-x": "initial",
             "--un-enter-translate-y": "initial",
-            "animation-duration": `${Number(handleMatchNumber(d) || 150)}ms`,
+            "animation-duration": `${Number(handleMatchNumber(d) ?? 150)}ms`,
             "animation-name": "animate-enter",
             "animation-timing-function": "ease-in-out",
         })],
@@ -58,16 +58,16 @@ export default defineConfig({
             "--un-enter-scale": "initial",
             "--un-enter-translate-x": "initial",
             "--un-enter-translate-y": "initial",
-            "animation-duration": `${Number(handleMatchNumber(d) || 150)}ms`,
+            "animation-duration": `${Number(handleMatchNumber(d) ?? 150)}ms`,
             "animation-name": "animate-exit",
             "animation-timing-function": "ease-in-out",
         })],
-        [/^fade-in-?(.+)?$/, ([, d]) => ({ "--un-enter-opacity": `${Number(handleMatchNumber(d) || 0) / 100}` })],
-        [/^fade-out-?(.+)?$/, ([, d]) => ({ "--un-exit-opacity": `${Number(handleMatchNumber(d) || 0) / 100}` })],
-        [/^zoom-in-?(.+)?$/, ([, d]) => ({ "--un-enter-scale": `${Number(handleMatchNumber(d) || 0) / 100}` })],
-        [/^zoom-out-?(.+)?$/, ([, d]) => ({ "--un-exit-scale": `${Number(handleMatchNumber(d) || 0) / 100}` })],
-        [/^spin-in-?(.+)?$/, ([, d]) => ({ "--un-enter-rotate": `${Number(handleMatchNumber(d) || 0)}deg` })],
-        [/^spin-out-?(.+)?$/, ([, d]) => ({ "--un-exit-rotate": `${Number(handleMatchNumber(d) || 0)}deg` })],
+        [/^fade-in-?(.+)?$/, ([, d]) => ({ "--un-enter-opacity": `${Number(handleMatchNumber(d) ?? 0) / 100}` })],
+        [/^fade-out-?(.+)?$/, ([, d]) => ({ "--un-exit-opacity": `${Number(handleMatchNumber(d) ?? 0) / 100}` })],
+        [/^zoom-in-?(.+)?$/, ([, d]) => ({ "--un-enter-scale": `${Number(handleMatchNumber(d) ?? 0) / 100}` })],
+        [/^zoom-out-?(.+)?$/, ([, d]) => ({ "--un-exit-scale": `${Number(handleMatchNumber(d) ?? 0) / 100}` })],
+        [/^spin-in-?(.+)?$/, ([, d]) => ({ "--un-enter-rotate": `${Number(handleMatchNumber(d) ?? 0)}deg` })],
+        [/^spin-out-?(.+)?$/, ([, d]) => ({ "--un-exit-rotate": `${Number(handleMatchNumber(d) ?? 0)}deg` })],
         [/^slide-in-from-top-?(.+)?$/, ([, d]) => ({ "--un-enter-translate-y": `-${handleMatchRem(d)}` })],
         [/^slide-in-from-bottom-?(.+)?$/, ([, d]) => ({ "--un-enter-translate-y": handleMatchRem(d) })],
         [/^slide-in-from-left-?(.+)?$/, ([, d]) => ({ "--un-enter-translate-x": `-${handleMatchRem(d)}` })],
