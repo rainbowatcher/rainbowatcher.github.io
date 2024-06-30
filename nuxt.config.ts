@@ -58,8 +58,6 @@ export default defineNuxtConfig({
             anchorLinks: true,
             rehypePlugins: [
                 ["rehype-katex", {
-                    fleqn: true,
-                    leqno: true,
                     output: "html",
                     strict: "warn",
                 }],
