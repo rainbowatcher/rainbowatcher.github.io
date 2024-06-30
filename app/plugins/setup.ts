@@ -60,16 +60,6 @@ export default defineNuxtPlugin((app) => {
         if (route.name === "posts-post") {
             useCodeCopyBtn()
         }
-        if (route.name === "posts") {
-            useShowupAnimate(30)
-        } else {
-            useShowupAnimate(100)
-        }
-        useEventListener("resize", useDebounceFn(() => {
-            injectPageStyle()
-        }, 200))
-        injectPageStyle()
-        // console.log("page:finish")
     })
     app.hook("page:loading:end", () => {
         pageLoading.value = false

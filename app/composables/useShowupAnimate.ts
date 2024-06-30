@@ -10,3 +10,28 @@ export function useShowupAnimate(interval = 50) {
         }, i * interval)
     }
 }
+
+export function useShowup(selector: string, delayInterval = 100) {
+    const { preferredMotion } = useSiteState()
+    if (preferredMotion.value === "reduce") return
+    tryOnMounted(() => {
+        for (const [idx, el] of document.querySelectorAll<HTMLElement>(selector).entries()) {
+            useMotion(el, {
+                enter: {
+                    opacity: 1,
+                    transition: {
+                        damping: 15,
+                        // debounce: true,
+                        delay: delayInterval * idx,
+                        type: "tween",
+                    },
+                    y: 0,
+                },
+                initial: {
+                    opacity: 0,
+                    y: 50,
+                },
+            })
+        }
+    })
+}

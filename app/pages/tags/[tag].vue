@@ -19,6 +19,7 @@ const postList = computed(() => {
     return posts.value?.filter(i => i.tags?.map((i: string) => i.toLocaleLowerCase()).includes(route.params.tag.toLocaleLowerCase()))
         .sort((i, j) => new Date(j.date).getTime() - new Date(i.date).getTime()) ?? []
 })
+useShowup(".show-up", 25)
 </script>
 
 <template>

@@ -31,7 +31,7 @@ function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string =
 
 watch(() => route.query, () => {
     nextTick(() => {
-        useShowupAnimate()
+        useShowup(".show-up", 25)
     })
 }, { immediate: true })
 </script>
@@ -42,7 +42,7 @@ watch(() => route.query, () => {
             <template v-if="posts?.length">
                 <div
                     v-for="post in currPage"
-                    :key="post._path" class="post-item relative show-up first:mt-8"
+                    :key="post._path" class="post-item show-up relative"
                 >
                     <NuxtLink
                         class="text-lg font-400 [&.active]:[view-transition-name:title]" :class="{ active: active === post._path }"
