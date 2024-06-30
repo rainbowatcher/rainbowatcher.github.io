@@ -1,5 +1,3 @@
-import { injectPageStyle } from "~/utils/style"
-
 export default defineNuxtPlugin((app) => {
     const route = useRoute()
     const { pageLoading } = useSiteState()

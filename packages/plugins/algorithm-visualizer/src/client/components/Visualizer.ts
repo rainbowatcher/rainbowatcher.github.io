@@ -49,7 +49,7 @@ export default defineComponent({
 
         function restore(data: Array<Data | number>) {
             for (const idx of previousCommandArgs) {
-                if (typeof data[idx] === "object") data[idx] = (data[idx] as Data).value
+                if (typeof data[idx] === "object") data[idx] = data[idx].value
             }
         }
 

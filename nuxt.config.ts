@@ -1,5 +1,4 @@
 import process from "node:process"
-import { isDevelopment, isProduction } from "std-env"
 import {
     algolia, app, appConfig, site,
 } from "./siteConfig"
@@ -29,10 +28,10 @@ export default defineNuxtConfig({
             },
         },
         routeRules: {
-            "/**": { isr: isProduction },
+            "/**": { isr: true },
         },
-        sourcemap: isProduction,
-        ssr: isProduction,
+        sourcemap: true,
+        ssr: true,
     },
 
     algolia,
