@@ -24,7 +24,7 @@ useShowup(".show-up")
             <span class="show-up absolute inset-x-0 top--.125em z--1 select-none text-center text-nowrap text-11vw c-cyan/38 font-800 lt-md:hidden dark:c-cyan/18">
                 {{ useDateFormat(post!.date, "YYYY MM DD").value }}
             </span>
-            <h1 class="page-title show-up [view-transition-name:title] z-1 mx-6.5dvw mt-1.2em text-center text-pretty tracking-tight lt-md:text-12vw md:text-7vw xl:text-5vw">
+            <h1 class="show-up page-title [view-transition-name:title] z-1 mx-6.5dvw mt-1.2em text-center text-pretty tracking-tight lt-md:text-12vw md:text-7vw xl:text-5vw">
                 {{ post!.title }}
             </h1>
             <p v-if="post!.subtitle" class="show-up mx-6.5dvw text-center c-coolGray leading-8">

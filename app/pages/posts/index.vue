@@ -42,7 +42,7 @@ watch(() => route.query, () => {
             <template v-if="posts?.length">
                 <div
                     v-for="post in currPage"
-                    :key="post._path" class="post-item show-up relative"
+                    :key="post._path" class="show-up post-item relative"
                 >
                     <NuxtLink
                         class="text-lg font-400 [&.active]:[view-transition-name:title]" :class="{ active: active === post._path }"
