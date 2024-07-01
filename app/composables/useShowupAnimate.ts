@@ -1,3 +1,5 @@
+import { useMotion } from "@vueuse/motion"
+
 export function useShowupAnimate(interval = 50) {
     const { preferredMotion } = useSiteState()
     if (preferredMotion.value === "reduce") return
@@ -15,23 +17,26 @@ export function useShowup(selector: string, delayInterval = 100) {
     const { preferredMotion } = useSiteState()
     if (preferredMotion.value === "reduce") return
     tryOnMounted(() => {
-        for (const [idx, el] of document.querySelectorAll<HTMLElement>(selector).entries()) {
-            useMotion(el, {
-                enter: {
-                    opacity: 1,
-                    transition: {
-                        damping: 15,
-                        // debounce: true,
-                        delay: delayInterval * idx,
-                        type: "tween",
+        if (document) {
+            for (const [idx, el] of document.querySelectorAll<HTMLElement>(selector).entries()) {
+                useMotion(el, {
+                    enter: {
+                        opacity: 1,
+                        transition: {
+                            damping: 25,
+                            delay: delayInterval * idx,
+                            mass: 0.5,
+                            stiffness: 250,
+                            type: "spring",
+                        },
+                        y: 0,
                     },
-                    y: 0,
-                },
-                initial: {
-                    opacity: 0,
-                    y: 50,
-                },
-            })
+                    initial: {
+                        opacity: 0,
+                        y: 50,
+                    },
+                })
+            }
         }
     })
 }
