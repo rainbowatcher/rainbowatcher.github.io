@@ -6,6 +6,28 @@ headerImage: /img/markdown.png
 tags: [Markdown, Syntax]
 ---
 
+## Code Demo
+
+::code-demo
+
+```html
+<div class="app1"></div>
+```
+
+```css
+.app1 {
+    background-color: green;
+    height: 120px;
+    width: 200px;
+}
+```
+
+```js
+const a = 1
+```
+
+::
+
 ## Code Group
 
 ::code-group
@@ -483,11 +505,19 @@ $$
 ### 编号
 
 ```tex
-$\tag{1} x+y^{2x}$
+$$
+\tag{1} x+y^{2x}
+$$
 
-$\tag*{1} x+y^{2x}$
+$$
+\tag*{1} x+y^{2x}
+$$
 ```
 
-$$\tag{1} x+y^{2x}$$
+$$
+\tag{1} x+y^{2x}
+$$
 
-$$\tag*{1} x+y^{2x}$$
+$$
+\tag*{1} x+y^{2x}
+$$
