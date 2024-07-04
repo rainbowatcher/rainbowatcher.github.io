@@ -242,5 +242,5 @@ html.dark {
 
 :is(.md-doc) .katex-display,
 .mermaid {
-    overflow: auto;
+    overflow: auto hidden;
 }
