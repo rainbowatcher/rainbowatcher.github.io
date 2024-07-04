@@ -103,7 +103,7 @@ export default defineNuxtConfig({
 
     i18n: {
         locales: [
-            { code: "cn", iso: "zh-CN", name: "简体中文" },
+            { code: "zh", iso: "zh-CN", name: "简体中文" },
             { code: "en", iso: "en-US", name: "English" },
         ],
         strategy: "no_prefix",

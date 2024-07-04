@@ -6,7 +6,7 @@ import {
 const { locale } = useI18n({ useScope: "global" })
 
 const items = [
-    { label: "简体中文", value: "cn" },
+    { label: "简体中文", value: "zh" },
     { label: "English", value: "en" },
 ]
 
@@ -15,7 +15,7 @@ function handleClick(e: MouseEvent) {
     // this check is because when use setLocale in @click or @select the nuxt will crash
     // @ts-expect-error property not exist on EventTarget
     if (e.target?.textContent === "简体中文") {
-        locale.value = "cn"
+        locale.value = "zh"
     } else {
         locale.value = "en"
     }
