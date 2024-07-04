@@ -5,10 +5,6 @@ import {
 
 export default defineNuxtConfig({
     $development: {
-        devtools: {
-            enabled: true,
-        },
-
         // Nuxt collects anonymous telemetry data
         telemetry: true,
         vite: {
@@ -72,6 +68,7 @@ export default defineNuxtConfig({
 
     css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
 
+    devtools: { enabled: false },
 
     eslint: {
         config: {
