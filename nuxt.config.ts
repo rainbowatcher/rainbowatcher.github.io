@@ -32,9 +32,7 @@ export default defineNuxtConfig({
 
     algolia,
     app,
-
     appConfig,
-
     colorMode: { classSuffix: "" },
 
     content: {
@@ -67,7 +65,6 @@ export default defineNuxtConfig({
     },
 
     css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
-
     devtools: { enabled: false },
 
     eslint: {
@@ -153,12 +150,12 @@ export default defineNuxtConfig({
         },
     },
 
-
     router: {
         options: {
             scrollBehaviorType: "smooth",
         },
     },
 
+    compatibilityDate: "2024-08-22",
     site,
 })
