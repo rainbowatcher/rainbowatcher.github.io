@@ -5,6 +5,7 @@ export type CommandType = "select" | "swap"
 
 class Array1DTracer extends Commander {
 
+    // eslint-disable-next-line ts/naming-convention
     private _data: number[] | undefined
 
     public random(capability: number, max = 10, min = 1) {

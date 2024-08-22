@@ -6,9 +6,9 @@ import {
     computed, defineComponent, h, onMounted, ref,
 } from "vue"
 import { sleep } from "../utils"
+import type { VNode } from "vue"
 import type { Command } from "../composables"
 import type { ChartOption, Data } from "../types"
-import type { VNode } from "vue"
 
 export default defineComponent({
     setup() {
@@ -53,7 +53,6 @@ export default defineComponent({
             }
         }
 
-        // eslint-disable-next-line unicorn/consistent-function-scoping
         const swap = (data: Array<Data | number>, left: number, right: number) => {
             const tmp = data[left]
             data[left] = data[right]

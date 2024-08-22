@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useMotion, useMotionProperties, useSpring } from "@vueuse/motion"
-import { useToggle } from "#imports"
+import { useMotionProperties, useSpring } from "@vueuse/motion"
+import { cn, useToggle } from "#imports"
 
 defineProps<{
     class?: string
