@@ -63,15 +63,16 @@
         #6666ff,
         #ef4444,
         #f97316,
-        #f97316,
-        #eab308
+        #eab308,
+        #22c55e
     );
-    background-size: 400% 100%;
-    animation: flow 30s linear infinite;
+    background-size: 327% 100%;
+    animation: flow 15s linear infinite;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
+
 @keyframes flow {
     0% {
         background-position: 0 0;
