@@ -59,7 +59,6 @@
         "cpx": "^1.5.0",
         "eslint": "^9.9.1",
         "katex": "^0.16.11",
-        "lint-staged": "^15.2.10",
         "mermaid": "^11.1.0",
         "nanoid": "^5.0.7",
         "nuxi": "^3.13.1",
@@ -81,10 +80,6 @@
         "vaul-vue": "^0.2.0"
     },
     "simple-git-hooks": {
-        "pre-commit": "npx lint-staged",
         "commit-msg": "npx commitlint --edit $1"
-    },
-    "lint-staged": {
-        "*.{ts,json}": "eslint"
     }
 }
