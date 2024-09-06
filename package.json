@@ -12,6 +12,7 @@
         "pnpm": ">=9"
     },
     "scripts": {
+        "analyze": "nuxi analyze",
         "clean": "nuxi cleanup && pnpm --stream -r clean",
         "check": "pnpm exec lychee -c lychee.toml -f markdown content",
         "build": "pnpm generate",
@@ -22,7 +23,8 @@
         "docs:build": "pnpm --filter docs docs:build",
         "dev": "nuxi dev",
         "lint": "eslint .",
-        "lint:inspect": "config-inspector --open"
+        "lint:inspect": "config-inspector --open",
+        "upgrade": "nuxi upgrade"
     },
     "devDependencies": {
         "@commitlint/config-conventional": "^19.4.1",
