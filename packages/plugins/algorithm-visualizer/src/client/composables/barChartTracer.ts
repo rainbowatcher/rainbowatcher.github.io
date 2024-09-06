@@ -1,11 +1,9 @@
 import { Commander } from "./commander"
-import type { ChartOption } from "../types"
+import type { ChartOption } from "../types/index"
 
 export type CommandType = "select" | "swap"
 
 class Array1DTracer extends Commander {
-
-    // eslint-disable-next-line ts/naming-convention
     private _data: number[] | undefined
 
     public random(capability: number, max = 10, min = 1) {
