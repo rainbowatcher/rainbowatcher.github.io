@@ -121,7 +121,7 @@ dracut:/#
 
 - [Deepin 安装指南 - 深度系统](https://www.deepin.org/installation/)
 - [UEFI+GPT、Legacy+MBR 引导模式介绍 & 引导修复 - 百度贴吧](http://tieba.baidu.com/p/5003454493?pid=104792401528&cid=0#104792401528)
-- [计算机的启动过程](http://blog.szm.me/misc/the_starting_process_of_a_computer/)
+- [计算机的启动过程](https://github.com/songziming/blog/blob/master/posts/2015-05-21-computer-starting-sequence.md)
 - [UEFI/GPT 模式下安装的 Windows-ArchWiki-Grub](<https://wiki.archlinux.org/index.php/GRUB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#UEFI/GPT_%E6%A8%A1%E5%BC%8F%E4%B8%8B%E5%AE%89%E8%A3%85%E7%9A%84_Windows>)
 - [使用 Windows 进行双启动 #Windows UEFI 和 BIOS 启动的局限 - ArchWiki](https://wiki.archlinux.org/index.php/Dual_boot_with_Windows#Windows_UEFI_vs_BIOS_limitations)
 - [使用 Windows 进行双启动 #UEFI / BIOS 启动管理器的局限 - ArchWiki](https://wiki.archlinux.org/index.php/Dual_boot_with_Windows#Bootloader_UEFI_vs_BIOS_limitations)
