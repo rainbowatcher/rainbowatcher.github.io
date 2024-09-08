@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const md = `
+const editor = `
 ## Editor
 
 - Editor: [VSCode](https://code.visualstudio.com/)
@@ -10,7 +10,8 @@ const md = `
     - [Cascadia Code](https://github.com/microsoft/cascadia-code)
     - [0xProto](https://github.com/0xType/0xProto)
 - Formatting & Linting: [@rainbowatcher/eslint-config](https://github.com/rainbowatcher/eslint-config)
-
+`
+const extensions = `
 ## Chrome Extensions
 
 - [Refined GitHub](https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf) - No-brainer must-have
@@ -20,7 +21,9 @@ const md = `
 - [Sala Dict](https://github.com/crimx/ext-saladict) - Dictionary
 - [Immersive Translate](https://github.com/immersive-translate/immersive-translate/)
 - [Vimium C](https://github.com/gdh1995/vimium-c) - Operate browser through keyboard
+`
 
+const others = `
 ## Applications
 
 - [Raycast](https://raycast.com/) - Spotlight replacement
@@ -32,7 +35,8 @@ const md = `
 - MacBook Pro 13 inch 2020 16GB
 - Mouse: Logitech G304
 - Keyboard: Filco Majestouch Convertible 2 TKL - Cherry MX Red
-
+`
+const cli = `
 ## CLI
 
 - [zsh](https://zsh.org/) - Shell
@@ -43,13 +47,18 @@ const md = `
 - [bumpp](https://github.com/antfu/bumpp) - Bump package version version for new release
 - [tsx](https://github.com/privatenumber/tsx) - Run TypeScript files without compilation
 `
+
+useShowup(".show-up")
 </script>
 
 <template>
+    <div class="font-mb font-sans lt-md:mx-12 md:(mx-12 w-3xl) lg:w-5xl">
+        <MDC :value="editor" class="show-up [&>h2]:mt0" />
+        <MDC :value="extensions" class="show-up" />
+        <MDC :value="others" class="show-up" />
+        <MDC :value="cli" class="show-up" />
+    </div>
     <DevOnly>
         <PageProfileDisplay />
     </DevOnly>
-    <div class="font-mb font-sans lt-md:mx-12 md:(mx-12 w-3xl) lg:w-5xl">
-        <MDC :value="md" class="leading-4.5 [&_i]:vertical-mid" />
-    </div>
 </template>
