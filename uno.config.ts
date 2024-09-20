@@ -4,21 +4,10 @@ import {
     transformerDirectives, transformerVariantGroup,
 } from "unocss"
 
-function handleMatchNumber(v?: string, defaultVal = "0") {
-    const num = h.bracket.cssvar.global.auto.fraction.number(v ?? defaultVal)
+const handleMatchNumber = (v?: string, defaultVal = "0") => h.number(v ?? defaultVal)!
 
-    if (!num) {
-        return
-    } else if (typeof num === "string") {
-        return num.replace("%", "")
-    } else if (typeof num === "number") {
-        return num
-    }
-}
+const handleMatchRem = (v?: string, defaultVal = "full") => h.rem(v ?? defaultVal)!
 
-function handleMatchRem(v?: string, defaultVal = "full") {
-    return h.bracket.cssvar.global.auto.fraction.rem(v ?? defaultVal)
-}
 
 export default defineConfig({
     layers: {
