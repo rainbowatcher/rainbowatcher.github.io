@@ -6,7 +6,7 @@ import {
 export default defineNuxtConfig({
     $development: {
         // Nuxt collects anonymous telemetry data
-        telemetry: true,
+        // telemetry: true,
         vite: {
             build: {
                 minify: false,
