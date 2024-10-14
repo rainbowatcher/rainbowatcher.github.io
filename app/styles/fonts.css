@@ -3,6 +3,7 @@
     src:
         local("鸿雷行书简体"),
         url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.woff") format("woff"),
+        url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.woff2") format("woff2"),
         url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.otf") format("otf"),
         url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.ttf") format("ttf");
     font-display: swap;
