@@ -5,7 +5,6 @@ I'm an developer and open-source maintainer that fond of adventurous exploration
 I write `Typescript`, `Rust`, `Python`, `Go`, and will learn `Swift` in the distant future,\
 and i don't like `Java`.\
 <br>\
-I'm learning english no\
 "
 useShowup(".show-up")
 </script>

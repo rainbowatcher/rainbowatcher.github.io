@@ -111,7 +111,7 @@ export default defineConfig({
             },
         },
         fontFamily: {
-            mb: "'鸿雷行书简体'",
+            mb: "鸿雷行书简体",
             mono: "'Cascadia Code', '0xProto'",
             sans: "ui-sans, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\", \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
             serif: "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",

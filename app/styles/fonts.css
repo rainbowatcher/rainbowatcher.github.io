@@ -1,0 +1,27 @@
+@font-face {
+    font-family: "鸿雷行书简体";
+    src: local("鸿雷行书简体"), url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.ttf"),
+        url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.otf"),
+        url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.woff"),
+        url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.woff2");
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 0xProto;
+    src: local("0xProto"), url("../public/fonts/0xProto/0xProto-Italic.otf"),
+        url("../public/fonts/0xProto/0xProto-Italic.ttf"), url("../public/fonts/0xProto/0xProto-Italic.woff2"),
+        url("../public/fonts/0xProto/0xProto-Regular.otf"), url("../public/fonts/0xProto/0xProto-Regular.ttf"),
+        url("../public/fonts/0xProto/0xProto-Italic.woff2");
+    font-display: swap;
+    font-style: normal italic;
+}
+
+@font-face {
+    font-family: Cascadia Code;
+    src: local("Cascadia Code"), url("../public/fonts/CascadiaCode/CascadiaCode-Italic.woff2"),
+        url("../public/fonts/CascadiaCode/CascadiaCode.woff2");
+    font-display: swap;
+    font-style: normal italic;
+}
