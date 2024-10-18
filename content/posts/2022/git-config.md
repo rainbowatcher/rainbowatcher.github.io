@@ -15,14 +15,14 @@ tags: [Git, CLI]
 
 首次使用 Git 时需要设置用户名和邮箱地址
 
-```shell
+```sh
 git config --global user.name "your name"
 git config --global user.email "example@email.com"
 ```
 
 针对个别项目不想使用全局设置可以单独设置用户名和邮箱
 
-```shell
+```sh
 git config user.name "another name"
 git config user.email "another@email.com"
 ```
@@ -39,13 +39,13 @@ Git 默认编辑器是 Vim，通过 `git config --global core.editor emacs` 可�
 
 ## Fast-forward
 
-```shell
+```sh
 git config --global --add merge.ff false
 ```
 
 意思是使用 `git merge` 时不要使用 fast-forward（快进）模式
 
-```shell
+```sh
 git config --global --add pull.ff only
 ```
 
@@ -58,19 +58,19 @@ fast-forward 的合并使追踪分支的历史记录变得更困难。因此在�
 
 在使用 `git grep` 时显示代码的行号
 
-```shell
+```sh
 git config --global grep.lineNumber true
 ```
 
 ## 显示空白字符变更
 
-```shell
+```sh
 git config diff.wsErrorHighlight all
 ```
 
 ## 全局 gitignore
 
-```shell
+```sh
 git config --global core.excludesfile ~/.gitignore_global
 ```
 
@@ -80,7 +80,7 @@ git config --global core.excludesfile ~/.gitignore_global
 
 通过 alias 可以设置命令别名，比如下面的代码
 
-```shell
+```sh
 git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.st status
@@ -88,7 +88,7 @@ git config --global alias.st status
 
 设置好之后执行 `git co` 就相当于与执行 `git checkout`。
 
-```shell
+```sh
 $ git config --global alias.l "log --oneline --graph"
 $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 \$ git ls
@@ -103,28 +103,13 @@ $ git config --global alias.ls 'log --graph --pretty=format:"%h <%an> %ar %s"'
 
 ```ini [~/.gitconfig]
 [user]
-        name = your_name
-        email = email_address@orgnization.com
-[core]
-        autocrlf = input
-        quotepath = false
-        excludesfile = /Users/username/.gitignore_global
-        editor = code --wait
-[init]
-        defaultBranch = main
-[filter "lfs"]
-        clean = git-lfs clean -- %f
-        smudge = git-lfs smudge -- %f
-        process = git-lfs filter-process
-        required = true
-[pull]
-        ff = only
-[includeIf "gitdir:~/WorkSpace/"]
-        path = ~/.config/git/.gitconfig_company
-[http]
-        proxy = http://127.0.0.1:8889
-[https]
-        proxy = https://127.0.0.1:8889
+    name = your_name
+    email = email_address@orgnization.com
+[alias]
+    remotes = remote --verbose
+    aliases = config --get-regexp alias
+    user = config --get-regexp user.
+    tags = tag -l
 ```
 
 <!-- ## rebase
@@ -223,7 +208,7 @@ Git 提供 includeIf 选项来指定条件配置，在切换多个项目工作�
 
 Git 提供的 alias 很好，但是我更喜欢 shell 自带的 alias
 
-```shell
+```sh
 alias gst='git status'
 alias gl='git log --oneline --cherry'
 alias gll='git log --graph --cherry --pretty=format:"%h <%an> %ar %s"'
