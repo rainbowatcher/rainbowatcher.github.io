@@ -82,13 +82,9 @@ export default defineNuxtConfig({
                 deep: false,
             },
         },
-        headNext: true,
-        // noVueServer: true,
-        // inlineRouteRules: true,
+        noVueServer: true,
         payloadExtraction: false,
-        renderJsonPayloads: true,
-        typedPages: true,
-        // viewTransition: true,
+        renderJsonPayloads: false,
     },
 
     features: {
