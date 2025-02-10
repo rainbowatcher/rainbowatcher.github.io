@@ -5,7 +5,7 @@ const [show, toggleShow] = useToggle(false)
 <template>
     <div class="menu-container hidden font-mb transition-opacity duration-300 lt-md:block">
         <button class="menu-trigger" @click="toggleShow(true)">
-            {{ $t("menu") }}
+            菜单
         </button>
 
         <SiteMenuContent v-model:show="show" />

@@ -29,11 +29,11 @@ const NavItems = defineNuxtComponent({
                 {this.navItems.map(item => (
                     <li>
                         <NuxtLink
-                            class={`font-400 hover:(op-100) ${this.getActiveClasses(item.path)} ${this.pt?.li || ""}`}
-                            onClick={() => this.$emit("navigator")}
+                            class={`font-400 hover:(op-100) ${this.getActiveClasses(item.path)} ${this.pt?.li ?? ""}`}
+                            onClick={() => { this.$emit("navigator") }}
                             to={item.path}
                         >
-                            {this.$t(item.label)}
+                            {item.label}
                         </NuxtLink>
                     </li>
                 ))}
@@ -46,10 +46,10 @@ export default defineNuxtComponent({
     data() {
         return {
             navItems: [
-                { label: "blog", path: "/posts" },
-                { label: "uses", path: "/uses" },
-                { label: "archives", path: "/archives" },
-                { label: "projects", path: "/projects" },
+                { label: "博客", path: "/posts" },
+                { label: "在用", path: "/uses" },
+                { label: "归档", path: "/archives" },
+                { label: "项目", path: "/projects" },
             ],
         }
     },
@@ -68,10 +68,10 @@ export default defineNuxtComponent({
     render() {
         if (this.$props.wrapper) {
             return (
-                <ol class={this.pt?.ol || ""}>
+                <ol class={this.pt?.ol ?? ""}>
                     <NavItems
                         navItems={this.navItems}
-                        onNavigator={() => this.$emit("navigator")}
+                        onNavigator={() => { this.$emit("navigator") }}
                         pt={this.pt}
                     />
                 </ol>

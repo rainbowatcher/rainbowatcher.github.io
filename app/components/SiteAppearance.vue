@@ -1,5 +1,5 @@
 <template>
     <ColorModeToggler />
     <SearchBar />
-    <I18nSwitcher />
+    <!-- <I18nSwitcher /> -->
 </template>

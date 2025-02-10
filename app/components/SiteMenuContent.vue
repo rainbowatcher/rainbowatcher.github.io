@@ -25,7 +25,7 @@ useEventListener("keydown", (e: KeyboardEvent) => {
                 <div class="menu-header flex flex-(row)">
                     <div>test</div>
                     <button class="ml-auto" @click="toggleShow(false)">
-                        {{ $t("close") }}
+                        关闭
                     </button>
                 </div>
                 <div class="nav-items flex justify-center">

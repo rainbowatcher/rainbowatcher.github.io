@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     app,
     appConfig,
     colorMode: { classSuffix: "" },
-    compatibilityDate: "2024-08-22",
+
     content: {
         build: {
             markdown: {
@@ -108,14 +108,7 @@ export default defineNuxtConfig({
     future: {
         compatibilityVersion: 4,
     },
-    i18n: {
-        locales: [
-            { code: "zh", language: "zh-CN", name: "简体中文" },
-            { code: "en", language: "en-US", name: "English" },
-        ],
-        strategy: "no_prefix",
-        vueI18n: "i18n.config.ts",
-    },
+
     linkChecker: {
         enabled: false,
     },
@@ -158,8 +151,8 @@ export default defineNuxtConfig({
 
     modules: [
         "@nuxtjs/algolia",
+        "@nuxtjs/seo",
         "@nuxtjs/color-mode",
-        "@nuxtjs/i18n",
         "@nuxt/eslint",
         "@nuxt/content",
         "@nuxt/image",
@@ -167,7 +160,6 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         "@vueuse/motion/nuxt",
         "@unocss/nuxt",
-        "@nuxtjs/seo",
     ],
 
     nitro: {
