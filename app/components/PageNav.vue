@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { NavItem } from "@nuxt/content"
+import type { ContentNavigationItem } from "@nuxt/content"
 
 type PageNavProps = {
-    next?: Partial<NavItem>
-    previous?: Partial<NavItem>
+    next?: ContentNavigationItem
+    previous?: ContentNavigationItem
     usePermalink?: boolean
     useTitle?: boolean
 }
@@ -11,13 +11,13 @@ type PageNavProps = {
 const props = defineProps<PageNavProps>()
 const { breakpoints } = useSiteState()
 
-function getLink(item?: Partial<NavItem>) {
-    (item as Event).preventDefault
+function getLink(item?: ContentNavigationItem): string {
+    (item as unknown as Event)?.preventDefault?.()
     if (!item) return ""
-    return props.usePermalink ? item.permalink : item._path
+    return props.usePermalink ? item.permalink as string : item.path
 }
 
-function handleClick(e: Event, url?: Partial<NavItem>) {
+function handleClick(e: Event, url?: ContentNavigationItem) {
     e.preventDefault()
     if (toValue(breakpoints.greater("sm"))) {
         return
@@ -34,11 +34,11 @@ function handleClick(e: Event, url?: Partial<NavItem>) {
             class="b-border px8 py4 transition-color md:(max-w-80 b-l) sm:(w-1/2 flex-1) lt-md:(cursor-pointer b rounded-lg hover:bg-neutral/10)"
             @click="handleClick($event, previous)"
         >
-            <div v-if="useTitle" class="text-xs op-75 md:hidden">
-                {{ $t("previousPage") }}
+            <div v-if="$props.useTitle" class="text-xs op-75 md:hidden">
+                上一页
             </div>
             <NuxtLink class="lt-sm:bg-none" :to="getLink(previous)" prefetch>
-                <span>{{ useTitle ? previous.title : $t("previousPage") }}</span>
+                <span>{{ $props.useTitle ? previous.title : "上一页" }}</span>
             </NuxtLink>
         </div>
         <div
@@ -46,11 +46,11 @@ function handleClick(e: Event, url?: Partial<NavItem>) {
             class="b-border px8 py4 text-right transition-background-color md:(mla max-w-80 b-r) sm:(w-1/2 flex-1) lt-md:(cursor-pointer b rounded-lg hover:bg-neutral/10)"
             @click="handleClick($event, next)"
         >
-            <div v-if="useTitle" class="text-xs op-75 md:hidden">
-                {{ $t("nextPage") }}
+            <div v-if="$props.useTitle" class="text-xs op-75 md:hidden">
+                下一页
             </div>
             <NuxtLink class="lt-sm:bg-none" :to="getLink(next)" prefetch>
-                <span>{{ useTitle ? next.title : $t("nextPage") }}</span>
+                <span>{{ $props.useTitle ? next.title : "下一页" }}</span>
             </NuxtLink>
         </div>
     </div>

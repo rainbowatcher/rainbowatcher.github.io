@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import { getRouteParamAsString } from "~/utils/route"
+
 const route = useRoute("tags-tag")
-const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
+const { data: posts } = await useAsyncData("posts", usePosts())
 const tags = computed(() => {
     const map = new Map<string, number>()
     if (!posts.value) return [...map.entries()]
@@ -8,7 +10,7 @@ const tags = computed(() => {
     for (const post of posts.value) {
         if (!post.tags) continue
         for (const tag of post.tags) {
-            // TODO: May be better to use lowercase tags
+            // TODO: Maybe better to use lowercase tags
             map.set(tag, (map.get(tag) ?? 0) + 1)
         }
     }
@@ -16,8 +18,8 @@ const tags = computed(() => {
     return [...map.entries()].sort((a, b) => b[1] - a[1])
 })
 const postList = computed(() => {
-    return posts.value?.filter(i => i.tags?.map((i: string) => i.toLocaleLowerCase()).includes(route.params.tag.toLocaleLowerCase()))
-        .sort((i, j) => new Date(j.date).getTime() - new Date(i.date).getTime()) ?? []
+    return posts.value?.filter(i => i.tags?.map((i: string) => i.toLocaleLowerCase()).includes(getRouteParamAsString(route, "tag")?.toLocaleLowerCase()))
+        .sort((i, j) => new Date(j.date!).getTime() - new Date(i.date!).getTime()) ?? []
 })
 useShowup(".show-up", 25)
 </script>
@@ -28,8 +30,8 @@ useShowup(".show-up", 25)
             <TagList :tags="tags" class="lt-sm:text-sm sm:text-lg [&.router-link-active]:(c-accent op-100)" />
         </div>
         <div class="post-list mt-8 lt-sm:ml-26 sm:ml-[calc(5rem+3rem)] space-y-4">
-            <div v-for="post in postList" :key="post._path" class="show-up">
-                <NuxtLink class="text-lg font-400" :href="post.permalink ?? post._path" role="link">
+            <div v-for="post in postList" :key="post.path" class="show-up">
+                <NuxtLink class="text-lg font-400" :href="post.permalink ?? post.path" role="link">
                     {{ post.title }}
                 </NuxtLink>
                 <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op-55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>

@@ -36,40 +36,45 @@ export default defineNuxtConfig({
     colorMode: { classSuffix: "" },
     compatibilityDate: "2024-08-22",
     content: {
-        highlight: {
-            langs: ["astro", "batch", "c", "c#", "c++", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
-            theme: {
-                dark: "aurora-x",
-                default: "github-light",
+        build: {
+            markdown: {
+                highlight: {
+                    langs: ["astro", "batch", "c", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
+                    theme: {
+                        dark: "aurora-x",
+                        default: "github-light",
+                    },
+                },
+                rehypePlugins: {
+                    "rehype-external-links": { options: { target: "_blank" } },
+                    "rehype-katex": {
+                        options: { output: "html", strict: "warn" },
+                    },
+                },
+                remarkPlugins: {
+                    "remark-flexible-containers": {},
+                    "remark-gfm": { options: { singleTilde: false } },
+                    "remark-math": {},
+                },
+                toc: {
+                    depth: 3,
+                },
             },
         },
-        ignores: [
-            "hide/*",
-            "LICENSE",
-        ],
-        markdown: {
+        renderer: {
             anchorLinks: true,
-            rehypePlugins: [
-                ["rehype-katex", {
-                    output: "html",
-                    strict: "warn",
-                }],
-                ["rehype-external-links", { target: "_blank" }],
-            ],
-            remarkPlugins: [
-                ["remark-gfm", { singleTilde: false }],
-                "remark-flexible-containers",
-                "remark-math",
-            ],
         },
     },
+
     css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
     devtools: { enabled: false },
+
     eslint: {
         config: {
             standalone: false,
         },
     },
+
     experimental: {
         componentIslands: true,
         defaults: {
@@ -85,10 +90,12 @@ export default defineNuxtConfig({
         typedPages: true,
         // viewTransition: true,
     },
+
     features: {
         // For UnoCSS
         inlineStyles: true,
     },
+
     fonts: {
         providers: {
             bunny: false,
@@ -97,6 +104,7 @@ export default defineNuxtConfig({
             googleicons: false,
         },
     },
+
     future: {
         compatibilityVersion: 4,
     },
@@ -111,6 +119,43 @@ export default defineNuxtConfig({
     linkChecker: {
         enabled: false,
     },
+
+    mdc: {
+        components: {
+            map: {
+                a: "ProseA",
+                blockquote: "ProseBlockquote",
+                code: "ProseCodeInline",
+                em: "ProseEm",
+                h1: "ProseH1",
+                h2: "ProseH2",
+                h3: "ProseH3",
+                h4: "ProseH4",
+                h5: "ProseH5",
+                h6: "ProseH6",
+                hr: "ProseHr",
+                img: "ProseImg",
+                li: "ProseLi",
+                ol: "ProseOl",
+                p: "ProseP",
+                pre: "ProsePre",
+                script: "ProseScript",
+                // span: "ProseSpan",
+                strong: "ProseStrong",
+                // sub: "ProseSub",
+                // sup: "ProseSup",
+                table: "ProseTable",
+                tbody: "ProseTbody",
+                td: "ProseTd",
+                th: "ProseTh",
+                thead: "ProseThead",
+                tr: "ProseTr",
+                ul: "ProseUl",
+            },
+            prose: false,
+        },
+    },
+
     modules: [
         "@nuxtjs/algolia",
         "@nuxtjs/color-mode",
@@ -124,6 +169,7 @@ export default defineNuxtConfig({
         "@unocss/nuxt",
         "@nuxtjs/seo",
     ],
+
     nitro: {
         hooks: {
             "prerender:generate"(route: any) {
@@ -139,20 +185,27 @@ export default defineNuxtConfig({
             },
         },
     },
+
     // because i'm using permalink for my posts, and og-image not support custom route path yet
     ogImage: { enabled: false },
+
     postcss: {
         plugins: {
             "@unocss/postcss": {},
         },
     },
+
     router: {
         options: {
             scrollBehaviorType: "smooth",
         },
     },
+
     site,
+
     unocss: {
         disableNuxtInlineStyle: false,
     },
+
+    compatibilityDate: "2025-02-05",
 })

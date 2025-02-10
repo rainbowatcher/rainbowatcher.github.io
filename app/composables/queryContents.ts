@@ -7,12 +7,23 @@ export type PageItem = {
 }
 
 export function usePosts() {
-    return () => queryContent("posts")
-        .only(["tags", "date", "title", "_path"])
-        .sort({ date: -1 })
-        .find()
+    return () => queryCollection("posts")
+        // .select("tags", "date", "title")
+        .order("date", "DESC")
+        .all()
+        .then(addPermalink)
 }
 
-// export function usePostNav(): (page: PageItem) => PageNav {
-//     useNavigatorLanguage
-// }
+export function usePost(path: string) {
+    return () => queryCollection("posts")
+        .path(path)
+        .first()
+}
+
+export function useNavItems() {
+    return () => queryCollection("posts")
+        // .select("tags", "date", "title")
+        .order("date", "DESC")
+        .all()
+        .then(toNavItems)
+}

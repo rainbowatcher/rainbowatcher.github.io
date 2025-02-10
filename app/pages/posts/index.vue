@@ -1,22 +1,22 @@
 <script lang="ts" setup>
-import type { ParsedContent } from "@nuxt/content"
+import type { PostsCollectionItem } from "@nuxt/content"
 
+const routePathPrefix = "/posts?page="
 const route = useRoute("posts")
 const pageNum = computed(() => (Number.isNaN(Number(route.query.page)) ? 1 : Number(route.query.page)))
-const routePathPrefix = "/posts?page="
-const { data: posts } = await useAsyncData("posts", usePosts(), { transform: addPermalink })
+const { data: posts } = await useAsyncData("posts", usePosts())
 const pageSize = 12
 const maxPage = computed(() => Math.ceil((posts.value?.length ?? 1) / pageSize))
-const nextNavItem = computed(() => (pageNum.value < maxPage.value ? { _path: `${routePathPrefix}${pageNum.value + 1}`, title: "" } : undefined))
-const previousNavItem = computed(() => (pageNum.value > 1 ? { _path: `${routePathPrefix}${pageNum.value - 1}`, title: "" } : undefined))
+const nextNavItem = computed(() => (pageNum.value < maxPage.value ? { path: `${routePathPrefix}${pageNum.value + 1}`, title: "" } : undefined))
+const previousNavItem = computed(() => (pageNum.value > 1 ? { path: `${routePathPrefix}${pageNum.value - 1}`, title: "" } : undefined))
 const currPage = computed(() => {
     return getPage(posts.value ?? [], pageNum.value)
 })
 // class for element add view transition id
 const active = useState<string | undefined>()
 
-function sortByDate(list: Array<Partial<ParsedContent>>) {
-    return list.sort((a: Partial<ParsedContent>, b: Partial<ParsedContent>) => {
+function sortByDate(list: PostsCollectionItem[]) {
+    return list.sort((a: PostsCollectionItem, b: PostsCollectionItem) => {
         return new Date(b.date).valueOf() - new Date(a.date).valueOf()
     })
 }
@@ -24,7 +24,7 @@ function sortByDate(list: Array<Partial<ParsedContent>>) {
 /**
  * get current page
  */
-function getPage(list: Array<Partial<ParsedContent>>, pageNum: number | string = 1) {
+function getPage(list: PostsCollectionItem[], pageNum: number | string = 1) {
     const num = Number(pageNum)
     return sortByDate(list).slice((num - 1) * pageSize, num * pageSize)
 }
@@ -42,11 +42,11 @@ watch(() => route.query, () => {
             <template v-if="posts?.length">
                 <div
                     v-for="post in currPage"
-                    :key="post._path" class="show-up post-item relative"
+                    :key="post.path" class="show-up post-item relative"
                 >
                     <NuxtLink
-                        class="text-lg font-400 [&.active]:[view-transition-name:title]" :class="{ active: active === post._path }"
-                        :href="post.permalink" role="link" prefetch @click="active = post._path"
+                        class="text-lg font-400 [&.active]:[view-transition-name:title]" :class="{ active: active === post.path }"
+                        :href="post.permalink" role="link" prefetch @click="active = post.path"
                     >
                         {{ post.title }}
                     </NuxtLink>

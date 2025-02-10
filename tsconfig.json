@@ -1,3 +1,8 @@
 {
     "extends": "./.nuxt/tsconfig.json",
+    "compilerOptions": {
+        "jsx": "preserve",
+        "jsxFactory": "h",
+        "jsxFragmentFactory": "Fragment",
+    }
 }

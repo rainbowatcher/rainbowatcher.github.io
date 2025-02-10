@@ -1,0 +1,68 @@
+/* region: containers */
+.remark-container {
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    padding: 1rem 1rem 0.75rem;
+    margin: 0 0 1.5rem;
+
+    > .remark-container-title {
+        font-weight: 700;
+        margin: 0;
+    }
+
+    &.info {
+        border-color: hsl(var(--ring));
+        /* color: hsl(var(--foreground)); */
+        /* background-color: hsl(var(--background)); */
+    }
+
+    &.tip {
+        border-color: hsl(var(--border));
+        color: hsl(var(--secondary-foreground));
+        background-color: hsl(var(--secondary));
+    }
+
+    &.warning {
+        border-color: hsl(var(--border));
+        color: hsl(var(--accent-foreground));
+        background-color: hsl(var(--accent));
+    }
+
+    &.danger {
+        border-color: hsl(var(--border));
+        color: hsl(var(--destructive-foreground));
+        background-color: hsl(var(--destructive));
+    }
+
+    &.details {
+        border-color: hsl(var(--ring));
+        /* color: hsl(var(--foreground)); */
+        /* background-color: #1e293b60; */
+        padding: 8px 16px;
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+    }
+
+    p + p {
+        margin: 8px 0;
+    }
+
+    a {
+        color: inherit;
+        font-weight: 600;
+    }
+
+    a:hover {
+        opacity: 0.6;
+    }
+}
+
+/* region: katex */
+:is(.md-doc) .katex-display,
+.mermaid {
+    overflow: auto hidden;
+}

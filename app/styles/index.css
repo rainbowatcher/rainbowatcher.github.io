@@ -1,5 +1,6 @@
 @import url("./animations.css");
 @import url("./fonts.css");
+@import url("./markdown.css");
 
 @layer base {
     :root {
@@ -88,9 +89,12 @@ html.dark {
 
 body,
 #__nuxt {
-    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
 }
 
+/* tabindex ring */
 :is(a, button):focus-visible {
     outline: 3px solid hsl(var(--muted));
     box-shadow: none;
@@ -111,85 +115,6 @@ body,
 /* links */
 a {
     @apply font-bold hover:(text-shadow-lg text-shadow-color-foreground/25) transition-(text-shadow,opacity) duration-300 ease-out;
-}
-
-:is(.md-doc, #__nuxt > div > footer) a[target="_blank"]::after {
-    content: "";
-    vertical-align: text-top;
-    display: inline-block;
-    width: 0.75em;
-    height: 0.75em;
-    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath stroke-dasharray='36' stroke-dashoffset='36' d='M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' dur='0.6s' values='36;0'/%3E%3C/path%3E%3Cpath stroke-dasharray='12' stroke-dashoffset='12' d='M13 11L20 4'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.6s' dur='0.3s' values='12;0'/%3E%3C/path%3E%3Cpath stroke-dasharray='8' stroke-dashoffset='8' d='M21 3H15M21 3V9'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.9s' dur='0.2s' values='8;0'/%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
-    background-color: currentColor;
-    -webkit-mask-image: var(--svg);
-    mask-image: var(--svg);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-}
-
-/* containers */
-.remark-container {
-    border: 1px solid transparent;
-    border-radius: 0.5rem;
-    padding: 1rem 1rem 0.75rem;
-    margin: 0 0 1.5rem;
-
-    > .remark-container-title {
-        font-weight: 700;
-        margin: 0;
-    }
-
-    &.info {
-        border-color: hsl(var(--ring));
-        /* color: hsl(var(--foreground)); */
-        /* background-color: hsl(var(--background)); */
-    }
-
-    &.tip {
-        border-color: hsl(var(--border));
-        color: hsl(var(--secondary-foreground));
-        background-color: hsl(var(--secondary));
-    }
-
-    &.warning {
-        border-color: hsl(var(--border));
-        color: hsl(var(--accent-foreground));
-        background-color: hsl(var(--accent));
-    }
-
-    &.danger {
-        border-color: hsl(var(--border));
-        color: hsl(var(--destructive-foreground));
-        background-color: hsl(var(--destructive));
-    }
-
-    &.details {
-        border-color: hsl(var(--ring));
-        /* color: hsl(var(--foreground)); */
-        /* background-color: #1e293b60; */
-        padding: 8px 16px;
-
-        summary {
-            cursor: pointer;
-            font-weight: 700;
-            margin: 8px 0;
-        }
-    }
-
-    p + p {
-        margin: 8px 0;
-    }
-
-    a {
-        color: inherit;
-        font-weight: 600;
-    }
-
-    a:hover {
-        opacity: 0.6;
-    }
 }
 
 /* docsearch */
@@ -241,7 +166,19 @@ html.dark {
     --docsearch-muted-color: hsl(var(--card-foreground));
 }
 
-:is(.md-doc) .katex-display,
-.mermaid {
-    overflow: auto hidden;
+/* footer link */
+:is(.md-doc, #__nuxt > footer) a[target="_blank"]::after {
+    content: "";
+    vertical-align: text-top;
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath stroke-dasharray='36' stroke-dashoffset='36' d='M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' dur='0.6s' values='36;0'/%3E%3C/path%3E%3Cpath stroke-dasharray='12' stroke-dashoffset='12' d='M13 11L20 4'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.6s' dur='0.3s' values='12;0'/%3E%3C/path%3E%3Cpath stroke-dasharray='8' stroke-dashoffset='8' d='M21 3H15M21 3V9'%3E%3Canimate fill='freeze' attributeName='stroke-dashoffset' begin='0.9s' dur='0.2s' values='8;0'/%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
 }
