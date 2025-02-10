@@ -51,7 +51,7 @@ async function render(id: string, code: string, config: MermaidConfig): Promise<
 async function renderChart() {
     // console.log(`rendering chart${props.id}${props.graph}`)
     const hasDarkClass = document.documentElement.classList.contains("dark")
-    const mermaidConfig = {
+    const mermaidConfig: MermaidConfig = {
         securityLevel: "loose",
         startOnLoad: false,
         theme: hasDarkClass ? "dark" : "default",

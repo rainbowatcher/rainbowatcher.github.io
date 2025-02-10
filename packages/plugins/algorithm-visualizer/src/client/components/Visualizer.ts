@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/filename-case */
 /* eslint-disable ts/naming-convention */
 // <script setup lang="ts">
 import * as echarts from "echarts/core"

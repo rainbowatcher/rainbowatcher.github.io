@@ -58,7 +58,7 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
             options: Options,
             _env: MarkdownEnv,
             slf: Renderer,
-        // eslint-disable-next-line ts/no-unsafe-return
+
         ): string => slf.renderToken(tokens, index, options),
         marker = ":",
         name,
@@ -72,7 +72,6 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
             // add a class to the opening tag
             tokens[index].attrJoin("class", name)
 
-            // eslint-disable-next-line ts/no-unsafe-return
             return slf.renderToken(tokens, index, options)
         },
         validate = (params: string): boolean => params.trim().split(" ", 2)[0] === name,
