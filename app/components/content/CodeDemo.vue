@@ -12,7 +12,7 @@ const floatControl = ref<HTMLDivElement>()
 const shadowDomContainer = ref<HTMLDivElement>()
 const codeSource = ref<HTMLDivElement>()
 const height = ref(0)
-const tabs = computed(() => slots.default?.().map((slot) => {
+const tabs = computed<Array<{ code: string; lang: string }>>(() => slots.default?.({}).map((slot: any) => {
     return {
         code: slot.props?.code,
         lang: slot.props?.language,
@@ -52,8 +52,8 @@ watchOnce(shadowDomContainer, () => {
         const shadowRoot = shadowDomContainer.value.attachShadow({ mode: "open" })
         const divEl = document.createElement("div")
         const styleEl = document.createElement("style")
-        styleEl.textContent = cssCode.value
-        divEl.innerHTML = htmlCode.value
+        styleEl.textContent = cssCode.value ?? ""
+        divEl.innerHTML = htmlCode.value ?? ""
         shadowRoot.append(divEl)
         shadowRoot.append(styleEl)
         toggleLoaded(true)
@@ -88,7 +88,7 @@ watchOnce(shadowDomContainer, () => {
             tabindex="0" role="button" @click="toggleShowCode(false)"
         >
             <i class="i-ph:arrow-line-up text-sm" />
-            <span class="ml-2 text-sm">{{ $t('close') }}</span>
+            <span class="ml-2 text-sm">关闭</span>
         </div>
     </div>
 </template>
