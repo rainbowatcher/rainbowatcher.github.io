@@ -8,7 +8,9 @@ export default nuxt(defineConfig({
     jsx: true,
     markdown: true,
     style: true,
-    typescript: true,
+    typescript: {
+        typeAware: false,
+    },
     unocss: true,
     vue: true,
     yaml: true,
