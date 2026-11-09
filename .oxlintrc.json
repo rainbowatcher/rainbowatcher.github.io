@@ -1,0 +1,6 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": ["eslint", "import", "oxc", "typescript", "unicorn", "vue"],
+    "categories": { "correctness": "error" },
+    "ignorePatterns": [".nuxt/**", ".output/**", ".pi/**", "dist/**", "lib/**", "public/_content/**"]
+}

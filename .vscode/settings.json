@@ -39,24 +39,6 @@
     "css.customData": [
         ".vscode/uno.json",
     ],
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit",
-    },
     "editor.formatOnSave": false,
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "vue",
-        "json",
-        "jsonc",
-        "markdown",
-        "yaml",
-        "css",
-        "sass",
-        "scss",
-        "less",
-    ],
     "prettier.enable": false,
 }

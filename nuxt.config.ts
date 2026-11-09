@@ -51,12 +51,6 @@ export default defineNuxtConfig({
     css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
     devtools: { enabled: false },
 
-    eslint: {
-        config: {
-            standalone: false,
-        },
-    },
-
     experimental: {
         componentIslands: true,
         defaults: {
@@ -150,7 +144,6 @@ export default defineNuxtConfig({
         "@nuxtjs/algolia",
         "@nuxtjs/seo",
         "@nuxtjs/color-mode",
-        "@nuxt/eslint",
         "@nuxtjs/mdc",
         "@nuxt/image",
         "@nuxt/fonts",

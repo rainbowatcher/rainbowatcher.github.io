@@ -5,6 +5,9 @@
 # node
 node_modules
 
+# agent workspace / reports
+.pi/
+
 # build
 dist
 lib/

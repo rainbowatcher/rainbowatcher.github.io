@@ -1,0 +1,9 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "useTabs": false,
+    "ignorePatterns": [".nuxt/**", ".output/**", ".pi/**", "dist/**", "lib/**", "public/_content/**"]
+}
