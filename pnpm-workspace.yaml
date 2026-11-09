@@ -1,0 +1,7 @@
+allowBuilds:
+  better-sqlite3: true
+  core-js: true
+  esbuild: true
+  fsevents: true
+  simple-git-hooks: true
+  vue-demi: true

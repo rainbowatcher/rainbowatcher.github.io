@@ -83,10 +83,6 @@ export default defineNuxtConfig({
         },
     },
 
-    future: {
-        compatibilityVersion: 4,
-    },
-
     linkChecker: {
         enabled: false,
     },
