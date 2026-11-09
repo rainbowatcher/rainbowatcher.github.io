@@ -1,8 +1,8 @@
-import type { ContentNavigationItem, PostsCollectionItem } from "@nuxt/content"
+import type { NavigationItem, Post } from "~/types/content"
 
 export const permalinkRE = /\w+\/\d{4}(\/\d{2}){2}\/.*?/
 
-export function addPermalink(content: PostsCollectionItem[]): PostsCollectionItem[] {
+export function addPermalink(content: Post[]): Post[] {
     if (content.at(0)?.permalink) return content
     return content.map((p) => {
         const date = p.date ? new Date(p.date) : new Date()
@@ -27,7 +27,7 @@ export function toOriginPath(permalink: string) {
     }
 }
 
-export function toNavItems(content: PostsCollectionItem[]): ContentNavigationItem[] {
+export function toNavItems(content: Post[]): NavigationItem[] {
     const items = addPermalink(content)
     return items.map(i => ({
         path: i.path,

@@ -34,36 +34,18 @@ export default defineNuxtConfig({
     app,
     appConfig,
     colorMode: { classSuffix: "" },
-
-    content: {
-        build: {
-            markdown: {
-                highlight: {
-                    langs: ["astro", "batch", "c", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
-                    theme: {
-                        dark: "aurora-x",
-                        default: "github-light",
-                    },
-                },
-                rehypePlugins: {
-                    "rehype-external-links": { options: { target: "_blank" } },
-                    "rehype-katex": {
-                        options: { output: "html", strict: "warn" },
-                    },
-                },
-                remarkPlugins: {
-                    "remark-flexible-containers": {},
-                    "remark-gfm": { options: { singleTilde: false } },
-                    "remark-math": {},
-                },
-                toc: {
-                    depth: 3,
-                },
-            },
-        },
-        renderer: {
-            anchorLinks: true,
-        },
+    components: {
+        dirs: [{
+            global: true,
+            // ProseCodeInline is deliberately NOT registered globally: the
+            // @nuxt/content baseline rendered it as a literal unresolved
+            // element on the home page, and we preserve that byte-for-byte.
+            // Article pages pass it explicitly via MDCRenderer's `components`
+            // prop (matching the baseline's styled inline code there).
+            ignore: ["**/ProseCodeInline.vue"],
+            path: "~/components",
+            pathPrefix: false,
+        }],
     },
 
     css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
@@ -143,6 +125,29 @@ export default defineNuxtConfig({
             },
             prose: false,
         },
+        headings: {
+            anchorLinks: true,
+        },
+        highlight: {
+            highlighter: "shiki",
+            langs: ["astro", "batch", "c", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
+            noApiRoute: true,
+            theme: {
+                dark: "aurora-x",
+                default: "github-light",
+            },
+        },
+        rehypePlugins: {
+            "rehype-external-links": { options: { target: "_blank" } },
+            "rehype-katex": {
+                options: { output: "html", strict: "warn" },
+            },
+        },
+        remarkPlugins: {
+            "remark-flexible-containers": {},
+            "remark-gfm": { options: { singleTilde: false } },
+            "remark-math": {},
+        },
     },
 
     modules: [
@@ -150,7 +155,7 @@ export default defineNuxtConfig({
         "@nuxtjs/seo",
         "@nuxtjs/color-mode",
         "@nuxt/eslint",
-        "@nuxt/content",
+        "@nuxtjs/mdc",
         "@nuxt/image",
         "@nuxt/fonts",
         "@vueuse/nuxt",
