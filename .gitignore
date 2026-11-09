@@ -19,3 +19,6 @@ algolia.js
 .output
 .data
 .lycheecache
+
+# build-time generated content (modules/static-content.ts)
+public/_content/
