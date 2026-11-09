@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ProseCodeInline from "~/components/content/ProseCodeInline.vue"
 import "katex/dist/katex.min.css"
 
 const route = useRoute("posts-post")
@@ -6,10 +7,14 @@ const { post: postName } = route.params
 if (!postName) {
     navigateTo("/posts")
 }
-const { data: posts } = await useAsyncData("posts", useNavItems())
+const { data: posts } = await useAsyncData("posts-nav", useNavItems())
 const path = computed(() => posts.value?.find(i => [i.path, i.permalink].includes(route.path))?.path)
 if (!path.value) throw createError({ fatal: true, statusCode: 404 })
-const { data: post } = await useAsyncData(`post-${postName}`, usePost(path.value!))
+const { data: post } = await useAsyncData(`post:${route.path}`, async () => {
+    const p = posts.value?.find(i => [i.path, i.permalink].includes(route.path))?.path
+    if (!p) return null
+    return await useDocument(p)()
+}, { watch: [() => route.path] })
 if (!post.value) throw createError({ fatal: true, statusCode: 404 })
 const currIdx = computed(() => posts.value?.findIndex(i => i.path === path.value) ?? 0)
 const nextPost = computed(() => (currIdx.value === posts.value!.length - 1 ? posts.value![0] : posts.value![currIdx.value + 1]))
@@ -33,7 +38,7 @@ useShowup(".show-up")
                 <TagList :tags="post!.tags" class="text-lg" />
                 <span class="hidden text-lg op-75 lt-md:inline">{{ useDateFormat(post!.date, "YYYY.MM.DD").value }}</span>
             </span>
-            <ContentRenderer :value="post!" class="md-doc show-up mt-24 min-w-0 font-sans lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-6" />
+            <MDCRenderer v-if="post" :body="(post as any).body" :data="post" :components="{ code: ProseCodeInline }" class="md-doc show-up mt-24 min-w-0 font-sans lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-6" />
         </article>
         <PageNav class="show-up" :previous="previousPost" :next="nextPost" use-title use-permalink />
     </section>

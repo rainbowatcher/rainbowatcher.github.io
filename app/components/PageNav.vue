@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { ContentNavigationItem } from "@nuxt/content"
+import type { NavigationItem } from "~/types/content"
 
 type PageNavProps = {
-    next?: ContentNavigationItem
-    previous?: ContentNavigationItem
+    next?: NavigationItem
+    previous?: NavigationItem
     usePermalink?: boolean
     useTitle?: boolean
 }
@@ -11,13 +11,13 @@ type PageNavProps = {
 const props = defineProps<PageNavProps>()
 const { breakpoints } = useSiteState()
 
-function getLink(item?: ContentNavigationItem): string {
+function getLink(item?: NavigationItem): string {
     (item as unknown as Event)?.preventDefault?.()
     if (!item) return ""
     return props.usePermalink ? item.permalink as string : item.path
 }
 
-function handleClick(e: Event, url?: ContentNavigationItem) {
+function handleClick(e: Event, url?: NavigationItem) {
     e.preventDefault()
     if (toValue(breakpoints.greater("sm"))) {
         return

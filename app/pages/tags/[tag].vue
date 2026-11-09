@@ -2,7 +2,7 @@
 import { getRouteParamAsString } from "~/utils/route"
 
 const route = useRoute("tags-tag")
-const { data: posts } = await useAsyncData("posts", usePosts())
+const { data: posts } = await useAsyncData("tags-posts", usePosts())
 const tags = computed(() => {
     const map = new Map<string, number>()
     if (!posts.value) return [...map.entries()]

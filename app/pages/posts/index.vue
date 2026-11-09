@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { PostsCollectionItem } from "@nuxt/content"
+import type { Post } from "~/types/content"
 
 const routePathPrefix = "/posts?page="
 const route = useRoute("posts")
 const pageNum = computed(() => (Number.isNaN(Number(route.query.page)) ? 1 : Number(route.query.page)))
-const { data: posts } = await useAsyncData("posts", usePosts())
+const { data: posts } = await useAsyncData("posts-list", usePosts())
 const pageSize = 12
 const maxPage = computed(() => Math.ceil((posts.value?.length ?? 1) / pageSize))
 const nextNavItem = computed(() => (pageNum.value < maxPage.value ? { path: `${routePathPrefix}${pageNum.value + 1}`, title: "" } : undefined))
@@ -15,8 +15,8 @@ const currPage = computed(() => {
 // class for element add view transition id
 const active = useState<string | undefined>()
 
-function sortByDate(list: PostsCollectionItem[]) {
-    return list.sort((a: PostsCollectionItem, b: PostsCollectionItem) => {
+function sortByDate(list: Post[]) {
+    return list.sort((a: Post, b: Post) => {
         return new Date(b.date).valueOf() - new Date(a.date).valueOf()
     })
 }
@@ -24,7 +24,7 @@ function sortByDate(list: PostsCollectionItem[]) {
 /**
  * get current page
  */
-function getPage(list: PostsCollectionItem[], pageNum: number | string = 1) {
+function getPage(list: Post[], pageNum: number | string = 1) {
     const num = Number(pageNum)
     return sortByDate(list).slice((num - 1) * pageSize, num * pageSize)
 }
