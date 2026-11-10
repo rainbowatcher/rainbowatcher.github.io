@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useBodyScrollLock } from "radix-vue"
+import { useBodyScrollLock } from "reka-ui"
 
 const show = defineModel<boolean>("show")
 const toggleShow = useToggle(show)
