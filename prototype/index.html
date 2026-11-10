@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Rainbow Watcher — 看彩虹的人</title>
+        <meta
+            name="description"
+            content="Rainbow Watcher 的个人站点：关于代码、工具与日常折腾的笔记。UI 重构交互原型。"
+        />
+        <meta name="theme-color" content="#faf8f2" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0b1414" media="(prefers-color-scheme: dark)" />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b6b5f'/%3E%3Cstop offset='.45' stop-color='%234e93a6'/%3E%3Cstop offset='.75' stop-color='%23c9a24a'/%3E%3Cstop offset='1' stop-color='%23b96b80'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='url(%23g)' stroke-width='5'/%3E%3C/svg%3E"
+        />
+        <link rel="stylesheet" href="assets/css/tokens.css" />
+        <link rel="stylesheet" href="assets/css/base.css" />
+        <link rel="stylesheet" href="assets/css/chrome.css" />
+        <link rel="stylesheet" href="assets/css/overlays.css" />
+        <link rel="stylesheet" href="assets/css/drawer.css" />
+        <link rel="stylesheet" href="assets/css/views-home.css" />
+        <link rel="stylesheet" href="assets/css/views-pages.css" />
+        <link rel="stylesheet" href="assets/css/views-uses.css" />
+        <link rel="stylesheet" href="assets/css/views-projects.css" />
+        <link rel="stylesheet" href="assets/css/views-research.css" />
+        <link rel="stylesheet" href="assets/css/views-responsive.css" />
+        <link rel="stylesheet" href="assets/css/article.css" />
+        <link rel="stylesheet" href="assets/css/article-rail.css" />
+        <link rel="stylesheet" href="assets/css/article-responsive.css" />
+        <script>
+            // 首屏前确定主题，避免浅色闪一帧
+            try {
+                const saved = localStorage.getItem("rw-theme")
+                const dark = window.matchMedia("(prefers-color-scheme: dark)").matches
+                document.documentElement.dataset.theme =
+                    saved === "light" || saved === "dark" ? saved : dark ? "dark" : "light"
+            } catch {
+                document.documentElement.dataset.theme = "light"
+            }
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#view">跳到正文</a>
+        <div class="rainbow-rule" aria-hidden="true"></div>
+
+        <header class="site-header" id="siteHeader">
+            <div class="header-inner">
+                <a class="brand" href="#/" aria-label="Rainbow Watcher 首页">
+                    <span class="brand-mark" aria-hidden="true"></span>
+                    <span class="brand-text">
+                        <span class="brand-name">Rainbow Watcher</span>
+                        <span class="brand-sub">看彩虹的人</span>
+                    </span>
+                </a>
+
+                <nav class="main-nav" aria-label="主导航">
+                    <a href="#/posts" data-nav="posts">博客</a>
+                    <a href="#/research" data-nav="research">研究</a>
+                    <a href="#/uses" data-nav="uses">在用</a>
+                    <a href="#/archives" data-nav="archives">归档</a>
+                    <a href="#/projects" data-nav="projects">项目</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="search-trigger" type="button" data-open-search aria-label="搜索文章">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path d="m20 20-3.2-3.2"></path>
+                        </svg>
+                        <span class="search-trigger-label">搜索</span>
+                        <kbd>⌘K</kbd>
+                    </button>
+                    <button class="icon-btn" type="button" data-theme-toggle aria-label="切换深浅色主题">
+                        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path
+                                d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                            ></path>
+                        </svg>
+                        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"></path>
+                        </svg>
+                    </button>
+                    <a
+                        class="icon-btn header-github"
+                        href="https://github.com/rainbowatcher"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="GitHub"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.5 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"
+                            ></path>
+                        </svg>
+                    </a>
+                    <button class="icon-btn menu-btn" type="button" data-open-menu aria-label="打开菜单">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+        </header>
+
+        <main id="view" role="main" tabindex="-1"></main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <a class="brand" href="#/" aria-label="回到首页">
+                        <span class="brand-mark" aria-hidden="true"></span>
+                        <span class="brand-text"
+                            ><span class="brand-name">Rainbow Watcher</span
+                            ><span class="brand-sub">看彩虹的人</span></span
+                        >
+                    </a>
+                    <p>写代码，也记录写代码之外的事。<br />保持好奇，偶尔更新。</p>
+                </div>
+                <nav class="footer-col" aria-label="页脚导航">
+                    <h2>浏览</h2>
+                    <a href="#/posts">文章</a>
+                    <a href="#/research">研究</a>
+                    <a href="#/archives">归档</a>
+                    <a href="#/projects">项目</a>
+                </nav>
+                <div class="footer-col">
+                    <h2>关于</h2>
+                    <a href="#/uses">在用</a>
+                    <a href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer">GitHub ↗</a>
+                    <a href="https://x.com/_rainbowatcher" target="_blank" rel="noreferrer">X / Twitter ↗</a>
+                </div>
+                <div class="footer-col footer-build">
+                    <h2>构建</h2>
+                    <span class="mono">Nuxt · UnoCSS · MDC</span>
+                    <span class="mono">BUILD 2026.11.10</span>
+                    <a
+                        class="mono"
+                        href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                        target="_blank"
+                        rel="noreferrer"
+                        >CC BY-NC-SA 4.0</a
+                    >
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2022–2026 Rainbow Watcher</span>
+                <span class="footer-dot" aria-hidden="true">·</span>
+                <span>用文字和代码搭起来的小站</span>
+                <button type="button" class="link-btn" data-open-contrast>设计说明 / 对比度自检</button>
+            </div>
+        </footer>
+
+        <!-- 移动端菜单 -->
+        <dialog class="drawer" id="drawerDialog" aria-label="站点菜单">
+            <div class="drawer-head">
+                <a class="brand" href="#/">
+                    <span class="brand-mark" aria-hidden="true"></span>
+                    <span class="brand-text"
+                        ><span class="brand-name">Rainbow Watcher</span><span class="brand-sub">看彩虹的人</span></span
+                    >
+                </a>
+                <button class="icon-btn" type="button" data-close-dialog aria-label="关闭菜单">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+                </button>
+            </div>
+            <nav class="drawer-nav" aria-label="移动端导航">
+                <a href="#/posts"><span>博客</span><span class="drawer-num">01</span></a>
+                <a href="#/research"><span>研究</span><span class="drawer-num">02</span></a>
+                <a href="#/uses"><span>在用</span><span class="drawer-num">03</span></a>
+                <a href="#/archives"><span>归档</span><span class="drawer-num">04</span></a>
+                <a href="#/projects"><span>项目</span><span class="drawer-num">05</span></a>
+            </nav>
+            <div class="drawer-foot">
+                <button type="button" class="btn btn-ghost" data-theme-toggle>切换主题</button>
+                <a class="btn btn-ghost" href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer"
+                    >GitHub ↗</a
+                >
+            </div>
+            <button type="button" class="drawer-note" data-open-contrast>设计说明 / 对比度自检</button>
+        </dialog>
+
+        <!-- 搜索面板 -->
+        <dialog class="palette" id="searchDialog" aria-label="搜索">
+            <div class="palette-box">
+                <div class="palette-input-row">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <path d="m20 20-3.2-3.2"></path>
+                    </svg>
+                    <input
+                        id="paletteInput"
+                        type="search"
+                        placeholder="搜索文章、主题或页面…"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="搜索关键词"
+                    />
+                    <kbd>ESC</kbd>
+                </div>
+                <div class="palette-results" id="paletteResults" role="listbox" aria-label="搜索结果"></div>
+                <div class="palette-foot">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> 选择</span>
+                    <span><kbd>↵</kbd> 打开</span>
+                    <span class="palette-count" id="paletteCount"></span>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- 设计说明 / 对比度 -->
+        <dialog class="sheet" id="contrastDialog" aria-label="设计说明与对比度自检">
+            <div class="sheet-box">
+                <div class="sheet-head">
+                    <div>
+                        <p class="eyebrow">Design notes</p>
+                        <h2>设计说明与对比度自检</h2>
+                    </div>
+                    <button class="icon-btn" type="button" data-close-dialog aria-label="关闭">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+                    </button>
+                </div>
+
+                <div class="sheet-body">
+                    <section class="note-section">
+                        <h3>这一版解决什么</h3>
+                        <ul class="note-list">
+                            <li>
+                                <strong>先读，再看。</strong>正文 17px / 1.9 行高，正文列 700px（约 40
+                                个汉字）；标题与正文拉开层级，减少满屏同字号的疲劳。
+                            </li>
+                            <li>
+                                <strong>对比度达标。</strong>正文墨色对纸底约 15.5:1，次要文字约 9.2:1，元信息约
+                                5.7:1；强调色约 6:1，全部达到 WCAG AA，正文达到 AAA。
+                            </li>
+                            <li>
+                                <strong>布局有骨架。</strong>统一 1160px
+                                内容宽度；列表用「日期—标题—主题」三列，文章页加右侧粘性目录。
+                            </li>
+                            <li>
+                                <strong>颜色有节制。</strong>暖纸底 + 墨色字 + 单一青绿强调色，彩虹只作为 2px
+                                品牌线与环形标记出现。
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="note-section">
+                        <div class="note-section-head">
+                            <h3>当前主题的实测对比度</h3>
+                            <button class="btn btn-ghost btn-sm" type="button" data-theme-toggle>切换主题</button>
+                        </div>
+                        <p class="note-hint">按 WCAG 2.1 计算，页面加载与切换主题时实时重算。</p>
+                        <div class="contrast-table" id="contrastTable"></div>
+                    </section>
+
+                    <section class="note-section">
+                        <h3>可交互的地方</h3>
+                        <div class="hotkey-grid">
+                            <div><kbd>⌘K</kbd><span>全局搜索</span></div>
+                            <div><kbd>↑↓ ↵</kbd><span>键盘选择</span></div>
+                            <div><kbd>Esc</kbd><span>关闭浮层</span></div>
+                            <div><span class="hotkey-dot"></span><span>文章页目录随滚动高亮</span></div>
+                        </div>
+                    </section>
+                </div>
+                <div class="sheet-foot">
+                    <span class="mono">PROTOTYPE / v1 · 2026.11</span>
+                    <button class="btn btn-primary" type="button" data-close-dialog>看完了</button>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- 原型工具条 -->
+        <div class="proto-tools" role="group" aria-label="原型工具">
+            <span class="proto-tools-label">PROTOTYPE</span>
+            <button type="button" class="proto-tool" data-theme-toggle aria-label="切换主题" title="切换主题">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"></path></svg>
+            </button>
+            <button
+                type="button"
+                class="proto-tool"
+                data-open-contrast
+                aria-label="设计说明与对比度自检"
+                title="设计说明 / 对比度"
+            >
+                <span class="proto-aa">Aa</span>
+            </button>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+        <script type="module" src="assets/js/app.js"></script>
+    </body>
+</html>
