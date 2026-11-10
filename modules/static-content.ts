@@ -1,3 +1,13 @@
+/**
+ * 构建期内容层：扫描 content/ 下 COLLECTIONS 声明的集合，用共享 Node 侧解析器逐篇
+ * 解析，产出内容哈希命名的 JSON 与 manifest 到 public/_content，由 Nitro 在
+ * /_content/ 下作为静态资源提供。
+ *
+ * 状态：rebuildChain 串行化重建（dev watcher 会突发事件），每次先清空再全量重写。
+ * 不变量：posts 元数据剔除 body；哈希文件名保证旧 JSON 不跨部署残留；content/hide/ 不发布。
+ * 边界：只产出数据资产，不渲染页面、不定义路由，也不处理 .md 以外的文件。
+ */
+
 import { createHash } from "node:crypto"
 import {
     existsSync, mkdirSync, readFileSync, rmSync, writeFileSync,
@@ -24,14 +34,6 @@ function yamlDate(value: any): any {
     return value
 }
 
-/**
- * Build-time content layer: scans content/, parses each document once with
- * the shared Node-only parser, writes deterministic per-document JSON
- * assets plus a manifest into `buildDir/static-content/`, exposed under
- * `/_content/` as Nitro public assets.
- *
- * Nothing from content/hide/ is ever published.
- */
 export default defineNuxtModule({
     meta: {
         name: "static-content",
@@ -42,8 +44,8 @@ export default defineNuxtModule({
         void resolver
         const { buildDir } = nuxt.options
         void buildDir
-        // Generate into the Nuxt public dir so files are copied to dist and
-        // served by Nitro's static handler during prerender + on static hosts.
+        // 写入 Nuxt 的 public 目录，以便文件随构建拷贝到 dist，并在预渲染与
+        // 静态托管时由 Nitro 的静态 handler 直接提供。
         const publicDir = join(rootDir, "public", "_content")
         const outDir = publicDir
 
@@ -51,11 +53,10 @@ export default defineNuxtModule({
         const { highlight } = mdcOptions
         const { parse } = await createContentParser({ highlight })
 
-        // Serialize rebuilds (dev watcher can fire bursts of events). The
-        // recovery catch only drains a previously rejected chain: a transient
-        // malformed edit must not permanently break later watcher rebuilds,
-        // while the current rebuild's own rejection still propagates to the
-        // caller (dev overlay/console, or a hard build failure at setup).
+        // 串行化重建（dev watcher 会突发多条事件）。catch 只用于排空上一次已
+        // reject 的链路：临时写坏的文档不能让后续 watcher 重建永久失效；
+        // 而本次重建自身的 reject 仍会抛给调用方（dev 遮罩/控制台，或 setup 期
+        // 的硬性构建失败）。
         let rebuildChain: Promise<void> = Promise.resolve()
 
         async function rebuild() {
@@ -90,10 +91,9 @@ export default defineNuxtModule({
                         id: file,
                         path,
                     })
-                    // Reproduce @nuxt/content's tree compression: empty
-                    // `className` arrays on <code> nodes are stripped so
-                    // MDCRenderer does not emit class="" on unresolved
-                    // (literal) tags.
+                    // 复刻 @nuxt/content 的树压缩：剥离 <code> 节点上的空
+                    // `className` 数组，避免 MDCRenderer 在未解析（字面量）标签上
+                    // 输出 class=""。
                     visit(parsed.body as any, (node: any) => {
                         if (node.tag === "code" && node.props?.className?.length === 0) {
                             delete node.props.className
@@ -114,7 +114,7 @@ export default defineNuxtModule({
                         }
                     }
 
-                    // Content-hash filename: stale JSON never outlives a redeploy.
+                    // 文件名带内容哈希：旧 JSON 不会跨部署残留。
                     const fileName = `${path.slice(1).replaceAll("/", "_")}.${createHash("sha1").update(JSON.stringify(data))
                         .digest("hex")
                         .slice(0, 8)}.json`
@@ -126,13 +126,13 @@ export default defineNuxtModule({
                     }
                     documents[path] = fileName
 
-                    // Home doc is additionally reachable at "/" (index page).
+                    // 首页文档额外以 "/" 暴露（index 页）。
                     if (file === "home.md") {
                         documents["/"] = fileName
                     }
 
                     if (file.startsWith("posts/")) {
-                        // Meta only — list views must not download bodies.
+                        // 仅元数据——列表页不得下载正文。
                         const { body: _body, ...metaOnly } = data
                         posts.push(metaOnly)
                     }
@@ -158,7 +158,7 @@ export default defineNuxtModule({
 
         await rebuild()
 
-        // Dev watcher: rebuild on add/change/unlink under content/.
+        // dev watcher：content/ 下新增/修改/删除 .md 时重建。
         if (nuxt.options.dev) {
             const contentDir = join(rootDir, "content")
             nuxt.hook("builder:watch", async (_event: string, path: string) => {

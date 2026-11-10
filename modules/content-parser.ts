@@ -1,3 +1,14 @@
+/**
+ * Node 侧 Markdown 解析器，复刻 @nuxt/content v3 管线：插件顺序与选项、Shiki 高亮器
+ * （压缩 class map、主题/语言）、相对链接归一化、toc depth 3 均与 nuxt.config.ts 对齐。
+ * `#mdc-imports` / `#mdc-configs` 在 Vite 外无法解析，因此插件在此显式 import。
+ *
+ * 生命周期：高亮器与语言包在 createContentParser 调用时一次性加载，由调用方复用。
+ * 不变量：主题按「具名槽位在前、default 在后」排序，class 列表与 CSS 变量顺序稳定。
+ *
+ * 边界：不读文件、不写产物、不维护路由或 manifest，只做 markdown → MDC AST。
+ */
+
 import { createMarkdownParser, createShikiHighlighter, rehypeHighlight } from "@nuxtjs/mdc/runtime"
 import defu from "defu"
 import { normalizeUri } from "micromark-util-sanitize-uri"
@@ -14,17 +25,6 @@ import slugify from "slugify"
 import { isRelative, withLeadingSlash, withoutTrailingSlash } from "ufo"
 import { visit } from "unist-util-visit"
 import type { MDCParserResult } from "@nuxtjs/mdc"
-
-/**
- * Node-only Markdown parser replicating the @nuxt/content v3 pipeline:
- * - same remark/rehype plugin order and options as nuxt.config.ts
- * - same Shiki highlighter construction (compressed class maps, themes/languages)
- * - same relative-link normalization handler
- * - toc depth 3
- *
- * `#mdc-imports` / `#mdc-configs` do not resolve outside the Nuxt/Vite
- * context, so plugins are imported explicitly here.
- */
 
 const SEMVER_REGEX = /^\d+(?:\.\d+)*(?:\.x)?$/
 
@@ -90,7 +90,7 @@ export type ParserConfig = {
 }
 
 export async function createContentParser(config: { highlight?: ParserConfig } = {}) {
-    // Reproduce @nuxt/content `getHighlightPluginInstance` with compress: true.
+    // 复刻 @nuxt/content 的 `getHighlightPluginInstance`（compress: true）。
     const highlightOptions: ParserConfig = defu(config.highlight ?? {}, {
         langs: ["bash", "html", "mdc", "vue", "yml", "scss", "ts", "ts", "typescript"],
         theme: { default: "material-theme-palenight" },
@@ -99,10 +99,9 @@ export async function createContentParser(config: { highlight?: ParserConfig } =
     const rawThemes = (typeof highlightOptions.theme === "string"
         ? { default: highlightOptions.theme }
         : highlightOptions.theme ?? { default: "material-theme-palenight" }) as Record<string, string>
-    // Reproduce the @nuxt/content pipeline's deterministic theme ordering:
-    // named (non-default) slots first, `default` last. This orders both the
-    // generated `shiki-themes` class list and CSS custom-property order in
-    // token styles, keeping prerendered HTML structurally identical.
+    // 复刻 @nuxt/content 管线的确定性主题排序：具名槽位（非 default）在前、
+    // `default` 在后。生成的 `shiki-themes` class 列表与 token 样式里的
+    // CSS 自定义属性顺序都由此决定，保证预渲染 HTML 结构一致。
     const { default: defaultTheme, ...restThemes } = rawThemes
     const themesObject: Record<string, string> = defaultTheme === undefined ? { ...restThemes } : { ...restThemes, default: defaultTheme }
     const bundledThemes: Record<string, any> = {}
@@ -181,6 +180,6 @@ export async function createContentParser(config: { highlight?: ParserConfig } =
 }
 
 export default function contentParserModule() {
-    // Non-module helper; kept as default export so Nuxt's modules/ auto
-    // loader does not treat this file as an invalid module.
+    // 本文件并非 Nuxt 模块；保留默认导出仅为满足 modules/ 目录的自动加载器，
+    // 避免它把该文件当成非法模块报错。
 }
