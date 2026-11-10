@@ -1,0 +1,380 @@
+/**
+ * 做什么：v2 的次级页面：在用清单、项目列表、研究列表与共用的大链接收尾。
+ * 取舍：一律用整行列表，不用卡片网格；项目缩写成大字，不做图标底板。
+ * 边界：不涉及文章详情与全局浮层。
+ */
+
+.uses {
+    padding-bottom: var(--section);
+}
+
+.uses-group {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--s-3);
+    padding-block: 56px;
+}
+
+.uses-group + .uses-group {
+    padding-top: 32px;
+}
+
+.uses-head {
+    grid-column: 1 / 4;
+}
+
+.uses-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.4vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.uses-head p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: var(--t-tiny);
+}
+
+.use-list {
+    grid-column: 4 / -1;
+}
+
+.use-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 2fr) 76px 24px;
+    gap: 20px;
+    align-items: baseline;
+    padding: 16px 14px;
+    color: var(--ink);
+    transition:
+        background-color 0.18s var(--ease),
+        color 0.18s var(--ease);
+}
+
+.use-row:hover {
+    background: var(--ink);
+    color: var(--bg);
+}
+
+.use-name {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.use-desc {
+    color: var(--muted);
+    font-size: var(--t-small);
+    line-height: 1.5;
+}
+
+.use-row:hover .use-desc,
+.use-row:hover .use-side {
+    color: var(--panel-muted);
+}
+
+.use-side {
+    color: var(--muted);
+    font-size: 13px;
+    text-align: right;
+}
+
+.use-arrow {
+    align-self: center;
+    justify-self: end;
+    color: var(--muted);
+}
+
+.use-row:hover .use-arrow {
+    color: var(--ink);
+}
+
+.project-list {
+    padding-bottom: var(--section);
+}
+
+.project-row {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr) 120px 32px;
+    gap: 24px;
+    align-items: center;
+    padding-block: 36px;
+    color: var(--ink);
+    transition: color 0.18s var(--ease);
+}
+
+.project-mark {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 4.6vw, 64px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+}
+
+.project-main h2 {
+    font-size: clamp(26px, 3vw, 42px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.project-main p {
+    max-width: 58ch;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: var(--t-small);
+    line-height: 1.55;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+.project-tags .tag {
+    background: var(--bg-2);
+}
+
+.project-status {
+    color: var(--muted);
+    font-size: var(--t-tiny);
+    text-align: right;
+}
+
+.project-arrow {
+    justify-self: end;
+    color: var(--muted);
+    transition:
+        color 0.18s var(--ease),
+        transform 0.18s var(--ease);
+}
+
+.project-row:hover {
+    color: var(--muted);
+}
+
+.project-row:hover .project-main h2 {
+    color: var(--ink);
+}
+
+.project-row:hover .project-arrow {
+    color: var(--ink);
+    transform: translate(3px, -3px);
+}
+
+.library-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: var(--section);
+    padding: 40px;
+    background: var(--panel);
+    color: var(--panel-ink);
+    font-size: clamp(28px, 4vw, 56px);
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+
+.library-cta:hover {
+    color: var(--accent);
+}
+
+.library-cta .arrow-ic {
+    width: 40px;
+    height: 40px;
+}
+
+.research {
+    padding-bottom: var(--section);
+}
+
+.research-note {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 24px;
+    align-items: baseline;
+    margin-bottom: 40px;
+    padding: 24px;
+    background: var(--accent);
+    color: var(--accent-ink);
+}
+
+.research-note strong {
+    font-size: var(--t-lead);
+    font-weight: 700;
+}
+
+.research-note p {
+    max-width: 68ch;
+    font-size: var(--t-small);
+    line-height: 1.6;
+}
+
+.research-row {
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr) 32px;
+    gap: 24px;
+    align-items: start;
+    padding-block: 32px;
+    color: var(--ink);
+    transition: color 0.18s var(--ease);
+}
+
+.research-date {
+    color: var(--muted);
+    font-size: var(--t-tiny);
+    font-variant-numeric: tabular-nums;
+}
+
+.research-title {
+    display: block;
+    font-size: clamp(26px, 3vw, 42px);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+}
+
+.research-sub {
+    display: block;
+    max-width: 64ch;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: var(--t-small);
+    line-height: 1.55;
+}
+
+.research-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+.research-arrow {
+    justify-self: end;
+    color: var(--muted);
+}
+
+.research-row:hover .research-title {
+    color: var(--muted);
+}
+
+.research-row:hover .research-arrow {
+    color: var(--ink);
+}
+
+@media (width <= 860px) {
+    .uses-group {
+        display: block;
+        padding-block: 40px;
+    }
+
+    .uses-head {
+        margin-bottom: 16px;
+    }
+
+    .uses-head p {
+        margin-top: 6px;
+    }
+
+    .use-row {
+        grid-template-columns: minmax(0, 1fr) 24px;
+        gap: 8px 16px;
+    }
+
+    .use-desc {
+        grid-column: 1 / 2;
+        grid-row: 2;
+    }
+
+    .use-side {
+        display: none;
+    }
+
+    .use-arrow {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+    }
+
+    .project-row {
+        grid-template-columns: 56px minmax(0, 1fr) 24px;
+        gap: 16px;
+        padding-block: 28px;
+    }
+
+    .project-status {
+        display: none;
+    }
+
+    .project-arrow {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+    }
+
+    .project-mark {
+        font-size: 36px;
+    }
+
+    .library-cta {
+        padding: 28px;
+    }
+
+    .research-note {
+        display: block;
+    }
+
+    .research-note p {
+        margin-top: 10px;
+    }
+
+    .research-row {
+        grid-template-columns: minmax(0, 1fr) 24px;
+        gap: 8px 16px;
+        padding-block: 26px;
+    }
+
+    .research-date {
+        grid-column: 1 / 2;
+        grid-row: 1;
+    }
+
+    .research-title {
+        grid-column: 1 / 2;
+        grid-row: 2;
+        margin-top: 4px;
+    }
+
+    .research-sub,
+    .research-tags {
+        grid-column: 1 / 2;
+    }
+
+    .research-arrow {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+    }
+}
+
+@media (width <= 560px) {
+    .use-name {
+        font-size: 18px;
+    }
+
+    .project-main h2 {
+        font-size: 24px;
+    }
+
+    .library-cta {
+        font-size: 26px;
+    }
+
+    .library-cta .arrow-ic {
+        width: 28px;
+        height: 28px;
+    }
+}
