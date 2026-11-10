@@ -5,3 +5,4 @@ allowBuilds:
   fsevents: true
   simple-git-hooks: true
   vue-demi: true
+shamefullyHoist: true
