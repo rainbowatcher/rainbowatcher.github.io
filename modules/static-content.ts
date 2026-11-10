@@ -30,7 +30,7 @@ function yamlDate(value: any): any {
  * assets plus a manifest into `buildDir/static-content/`, exposed under
  * `/_content/` as Nitro public assets.
  *
- * Nothing from content/hide/ or content/links/ is ever published.
+ * Nothing from content/hide/ is ever published.
  */
 export default defineNuxtModule({
     meta: {
