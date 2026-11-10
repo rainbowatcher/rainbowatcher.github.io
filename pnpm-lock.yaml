@@ -217,9 +217,6 @@ importers:
       '@vueuse/nuxt':
         specifier: ^15.0.0
         version: 15.0.0(427d559ab3d1d05241facc0cd6e9977c)
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       commitlint:
         specifier: ^21.2.4
         version: 21.2.4(conventional-commits-parser@7.1.4)(typescript@7.0.2)
@@ -238,9 +235,6 @@ importers:
       nuxt:
         specifier: ^4.6.4
         version: 4.6.4(@babel/plugin-proposal-decorators@7.25.7(@babel/core@7.29.13(supports-color@10.2.2))(supports-color@10.2.2))(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.13(supports-color@10.2.2)))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.13(supports-color@10.2.2)))(@oxc-project/types@0.156.0)(@vue/compiler-sfc@3.5.45)(acorn@8.14.0)(better-sqlite3@11.8.1)(confbox@0.3.2)(db0@0.3.4(better-sqlite3@11.8.1))(dotenv@17.4.2)(encoding@0.1.13)(esbuild@0.28.2)(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(giget@3.3.1)(ioredis@5.11.1(supports-color@10.2.2))(lightningcss@1.33.0)(mlly@1.8.2)(optionator@0.9.4)(oxc-parser@0.153.0)(oxlint@1.92.0)(rolldown@1.2.16)(rollup-plugin-visualizer@7.1.2(rolldown@1.2.16)(rollup@4.68.0))(rollup@4.68.0)(serve@14.2.7(supports-color@10.2.2))(srvx@1.0.8)(supports-color@10.2.2)(terser@5.51.2)(tsx@4.19.2)(typescript@7.0.2)(vite@8.3.6(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.19.2)(yaml@2.7.0))(webpack@5.95.0(esbuild@0.28.2))(yaml@2.7.0)
-      ohash:
-        specifier: ^1.1.4
-        version: 1.1.4
       oxfmt:
         specifier: ^0.77.0
         version: 0.77.0
@@ -277,9 +271,6 @@ importers:
       slugify:
         specifier: ^1.6.9
         version: 1.6.9
-      std-env:
-        specifier: ^4.3.0
-        version: 4.3.0
       tailwind-merge:
         specifier: ^3.7.0
         version: 3.7.0
@@ -3648,10 +3639,6 @@ packages:
   clone-response@1.0.3:
     resolution: {integrity: sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==}
 
-  clsx@2.1.1:
-    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
-    engines: {node: '>=6'}
-
   cluster-key-slot@1.1.1:
     resolution: {integrity: sha512-rwHwUfXL40Chm1r08yrhU3qpUvdVlgkKNeyeGPOxnW8/SyVDvgRaed/Uz54AqWNaTCAThlj6QAs3TZcKI0xDEw==}
     engines: {node: '>=0.10.0'}
@@ -5539,10 +5526,6 @@ packages:
 
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
-    engines: {node: '>= 0.6'}
-
-  mime-db@1.53.0:
-    resolution: {integrity: sha512-oHlN/w+3MQ3rba9rqFr6V/ypF10LSkdwUysQL7GkXoTgIWeV+tcXGA852TBxH+gsh8UWoyhR1hKcoMJTuWflpg==}
     engines: {node: '>= 0.6'}
 
   mime-db@1.54.0:
@@ -11629,8 +11612,6 @@ snapshots:
     dependencies:
       mimic-response: 1.0.1
 
-  clsx@2.1.1: {}
-
   cluster-key-slot@1.1.1: {}
 
   color-convert@2.0.1:
@@ -11678,7 +11659,7 @@ snapshots:
 
   compressible@2.0.18:
     dependencies:
-      mime-db: 1.53.0
+      mime-db: 1.54.0
     optional: true
 
   compression@1.8.1(supports-color@10.2.2):
@@ -13908,9 +13889,6 @@ snapshots:
     optional: true
 
   mime-db@1.52.0: {}
-
-  mime-db@1.53.0:
-    optional: true
 
   mime-db@1.54.0: {}
 

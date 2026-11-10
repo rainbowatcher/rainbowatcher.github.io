@@ -1,5 +1,3 @@
-import { hasWindow } from "std-env"
-
 const hasFetched = new Set<string>()
 const createLink = () => document.createElement("link")
 
@@ -19,7 +17,7 @@ function viaXHR(url: string) {
 let link
 export function usePrefetch(url: string) {
     if (hasFetched.has(url)) return
-    if (hasWindow) {
+    if (typeof window !== "undefined") {
         link = createLink()
         hasFetched.add(url)
         if (link.relList?.supports?.("prefetch")) {

@@ -7,10 +7,10 @@
  * 边界：不读文件、不写产物、不维护路由或 manifest。
  */
 
+import { createHash } from "node:crypto"
 import { createMarkdownParser, createShikiHighlighter, rehypeHighlight } from "@nuxtjs/mdc/runtime"
 import defu from "defu"
 import { normalizeUri } from "micromark-util-sanitize-uri"
-import { hash } from "ohash"
 import rehypeExternalLinks from "rehype-external-links"
 import rehypeKatex from "rehype-katex"
 import remarkEmoji from "remark-emoji"
@@ -131,7 +131,7 @@ export async function createContentParser(config: { highlight?: ParserConfig } =
                     (node: any) => !!node.properties?.style,
                     (node: any) => {
                         const { style } = node.properties
-                        stylesMap[style] = stylesMap[style] || `s${hash(style).slice(0, 4)}`
+                        stylesMap[style] = stylesMap[style] || `s${createHash("sha1").update(style).digest("hex").slice(0, 4)}`
                         node.properties.class = `${node.properties.class || ""} ${stylesMap[style]}`.trim()
                         node.properties.style = undefined
                     },
