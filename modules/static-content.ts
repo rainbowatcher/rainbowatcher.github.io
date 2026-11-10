@@ -1,11 +1,11 @@
 /**
- * 构建期内容层：扫描 content/ 下 COLLECTIONS 声明的集合，用共享 Node 侧解析器逐篇
- * 解析，产出内容哈希命名的 JSON 与 manifest 到 public/_content，由 Nitro 在
- * /_content/ 下作为静态资源提供。
- *
- * 状态：rebuildChain 串行化重建（dev watcher 会突发事件），每次先清空再全量重写。
- * 不变量：posts 元数据剔除 body；哈希文件名保证旧 JSON 不跨部署残留；content/hide/ 不发布。
- * 边界：只产出数据资产，不渲染页面、不定义路由，也不处理 .md 以外的文件。
+ * 做什么：把 content/ 下的 markdown 在构建期编译成静态 JSON 数据集，取代 @nuxt/content
+ * 的运行时查询；每篇文档一个内容哈希命名的 JSON，外加 manifest.json 索引。
+ * 状态与生命周期：rebuildChain 串行化重建（dev watcher 会突发事件），每次清空后全量重写。
+ * 取舍与不变量：manifest.documents 以路由 path 为键，posts 剔除 body；哈希文件名保证旧
+ * JSON 不跨部署残留；content/hide/ 与 COLLECTIONS 之外的文件不发布。
+ * 边界：只产出数据资产到 public/_content/（供 queryContents.ts 读取），不渲染页面、
+ * 不定义路由，也不处理 .md 以外的文件。
  */
 
 import { createHash } from "node:crypto"

@@ -1,10 +1,10 @@
 /**
- * 构建信息模块：在 build:before 阶段把构建时间写入 app/assets/build-info.json，
- * 供页面展示站点最后构建时间。
- *
- * 取舍：不依赖构建机器时区，统一换算成 UTC+8 再格式化，输出固定带 GMT+8 后缀；
+ * 做什么：构建信息模块，在 build:before 阶段把构建时间写入 app/assets/build-info.json，
+ * 供 SiteFooter 展示站点最后构建时间。
+ * 状态与生命周期：无内部状态，每次构建触发一次写入。
+ * 取舍与不变量：不依赖构建机器时区，统一换算成 UTC+8，输出固定带 GMT+8 后缀；
  * JSON 用 4 空格缩进并保留结尾换行，保证该文件在 git 中的 diff 稳定。
- * 边界：只写 app/assets/build-info.json，不参与页面渲染，也不计算版本号。
+ * 边界：只写这一个 JSON 文件，不参与页面渲染，也不计算版本号。
  */
 
 import fs from "node:fs"
