@@ -14,7 +14,7 @@ const { breakpoints } = useSiteState()
 function getLink(item?: NavigationItem): string {
     (item as unknown as Event)?.preventDefault?.()
     if (!item) return ""
-    return props.usePermalink ? item.permalink as string : item.path
+    return props.usePermalink ? item.permalink as string : item.path ?? ""
 }
 
 function handleClick(e: Event, url?: NavigationItem) {

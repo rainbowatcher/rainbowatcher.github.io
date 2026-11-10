@@ -26,6 +26,8 @@ const props = defineProps({
 })
 
 
+const refinedWidth = computed(() => (typeof props.width === "boolean" ? undefined : props.width))
+
 const refinedSrc = computed(() => {
     if (props.src?.startsWith("/") && !props.src.startsWith("//")) {
         const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL))
@@ -41,7 +43,7 @@ const refinedSrc = computed(() => {
     <NuxtImg
         :src="refinedSrc"
         :alt="alt"
-        :width="width"
+        :width="refinedWidth"
         :height="height"
         :loading="lazy"
     />

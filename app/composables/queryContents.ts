@@ -2,8 +2,6 @@ import process from "node:process"
 import { addPermalink, toNavItems } from "~/utils/path"
 import type { ContentDocument, NavigationItem, Post } from "~/types/content"
 
-export type { ContentDocument, NavigationItem, Post }
-
 type Manifest = {
     documents: Record<string, string>
     posts: ContentDocument[]
