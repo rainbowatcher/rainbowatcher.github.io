@@ -6,7 +6,6 @@
     "author": "rainbowatcher <rainbow-w@qq.com>",
     "license": "MIT",
     "repository": "https://github.com/rainbowatcher/rainbowatcher.github.io.git",
-    "main": "index.js",
     "engines": {
         "node": ">=20",
         "pnpm": ">=9"
