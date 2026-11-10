@@ -1,20 +1,4 @@
-/* 设计变量：暖纸 + 墨色 + 青绿强调；深色为同源暗阶 */
-@font-face {
-    font-family: "Cascadia Code";
-    src: url("../../../app/public/fonts/CascadiaCode/CascadiaCode.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "HongLei";
-    src: url("../../../app/public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-}
-
+/* 设计变量：暖纸 + 墨色 + 青绿强调；深色为同源暗阶；不引入任何 web font */
 :root {
     --bg: #faf8f2;
     --bg-glow: rgb(11 107 95 / 6%);
@@ -57,7 +41,7 @@
         "Microsoft YaHei", sans-serif;
     --font-serif:
         "Songti SC", "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN", STSong, SimSun, Georgia, serif;
-    --font-mono: "Cascadia Code", "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
     --prose-size: 17px;
     color-scheme: light;
 }
