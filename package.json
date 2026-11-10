@@ -36,7 +36,6 @@
         "@iconify-json/ph": "^1.2.2",
         "@nuxt/fonts": "^1.2.0",
         "@nuxt/image": "^2.2.1",
-        "@nuxtjs/algolia": "^1.11.2",
         "@nuxtjs/color-mode": "^4.1.0",
         "@nuxtjs/mdc": "0.13.5",
         "@nuxtjs/seo": "2.1.1",

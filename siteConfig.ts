@@ -7,12 +7,10 @@ const vercelUrl = "https://blog-rainbowatcher.vercel.app"
 const ogImage = "/og.webp"
 const licenseUrl = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 
-export const algolia: NuxtConfig["algolia"] = {
+export const docSearch = {
     apiKey: "f757c625852758ee96aaf2268959166e",
-    applicationId: "3BGNB9V5MC",
-    docSearch: {
-        indexName: "rainbowatcher",
-    },
+    appId: "3BGNB9V5MC",
+    indexName: "rainbowatcher",
 }
 
 export const app: NuxtConfig["app"] = {

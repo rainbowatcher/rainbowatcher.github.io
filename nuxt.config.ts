@@ -1,6 +1,6 @@
 import process from "node:process"
 import {
-    algolia, app, appConfig, site,
+    app, appConfig, docSearch, site,
 } from "./siteConfig"
 
 export default defineNuxtConfig({
@@ -30,7 +30,6 @@ export default defineNuxtConfig({
         ssr: true,
     },
 
-    algolia,
     app,
     appConfig,
     colorMode: { classSuffix: "" },
@@ -141,7 +140,6 @@ export default defineNuxtConfig({
     },
 
     modules: [
-        "@nuxtjs/algolia",
         "@nuxtjs/seo",
         "@nuxtjs/color-mode",
         "@nuxtjs/mdc",
@@ -181,6 +179,10 @@ export default defineNuxtConfig({
         options: {
             scrollBehaviorType: "smooth",
         },
+    },
+
+    runtimeConfig: {
+        public: { docSearch },
     },
 
     site,
