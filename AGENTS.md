@@ -18,6 +18,8 @@
 - 调用本地工具一律 `pnpm exec <bin>`（如 `pnpm exec oxlint`）。
 - 禁用 `npx`：它会静默下载非锁定版本，且 npm 无法在这套 pnpm 隔离布局上工作。
 - 新增依赖前先确认现有依赖能否满足；锁定文件（`pnpm-lock.yaml`）随依赖变更一起提交。
+- **幽灵依赖是明确接受的**：`shamefullyHoist: true` 让 nuxt / @nuxtjs/mdc / unocss / shiki 的传递依赖（如 `@nuxt/kit`、`defu`、`ufo`、`unist-util-visit`、`@shikijs/langs`）可直接 import。不为它们声明版本，版本由上游决定，避免两份副本与独立漂移。
+- knip 的 `unlisted` 结果只作审计参考，不进 CI 门禁；需要 fail-loud 时应关闭 `shamefullyHoist` 并全面声明，而非挑选部分声明。
 
 ### 1.3 文件头注释
 
