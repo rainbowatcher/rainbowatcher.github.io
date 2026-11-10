@@ -103,6 +103,7 @@ pnpm fmt          # 格式化（oxfmt）
 pnpm fmt:check    # 格式校验
 pnpm lint         # 代码检查（oxlint）
 pnpm lint:fix     # 自动修复
+pnpm typecheck    # 类型检查（nuxi + golar）
 pnpm generate     # 全量构建，验证 prerender 与内容管线
 pnpm check        # 检查 content/ 中的外部链接（lychee）
 ```
@@ -115,4 +116,4 @@ pnpm check        # 检查 content/ 中的外部链接（lychee）
 - [ ] 没有文件超过 500 行？
 - [ ] 新增模块目录有 `index.ts` 或 `README.md` 说明职责？
 - [ ] 未手改生成物（`public/_content/`、`.nuxt/`、`.output/`、`dist/`）？
-- [ ] `pnpm fmt:check` 与 `pnpm lint` 通过；构建相关改动已跑 `pnpm generate`？
+- [ ] `pnpm fmt:check`、`pnpm lint` 通过，`pnpm typecheck` 无新增错误；构建相关改动已跑 `pnpm generate`？
