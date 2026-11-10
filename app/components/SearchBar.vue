@@ -49,6 +49,15 @@ onUnmounted(() => instance?.destroy())
 .docsearch {
     line-height: normal;
 }
+
+/* 预渲染阶段容器还是空的，先用伪元素占住图标位，DocSearch 注入按钮后 :empty 失效 */
+.docsearch:empty::before {
+    @apply i-ph-magnifying-glass block op-75;
+    content: "";
+    height: 1.2em;
+    width: 1.2em;
+    background-color: hsl(var(--foreground));
+}
 .docsearch > .DocSearch-Button {
     @apply i-ph-magnifying-glass;
     height: 1.2em !important;
