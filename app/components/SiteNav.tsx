@@ -1,3 +1,9 @@
+/**
+ * 做什么：站点主导航：页头与移动端菜单共用同一组导航项。
+ * 状态与生命周期：导航项为静态数据；高亮由当前路由前缀决定。
+ * 取舍与不变量：路由前缀匹配允许 /research/<slug> 在内页仍高亮「研究」。
+ * 边界：不负责菜单显隐（见 SiteMenuContent）与主题/搜索入口。
+ */
 import { NuxtLink } from "#components"
 
 type NavItemsPassThrough = {
@@ -47,6 +53,7 @@ export default defineNuxtComponent({
         return {
             navItems: [
                 { label: "博客", path: "/posts" },
+                { label: "研究", path: "/research" },
                 { label: "在用", path: "/uses" },
                 { label: "归档", path: "/archives" },
                 { label: "项目", path: "/projects" },
