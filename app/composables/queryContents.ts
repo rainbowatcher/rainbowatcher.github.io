@@ -27,7 +27,7 @@ async function loadJson<T>(file: string): Promise<T> {
         const { readFileSync } = await import(/* @vite-ignore */ "node:fs")
         return JSON.parse(readFileSync(`${process.cwd()}/public/_content/${file}`, "utf8")) as T
     }
-    return await $fetch<T>(`${baseURL()}/_content/${file}`)
+    return (await $fetch<T>(`${baseURL()}/_content/${file}`)) as T
 }
 
 async function getManifest(): Promise<Manifest> {
