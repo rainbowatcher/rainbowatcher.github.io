@@ -25,6 +25,7 @@
         "fmt:check": "oxfmt --check",
         "lint": "oxlint",
         "lint:fix": "oxlint --fix",
+        "typecheck": "nuxi typecheck --checker=golar",
         "upgrade": "nuxi upgrade"
     },
     "devDependencies": {
