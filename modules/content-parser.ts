@@ -1,5 +1,5 @@
 import { createMarkdownParser, createShikiHighlighter, rehypeHighlight } from "@nuxtjs/mdc/runtime"
-import { defu } from "defu"
+import defu from "defu"
 import { normalizeUri } from "micromark-util-sanitize-uri"
 import { hash } from "ohash"
 import rehypeExternalLinks from "rehype-external-links"
