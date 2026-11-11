@@ -1,5 +1,5 @@
 /**
- * 做什么：v3 的颜色、字体、尺度、圆角与动效变量，亮暗两套都由 HSL 定义。
+ * 做什么：v3 的颜色、字体、尺度、直角与动效变量，亮暗两套都由 HSL 定义。
  * 状态与生命周期：主题由 html[data-theme] 切换，首屏前的内联脚本先写入该属性。
  * 取舍与不变量：暗色主色固定为 hsl(203 60% 12%)；两套主题都用有彩底与有彩字，不出现纯黑白大色块。
  * 边界：不含布局与组件规则，也不定义第三方图标颜色。
@@ -24,6 +24,15 @@
     --code-ink: hsl(203 30% 26%);
     --note-bg: hsl(48 46% 92%);
     --note-line: hsl(48 32% 76%);
+    --scrim: hsl(203 34% 26% / 0.32);
+
+    --tok-comment: hsl(203 12% 48%);
+    --tok-keyword: hsl(3 42% 46%);
+    --tok-string: hsl(150 26% 34%);
+    --tok-number: hsl(28 46% 40%);
+    --tok-function: hsl(196 46% 32%);
+    --tok-constant: hsl(340 30% 44%);
+    --tok-variable: hsl(216 36% 42%);
 
     --r1: hsl(6 50% 62%);
     --r2: hsl(28 52% 60%);
@@ -47,11 +56,12 @@
     --t-small: 14px;
     --t-label: 13px;
 
-    --wrap: 1280px;
+    --wrap: 1760px;
     --gut: 80px;
-    --nav-h: 66px;
-    --padt: 116px;
-    --padb: 72px;
+    --nav-h: 62px;
+    --padt: 72px;
+    --padb: 48px;
+    --article-width: 960px;
     --s-1: 4px;
     --s-2: 8px;
     --s-3: 12px;
@@ -63,13 +73,13 @@
     --s-9: 96px;
     --s-10: 128px;
 
-    --r-sm: 6px;
-    --r-md: 12px;
-    --r-lg: 18px;
-    --r-btn: 10px;
+    --r-sm: 0;
+    --r-md: 0;
+    --r-lg: 0;
+    --r-btn: 0;
     --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
     --dur: 480ms;
-    --shadow: 0 12px 32px -22px hsl(203 40% 24% / 0.35);
+    --shadow: none;
 }
 
 :root[data-theme="dark"] {
@@ -91,6 +101,15 @@
     --code-ink: hsl(198 24% 84%);
     --note-bg: hsl(48 22% 20%);
     --note-line: hsl(48 20% 36%);
+    --scrim: hsl(203 60% 6% / 0.58);
+
+    --tok-comment: hsl(198 14% 52%);
+    --tok-keyword: hsl(3 44% 68%);
+    --tok-string: hsl(150 28% 62%);
+    --tok-number: hsl(28 44% 66%);
+    --tok-function: hsl(190 42% 64%);
+    --tok-constant: hsl(340 34% 68%);
+    --tok-variable: hsl(216 38% 70%);
 
     --r1: hsl(6 46% 66%);
     --r2: hsl(28 48% 66%);
@@ -100,5 +119,5 @@
     --r6: hsl(216 40% 70%);
     --r7: hsl(276 22% 70%);
 
-    --shadow: 0 14px 36px -22px hsl(203 70% 4% / 0.65);
+    --shadow: none;
 }

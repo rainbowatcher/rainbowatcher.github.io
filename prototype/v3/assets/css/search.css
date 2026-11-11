@@ -1,0 +1,180 @@
+/**
+ * 做什么：v3 全站 Algolia 搜索面板的版式与结果列表。
+ * 状态与生命周期：面板由 search.js 切换 hidden，键盘选中项写入 .is-active；无网络时显示错误态。
+ * 取舍与不变量：与页面共用一套边框、间距和强调色，方形无圆角；遮罩是半透明有彩底，不用黑白。
+ * 边界：不发起请求，也不负责把命中结果映射到原型页面。
+ */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    padding: 10svh var(--s-4) var(--s-4);
+    background: var(--scrim);
+}
+
+.search-overlay[hidden] {
+    display: none;
+}
+
+.search-panel {
+    width: min(680px, 100%);
+    border: 1px solid var(--line-strong);
+    background: var(--bg);
+}
+
+.search-panel__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    height: 52px;
+    padding-inline: var(--s-4);
+    border-bottom: 1px solid var(--line);
+}
+
+.search-panel__bar svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1.7;
+}
+
+.search-panel__bar input {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font-size: 16px;
+    outline: none;
+}
+
+.search-panel__bar input::placeholder {
+    color: var(--muted);
+}
+
+.search-panel__bar kbd {
+    flex: none;
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+.search-panel__status {
+    padding: var(--s-2) var(--s-4);
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: var(--t-small);
+}
+
+.search-results {
+    max-height: min(52svh, 460px);
+    overflow-y: auto;
+}
+
+.search-results li {
+    border-bottom: 1px solid var(--line);
+}
+
+.search-results a {
+    display: grid;
+    gap: 2px;
+    padding: var(--s-3) var(--s-4);
+    border-left: 2px solid transparent;
+}
+
+.search-results a:hover,
+.search-results a.is-active {
+    border-left-color: var(--r5);
+    background: var(--bg-2);
+}
+
+.search-results strong {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.search-results span {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.search-results mark {
+    background: var(--accent-soft);
+    color: var(--accent-on-soft);
+}
+
+.search-panel__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding: var(--s-2) var(--s-4);
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+.algolia-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    flex: 1 1 260px;
+    max-width: 340px;
+    min-height: 40px;
+    padding: 0 var(--s-3);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--ink-2);
+    font-size: 14px;
+    text-align: left;
+    transition:
+        border-color 240ms var(--ease),
+        color 240ms var(--ease);
+}
+
+.algolia-trigger:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.algolia-trigger svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+}
+
+.algolia-trigger kbd {
+    margin-left: auto;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+}

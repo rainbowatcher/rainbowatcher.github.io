@@ -6,7 +6,8 @@
  */
 
 .hero {
-    padding-top: calc(var(--nav-h) + var(--s-7));
+    padding-top: calc(var(--nav-h) + var(--s-6));
+    padding-bottom: var(--s-6);
 }
 
 .hero__grid {
@@ -30,7 +31,7 @@
 }
 
 .hero__text h1 {
-    margin-block: var(--s-4) var(--s-5);
+    margin-block: var(--s-3) var(--s-4);
     font-family: var(--font-display);
     font-size: var(--t-h1);
     font-weight: 600;
@@ -43,13 +44,13 @@
 }
 
 .hero .btn-row {
-    margin-top: var(--s-7);
+    margin-top: var(--s-5);
 }
 
 .hero__fact {
     position: relative;
-    margin-top: var(--s-7);
-    padding-top: var(--s-5);
+    margin-top: var(--s-5);
+    padding-top: var(--s-4);
     border-top: 1px solid var(--line);
     color: var(--muted);
     font-family: var(--font-mono);
@@ -62,7 +63,7 @@
     left: 0;
     width: 28px;
     height: 3px;
-    border-radius: 3px;
+    border-radius: 0;
     background: var(--spectrum);
     content: "";
 }
@@ -70,10 +71,10 @@
 .reader {
     display: flex;
     flex-direction: column;
-    min-height: 540px;
+    min-height: 420px;
     overflow: hidden;
     border: 1px solid var(--line);
-    border-radius: var(--r-lg);
+    border-radius: 0;
     background: var(--bg-2);
     box-shadow: var(--shadow);
 }
@@ -82,8 +83,8 @@
     display: flex;
     align-items: center;
     gap: var(--s-2);
-    height: 44px;
-    padding-inline: var(--s-5);
+    height: 36px;
+    padding-inline: var(--s-4);
     border-bottom: 1px solid var(--line);
     background: var(--bg-3);
 }
@@ -97,7 +98,7 @@
 .reader__dots i {
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--line-strong);
 }
 
@@ -123,8 +124,8 @@
     flex: 1;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 148px;
-    gap: var(--s-5);
-    padding: var(--s-6);
+    gap: var(--s-4);
+    padding: var(--s-4);
 }
 
 .reader__doc h3 {
@@ -192,7 +193,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--s-3);
-    padding: var(--s-3) var(--s-6);
+    padding: var(--s-2) var(--s-4);
     border-top: 1px solid var(--line);
     color: var(--muted);
     font-family: var(--font-mono);
@@ -205,7 +206,7 @@
     left: -21px;
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--spectrum);
     transform: translateY(-50%);
     animation: breathe 2.8s ease-in-out infinite;
@@ -232,7 +233,7 @@
     grid-template-columns: 116px minmax(0, 1fr) minmax(0, 250px) 24px;
     gap: var(--s-5);
     align-items: center;
-    min-height: 86px;
+    min-height: 68px;
     padding-inline: 0;
     transition: background-color 260ms var(--ease);
 }
@@ -297,7 +298,7 @@
 }
 
 .entry-card {
-    min-height: 336px;
+    min-height: 240px;
     background: var(--bg);
 }
 
@@ -313,13 +314,13 @@
 .entry-card__num::after {
     width: 24px;
     height: 3px;
-    border-radius: 3px;
+    border-radius: 0;
     background: var(--dot, var(--r5));
     content: "";
 }
 
 .entry-card h3 {
-    margin-top: var(--s-8);
+    margin-top: var(--s-5);
 }
 
 .entry-card .card__body {
@@ -337,7 +338,7 @@
     display: flex;
     align-items: center;
     gap: var(--s-5);
-    margin-top: var(--s-8);
+    margin-top: var(--s-5);
     color: var(--muted);
     font-size: var(--t-small);
 }
@@ -380,13 +381,13 @@
     bottom: -8px;
     left: 0;
     height: 4px;
-    border-radius: 4px;
+    border-radius: 0;
     background: var(--spectrum);
     content: "";
 }
 
 .research-split .lead {
-    margin-top: var(--s-7);
+    margin-top: var(--s-5);
     max-width: 40ch;
 }
 
@@ -395,9 +396,9 @@
 }
 
 .note-card {
-    padding: var(--s-7);
+    padding: var(--s-5);
     border: 1px solid var(--line);
-    border-radius: var(--r-lg);
+    border-radius: 0;
     background: var(--bg-2);
 }
 
@@ -414,7 +415,7 @@
 }
 
 .note-card h3 {
-    margin-block: var(--s-6) var(--s-4);
+    margin-block: var(--s-5) var(--s-3);
     font-family: var(--font-display);
     font-size: 26px;
     font-weight: 600;
@@ -423,8 +424,8 @@
 
 .note-card ul {
     display: grid;
-    gap: var(--s-3);
-    margin-block: var(--s-5);
+    gap: var(--s-2);
+    margin-block: var(--s-4);
 }
 
 .note-card li {
@@ -441,16 +442,16 @@
     left: 0;
     width: 7px;
     height: 7px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--dot, var(--r5));
     content: "";
 }
 
 .env-note {
-    margin-top: var(--s-6);
-    padding: var(--s-4) var(--s-5);
+    margin-top: var(--s-4);
+    padding: var(--s-3) var(--s-4);
     border-left: 3px solid var(--note-line);
-    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+    border-radius: 0;
     background: var(--note-bg);
     color: var(--ink-2);
     font-size: var(--t-small);

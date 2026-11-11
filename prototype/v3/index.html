@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light" data-type="software" data-radius="soft" data-buttons="tonal">
+<html lang="zh-CN" data-theme="light" data-type="software" data-radius="sharp" data-buttons="tonal">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -19,48 +19,44 @@
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+        <script>
+            ;(function () {
+                var d = document.documentElement
+                d.classList.add("has-js", "m-enter")
+                var saved = null
+                try {
+                    saved = localStorage.getItem("prototypeTheme")
+                } catch (e) {}
+                var forced = new URLSearchParams(window.location.search).get("theme")
+                var theme = "light"
+                if (forced === "light" || forced === "dark") theme = forced
+                else if (saved === "light" || saved === "dark") theme = saved
+                d.dataset.theme = theme
+                var scale = 1
+                try {
+                    var value = parseFloat(localStorage.getItem("prototypeArticleScale"))
+                    if (isFinite(value) && value >= 0.9 && value <= 1.2) scale = value
+                } catch (e) {}
+                d.style.setProperty("--article-scale", String(scale))
+            })()
+        </script>
         <link rel="stylesheet" href="assets/css/tokens.css" />
         <link rel="stylesheet" href="assets/css/base.css" />
         <link rel="stylesheet" href="assets/css/chrome.css" />
         <link rel="stylesheet" href="assets/css/home.css" />
         <link rel="stylesheet" href="assets/css/library.css" />
         <link rel="stylesheet" href="assets/css/article.css" />
+        <link rel="stylesheet" href="assets/css/toc.css" />
+        <link rel="stylesheet" href="assets/css/highlight.css" />
+        <link rel="stylesheet" href="assets/css/search.css" />
         <link rel="stylesheet" href="assets/css/responsive.css" />
-        <script>
-            ;(function () {
-                var saved = null
-                try {
-                    saved = localStorage.getItem("prototypeTheme")
-                } catch (e) {}
-                var forced = new URLSearchParams(window.location.search).get("theme")
-                var theme =
-                    forced === "light" || forced === "dark"
-                        ? forced
-                        : saved === "light" || saved === "dark"
-                          ? saved
-                          : "light"
-                document.documentElement.dataset.theme = theme
-                var meta = document.querySelector('meta[name="theme-color"]')
-                if (meta) meta.content = theme === "dark" ? "hsl(203 60% 12%)" : "hsl(200 32% 97%)"
-                document.documentElement.classList.add("has-js", "m-enter")
-            })()
-        </script>
     </head>
     <body>
-        <!-- 版本：v3 · 方向：淡色纸面 / 光谱细线 · 处理：software，split 首屏，space 节奏，tonal 按钮，dots 标记 -->
+        <!-- 版本：v3 · 方向：淡色纸面 / 直角 / 光谱细线 · 处理：software，split 首屏，space 节奏，tonal 按钮 -->
         <header class="nav">
             <div class="wrap nav__inner">
                 <a class="skip-link" href="#top">跳到正文</a>
                 <a class="brand" href="index.html" aria-label="Rainbow Watcher 知识库首页">
-                    <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
-                        <path d="M3 21a11 11 0 0 1 22 0" stroke="var(--r1)" />
-                        <path d="M4.65 21a9.35 9.35 0 0 1 18.7 0" stroke="var(--r2)" />
-                        <path d="M6.3 21a7.7 7.7 0 0 1 15.4 0" stroke="var(--r3)" />
-                        <path d="M7.95 21a6.05 6.05 0 0 1 12.1 0" stroke="var(--r4)" />
-                        <path d="M9.6 21a4.4 4.4 0 0 1 8.8 0" stroke="var(--r5)" />
-                        <path d="M11.25 21a2.75 2.75 0 0 1 5.5 0" stroke="var(--r6)" />
-                        <path d="M12.9 21a1.1 1.1 0 0 1 2.2 0" stroke="var(--r7)" />
-                    </svg>
                     <span class="brand__name">Rainbow Watcher</span>
                 </a>
                 <nav class="nav__links" aria-label="主导航">
@@ -71,12 +67,12 @@
                     <a href="archives.html">归档</a>
                 </nav>
                 <div class="nav__tools">
-                    <a class="icon-btn" href="posts.html?focus=search" aria-label="搜索文章" title="搜索文章">
+                    <button class="icon-btn" id="searchTrigger" type="button" aria-label="搜索全站" title="搜索全站 ⌘K">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <circle cx="11" cy="11" r="7" />
                             <path d="m16.5 16.5 4 4" />
                         </svg>
-                    </a>
+                    </button>
                     <button
                         class="icon-btn theme-switch"
                         id="themeToggle"
@@ -351,7 +347,6 @@
                             >阅读文章 <span class="arrow" aria-hidden="true">→</span></a
                         >
                     </div>
-                    <p class="closing__word">Rainbow Watcher</p>
                 </div>
                 <div class="closing__bottom">
                     <div class="closing__cols">
@@ -386,6 +381,7 @@
                 </div>
             </div>
         </footer>
+        <div id="searchMount"></div>
         <script type="module" src="assets/js/app.js"></script>
     </body>
 </html>

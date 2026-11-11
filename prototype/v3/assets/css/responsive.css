@@ -1,15 +1,15 @@
 /**
  * 做什么：v3 在平板与手机上的降级规则，覆盖首页、列表页与长文页。
- * 状态与生命周期：640px 以下解除固定屏高，让章节随内容增长；菜单与目录同宽度切换。
- * 取舍与不变量：所有断点仍共用 .wrap 左右边界；长文目录在窄屏改为顶部横向条目，不消失。
+ * 状态与生命周期：目录在所有宽度都沿右缘停靠，窄屏用把手点击展开；章节高度始终随内容增长。
+ * 取舍与不变量：所有断点仍共用 .wrap 左右边界；长文在窄屏给收起的把手留出 28px。
  * 边界：不新增颜色、字体与组件种类，只改排布与尺寸。
  */
 
 @media (max-width: 1023px) {
     :root {
         --gut: 48px;
-        --padt: 96px;
-        --padb: 56px;
+        --padt: 64px;
+        --padb: 40px;
     }
 
     .hero__grid,
@@ -22,41 +22,7 @@
     }
 
     .article-shell {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .rail {
-        position: static;
-        order: -1;
-        margin-bottom: var(--s-6);
-        padding: var(--s-4) var(--s-5);
-        border: 1px solid var(--line);
-        border-radius: var(--r-md);
-        background: var(--bg-2);
-    }
-
-    .rail__track,
-    .toc a.is-active::before {
-        display: none;
-    }
-
-    .toc ol {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px var(--s-5);
-    }
-
-    .toc ol ol {
-        display: none;
-    }
-
-    .rail__tools {
-        margin-top: var(--s-4);
-        padding-top: var(--s-4);
-    }
-
-    .rail__percent {
-        margin-top: var(--s-3);
+        padding-right: 28px;
     }
 }
 
@@ -79,7 +45,6 @@
 
     .reader__body {
         grid-template-columns: minmax(0, 1fr) 118px;
-        padding: var(--s-5);
     }
 
     .closing__cols {
@@ -90,23 +55,13 @@
 @media (max-width: 639px) {
     :root {
         --gut: 20px;
-        --nav-h: 58px;
-        --padt: 84px;
-        --padb: 48px;
+        --nav-h: 56px;
+        --padt: 56px;
+        --padb: 32px;
     }
 
     html {
         scroll-padding-top: calc(var(--nav-h) + 16px);
-    }
-
-    .section {
-        height: auto;
-        min-height: calc(var(--hm, 1) * 100svh);
-    }
-
-    #entries,
-    #research {
-        --hm: 2;
     }
 
     .nav__links {
@@ -128,11 +83,6 @@
     .brand {
         min-height: 44px;
         font-size: 16px;
-    }
-
-    .brand__mark {
-        width: 24px;
-        height: 24px;
     }
 
     .icon-btn {
@@ -236,7 +186,7 @@
     .section__head {
         display: grid;
         gap: var(--s-3);
-        margin-bottom: var(--s-6);
+        margin-bottom: var(--s-5);
     }
 
     .section__head .link {
@@ -274,18 +224,18 @@
     .note-card,
     .research-card,
     .project-card {
-        padding: var(--s-5);
+        padding: var(--s-4);
     }
 
     .page {
-        padding-top: calc(var(--nav-h) + var(--s-7));
-        padding-bottom: var(--s-9);
+        padding-top: calc(var(--nav-h) + var(--s-6));
+        padding-bottom: var(--s-7);
     }
 
     .page__head {
         grid-template-columns: minmax(0, 1fr);
         gap: var(--s-5);
-        padding-bottom: var(--s-6);
+        padding-bottom: var(--s-5);
     }
 
     .page__meta {
@@ -297,8 +247,7 @@
         gap: var(--s-3);
     }
 
-    .search-field {
-        max-width: none;
+    .algolia-trigger {
         flex-basis: 100%;
     }
 
@@ -306,7 +255,7 @@
         grid-template-columns: minmax(0, 1fr) 20px;
         gap: var(--s-3);
         min-height: 0;
-        padding-block: var(--s-4);
+        padding-block: var(--s-3);
     }
 
     .post-row time {
@@ -341,7 +290,7 @@
     }
 
     .article-shell {
-        padding-top: calc(var(--nav-h) + var(--s-6));
+        padding-top: calc(var(--nav-h) + var(--s-5));
     }
 
     .article__head h1 {
@@ -373,13 +322,12 @@
         text-align: left;
     }
 
-    .closing {
-        min-height: calc(2 * 100svh);
-        padding-block: var(--s-8) var(--s-5);
+    .rail {
+        width: min(264px, calc(100vw - 28px));
     }
 
-    .closing__word {
-        font-size: 9.5vw;
+    .closing {
+        padding-block: var(--s-7) var(--s-5);
     }
 
     .recent-list h3,
@@ -404,10 +352,6 @@
         gap: var(--s-2);
     }
 
-    .nav__tools > a.icon-btn {
-        display: none;
-    }
-
     .reader__body {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -421,6 +365,6 @@
     }
 
     .env-banner {
-        padding: var(--s-4);
+        padding: var(--s-3);
     }
 }

@@ -1,28 +1,24 @@
 /**
- * 做什么：v3 文章列表的标签筛选与关键词过滤。
- * 状态与生命周期：当前标签存在闭包里，筛选结果写回 hidden 与计数文本；无结果时显示空状态。
- * 取舍与不变量：只按 data-tags 与标题文本匹配，大小写不敏感；不改动列表 DOM 顺序。
+ * 做什么：v3 文章列表的标签筛选，只按分类收起条目。
+ * 状态与生命周期：当前标签存在闭包里，结果数量写回计数文本；关键词搜索交给 Algolia 面板。
+ * 取舍与不变量：只匹配 data-tags，标签可单选或取消；不改动列表 DOM 顺序。
  * 边界：不做分页、不做远程搜索，也不处理文章正文。
  */
 
-export function initFilter() {
-    const input = document.querySelector("#postFilter")
+export function initTags() {
     const rows = [...document.querySelectorAll(".post-list li[data-tags]")]
     const chips = [...document.querySelectorAll(".filter-chips button[data-tag]")]
     const result = document.querySelector("#filterResult")
     const empty = document.querySelector("#emptyState")
     const list = document.querySelector(".post-list")
-    if (!input || !rows.length) return
+    if (!rows.length) return
 
     let tag = ""
 
     const apply = () => {
-        const keyword = input.value.trim().toLocaleLowerCase()
         let visible = 0
         rows.forEach((row) => {
-            const tags = row.dataset.tags.toLocaleLowerCase()
-            const text = row.textContent.toLocaleLowerCase()
-            const show = (!tag || tags.includes(tag.toLocaleLowerCase())) && (!keyword || text.includes(keyword))
+            const show = !tag || row.dataset.tags.toLocaleLowerCase().includes(tag.toLocaleLowerCase())
             row.hidden = !show
             if (show) visible += 1
         })
@@ -38,6 +34,5 @@ export function initFilter() {
             apply()
         })
     })
-    input.addEventListener("input", apply)
     apply()
 }

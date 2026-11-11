@@ -1,0 +1,34 @@
+/**
+ * 做什么：v3 代码块的语法着色配色，亮暗两套都取自主题的低饱和色。
+ * 状态与生命周期：token 类由 highlight.js 在页面加载后写入，未着色时仍是纯文本可读。
+ * 取舍与不变量：颜色只落在行内 token 上，代码块底色与边距由 article.css 负责。
+ * 边界：不做语言解析，也不定义代码块的外框与工具条。
+ */
+
+.code-block .tok-comment {
+    color: var(--tok-comment);
+}
+
+.code-block .tok-keyword {
+    color: var(--tok-keyword);
+}
+
+.code-block .tok-string {
+    color: var(--tok-string);
+}
+
+.code-block .tok-number {
+    color: var(--tok-number);
+}
+
+.code-block .tok-function {
+    color: var(--tok-function);
+}
+
+.code-block .tok-constant {
+    color: var(--tok-constant);
+}
+
+.code-block .tok-variable {
+    color: var(--tok-variable);
+}

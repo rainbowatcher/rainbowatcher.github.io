@@ -1,7 +1,7 @@
 /**
  * 做什么：v3 的固定页头、品牌标记、主题开关、移动端菜单、页脚与阅读进度条。
  * 状态与生命周期：菜单展开状态由 aria-expanded 与 hidden 共同表达，进度条宽度由 JS 写入 --progress。
- * 取舍与不变量：页头不透明、不模糊、不随滚动变化；彩虹只出现在 2px 品牌线与进度填充里。
+ * 取舍与不变量：页头不透明、不模糊、不随滚动变化；页头只有文字标记，彩虹只在顶栏 2px 线与进度填充里。
  * 边界：不定义页面内容版式，也不负责目录与文章排版。
  */
 
@@ -37,30 +37,12 @@
 .brand {
     display: inline-flex;
     align-items: center;
-    gap: var(--s-3);
     flex: none;
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
     white-space: nowrap;
-}
-
-.brand__mark {
-    width: 28px;
-    height: 28px;
-    flex: none;
-}
-
-.brand__mark path {
-    fill: none;
-    stroke-linecap: round;
-    stroke-width: 1.7;
-    transition: stroke-width 260ms var(--ease);
-}
-
-.brand:hover .brand__mark path {
-    stroke-width: 2.1;
 }
 
 .nav__links {
@@ -86,7 +68,7 @@
     bottom: 0;
     left: 0;
     height: 2px;
-    border-radius: 2px;
+    border-radius: 0;
     background: var(--accent);
     transform: scaleX(0);
     transform-origin: left;
@@ -169,12 +151,11 @@
     background: var(--spectrum);
     transform: scaleX(var(--progress, 0));
     transform-origin: left;
-    transition: transform 90ms linear;
 }
 
 .page {
-    padding-top: calc(var(--nav-h) + var(--s-9));
-    padding-bottom: var(--s-10);
+    padding-top: calc(var(--nav-h) + var(--s-7));
+    padding-bottom: var(--s-8);
 }
 
 .page__head {
@@ -182,7 +163,7 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
     gap: var(--s-8);
     align-items: end;
-    padding-bottom: var(--s-8);
+    padding-bottom: var(--s-6);
     border-bottom: 1px solid var(--line);
 }
 
@@ -218,10 +199,7 @@
 }
 
 .closing {
-    display: grid;
-    align-content: center;
-    min-height: 100svh;
-    padding-block: var(--s-9) var(--s-6);
+    padding-block: var(--s-7) var(--s-5);
     border-top: 1px solid var(--line);
     background: var(--bg-2);
 }
@@ -231,7 +209,7 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--s-7);
-    padding-bottom: var(--s-8);
+    padding-bottom: var(--s-6);
 }
 
 .closing__top h2 {
@@ -242,25 +220,15 @@
     line-height: 1.35;
 }
 
-.closing__word {
-    margin-top: var(--s-7);
-    font-family: var(--font-display);
-    font-size: clamp(48px, 8.5vw, 122px);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    white-space: nowrap;
-}
-
 .closing__bottom {
-    margin-top: var(--s-8);
+    margin-top: var(--s-5);
 }
 
 .closing__cols {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--s-6);
-    padding-block: var(--s-7) 0;
+    padding-block: var(--s-5) 0;
 }
 
 .closing__cols h3 {
@@ -294,7 +262,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--s-3);
-    padding-top: var(--s-6);
+    padding-top: var(--s-4);
     border-top: 1px solid var(--line);
     color: var(--muted);
     font-size: var(--t-small);

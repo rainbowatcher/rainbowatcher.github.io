@@ -1,0 +1,220 @@
+/**
+ * 做什么：v3 长文页默认收起的线条缩略图目录，含把手、当前章节名与字号工具。
+ * 状态与生命周期：目录沿视口右缘停靠，悬停 / 聚焦 / 点击把手才展开；活跃线由 reading.js 更新。
+ * 取舍与不变量：每个 anchor 用一根长短不一的横线表示，不重复列出标题文字；收起时把手只露一叠短线。
+ * 边界：不定义正文排版与代码块，也不负责阅读进度条本身。
+ */
+
+.rail {
+    position: fixed;
+    top: calc(var(--nav-h) + var(--s-5));
+    right: 0;
+    z-index: 16;
+    width: 264px;
+    max-height: calc(100svh - var(--nav-h) - var(--s-6));
+    overflow-y: auto;
+    padding: var(--s-4) var(--s-4) var(--s-4) calc(28px + var(--s-4));
+    border: 1px solid var(--line);
+    border-right: 0;
+    background: var(--bg-2);
+    transform: translateX(calc(100% - 28px));
+    transition: transform 260ms var(--ease);
+}
+
+.rail:hover,
+.rail:focus-within,
+.rail.is-open {
+    transform: translateX(0);
+}
+
+.rail__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    padding: 0;
+    border: 0;
+    border-left: 2px solid var(--r5);
+    border-right: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--bg-3);
+    cursor: pointer;
+}
+
+.rail__lines {
+    display: grid;
+    gap: 5px;
+}
+
+.rail__lines i {
+    display: block;
+    width: 13px;
+    height: 2px;
+    background: var(--muted);
+    transition: background-color 240ms var(--ease);
+}
+
+.rail__lines i:nth-child(2) {
+    width: 9px;
+    margin-left: 4px;
+    background: var(--r5);
+}
+
+.rail__lines i:nth-child(3) {
+    width: 11px;
+}
+
+.rail__lines i:nth-child(4) {
+    width: 7px;
+    margin-left: 6px;
+}
+
+.rail__handle:hover .rail__lines i {
+    background: var(--accent);
+}
+
+.rail__title {
+    margin-bottom: var(--s-2);
+    color: var(--muted);
+    font-size: var(--t-label);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+}
+
+.rail__current {
+    margin-bottom: var(--s-5);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.toc ol {
+    display: grid;
+    gap: 10px;
+}
+
+.toc ol ol {
+    margin-top: 8px;
+    padding-left: 14px;
+    gap: 8px;
+}
+
+.toc a {
+    position: relative;
+    display: block;
+    padding-block: 3px;
+}
+
+.toc__line {
+    display: block;
+    width: 72%;
+    height: 3px;
+    background: var(--line-strong);
+    transform-origin: left;
+    transition:
+        background-color 240ms var(--ease),
+        height 240ms var(--ease);
+}
+
+.toc > ol > li:nth-child(7n + 1) .toc__line {
+    width: 88%;
+}
+
+.toc > ol > li:nth-child(7n + 2) .toc__line {
+    width: 63%;
+}
+
+.toc > ol > li:nth-child(7n + 3) .toc__line {
+    width: 79%;
+}
+
+.toc > ol > li:nth-child(7n + 4) .toc__line {
+    width: 57%;
+}
+
+.toc > ol > li:nth-child(7n + 5) .toc__line {
+    width: 93%;
+}
+
+.toc > ol > li:nth-child(7n + 6) .toc__line {
+    width: 70%;
+}
+
+.toc > ol > li:nth-child(7n) .toc__line {
+    width: 84%;
+}
+
+.toc ol ol .toc__line {
+    transform: scaleX(0.62);
+}
+
+.toc ol ol li:nth-child(2n) .toc__line {
+    transform: scaleX(0.5);
+}
+
+.toc a:hover .toc__line {
+    background: var(--accent);
+}
+
+.toc a.is-active .toc__line {
+    height: 4px;
+    background: var(--spectrum);
+}
+
+.toc a.is-active::before {
+    position: absolute;
+    top: 50%;
+    left: -14px;
+    width: 6px;
+    height: 6px;
+    background: var(--spectrum);
+    transform: translateY(-50%);
+    content: "";
+}
+
+.rail__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    margin-top: var(--s-5);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+}
+
+.rail__tools span {
+    margin-right: auto;
+    color: var(--muted);
+    font-size: var(--t-small);
+}
+
+.rail__tools button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-size: 13px;
+    transition:
+        border-color 240ms var(--ease),
+        color 240ms var(--ease);
+}
+
+.rail__tools button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.rail__percent {
+    margin-top: var(--s-4);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
