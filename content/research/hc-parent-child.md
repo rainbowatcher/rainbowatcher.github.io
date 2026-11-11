@@ -11,6 +11,7 @@ tags: [Herdr, CLI, Terminal]
 - 父子关系不是 `hc run` 的参数，而是 `terminal.run` 这个 **JSON-RPC 方法** 的字段：`parent` / `caller` / `no_parent` / `outlive_parent`。CLI 只是其中一种把字段填好的方式。
 - 唯一"自动认父"的机制是 `caller`（CLI 里由 `$HC_TERMINAL_ID` 填入）。同一个方法不传 `caller`，建出来的终端 `parent` 就是 `null`——**父子靠客户端自报，核心不会猜**。
 - 所以命令行之外真正能建出父子链的只有一条路：**自己说这套协议**（unix socket、`hc connect` 的 stdio、`ssh box hc connect`）。不需要 `hc` 可执行文件，也不需要是终端里的子进程。
+- 官方不发 SDK：上游 workspace `publish = false`，仓库里没有客户端目录。Rust 侧有 `herdr-protocol` 一个能钉版本的库；Node 侧没有对等物，只有两个插件各自 vendored 的单文件客户端。
 - Sheprd GUI 能建终端（Herdr 2 标签、分屏），但本机上 20 个 hc 终端**全部** `parent: null`，其中 app 建的那些带 `herdr.space` / `herdr.tab` 标签。GUI 用的是标签与版面模型，和 hc 的父子是两套东西。
 - herdr 1（0.9.5）的 API 里根本没有这条记录：128 个请求方法里 `parent` 命中 **0** 次，pane 列表是 `pane_id` / `tab_id` / `workspace_id` / `terminal_id` 平铺。
 - mods、automations、`.herdr/worktree.toml` 脚本、`sheprd chat` 都能让 app 建出终端，但**都无法指定父**：mods 没有 IO/进程能力，automations 的 step 列表里没有这一项。
@@ -85,6 +86,79 @@ print(s.recv(65536))
 
 - 客户端自己负责地址管理：`parent` 不存在会被 `not_found` 拒绝，没有"自动找最近终端"这种便利。
 - 不传 `cwd` 时子终端落在**核心**的 cwd（实测 `"/"`），不是调用者的 cwd。CLI 帮你填了，裸协议没有。
+
+### 现成的库：Rust 有一个，Node 一个都没有
+
+查于 2026-11-11，crates.io / npm / GitHub 三处。分两层看。
+
+**上游不发 SDK。** `herdrdev/herdr-core` 的 workspace 写着 `publish = false`，仓库里没有 `clients/` 目录，文档《Build your own client》只给两样东西：`hc schema` 的 OpenRPC 和 `hc connect`。npm 上 `herdr` 是 0.0.0 占位包，`herdrdev` scope 下没有包。
+
+**Rust：`herdr-protocol`。** 目前唯一一个 hc generation 1 的第三方库，从 Whip（手机上的 Herdr 客户端）里拆出来的。
+
+| 项          | herdr-protocol 0.2.1                                                                                        |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| 仓库        | https://github.com/kosumic/whip （库在 `herdr-protocol/`，docs.rs 同名）                                    |
+| 许可 / 依赖 | MIT；只依赖 serde / serde_json / thiserror，不拉 tokio                                                      |
+| 覆盖        | 由 core 0.1.16 的 `hc.openrpc.json` 生成的 31 个方法 + `hello`                                              |
+| 父字段      | `TerminalRunParams` 带 `caller` / `parent` / `no_parent` / `outlive_parent` / `die_with_parent`             |
+| 传输        | 不管：实现 `Transport` 由你，或直接驱动 `hc::session::Session`（JSONL hello → 九字节帧、id 关联、通道信用） |
+| 额外        | `hc::hierarchy` 从 agent 列表还原父树；`projection` / `documents` / `edits` 处理桌面文档                    |
+
+它的定位是"库里带着协议，不带连接"：`cargo add herdr-protocol`，加二十行 `UnixStream` 就能建子树。首发 11-01，下载量 34，版本 0.2.x。
+
+crates.io 上其他带 herdr 名字的库都不是这套协议：`herdr-client`（0.0.0，已 yank）、`herdr-plugin`（插件框架，tab / workspace）、`herdr-sdk`（连 `$HERDR_SOCKET_PATH`，即 herdr 1 的 socket，schema 里没有 `parent`）。
+
+**Node：没有对等物。** hc 客户端只以"应用内模块"的形态存在，散在三个包里：
+
+| 包                       | 出处                           | hc 客户端                   | 形态                                                                                         |
+| ------------------------ | ------------------------------ | --------------------------- | -------------------------------------------------------------------------------------------- |
+| piher 0.2.0              | `github.com/felixzsh/piher`    | `src/core-client.ts` 715 行 | 一请求一连接；`run()` 自动填 `caller: env.terminalId`，`parent` 缺省就是自己；钉 core 0.1.16 |
+| pi-pier 0.5.5            | `github.com/July24/pier`       | `src/core-client.ts` 709 行 | 同一份代码的 vendored 副本，钉 0.1.18                                                        |
+| @thl-ai/herdr-link 0.6.5 | `github.com/THL-AI/herdr-link` | `dist/core/HerdrCore.js`    | Effect + Schema；常驻连接、心跳、断线重连、事件订阅                                          |
+
+三个都能抄：前两个只 import `node:net`，`herdr-link` 带 Effect 运行时。但都不算 SDK——没有 `exports` 字段、没有对外版本承诺，`core-client.ts` 的头注释直说 "used inside the pi extension"。另有 `@bakers-build/addon-herdr-core`，那是 `execFile("hc")` 的 CLI 包装，不碰协议。
+
+Node 里真正带 SDK 的是 herdr 1 那一套：`@brooswit/herdr-sdk` 1.0.0、`@timmo001/effect-herdr`、`@smthrs/herdr` 0.35.0，都连 `$HERDR_SOCKET_PATH`，那套 schema 里 `parent` 出现 0 次，本题用不上。
+
+**两个都试过。** 同一个父终端 `t2f`，分别用 Rust 与 Node 建子终端：
+
+```rust
+// 直接用 Session，不实现 Transport
+let mut s = Session::default();
+stream.write_all(&Session::hello_request())?;
+// 收到 Action::Ready 之后
+let (_, bytes) = s.request(Request::terminal_run(TerminalRunParams {
+    argv: Some(vec!["/bin/sh".into(), "-c".into(), "sleep 300".into()]),
+    name: Some("sdk-child".into()),
+    caller: Some("t2f".into()),
+    ..Default::default()
+}))?;
+stream.write_all(&bytes)?;
+```
+
+```ts
+// piher/src/core-client.ts
+const t = await new CoreClient({ socketPath: process.env.HC_TERMINAL_SOCKET!, terminalId: "t2f" }).run({
+    argv: ["/bin/sh", "-c", "sleep 300"],
+    name: "sdk-node-child",
+})
+```
+
+```text
+Rust: address=t2g parent=Some("t2f") die_with_parent=Some(true) cwd=/
+Node: { id: 't2h', parent: 't2f', cwd: '/', state: 'live' }
+```
+
+`hc get` 与返回一致，`t2g` / `t2h` 都挂在 `t2f` 下。两个库都**不替你填 `cwd`**，所以还是核心的 `/`——和裸协议同一个缺省值问题，不是库的锅。
+
+**怎么选**：
+
+- 要一个能钉进 `Cargo.toml` 的依赖：`herdr-protocol`。代价是连接也得自己接，它只给 `Session` 和 trait。
+- Node 想要最短路径：抄 piher 的 `core-client.ts`，单文件七百行、自己钉核心版本、标签前缀 `piher.*`。
+- 要事件流、桌面文档、父子分组投影：`herdr-protocol` 的 `hc::events` / `projection` / `hierarchy`，Node 侧没有等价物。
+- Node 又不想写连接状态机：`@thl-ai/herdr-link` 的 Effect 客户端最接近成品，只是它跟着 app 发版。
+
+一句话：父子在协议层已经开放，但"官方的、跨语言的客户端"不存在；能用的是别人从应用里抠出来的一块，Rust 那块有版本号和 MIT，Node 那块只有源码。
 
 ## 三、途径二：环境变量继承
 
