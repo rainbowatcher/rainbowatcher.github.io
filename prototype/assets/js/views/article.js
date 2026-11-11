@@ -154,10 +154,14 @@ export function mount() {
         return { id: heading.id, text: heading.textContent.trim(), level: heading.tagName === "H3" ? 3 : 2 }
     })
     const toc = tocMarkup(headings)
-    nav.innerHTML = toc
+    const thumb = headings
+        .map((heading) => `<i class="depth-${heading.level}" data-anchor="${heading.id}"></i>`)
+        .join("")
+    nav.innerHTML = `<div class="toc-thumb" aria-hidden="true">${thumb}</div><div class="toc-list">${toc}</div>`
     mobileNav.innerHTML = toc
 
     const links = [...document.querySelectorAll("#tocNav a, #tocMobile a")]
+    const thumbs = [...document.querySelectorAll("#tocNav .toc-thumb i")]
     const onTocClick = (event) => {
         const link = event.target.closest("[data-anchor]")
         if (!link) return
@@ -200,6 +204,9 @@ export function mount() {
         }
         links.forEach((link) => {
             link.classList.toggle("is-active", link.dataset.anchor === activeId)
+        })
+        thumbs.forEach((thumb) => {
+            thumb.classList.toggle("is-current", thumb.dataset.anchor === activeId)
         })
     }
 

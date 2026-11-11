@@ -320,3 +320,44 @@
 .article-banner strong {
     color: var(--ink);
 }
+
+/* 目录缩略图：默认收起态，hover/聚焦时展开为明文列表 */
+
+.toc-nav .toc-thumb {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px 0;
+}
+
+.toc-nav .toc-thumb i {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--line-strong);
+    transition: background-color 0.18s ease;
+}
+
+.toc-nav .toc-thumb i.depth-3 {
+    width: 13px;
+    margin-left: 7px;
+}
+
+.toc-nav .toc-thumb i.is-current {
+    background: var(--accent);
+}
+
+.toc-nav .toc-list {
+    display: none;
+}
+
+.toc-nav:hover .toc-thumb,
+.toc-nav:focus-within .toc-thumb {
+    display: none;
+}
+
+.toc-nav:hover .toc-list,
+.toc-nav:focus-within .toc-list {
+    display: flex;
+    flex-direction: column;
+}

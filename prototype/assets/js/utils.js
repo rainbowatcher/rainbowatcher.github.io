@@ -46,12 +46,12 @@ export function tagChip(tag, { active = false, link = true } = {}) {
     return link ? `<a class="${cls}" href="${tagHref(tag)}">${esc(tag)}</a>` : `<span class="${cls}">${esc(tag)}</span>`
 }
 
-export function postRow(post) {
+export function postRow(post, { hrefBase = "posts" } = {}) {
     return `
         <div class="post-row">
             <time class="post-date" datetime="${post.date}">${fmtDate(post.date)}</time>
             <span class="post-main">
-                <a class="post-title" href="#/posts/${post.slug}">${esc(post.title)}</a>
+                <a class="post-title" href="#/${hrefBase}/${post.slug}">${esc(post.title)}</a>
                 <span class="post-excerpt">${esc(post.excerpt)}</span>
             </span>
             <span class="post-tags">${post.tags

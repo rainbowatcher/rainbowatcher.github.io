@@ -5,11 +5,11 @@
  */
 
 import { researchReports } from "../data.js"
-import { esc, fmtDate } from "../utils.js"
+import { postRow, sortedPosts } from "../utils.js"
 import { icon } from "../icons.js"
 
 export function render() {
-    const reports = [...researchReports].sort((a, b) => b.date.localeCompare(a.date))
+    const reports = sortedPosts(researchReports)
 
     return `
     <div class="container view-enter">
@@ -30,25 +30,8 @@ export function render() {
             </div>
         </div>
 
-        <div>
-            ${reports
-                .map(
-                    (report) => `
-            <a class="research-card" href="#/research/${report.slug}">
-                <div class="research-card-meta">
-                    <time datetime="${report.date}">${fmtDate(report.date)}</time><span class="dot"></span>
-                    <span>${report.minutes} 分钟阅读</span>
-                    ${report.tags.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}
-                </div>
-                <h2>${esc(report.title)}</h2>
-                <p>${esc(report.subtitle)}</p>
-                <div class="research-card-foot">
-                    <span>本机环境 · 可复验步骤</span>
-                    <span>阅读报告 ${icon("arrow-right")}</span>
-                </div>
-            </a>`,
-                )
-                .join("")}
+        <div class="post-list">
+            ${reports.map((report) => postRow(report, { hrefBase: "research" })).join("")}
         </div>
 
         <section class="method-grid" aria-label="记录方法">
