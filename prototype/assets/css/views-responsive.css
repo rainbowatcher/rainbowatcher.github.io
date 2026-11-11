@@ -41,9 +41,6 @@
         font-size: 11px;
     }
 
-    .method-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (width <= 720px) {

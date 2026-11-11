@@ -9,7 +9,7 @@ import { esc, fmtDate } from "./utils.js"
 
 const PAGES = [
     { title: "博客", desc: "想法、唠叨与长短不一的笔记", href: "#/posts", tag: "PAGE" },
-    { title: "知识库", desc: "研究报告与按年份归档的可追溯知识", href: "#/knowledge", tag: "PAGE" },
+    { title: "知识库", desc: "研究报告与笔记的统一可追溯索引", href: "#/knowledge", tag: "PAGE" },
     { title: "在用", desc: "每天真正在使用的工具与硬件", href: "#/uses", tag: "PAGE" },
     { title: "项目", desc: "维护中的开源项目", href: "#/projects", tag: "PAGE" },
 ]

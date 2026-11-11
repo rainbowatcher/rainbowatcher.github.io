@@ -45,9 +45,9 @@ python3 -m http.server 4173 --directory .
 ## 页面
 
 - `/`：自我介绍、站点速览、最近更新、主题入口、联系方式
-- `/posts`：Twitter 风格博客时间流，短内容直接展开，长内容可原地展开全文
+- `/posts`：Twitter 风格博客时间流，正文截断到 500 字，点击内容原地展开
 - `/posts/:slug`：文章详情，含目录、阅读进度、代码复制、上下篇
-- `/knowledge`：知识库，合并研究报告与按年份归档的笔记
+- `/knowledge`：知识库，研究报告与笔记并入同一条按时间排序的索引
 - `/research/:slug`：研究报告详情
 - `/uses`：按场景分组的工具与硬件清单
 - `/projects`：项目卡片
@@ -78,9 +78,9 @@ prototype/
     │   ├── overlays.css    搜索面板、说明/对比度面板
     │   ├── drawer.css      移动端菜单、原型工具条、Toast
     │   ├── views-home.css  首页
-    │   ├── views-pages.css 页面头、列表、知识库归档、404
+    │   ├── views-pages.css 页面头、列表、知识库索引、404
     │   ├── views-blog.css  Twitter 风格博客时间流
-    │   ├── views-uses.css / views-projects.css / views-research.css
+    │   ├── notice.css / views-uses.css / views-projects.css
     │   ├── views-responsive.css  各页面的窄屏规则
     │   ├── article.css     文章头、正文、代码、表格
     │   ├── article-rail.css  目录、文末、研究提示

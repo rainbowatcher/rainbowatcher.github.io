@@ -10,13 +10,17 @@ import { icon } from "../icons.js"
 
 const PAGE_SIZE = 8
 
-function plainTextLength(html) {
-    return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().length
+const PREVIEW_LENGTH = 500
+
+function plainText(html) {
+    return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
 }
 
 function postCard(post) {
     const body = post.body?.trim() ?? ""
-    const long = body.length > 0 && plainTextLength(body) > 480
+    const text = body ? plainText(body) : post.excerpt
+    const long = Boolean(body) && text.length > PREVIEW_LENGTH
+    const preview = long ? `${text.slice(0, PREVIEW_LENGTH).trimEnd()}…` : ""
     const shortBody = body && !long ? body : ""
     return `
     <article class="post-card" data-post="${post.slug}">
@@ -31,16 +35,20 @@ function postCard(post) {
         <div class="post-card-main">
             <h2 class="post-card-title"><a href="#/posts/${post.slug}">${esc(post.title)}</a></h2>
             ${
-                shortBody
-                    ? `<div class="post-card-text">${shortBody}</div>`
-                    : `<p class="post-card-text">${esc(post.excerpt)}</p>`
+                long
+                    ? `<div class="post-card-preview" data-expand role="button" tabindex="0" aria-expanded="false">
+                        <p>${esc(preview)}</p>
+                        <span class="post-card-more">展开</span>
+                    </div>
+                    <div class="post-card-full prose" hidden>${body}<button class="post-card-collapse" type="button" data-collapse>收起</button></div>`
+                    : shortBody
+                      ? `<div class="post-card-text">${shortBody}</div>`
+                      : `<p class="post-card-text">${esc(post.excerpt)}</p>`
             }
-            ${long ? `<div class="post-card-full prose" hidden>${body}</div>` : ""}
             <div class="post-card-tags">${post.tags.map((tag) => tagChip(tag)).join("")}</div>
         </div>
         <footer class="post-card-foot">
             <span>${post.minutes} 分钟阅读</span>
-            ${long ? `<button class="post-card-more" type="button" data-expand aria-expanded="false">展开全文</button>` : ""}
             <a class="post-card-open" href="#/posts/${post.slug}">打开文章 <span aria-hidden="true">→</span></a>
         </footer>
     </article>`
@@ -149,17 +157,28 @@ export function mount(route) {
         paint()
     })
 
+    const toggleCard = (card, opened) => {
+        const preview = card?.querySelector("[data-expand]")
+        const full = card?.querySelector(".post-card-full")
+        if (!card || !preview || !full) return
+        card.classList.toggle("is-expanded", opened)
+        preview.hidden = opened
+        full.hidden = !opened
+        preview.setAttribute("aria-expanded", String(opened))
+    }
+
     list.addEventListener("click", (event) => {
         const expand = event.target.closest("[data-expand]")
         if (expand) {
-            const card = expand.closest(".post-card")
-            const full = card?.querySelector(".post-card-full")
-            if (!full) return
-            const opened = full.hidden
-            full.hidden = !opened
-            card.classList.toggle("is-expanded", opened)
-            expand.setAttribute("aria-expanded", String(opened))
-            expand.textContent = opened ? "收起" : "展开全文"
+            toggleCard(expand.closest(".post-card"), true)
+            return
+        }
+
+        const collapse = event.target.closest("[data-collapse]")
+        if (collapse) {
+            const card = collapse.closest(".post-card")
+            toggleCard(card, false)
+            card?.querySelector("[data-expand]")?.focus()
             return
         }
 
@@ -168,6 +187,15 @@ export function mount(route) {
         state.page = Number(button.dataset.page)
         paint()
         list.scrollIntoView({ behavior: "smooth", block: "start" })
+    })
+
+    list.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return
+        const expand = event.target.closest("[data-expand]")
+        if (!expand) return
+        event.preventDefault()
+        toggleCard(expand.closest(".post-card"), true)
+        expand.closest(".post-card")?.querySelector("[data-collapse]")?.focus()
     })
 
     paint()

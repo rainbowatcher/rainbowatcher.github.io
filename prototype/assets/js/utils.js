@@ -46,7 +46,7 @@ export function tagChip(tag, { active = false, link = true } = {}) {
     return link ? `<a class="${cls}" href="${tagHref(tag)}">${esc(tag)}</a>` : `<span class="${cls}">${esc(tag)}</span>`
 }
 
-export function postRow(post, { hrefBase = "posts" } = {}) {
+export function postRow(post, { hrefBase = "posts", linkTags = true } = {}) {
     return `
         <div class="post-row">
             <time class="post-date" datetime="${post.date}">${fmtDate(post.date)}</time>
@@ -56,7 +56,7 @@ export function postRow(post, { hrefBase = "posts" } = {}) {
             </span>
             <span class="post-tags">${post.tags
                 .slice(0, 3)
-                .map((tag) => tagChip(tag))
+                .map((tag) => (linkTags ? tagChip(tag) : `<span class="tag">${esc(tag)}</span>`))
                 .join("")}</span>
             <span class="post-arrow" aria-hidden="true"><svg class="arrow-ic" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
         </div>`
