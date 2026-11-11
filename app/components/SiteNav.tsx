@@ -53,6 +53,7 @@ export default defineNuxtComponent({
         return {
             navItems: [
                 { label: "博客", path: "/posts" },
+                { label: "专题", path: "/topics" },
                 { label: "研究", path: "/research" },
                 { label: "在用", path: "/uses" },
                 { label: "归档", path: "/archives" },

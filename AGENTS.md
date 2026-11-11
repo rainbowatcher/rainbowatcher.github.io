@@ -74,8 +74,9 @@
 ## 2. 仓库结构与内容数据流
 
 ```
-content/            markdown 唯一内容源（posts/、archives/、research/、home.md、uses.md 会发布）
+content/            markdown 唯一内容源（posts/、archives/、research/、topics/、home.md、uses.md 会发布）
   ├─ research/      基于本机环境的探索报告（工具实测、命令输出、版本号），随站发布并在页面标注
+  ├─ topics/        专题：围绕单个问题的系统分析（结论、方案、边界与验证命令）
   └─ hide/          永不发布的草稿
 modules/            构建期 Nuxt 模块
   ├─ static-content.ts   扫描 content/，编译出 public/_content/*.json + manifest.json
@@ -85,6 +86,7 @@ public/             静态资源
 ```
 
 - 页面内容一律经 `app/composables/queryContents.ts` 读取 `/_content/`，不引入 `@nuxt/content` 运行时。
+- `content/topics/` 是**专题**：围绕单个问题的系统分析，结论不依赖本机环境；走 `/topics` 分区与 `manifest.topics`，列表页展示摘要。
 - `content/research/` 是**基于本机环境的探索报告**：结论依赖当时的机器状态、工具版本与本地配置，换台机器未必复现。它随站发布，走 `/research` 分区与 `manifest.research`，页面固定标注本地环境依赖与复验要求；其中的命令与数据引用前须在本机复验，不得当通用结论使用。
 - `public/_content/` 是生成物，禁止手改；改动 markdown 后由 dev watcher 重建，构建时全量重写。
 - 解析行为（插件顺序、Shiki 主题、toc 深度）改动必须同步 `nuxt.config.ts` 与 `modules/content-parser.ts`，否则预渲染 HTML 会漂移。
