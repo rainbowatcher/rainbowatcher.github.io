@@ -1,0 +1,305 @@
+/**
+ * 做什么：v3 的固定页头、品牌标记、主题开关、移动端菜单、页脚与阅读进度条。
+ * 状态与生命周期：菜单展开状态由 aria-expanded 与 hidden 共同表达，进度条宽度由 JS 写入 --progress。
+ * 取舍与不变量：页头不透明、不模糊、不随滚动变化；彩虹只出现在 2px 品牌线与进度填充里。
+ * 边界：不定义页面内容版式，也不负责目录与文章排版。
+ */
+
+.nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    height: var(--nav-h);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+}
+
+.nav::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: var(--spectrum);
+    opacity: 0.85;
+    content: "";
+}
+
+.nav__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    height: 100%;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    flex: none;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.brand__mark {
+    width: 28px;
+    height: 28px;
+    flex: none;
+}
+
+.brand__mark path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 1.7;
+    transition: stroke-width 260ms var(--ease);
+}
+
+.brand:hover .brand__mark path {
+    stroke-width: 2.1;
+}
+
+.nav__links {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    margin-left: auto;
+}
+
+.nav__links a {
+    position: relative;
+    padding-block: 6px;
+    color: var(--ink-2);
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 240ms var(--ease);
+}
+
+.nav__links a::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 260ms var(--ease);
+    content: "";
+}
+
+.nav__links a:hover,
+.nav__links a[aria-current="page"] {
+    color: var(--ink);
+}
+
+.nav__links a:hover::after,
+.nav__links a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+.nav__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    flex: none;
+}
+
+.theme-switch .moon,
+:root[data-theme="dark"] .theme-switch .sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-switch .moon {
+    display: block;
+}
+
+.nav__menu {
+    display: none;
+}
+
+.mobile-menu {
+    position: fixed;
+    inset: var(--nav-h) 0 0;
+    z-index: 19;
+    display: grid;
+    align-content: start;
+    gap: var(--s-2);
+    padding: var(--s-6) var(--gut) var(--s-8);
+    background: var(--bg);
+}
+
+.mobile-menu[hidden] {
+    display: none;
+}
+
+.mobile-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-size: 22px;
+}
+
+.mobile-menu a[aria-current="page"] {
+    color: var(--accent);
+}
+
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    width: 100%;
+    height: 3px;
+    background: var(--line);
+}
+
+.progress__fill {
+    width: 100%;
+    height: 100%;
+    background: var(--spectrum);
+    transform: scaleX(var(--progress, 0));
+    transform-origin: left;
+    transition: transform 90ms linear;
+}
+
+.page {
+    padding-top: calc(var(--nav-h) + var(--s-9));
+    padding-bottom: var(--s-10);
+}
+
+.page__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+    gap: var(--s-8);
+    align-items: end;
+    padding-bottom: var(--s-8);
+    border-bottom: 1px solid var(--line);
+}
+
+.page__head h1 {
+    font-family: var(--font-display);
+    font-size: var(--t-h1);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+}
+
+.page__head .lead {
+    margin-top: var(--s-4);
+    max-width: 48ch;
+}
+
+.page__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    align-items: flex-end;
+    color: var(--muted);
+    font-size: var(--t-small);
+    text-align: right;
+}
+
+.page__meta strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.closing {
+    display: grid;
+    align-content: center;
+    min-height: 100svh;
+    padding-block: var(--s-9) var(--s-6);
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+}
+
+.closing__top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-7);
+    padding-bottom: var(--s-8);
+}
+
+.closing__top h2 {
+    max-width: 24ch;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 2.6vw, 38px);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.closing__word {
+    margin-top: var(--s-7);
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8.5vw, 122px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+}
+
+.closing__bottom {
+    margin-top: var(--s-8);
+}
+
+.closing__cols {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-6);
+    padding-block: var(--s-7) 0;
+}
+
+.closing__cols h3 {
+    margin-bottom: var(--s-4);
+    color: var(--muted);
+    font-size: var(--t-label);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+}
+
+.closing__cols a {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 44px;
+    color: var(--ink-2);
+    font-size: 15px;
+    transition:
+        color 240ms var(--ease),
+        transform 240ms var(--ease);
+}
+
+.closing__cols a:hover {
+    color: var(--accent);
+    transform: translateX(3px);
+}
+
+.closing__legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: var(--t-small);
+}
+
+.closing__legal a {
+    color: var(--accent);
+}

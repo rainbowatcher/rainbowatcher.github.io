@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-type="software" data-radius="soft" data-buttons="tonal">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>研究 · Rainbow Watcher 的个人知识库</title>
+        <meta name="description" content="基于本机环境的探索报告与踩坑记录，附复现命令与复验要求。" />
+        <meta name="page-type" content="software" />
+        <meta name="site-kind" content="software" />
+        <meta name="theme-color" content="hsl(200 32% 97%)" />
+        <meta property="og:title" content="研究 · Rainbow Watcher 的个人知识库" />
+        <meta property="og:description" content="基于本机环境的探索报告与踩坑记录，附复现命令与复验要求。" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="assets/css/tokens.css" />
+        <link rel="stylesheet" href="assets/css/base.css" />
+        <link rel="stylesheet" href="assets/css/chrome.css" />
+        <link rel="stylesheet" href="assets/css/home.css" />
+        <link rel="stylesheet" href="assets/css/library.css" />
+        <link rel="stylesheet" href="assets/css/article.css" />
+        <link rel="stylesheet" href="assets/css/responsive.css" />
+        <script>
+            ;(function () {
+                var saved = null
+                try {
+                    saved = localStorage.getItem("prototypeTheme")
+                } catch (e) {}
+                var forced = new URLSearchParams(window.location.search).get("theme")
+                var theme =
+                    forced === "light" || forced === "dark"
+                        ? forced
+                        : saved === "light" || saved === "dark"
+                          ? saved
+                          : "light"
+                document.documentElement.dataset.theme = theme
+                var meta = document.querySelector('meta[name="theme-color"]')
+                if (meta) meta.content = theme === "dark" ? "hsl(203 60% 12%)" : "hsl(200 32% 97%)"
+                document.documentElement.classList.add("has-js", "m-enter")
+            })()
+        </script>
+    </head>
+    <body>
+        <!-- 版本：v3 · 方向：淡色纸面 / 光谱细线 · 处理：software，split 首屏，space 节奏，tonal 按钮，dots 标记 -->
+        <header class="nav">
+            <div class="wrap nav__inner">
+                <a class="skip-link" href="#top">跳到正文</a>
+                <a class="brand" href="index.html" aria-label="Rainbow Watcher 知识库首页">
+                    <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+                        <path d="M3 21a11 11 0 0 1 22 0" stroke="var(--r1)" />
+                        <path d="M4.65 21a9.35 9.35 0 0 1 18.7 0" stroke="var(--r2)" />
+                        <path d="M6.3 21a7.7 7.7 0 0 1 15.4 0" stroke="var(--r3)" />
+                        <path d="M7.95 21a6.05 6.05 0 0 1 12.1 0" stroke="var(--r4)" />
+                        <path d="M9.6 21a4.4 4.4 0 0 1 8.8 0" stroke="var(--r5)" />
+                        <path d="M11.25 21a2.75 2.75 0 0 1 5.5 0" stroke="var(--r6)" />
+                        <path d="M12.9 21a1.1 1.1 0 0 1 2.2 0" stroke="var(--r7)" />
+                    </svg>
+                    <span class="brand__name">Rainbow Watcher</span>
+                </a>
+                <nav class="nav__links" aria-label="主导航">
+                    <a href="posts.html">文章</a>
+                    <a href="projects.html">项目</a>
+                    <a href="uses.html">在用</a>
+                    <a href="research.html" aria-current="page">研究</a>
+                    <a href="archives.html">归档</a>
+                </nav>
+                <div class="nav__tools">
+                    <a class="icon-btn" href="posts.html?focus=search" aria-label="搜索文章" title="搜索文章">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="m16.5 16.5 4 4" />
+                        </svg>
+                    </a>
+                    <button
+                        class="icon-btn theme-switch"
+                        id="themeToggle"
+                        type="button"
+                        aria-label="切换到暗色主题"
+                        title="切换到暗色主题"
+                    >
+                        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                            />
+                        </svg>
+                        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" />
+                        </svg>
+                    </button>
+                    <button
+                        class="icon-btn nav__menu nav__toggle"
+                        id="menuToggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="mobileMenu"
+                        aria-label="打开菜单"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div class="mobile-menu" id="mobileMenu" hidden>
+            <a href="posts.html">文章 <span aria-hidden="true">→</span></a>
+            <a href="projects.html">项目 <span aria-hidden="true">→</span></a>
+            <a href="uses.html">在用 <span aria-hidden="true">→</span></a>
+            <a href="research.html" aria-current="page">研究 <span aria-hidden="true">→</span></a>
+            <a href="archives.html">归档 <span aria-hidden="true">→</span></a>
+            <a href="index.html">首页 <span aria-hidden="true">→</span></a>
+        </div>
+        <main id="top" class="page">
+            <div class="wrap">
+                <div class="page__head" data-enter>
+                    <div>
+                        <h1>研究</h1>
+                        <p class="lead">基于本机环境的探索报告：写清判定方法、复现命令，以及没验证的部分。</p>
+                    </div>
+                    <div class="page__meta"><strong>1</strong><span>份报告 · 2026-11-10</span></div>
+                </div>
+                <div class="env-banner">
+                    <div>
+                        <strong>本机环境依赖，引用前请复验</strong>
+                        <p>
+                            研究内容基于当时的机器状态、工具版本与本地配置：macOS、hc 0.1.19（PATH）与 bundle 内
+                            0.1.13、herdr 0.9.5、Sheprd
+                            20261104.1。换台机器未必复现，文中的命令与数据须在本机重新跑过再引用，不能当通用结论使用。
+                        </p>
+                    </div>
+                </div>
+                <div class="research-list">
+                    <a class="research-card" href="research-note.html">
+                        <div>
+                            <h3>hc 父子终端：命令行之外的入口</h3>
+                            <p>
+                                从 JSON-RPC 的 caller 字段，到 Sheprd GUI、mods、automations
+                                各自能建出什么。报告按「结论、判定方法、途径、没验证的部分」组织，附一张协议字段表和可复现的命令。
+                            </p>
+                            <div class="article__meta" style="margin-top: 24px">
+                                <span class="spectral-rule" aria-hidden="true"></span
+                                ><span>Herdr · CLI · Terminal</span>
+                            </div>
+                        </div>
+                        <div class="research-card__side">
+                            <span>2026-11-10 · 9 节</span>
+                            <span class="link">读这份报告 <span class="arrow" aria-hidden="true">→</span></span>
+                        </div>
+                    </a>
+                </div>
+
+                <section id="pitfalls" style="margin-top: 96px">
+                    <h2 style="font-family: var(--font-display); font-size: 34px; font-weight: 600">踩坑记录</h2>
+                    <p class="section__hint" style="margin-top: 12px">报告第八节里记下的、会让结论看起来不对的地方。</p>
+                    <ol class="pitfall-list">
+                        <li>
+                            <span>01</span>
+                            <div>裸协议不填 cwd，子终端落在核心的 cwd（实测 /），不是调用者的目录。</div>
+                        </li>
+                        <li>
+                            <span>02</span>
+                            <div>parent 写错不会被宽容处理：直接返回 not_found，脚本里要接住这个错误。</div>
+                        </li>
+                        <li>
+                            <span>03</span>
+                            <div>no_parent 不覆盖显式 parent，两者同传时是认父生效。</div>
+                        </li>
+                        <li>
+                            <span>04</span>
+                            <div>
+                                hc ls --all --json 不给 die_with_parent、labels 与 created_ms，要细节只能逐个 hc get。
+                            </div>
+                        </li>
+                        <li>
+                            <span>05</span>
+                            <div>hc rm 一次只收一个参数；父不存在时也不退化成游离终端。</div>
+                        </li>
+                    </ol>
+                </section>
+            </div>
+        </main>
+        <footer class="closing" id="contact">
+            <div class="wrap">
+                <div class="closing__main">
+                    <div class="closing__top">
+                        <h2>把读过的、做过的、踩过的都留在这里。</h2>
+                        <a class="btn btn--primary" href="posts.html"
+                            >阅读文章 <span class="arrow" aria-hidden="true">→</span></a
+                        >
+                    </div>
+                    <p class="closing__word">Rainbow Watcher</p>
+                </div>
+                <div class="closing__bottom">
+                    <div class="closing__cols">
+                        <div>
+                            <h3>阅读</h3>
+                            <a href="posts.html">文章</a>
+                            <a href="archives.html">归档</a>
+                            <a href="article.html">数据仓库笔记</a>
+                        </div>
+                        <div>
+                            <h3>整理</h3>
+                            <a href="projects.html">项目</a>
+                            <a href="uses.html">在用工具</a>
+                            <a href="research.html">研究</a>
+                        </div>
+                        <div>
+                            <h3>报告</h3>
+                            <a href="research-note.html">hc 父子终端</a>
+                            <a href="research.html#pitfalls">踩坑记录</a>
+                        </div>
+                        <div>
+                            <h3>站点</h3>
+                            <a href="index.html">首页</a>
+                            <a href="../index.html">更早的原型</a>
+                            <a href="404.html">404 页面</a>
+                        </div>
+                    </div>
+                    <div class="closing__legal">
+                        <span>© <span data-year>2026</span> Rainbow Watcher · 原型内容取自 content/</span>
+                        <span>亮暗主题 · 阅读进度 · anchor 目录 · <a href="README.md">设计说明</a></span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script type="module" src="assets/js/app.js"></script>
+    </body>
+</html>
