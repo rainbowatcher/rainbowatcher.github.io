@@ -393,50 +393,43 @@ for t in probe probe2; do hc kill "$t"; hc rm "$t"; done</code></pre>
                         aria-expanded="false"
                         aria-label="展开目录"
                     >
-                        <span class="rail__lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                        <span class="rail__thumb" aria-hidden="true">
+                            <i data-for="conclusion"></i>
+                            <i data-for="method"></i>
+                            <i data-for="protocol"></i>
+                            <i class="is-l3" data-for="five-tests"></i>
+                            <i data-for="socket"></i>
+                            <i class="is-l3" data-for="unix-socket"></i>
+                            <i class="is-l3" data-for="cost"></i>
+                            <i data-for="env"></i>
+                            <i data-for="gui"></i>
+                            <i data-for="pitfalls"></i>
+                            <i data-for="cleanup"></i>
+                        </span>
                         <span class="sr-only">目录</span>
                     </button>
                     <p class="rail__title">报告目录</p>
-                    <p class="rail__current" data-toc-current>结论先行</p>
                     <nav class="toc" aria-label="报告目录">
                         <ol>
+                            <li><a href="#conclusion">结论先行</a></li>
+                            <li><a href="#method">判定方法</a></li>
                             <li>
-                                <a href="#conclusion" aria-label="结论先行"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#method" aria-label="判定方法"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#protocol" aria-label="一、父子的载体是协议字段"><i class="toc__line"></i></a>
+                                <a href="#protocol">一、父子的载体是协议字段</a>
                                 <ol>
-                                    <li>
-                                        <a href="#five-tests" aria-label="五组实测"><i class="toc__line"></i></a>
-                                    </li>
+                                    <li><a href="#five-tests">五组实测</a></li>
                                 </ol>
                             </li>
                             <li>
-                                <a href="#socket" aria-label="二、途径一：直接说协议"><i class="toc__line"></i></a>
+                                <a href="#socket">二、途径一：直接说协议</a>
                                 <ol>
-                                    <li>
-                                        <a href="#unix-socket" aria-label="unix socket"><i class="toc__line"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#cost" aria-label="代价"><i class="toc__line"></i></a>
-                                    </li>
+                                    <li><a href="#unix-socket">unix socket</a></li>
+                                    <li><a href="#cost">代价</a></li>
                                 </ol>
                             </li>
-                            <li>
-                                <a href="#env" aria-label="三、途径二：环境变量继承"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#gui" aria-label="五、Sheprd GUI"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#pitfalls" aria-label="八、没验证的，和踩到的坑"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#cleanup" aria-label="九、复现与清理"><i class="toc__line"></i></a>
-                            </li>
+                            <li><a href="#env">三、途径二：环境变量继承</a></li>
+                            <li><a href="#gui">五、Sheprd GUI</a></li>
+                            <li><a href="#pitfalls">八、没验证的，和踩到的坑</a></li>
+                            <li><a href="#cleanup">九、复现与清理</a></li>
                         </ol>
                     </nav>
                     <div class="rail__tools">

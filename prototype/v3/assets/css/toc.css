@@ -1,7 +1,7 @@
 /**
- * 做什么：v3 长文页默认收起的线条缩略图目录，含把手、当前章节名与字号工具。
- * 状态与生命周期：目录沿视口右缘停靠，悬停 / 聚焦 / 点击把手才展开；活跃线由 reading.js 更新。
- * 取舍与不变量：每个 anchor 用一根长短不一的横线表示，不重复列出标题文字；收起时把手只露一叠短线。
+ * 做什么：v3 长文页默认收起的 anchor 目录，触发器是按层级缩进的线条缩略图。
+ * 状态与生命周期：目录沿视口右缘停靠，悬停 / 聚焦 / 点击把手才展开；当前章节由 reading.js 同步到缩略图。
+ * 取舍与不变量：线条只出现在触发器，展开的导航始终用明文标题，层级靠缩进表达而不靠装饰线。
  * 边界：不定义正文排版与代码块，也不负责阅读进度条本身。
  */
 
@@ -39,133 +39,67 @@
     padding: 0;
     border: 0;
     border-left: 2px solid var(--r5);
-    border-right: 1px solid var(--line);
-    border-radius: 0;
     background: var(--bg-3);
     cursor: pointer;
 }
 
-.rail__lines {
+.rail__thumb {
     display: grid;
     gap: 5px;
+    justify-items: start;
 }
 
-.rail__lines i {
+.rail__thumb i {
     display: block;
-    width: 13px;
+    width: 14px;
     height: 2px;
-    background: var(--muted);
-    transition: background-color 240ms var(--ease);
+    background: var(--line-strong);
 }
 
-.rail__lines i:nth-child(2) {
-    width: 9px;
+.rail__thumb i.is-l3 {
+    width: 10px;
     margin-left: 4px;
+}
+
+.rail__thumb i.is-current {
     background: var(--r5);
 }
 
-.rail__lines i:nth-child(3) {
-    width: 11px;
-}
-
-.rail__lines i:nth-child(4) {
-    width: 7px;
-    margin-left: 6px;
-}
-
-.rail__handle:hover .rail__lines i {
-    background: var(--accent);
-}
-
 .rail__title {
-    margin-bottom: var(--s-2);
+    margin-bottom: var(--s-3);
     color: var(--muted);
     font-size: var(--t-label);
     font-weight: 500;
     letter-spacing: 0.08em;
 }
 
-.rail__current {
-    margin-bottom: var(--s-5);
-    padding-bottom: var(--s-3);
-    border-bottom: 1px solid var(--line);
-    font-family: var(--font-display);
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.5;
-}
-
 .toc ol {
     display: grid;
-    gap: 10px;
+    gap: 2px;
 }
 
 .toc ol ol {
-    margin-top: 8px;
-    padding-left: 14px;
-    gap: 8px;
+    margin-top: 2px;
+    padding-left: var(--s-4);
 }
 
 .toc a {
     position: relative;
     display: block;
-    padding-block: 3px;
+    padding-block: 5px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    transition: color 240ms var(--ease);
 }
 
-.toc__line {
-    display: block;
-    width: 72%;
-    height: 3px;
-    background: var(--line-strong);
-    transform-origin: left;
-    transition:
-        background-color 240ms var(--ease),
-        height 240ms var(--ease);
+.toc a:hover {
+    color: var(--ink);
 }
 
-.toc > ol > li:nth-child(7n + 1) .toc__line {
-    width: 88%;
-}
-
-.toc > ol > li:nth-child(7n + 2) .toc__line {
-    width: 63%;
-}
-
-.toc > ol > li:nth-child(7n + 3) .toc__line {
-    width: 79%;
-}
-
-.toc > ol > li:nth-child(7n + 4) .toc__line {
-    width: 57%;
-}
-
-.toc > ol > li:nth-child(7n + 5) .toc__line {
-    width: 93%;
-}
-
-.toc > ol > li:nth-child(7n + 6) .toc__line {
-    width: 70%;
-}
-
-.toc > ol > li:nth-child(7n) .toc__line {
-    width: 84%;
-}
-
-.toc ol ol .toc__line {
-    transform: scaleX(0.62);
-}
-
-.toc ol ol li:nth-child(2n) .toc__line {
-    transform: scaleX(0.5);
-}
-
-.toc a:hover .toc__line {
-    background: var(--accent);
-}
-
-.toc a.is-active .toc__line {
-    height: 4px;
-    background: var(--spectrum);
+.toc a.is-active {
+    color: var(--accent);
+    font-weight: 500;
 }
 
 .toc a.is-active::before {
@@ -184,8 +118,6 @@
     align-items: center;
     gap: var(--s-2);
     margin-top: var(--s-5);
-    padding-top: var(--s-4);
-    border-top: 1px solid var(--line);
 }
 
 .rail__tools span {
@@ -198,7 +130,6 @@
     width: 32px;
     height: 32px;
     border: 1px solid var(--line);
-    border-radius: 0;
     background: transparent;
     color: var(--ink-2);
     font-size: 13px;

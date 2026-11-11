@@ -1,6 +1,6 @@
 /**
  * 做什么：v3 长文页的阅读进度、目录高亮、正文字号与代码块复制。
- * 状态与生命周期：滚动时同一帧内更新进度条、目录活跃线与当前章节名；字号由首屏前脚本恢复并写入 localStorage。
+ * 状态与生命周期：滚动时同一帧内更新进度条、目录高亮与触发器缩略图的当前位置；字号由首屏前脚本恢复并写入 localStorage。
  * 取舍与不变量：进度以「已滚过全文的比例」计算，目录高亮取视口上方最近的标题，两者互不依赖数据。
  * 边界：不生成目录条目，HTML 里的 anchor 与 id 必须已经存在；不改动其它页面。
  */
@@ -34,10 +34,8 @@ function initToc() {
         .filter(Boolean)
     if (!links.length || !headings.length) return () => {}
 
-    const current = document.querySelector("[data-toc-current]")
-    const labelOf = (link) => link.dataset.label || link.getAttribute("aria-label") || ""
+    const thumbs = [...document.querySelectorAll(".rail__thumb i[data-for]")]
     let active = null
-    let resting = ""
 
     const setActive = (id) => {
         if (id === active) return
@@ -48,23 +46,8 @@ function initToc() {
             if (on) link.setAttribute("aria-current", "true")
             else link.removeAttribute("aria-current")
         })
-        const hit = links.find((link) => link.hash.slice(1) === id)
-        resting = hit ? labelOf(hit) : ""
-        if (current && resting) current.textContent = resting
+        thumbs.forEach((line) => line.classList.toggle("is-current", line.dataset.for === id))
     }
-
-    links.forEach((link) => {
-        const reveal = () => {
-            if (current) current.textContent = labelOf(link)
-        }
-        const reset = () => {
-            if (current && resting) current.textContent = resting
-        }
-        link.addEventListener("mouseenter", reveal)
-        link.addEventListener("focus", reveal)
-        link.addEventListener("mouseleave", reset)
-        link.addEventListener("blur", reset)
-    })
 
     const onHash = () => {
         const id = decodeURIComponent(window.location.hash.slice(1))

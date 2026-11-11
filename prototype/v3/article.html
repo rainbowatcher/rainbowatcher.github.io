@@ -293,38 +293,31 @@
                         aria-expanded="false"
                         aria-label="展开目录"
                     >
-                        <span class="rail__lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                        <span class="rail__thumb" aria-hidden="true">
+                            <i data-for="what-is-dw"></i>
+                            <i data-for="what-is-lake"></i>
+                            <i data-for="differences"></i>
+                            <i class="is-l3" data-for="compare-table"></i>
+                            <i class="is-l3" data-for="tradeoffs"></i>
+                            <i data-for="layers"></i>
+                            <i data-for="references"></i>
+                        </span>
                         <span class="sr-only">目录</span>
                     </button>
                     <p class="rail__title">本文目录</p>
-                    <p class="rail__current" data-toc-current>数据仓库是什么</p>
                     <nav class="toc" aria-label="本文目录">
                         <ol>
+                            <li><a href="#what-is-dw">数据仓库是什么</a></li>
+                            <li><a href="#what-is-lake">数据湖是什么</a></li>
                             <li>
-                                <a href="#what-is-dw" aria-label="数据仓库是什么"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#what-is-lake" aria-label="数据湖是什么"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#differences" aria-label="他们的异同"><i class="toc__line"></i></a>
+                                <a href="#differences">他们的异同</a>
                                 <ol>
-                                    <li>
-                                        <a href="#compare-table" aria-label="三类存储的对照"
-                                            ><i class="toc__line"></i
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a href="#tradeoffs" aria-label="数据湖还缺什么"><i class="toc__line"></i></a>
-                                    </li>
+                                    <li><a href="#compare-table">三类存储的对照</a></li>
+                                    <li><a href="#tradeoffs">数据湖还缺什么</a></li>
                                 </ol>
                             </li>
-                            <li>
-                                <a href="#layers" aria-label="数仓分层"><i class="toc__line"></i></a>
-                            </li>
-                            <li>
-                                <a href="#references" aria-label="参考资料"><i class="toc__line"></i></a>
-                            </li>
+                            <li><a href="#layers">数仓分层</a></li>
+                            <li><a href="#references">参考资料</a></li>
                         </ol>
                     </nav>
                     <div class="rail__tools">
