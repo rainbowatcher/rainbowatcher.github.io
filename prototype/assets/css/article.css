@@ -1,7 +1,7 @@
 /* ---------- 文章页 ---------- */
 
 .article-wrap {
-    width: min(1002px, 100% - var(--gutter) * 2);
+    width: min(var(--maxw), 100% - var(--gutter) * 2);
     margin-inline: auto;
 }
 
@@ -73,9 +73,9 @@
 
 .article-layout {
     display: grid;
-    grid-template-columns: minmax(0, 700px) 220px;
+    grid-template-columns: minmax(0, 820px) 150px;
     justify-content: space-between;
-    gap: clamp(36px, 6vw, 82px);
+    gap: clamp(36px, 5vw, 96px);
     padding-top: clamp(32px, 4.5vw, 52px);
 }
 

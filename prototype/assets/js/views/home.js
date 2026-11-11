@@ -64,7 +64,7 @@ export function render() {
             <div class="section-head">
                 <span class="section-index">02</span>
                 <h2 id="topics-title">按主题浏览</h2>
-                <a class="more" href="#/archives">查看归档 ${icon("arrow-up-right")}</a>
+                <a class="more" href="#/knowledge">查看知识库 ${icon("arrow-up-right")}</a>
             </div>
             <div class="topic-cloud">
                 ${tags

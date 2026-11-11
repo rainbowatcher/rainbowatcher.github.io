@@ -10,10 +10,9 @@ import { initContrast } from "./contrast.js"
 import * as home from "./views/home.js"
 import * as postsView from "./views/posts.js"
 import * as article from "./views/article.js"
-import * as archive from "./views/archive.js"
+import * as knowledge from "./views/knowledge.js"
 import * as uses from "./views/uses.js"
 import * as projects from "./views/projects.js"
-import * as research from "./views/research.js"
 import * as notfound from "./views/notfound.js"
 
 const viewEl = document.querySelector("#view")
@@ -27,20 +26,18 @@ const routes = {
     home,
     posts: postsView,
     post: article,
-    archives: archive,
+    knowledge,
     uses,
     projects,
-    research,
     "research-detail": article,
     notfound,
 }
 
 const staticTitles = {
     home: "Rainbow Watcher — 看彩虹的人",
-    archives: "归档 — Rainbow Watcher",
+    knowledge: "知识库 — Rainbow Watcher",
     uses: "在用 — Rainbow Watcher",
     projects: "项目 — Rainbow Watcher",
-    research: "研究 — Rainbow Watcher",
     notfound: "页面不存在 — Rainbow Watcher",
 }
 
@@ -54,9 +51,10 @@ function parseRoute() {
         return segments[1] ? { name: "post", slug: segments[1], query } : { name: "posts", query }
     }
     if (segments[0] === "research") {
-        return segments[1] ? { name: "research-detail", slug: segments[1], query } : { name: "research", query }
+        return segments[1] ? { name: "research-detail", slug: segments[1], query } : { name: "knowledge", query }
     }
-    if (["archives", "uses", "projects"].includes(segments[0])) {
+    if (segments[0] === "archives") return { name: "knowledge", query }
+    if (["knowledge", "uses", "projects"].includes(segments[0])) {
         return { name: segments[0], query }
     }
     return { name: "notfound", query }
@@ -64,7 +62,7 @@ function parseRoute() {
 
 function navTarget(route) {
     if (route.name === "post") return "posts"
-    if (route.name === "research-detail") return "research"
+    if (route.name === "research-detail") return "knowledge"
     return route.name
 }
 

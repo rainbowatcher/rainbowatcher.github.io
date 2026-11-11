@@ -69,7 +69,7 @@ export function queryOf(route) {
 export function pageTitleFor(route, postsCount) {
     const map = {
         home: "Rainbow Watcher — 看彩虹的人",
-        posts: `文章 · ${postsCount} 篇 — Rainbow Watcher`,
+        posts: `博客 · ${postsCount} 篇 — Rainbow Watcher`,
         archives: "归档 — Rainbow Watcher",
         uses: "在用 — Rainbow Watcher",
         projects: "项目 — Rainbow Watcher",

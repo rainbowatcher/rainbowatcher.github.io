@@ -1,10 +1,10 @@
-@media (width <= 1000px) {
+@media (width <= 1120px) {
     .article-wrap {
-        width: min(700px, 100% - var(--gutter) * 2);
+        width: min(820px, 100% - var(--gutter) * 2);
     }
 
     .article-layout {
-        grid-template-columns: minmax(0, 700px);
+        grid-template-columns: minmax(0, 820px);
         justify-content: center;
     }
 
@@ -17,7 +17,7 @@
     }
 }
 
-@media (width >= 1001px) {
+@media (width >= 1121px) {
     .toc-mobile {
         display: none;
     }
@@ -38,14 +38,6 @@
 
     .code-block {
         margin-inline: -8px;
-    }
-
-    .author-card {
-        flex-wrap: wrap;
-    }
-
-    .author-card .btn {
-        width: 100%;
     }
 
     .prev-next {

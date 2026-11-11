@@ -1,5 +1,5 @@
 /**
- * 做什么：文章详情视图：正文排版、目录、阅读进度、字号调节与上下篇。
+ * 做什么：文章详情视图：正文排版、目录、阅读进度与上下篇。
  * 取舍：目录链接用 data-anchor 而非 hash，避免和前端路由的 hash 冲突。
  * 边界：不处理 Markdown 解析，正文由数据层直接给出 HTML。
  */
@@ -7,16 +7,6 @@
 import { posts, researchReports } from "../data.js"
 import { esc, fmtDate, sortedPosts, tagChip } from "../utils.js"
 import { icon } from "../icons.js"
-
-const FONT_SIZES = { s: "15.5px", m: "17px", l: "18.5px" }
-
-function readFontSize() {
-    try {
-        return localStorage.getItem("rw-prose-size") ?? "m"
-    } catch {
-        return "m"
-    }
-}
 
 function defaultBody(post) {
     const code = post.tags.includes("Git")
@@ -67,12 +57,11 @@ export function render(route) {
     const prev = !isResearch && index > 0 ? sorted[index - 1] : null
     const next = !isResearch && index >= 0 && index < sorted.length - 1 ? sorted[index + 1] : null
     const body = doc.body ?? defaultBody(doc)
-    const font = readFontSize()
 
     return `
     <div class="article-wrap view-enter">
         <header class="article-head">
-            <a class="article-back" href="${isResearch ? "#/research" : "#/posts"}">${icon("arrow-left")} ${isResearch ? "研究" : "文章"}</a>
+            <a class="article-back" href="${isResearch ? "#/knowledge" : "#/posts"}">${icon("arrow-left")} ${isResearch ? "知识库" : "博客"}</a>
             <div class="article-kicker">
                 <time datetime="${doc.date}">${fmtDate(doc.date)}</time><span class="dot"></span>
                 <span>${doc.minutes} 分钟阅读</span>
@@ -83,7 +72,7 @@ export function render(route) {
             ${isResearch ? `<div class="article-banner">${icon("flask")}<p><strong>本机环境探索报告。</strong>结论依赖当时的机器状态、工具版本与本地配置，换台机器未必复现；引用前请先在本机复验。</p></div>` : ""}
         </header>
 
-        <div class="article-layout" data-font="${font}" style="--prose-size:${FONT_SIZES[font] ?? FONT_SIZES.m}">
+        <div class="article-layout">
             <article class="article-body">
                 <details class="toc-mobile">
                     <summary>本文目录</summary>
@@ -93,19 +82,8 @@ export function render(route) {
             </article>
 
             <aside class="article-rail" aria-label="文章目录与阅读设置">
-                <div>
-                    <p class="toc-label">On this page</p>
-                    <nav class="toc-nav" id="tocNav"></nav>
-                </div>
+                <nav class="toc-nav" id="tocNav" aria-label="本文目录"></nav>
                 <div class="reading-tools">
-                    <div class="reading-tools-row">
-                        <span class="reading-tools-label">字号</span>
-                        <div class="font-switch" role="group" aria-label="正文字号">
-                            <button type="button" data-font-size="s" class="${font === "s" ? "is-active" : ""}" aria-label="小号字">A</button>
-                            <button type="button" data-font-size="m" class="${font === "m" ? "is-active" : ""}" aria-label="中号字">A</button>
-                            <button type="button" data-font-size="l" class="${font === "l" ? "is-active" : ""}" aria-label="大号字">A</button>
-                        </div>
-                    </div>
                     <button type="button" class="toc-top" data-to-top>回到顶部 ↑</button>
                 </div>
             </aside>
@@ -113,14 +91,6 @@ export function render(route) {
 
         <footer class="article-foot">
             <div class="article-foot-tags"><span>Topics</span>${doc.tags.map((tag) => tagChip(tag)).join("")}</div>
-            <div class="author-card">
-                <span class="author-avatar" aria-hidden="true">虹</span>
-                <div class="author-main">
-                    <strong>Rainbow Watcher</strong>
-                    <p>开发者、开源维护者。写 TypeScript、Rust、Python、Go，也记录代码之外的事。</p>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="https://github.com/rainbowatcher" target="_blank" rel="noreferrer">GitHub ${icon("arrow-up-right")}</a>
-            </div>
             ${
                 prev || next
                     ? `
@@ -172,22 +142,8 @@ export function mount() {
     }
     nav.addEventListener("click", onTocClick)
     mobileNav.addEventListener("click", onTocClick)
-
-    document.querySelectorAll("[data-font-size]").forEach((button) => {
-        button.addEventListener("click", () => {
-            const size = button.dataset.fontSize
-            const layout = document.querySelector(".article-layout")
-            layout.style.setProperty("--prose-size", FONT_SIZES[size] ?? FONT_SIZES.m)
-            layout.dataset.font = size
-            document.querySelectorAll("[data-font-size]").forEach((item) => {
-                item.classList.toggle("is-active", item === button)
-            })
-            try {
-                localStorage.setItem("rw-prose-size", size)
-            } catch {
-                // 忽略隐私模式下的写入失败
-            }
-        })
+    document.querySelector("[data-to-top]")?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" })
     })
 
     const update = () => {

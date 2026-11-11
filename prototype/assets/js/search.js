@@ -8,9 +8,9 @@ import { posts, researchReports } from "./data.js"
 import { esc, fmtDate } from "./utils.js"
 
 const PAGES = [
-    { title: "研究", desc: "基于本机环境的探索报告", href: "#/research", tag: "PAGE" },
+    { title: "博客", desc: "想法、唠叨与长短不一的笔记", href: "#/posts", tag: "PAGE" },
+    { title: "知识库", desc: "研究报告与按年份归档的可追溯知识", href: "#/knowledge", tag: "PAGE" },
     { title: "在用", desc: "每天真正在使用的工具与硬件", href: "#/uses", tag: "PAGE" },
-    { title: "归档", desc: "按时间浏览全部文章", href: "#/archives", tag: "PAGE" },
     { title: "项目", desc: "维护中的开源项目", href: "#/projects", tag: "PAGE" },
 ]
 
@@ -32,7 +32,7 @@ function index() {
         })),
         ...researchReports.map((report) => ({
             title: report.title,
-            desc: `${fmtDate(report.date)} · 研究`,
+            desc: `${fmtDate(report.date)} · 知识库`,
             href: `#/research/${report.slug}`,
             tag: "LAB",
             haystack: `${report.title} ${report.subtitle} ${report.tags.join(" ")}`.toLowerCase(),
@@ -50,7 +50,7 @@ function paint() {
     cursor = 0
 
     if (!items.length) {
-        results.innerHTML = `<p class="palette-empty">没有找到“${esc(input.value.trim())}”<br>试试文章标题、主题或“归档”。</p>`
+        results.innerHTML = `<p class="palette-empty">没有找到“${esc(input.value.trim())}”<br>试试文章标题、主题或“知识库”。</p>`
         count.textContent = "0 个结果"
         return
     }
@@ -60,7 +60,7 @@ function paint() {
         if (!groups.has(item.tag)) groups.set(item.tag, [])
         groups.get(item.tag).push(item)
     }
-    const labels = { POST: "文章", LAB: "研究", PAGE: "页面" }
+    const labels = { POST: "博客", LAB: "知识库", PAGE: "页面" }
     let indexInList = 0
     results.innerHTML = [...groups.entries()]
         .map(

@@ -5,10 +5,46 @@
  */
 
 import { posts } from "../data.js"
-import { esc, pageTitleFor, postRow, queryOf, sortedPosts, tagChip, tagStats } from "../utils.js"
+import { esc, fmtDate, pageTitleFor, queryOf, sortedPosts, tagChip, tagStats } from "../utils.js"
 import { icon } from "../icons.js"
 
 const PAGE_SIZE = 8
+
+function plainTextLength(html) {
+    return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().length
+}
+
+function postCard(post) {
+    const body = post.body?.trim() ?? ""
+    const long = body.length > 0 && plainTextLength(body) > 480
+    const shortBody = body && !long ? body : ""
+    return `
+    <article class="post-card" data-post="${post.slug}">
+        <header class="post-card-head">
+            <span class="post-avatar" aria-hidden="true">虹</span>
+            <div class="post-card-author">
+                <strong>Rainbow Watcher</strong>
+                <span>@rainbowatcher · <time datetime="${post.date}">${fmtDate(post.date)}</time></span>
+            </div>
+            <a class="post-card-permalink" href="#/posts/${post.slug}" aria-label="打开《${esc(post.title)}》">↗</a>
+        </header>
+        <div class="post-card-main">
+            <h2 class="post-card-title"><a href="#/posts/${post.slug}">${esc(post.title)}</a></h2>
+            ${
+                shortBody
+                    ? `<div class="post-card-text">${shortBody}</div>`
+                    : `<p class="post-card-text">${esc(post.excerpt)}</p>`
+            }
+            ${long ? `<div class="post-card-full prose" hidden>${body}</div>` : ""}
+            <div class="post-card-tags">${post.tags.map((tag) => tagChip(tag)).join("")}</div>
+        </div>
+        <footer class="post-card-foot">
+            <span>${post.minutes} 分钟阅读</span>
+            ${long ? `<button class="post-card-more" type="button" data-expand aria-expanded="false">展开全文</button>` : ""}
+            <a class="post-card-open" href="#/posts/${post.slug}">打开文章 <span aria-hidden="true">→</span></a>
+        </footer>
+    </article>`
+}
 
 export function render(route) {
     const sorted = sortedPosts(posts)
@@ -19,12 +55,12 @@ export function render(route) {
     return `
     <div class="container view-enter">
         <header class="page-head">
-            <p class="eyebrow">Index / Posts</p>
+            <p class="eyebrow">Feed / Posts</p>
             <div class="page-title-row">
-                <h1 class="page-title">文章</h1>
+                <h1 class="page-title">博客</h1>
                 <span class="page-meta">${sorted.length} POSTS · 2022—2024</span>
             </div>
-            <p class="page-desc">关于代码、工具与日常折腾的笔记。按时间倒序排列，可以用主题或关键词筛选。</p>
+            <p class="page-desc">想法、唠叨与长短不一的笔记。短的直接留在这里，长的可以展开，也可以进入正文。</p>
         </header>
 
         <div class="list-toolbar">
@@ -83,7 +119,7 @@ export function mount(route) {
 
         const pages = Array.from({ length: totalPages }, (_, index) => index + 1)
         list.innerHTML = `
-            <div class="post-list">${pageItems.map(postRow).join("")}</div>
+            <div class="feed">${pageItems.map(postCard).join("")}</div>
             <nav class="pager" aria-label="分页">
                 <span class="pager-info">${from}–${to} / ${items.length}${activeTag ? ` · 主题 ${esc(activeTag)}` : ""}</span>
                 <div class="pager-pages">
@@ -114,6 +150,19 @@ export function mount(route) {
     })
 
     list.addEventListener("click", (event) => {
+        const expand = event.target.closest("[data-expand]")
+        if (expand) {
+            const card = expand.closest(".post-card")
+            const full = card?.querySelector(".post-card-full")
+            if (!full) return
+            const opened = full.hidden
+            full.hidden = !opened
+            card.classList.toggle("is-expanded", opened)
+            expand.setAttribute("aria-expanded", String(opened))
+            expand.textContent = opened ? "收起" : "展开全文"
+            return
+        }
+
         const button = event.target.closest("[data-page]")
         if (!button || button.disabled) return
         state.page = Number(button.dataset.page)

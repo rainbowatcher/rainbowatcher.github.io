@@ -37,7 +37,6 @@ export function render() {
 
         <div class="uses-layout">
             <aside class="uses-index" aria-label="在本页中跳转">
-                <span class="uses-index-label">On this page</span>
                 ${usesSections.map((section) => `<a href="#/uses" data-target="${section.id}">${esc(section.title)}</a>`).join("")}
             </aside>
 

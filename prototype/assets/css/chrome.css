@@ -202,10 +202,7 @@ body {
 
 .reading-progress {
     position: absolute;
-    right: 0;
-    bottom: -1px;
-    left: 0;
-    height: 2px;
+    inset: 0;
     background: var(--accent);
     transform: scaleX(0);
     transform-origin: left center;
