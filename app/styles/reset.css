@@ -1,0 +1,79 @@
+/**
+ * 做什么：元素级重置：盒模型、默认外边距、列表缩进、表单元素字体与按钮外观、链接下划线。
+ * 状态与生命周期：静态样式，由 nuxt.config 的 css 数组排在 UnoCSS 之前加载，
+ * 因此任何工具类都能覆盖这里的规则（UnoCSS 产物不带 @layer，顺序即优先级）。
+ * 取舍与不变量：不使用 @unocss/reset/tailwind.css：它会把 ul/ol 的 list-style 清掉，
+ * 与正文列表冲突，也会在按钮上写死 background，压过工具类；
+ * 这里只重置换肤必需的属性；按钮不写 border:0（那会把 border-style 压成 none，
+ * 让上方的 border-width 工具类失效），列表符号保留给 UA 与 .prose 决定。
+ * 边界：不含颜色与字体变量（见 tokens.css），也不含任何组件外观。
+ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    /* 工具类只写 border-width/color，样式统一由这里给成 solid；宽度默认 0，需要时才加 */
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--line);
+}
+
+body {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd,
+pre {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+}
+
+img,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    padding: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+input,
+select,
+textarea {
+    color: inherit;
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+hr {
+    border: 0;
+}

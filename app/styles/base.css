@@ -36,8 +36,6 @@ body::after {
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
     transition:
         color 0.18s ease,
         background-color 0.18s ease,

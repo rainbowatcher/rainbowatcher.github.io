@@ -47,7 +47,8 @@ export default defineNuxtConfig({
         ],
     },
 
-    css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
+    // 顺序即优先级：自写的元素重置在最前，UnoCSS 工具类随后，站点全局样式最后
+    css: ["~/styles/reset.css", "uno.css", "~/styles/index.css"],
     devtools: { enabled: false },
 
     experimental: {
