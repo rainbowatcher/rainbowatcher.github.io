@@ -242,6 +242,11 @@
     border-top: 1px solid var(--line);
 }
 
+/* 页头自带 border-bottom，列表紧跟页头时不再补第二条线 */
+.page-head + .post-list > .post-row:first-child {
+    border-top: none;
+}
+
 .post-date {
     color: var(--muted);
     font-family: var(--font-mono);
