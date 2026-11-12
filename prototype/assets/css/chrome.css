@@ -16,8 +16,8 @@ body {
     right: 0;
     left: 0;
     height: 2px;
-    background: var(--rainbow);
-    opacity: 0.9;
+    /* 轨道用中性淡色，阅读进度（accent）才有足够对比 */
+    background: var(--line-strong);
 }
 
 .container {
