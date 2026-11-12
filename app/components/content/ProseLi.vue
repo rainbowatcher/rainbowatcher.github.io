@@ -1,25 +1,6 @@
+<!-- 做什么：列表项，间距由 .prose li 提供；任务列表的复选框样式在 prose.css。 -->
 <template>
-    <li class="relative [&+li]:mt2 [&>ol,&>ul]:mt2">
+    <li>
         <slot />
     </li>
 </template>
-
-<style lang="css">
-li > input {
-    @apply mr-2 h3.5 w3.5 appearance-none b b-border rounded bg-popover;
-}
-
-li > input:checked {
-    @apply bg-accent;
-}
-
-li > input:checked::before {
-    content: '\2713';
-    display: block;
-    text-align: center;
-    color: var(--background);
-    position: absolute;
-    left: 0rem;
-    top: 0rem;
-}
-</style>

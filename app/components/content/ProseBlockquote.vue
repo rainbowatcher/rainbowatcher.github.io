@@ -1,5 +1,6 @@
+<!-- 做什么：引用块，左侧竖线与衬线字体由 .prose blockquote 提供。 -->
 <template>
-    <blockquote class="b-l-(4 muted) bg-card p2 c-card-foreground italic [&_blockquote]:(ml4 mt4)">
+    <blockquote>
         <slot />
     </blockquote>
 </template>

@@ -1,4 +1,11 @@
-<script lang="ts" setup>
+<script setup lang="ts">
+/**
+ * 做什么：正文里的状态徽章（tip / note / warning / danger / info），供 markdown 内联使用。
+ * 状态与生命周期：纯展示，无状态。
+ * 取舍与不变量：配色收敛到 tokens：tip 用强调色底、note 用表面色、warning 用金色、danger 用危险色，
+ * 与正文提示块（callout）同一套语义色。
+ * 边界：不参与正文容器布局，也不做图标。
+ */
 type BadgeType = "danger" | "info" | "note" | "tip" | "warning"
 
 defineProps({
@@ -22,54 +29,35 @@ defineProps({
 
 <template>
     <span
-        class="badge inline-block select-none rounded-full bg-slate5/20 px-2 py.5 v-text-bottom text-sm font-semibold" :class="[type]" :style="{
-            verticalAlign: vertical,
-        }"
+        class="badge inline-block select-none rounded-full px-2 py-0.5 font-mono text-11px"
+        :class="[type]"
+        :style="{ verticalAlign: vertical }"
     >
         <slot>{{ text }}</slot>
     </span>
 </template>
 
-<style lang="css">
+<style scoped>
 .badge {
-    @apply [&.danger]:(bg-destructive c-destructive-foreground);
-    @apply [&.info]:(bg-popover c-popover-foreground);
-    @apply [&.tip]:(bg-primary c-primary-foreground);
-    @apply [&.warning]:(bg-accent c-accent-foreground);
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink-2);
+    line-height: 1.5;
 }
-/* .badge {
-   display: inline-block;
-   font-size: 14px;
-   height: 1.25rem;
-   line-height: 1.25rem;
-   border-radius: .25rem;
-   padding: 0 .35rem;
-   vertical-align: top;
-   color: rgba(38, 38, 38, 1);
 
-   &.tip {
-     background-color: rgba(74, 222, 128, 1);
-   }
+.badge.tip {
+    border-color: color-mix(in srgb, var(--accent) 24%, var(--line));
+    background: var(--accent-soft);
+    color: var(--accent);
+}
 
-   &.warning {
-     background-color: rgba(250, 204, 21, 1);
-   }
+.badge.warning {
+    border-color: color-mix(in srgb, var(--gold) 30%, var(--line));
+    color: var(--gold);
+}
 
-   &.danger {
-     background-color: rgba(248, 113, 113, 1);
-   }
-
-   .table-of-contents & {
-     vertical-align: middle;
-   }
-
-   &+& {
-     margin-left: 5px;
-   }
- }
-
- .badge-dot {
-   height: 1rem;
- }
-*/
+.badge.danger {
+    border-color: color-mix(in srgb, var(--danger) 30%, var(--line));
+    color: var(--danger);
+}
 </style>

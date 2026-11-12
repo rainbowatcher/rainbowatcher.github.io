@@ -1,5 +1,4 @@
 export default defineNuxtPlugin((app) => {
-    const route = useRoute()
     const { pageLoading } = useSiteState()
     // app.hook("app:created", (_vueApp) => {
     //     console.log("app:created")
@@ -55,9 +54,7 @@ export default defineNuxtPlugin((app) => {
     //     console.log("page:start")
     // })
     app.hook("page:finish", () => {
-        if (route.name === "posts-post") {
-            useCodeCopyBtn()
-        }
+        // 代码复制按钮由 ProsePre 组件自带，这里不再做 DOM 注入
     })
     app.hook("page:loading:end", () => {
         pageLoading.value = false

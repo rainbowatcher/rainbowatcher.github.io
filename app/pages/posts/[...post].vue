@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import ProseCodeInline from "~/components/content/ProseCodeInline.vue"
+/**
+ * 做什么：/posts/<permalink> 文章详情页：取文档、给出相邻文章，其余交给 ArticleLayout 渲染。
+ * 状态与生命周期：路由切换时按 route.path 重新取文档；相邻关系按 manifest.posts 的导航顺序推导。
+ * 取舍与不变量：文章用时间永久链接（permalink），因此匹配与链接都以 permalink 优先；
+ * 首尾文章环绕到另一端，保证任何一篇都有上一篇与下一篇。
+ * 边界：不渲染正文排版与目录（见 ArticleLayout），也不负责列表页。
+ */
 import "katex/dist/katex.min.css"
+import type { NavigationItem } from "~/types/content"
 
 const route = useRoute("posts-post")
 const { post: postName } = route.params
@@ -8,38 +15,46 @@ if (!postName) {
     navigateTo("/posts")
 }
 const { data: posts } = await useAsyncData("posts-nav", useNavItems())
-const path = computed(() => posts.value?.find(i => [i.path, i.permalink].includes(route.path))?.path)
+const path = computed(() => posts.value?.find((i) => [i.path, i.permalink].includes(route.path))?.path)
 if (!path.value) throw createError({ fatal: true, statusCode: 404 })
-const { data: post } = await useAsyncData(`post:${route.path}`, async () => {
-    const p = posts.value?.find(i => [i.path, i.permalink].includes(route.path))?.path
-    if (!p) return null
-    return await useDocument(p)()
-}, { watch: [() => route.path] })
+const { data: post } = await useAsyncData(
+    `post:${route.path}`,
+    async () => {
+        const target = posts.value?.find((i) => [i.path, i.permalink].includes(route.path))?.path
+        if (!target) return null
+        return await useDocument(target)()
+    },
+    { watch: [() => route.path] },
+)
 if (!post.value) throw createError({ fatal: true, statusCode: 404 })
-const currIdx = computed(() => posts.value?.findIndex(i => i.path === path.value) ?? 0)
-const nextPost = computed(() => (currIdx.value === posts.value!.length - 1 ? posts.value![0] : posts.value![currIdx.value + 1]))
-const previousPost = computed(() => (currIdx.value === 0 ? posts.value!.at(-1) : posts.value![currIdx.value - 1]))
-useShowup(".show-up")
+
+const list = computed(() => posts.value ?? [])
+const currIdx = computed(() => list.value.findIndex((i) => i.path === path.value))
+
+function entry(item?: NavigationItem) {
+    if (!item) return undefined
+    return { title: item.title ?? "", to: (item.permalink ?? item.path) as string }
+}
+
+/** 首尾环绕：第一篇的上一篇是最后一篇，反之亦然。 */
+function neighbor(offset: number) {
+    if (!list.value.length || currIdx.value < 0) return undefined
+    return list.value[(currIdx.value + offset + list.value.length) % list.value.length]
+}
+
+const nextPost = computed(() => neighbor(1))
+const previousPost = computed(() => neighbor(-1))
+
+useHead({ title: post.value.title })
 </script>
 
 <template>
-    <section class="flex flex-1 flex-col">
-        <article class="relative min-w-0 w-full font-mb">
-            <span class="show-up absolute inset-x-0 top--.125em z--1 select-none text-center text-nowrap text-11vw c-cyan/38 font-800 lt-md:hidden dark:c-cyan/18">
-                {{ useDateFormat(post!.date, "YYYY MM DD").value }}
-            </span>
-            <h1 class="show-up page-title [view-transition-name:title] z-1 mx-6.5dvw mt-1.2em text-center text-pretty tracking-tight lt-md:text-12vw md:text-7vw xl:text-5vw">
-                {{ post!.title }}
-            </h1>
-            <p v-if="post!.subtitle" class="show-up mx-6.5dvw text-center c-coolGray leading-8">
-                {{ post!.subtitle }}
-            </p>
-            <span class="show-up mxa flex flex-row flex-wrap justify-center text-pretty space-x-4">
-                <TagList :tags="post!.tags" class="text-lg" />
-                <span class="hidden text-lg op-75 lt-md:inline">{{ useDateFormat(post!.date, "YYYY.MM.DD").value }}</span>
-            </span>
-            <MDCRenderer v-if="post" :body="(post as any).body" :data="post" :components="{ code: ProseCodeInline }" class="md-doc show-up mt-24 min-w-0 font-sans lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-6" />
-        </article>
-        <PageNav class="show-up" :previous="previousPost" :next="nextPost" use-title use-permalink />
-    </section>
+    <ArticleLayout
+        :doc="post!"
+        :back="{ label: '博客', to: '/posts' }"
+        fallback-label="全部文章"
+        fallback-to="/posts"
+        :next="entry(nextPost)"
+        :previous="entry(previousPost)"
+    />
 </template>

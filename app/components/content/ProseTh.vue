@@ -1,5 +1,6 @@
+<!-- 做什么：表头单元格，样式由 .prose th 提供。_ -->
 <template>
-    <th class="bg-slate5/10 px4 py1.5">
+    <th>
         <slot />
     </th>
 </template>

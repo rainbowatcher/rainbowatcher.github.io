@@ -1,12 +1,13 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 /**
- * 做什么：/topics/<slug> 详情页，渲染单篇专题并提供前后篇导航。
- * 状态与生命周期：路由切换时按 route.path 重新取文档；列表元数据取自 manifest.topics。
- * 取舍与不变量：专题的 path 即路由，无时间永久链接，故直接按 path 匹配与链接。
- * 边界：不生成列表页（见 index.vue），也不校验 frontmatter 之外的内容。
+ * 做什么：/topics/<slug> 专题详情页：取文档与相邻专题，交给 ArticleLayout 渲染，并写页面级 SEO。
+ * 状态与生命周期：路由切换时按 route.path 重新取文档；相邻关系取自 manifest.topics 的顺序。
+ * 取舍与不变量：专题固定带「命令与结论随环境变化」提示条；description 优先取 frontmatter，
+ * 缺失时退回 summary，保证 meta description 非空。
+ * 边界：不渲染正文排版与目录（见 ArticleLayout），也不负责列表页。
  */
-import ProseCodeInline from "~/components/content/ProseCodeInline.vue"
 import "katex/dist/katex.min.css"
+import type { Topic } from "~/types/content"
 
 const route = useRoute()
 const { data: topics } = await useAsyncData("topics-nav", useTopics())
@@ -22,66 +23,44 @@ const { data: doc } = await useAsyncData(
 )
 if (!doc.value) throw createError({ fatal: true, statusCode: 404 })
 
-const pageTitle = computed(() => doc.value?.title ?? "专题")
 const pageDescription = computed(() => {
     const description = doc.value?.description
     if (typeof description === "string" && description) return description
     const summary = doc.value?.summary
     return typeof summary === "string" ? summary : ""
 })
+
 useHead({
-    title: pageTitle,
+    title: doc.value.title,
     meta: [{ name: "description", content: pageDescription }],
 })
 
-const currIdx = computed(() => topics.value?.findIndex((item) => item.path === path.value) ?? 0)
-const nextTopic = computed(() => {
-    const list = topics.value
-    if (!list?.length) return undefined
-    return currIdx.value === list.length - 1 ? list[0] : list[currIdx.value + 1]
-})
-const previousTopic = computed(() => {
-    const list = topics.value
-    if (!list?.length) return undefined
-    return currIdx.value === 0 ? list.at(-1) : list[currIdx.value - 1]
-})
-useShowup(".show-up")
+const list = computed(() => topics.value ?? [])
+const currIdx = computed(() => list.value.findIndex((item) => item.path === path.value))
+
+function entry(item?: Topic) {
+    return item ? { title: item.title ?? "", to: item.path } : undefined
+}
+
+/** 首尾环绕：第一篇的上一篇是最后一篇，反之亦然。 */
+function neighbor(offset: number) {
+    if (!list.value.length || currIdx.value < 0) return undefined
+    return list.value[(currIdx.value + offset + list.value.length) % list.value.length]
+}
+
+const nextTopic = computed(() => neighbor(1))
+const previousTopic = computed(() => neighbor(-1))
 </script>
 
 <template>
-    <section class="flex flex-1 flex-col">
-        <article class="relative min-w-0 w-full font-mb">
-            <span
-                v-if="doc!.date"
-                class="show-up absolute inset-x-0 top--.125em z--1 select-none text-center text-nowrap text-11vw c-cyan/38 font-800 lt-md:hidden dark:c-cyan/18"
-            >
-                {{ useDateFormat(doc!.date, "YYYY MM DD").value }}
-            </span>
-            <h1
-                class="show-up [view-transition-name:title] z-1 mx-6.5dvw mt-1.2em text-center text-pretty tracking-tight lt-md:text-12vw md:text-7vw xl:text-5vw"
-            >
-                {{ doc!.title }}
-            </h1>
-            <p v-if="doc!.subtitle" class="show-up mx-6.5dvw text-center c-coolGray leading-8">
-                {{ doc!.subtitle }}
-            </p>
-            <span class="show-up mxa flex flex-row flex-wrap justify-center text-pretty space-x-4">
-                <TagList :tags="doc!.tags" class="text-lg" />
-                <span v-if="doc!.date" class="hidden text-lg op-75 lt-md:inline">{{
-                    useDateFormat(doc!.date, "YYYY.MM.DD").value
-                }}</span>
-            </span>
-            <p class="show-up mx-6.5dvw mt-6 text-center text-xs c-muted leading-6">
-                专题分析：命令与结论会随版本、网络与部署方式变化，执行前请先核对目标环境。
-            </p>
-            <MDCRenderer
-                v-if="doc"
-                :body="(doc as any).body"
-                :data="doc"
-                :components="{ code: ProseCodeInline }"
-                class="md-doc show-up mt-24 min-w-0 font-sans lt-sm:mx-6 sm:(mxa w-xl) lg:w-3xl md:w-2xl xl:w-5xl space-y-6"
-            />
-        </article>
-        <PageNav class="show-up" :next="nextTopic" :previous="previousTopic" use-title />
-    </section>
+    <ArticleLayout
+        :doc="doc!"
+        :back="{ label: '专题', to: '/topics' }"
+        :banner="{ lead: '专题分析。', text: '命令与结论会随版本、网络与部署方式变化，执行前请先核对目标环境。' }"
+        fallback-label="全部专题"
+        fallback-to="/topics"
+        :kicker="'专题'"
+        :next="entry(nextTopic)"
+        :previous="entry(previousTopic)"
+    />
 </template>

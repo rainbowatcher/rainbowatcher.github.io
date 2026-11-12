@@ -1,7 +1,5 @@
 import process from "node:process"
-import {
-    app, appConfig, docSearch, site,
-} from "./siteConfig"
+import { app, appConfig, docSearch, site } from "./siteConfig"
 
 export default defineNuxtConfig({
     $development: {
@@ -34,17 +32,19 @@ export default defineNuxtConfig({
     appConfig,
     colorMode: { classSuffix: "" },
     components: {
-        dirs: [{
-            global: true,
-            // ProseCodeInline is deliberately NOT registered globally: the
-            // @nuxt/content baseline rendered it as a literal unresolved
-            // element on the home page, and we preserve that byte-for-byte.
-            // Article pages pass it explicitly via MDCRenderer's `components`
-            // prop (matching the baseline's styled inline code there).
-            ignore: ["**/ProseCodeInline.vue"],
-            path: "~/components",
-            pathPrefix: false,
-        }],
+        dirs: [
+            {
+                global: true,
+                // ProseCodeInline is deliberately NOT registered globally: the
+                // @nuxt/content baseline rendered it as a literal unresolved
+                // element on the home page, and we preserve that byte-for-byte.
+                // Article pages pass it explicitly via MDCRenderer's `components`
+                // prop (matching the baseline's styled inline code there).
+                ignore: ["**/ProseCodeInline.vue"],
+                path: "~/components",
+                pathPrefix: false,
+            },
+        ],
     },
 
     css: ["uno.css", "@unocss/reset/tailwind.css", "~/styles/index.css"],
@@ -119,11 +119,48 @@ export default defineNuxtConfig({
         },
         highlight: {
             highlighter: "shiki",
-            langs: ["astro", "batch", "c", "cpp", "csharp", "css", "diff", "go", "html", "http", "ini", "java", "javascript", "json", "jsx", "kotlin", "latex", "lua", "markdown", "mermaid", "md", "python", "ruby", "shell", "sql", "svelte", "tex", "toml", "tsx", "typescript", "vue", "xml", "yaml", "zig", "zsh"],
+            langs: [
+                "astro",
+                "batch",
+                "c",
+                "cpp",
+                "csharp",
+                "css",
+                "diff",
+                "go",
+                "html",
+                "http",
+                "ini",
+                "java",
+                "javascript",
+                "json",
+                "jsx",
+                "kotlin",
+                "latex",
+                "lua",
+                "markdown",
+                "mermaid",
+                "md",
+                "python",
+                "ruby",
+                "shell",
+                "sql",
+                "svelte",
+                "tex",
+                "toml",
+                "tsx",
+                "typescript",
+                "vue",
+                "xml",
+                "yaml",
+                "zig",
+                "zsh",
+            ],
             noApiRoute: true,
+            // 明暗两种模式都用深色代码块：这是原型的设计选择，代码块外壳与整页配色解耦
             theme: {
-                dark: "aurora-x",
-                default: "github-light",
+                dark: "vitesse-dark",
+                default: "vitesse-dark",
             },
         },
         rehypePlugins: {
@@ -154,7 +191,9 @@ export default defineNuxtConfig({
         hooks: {
             "prerender:generate"(route: any) {
                 if (route.fileName?.endsWith(".html") && route.contents) {
-                    route.contents = route.contents.replaceAll(/(?:src|href|srcset)="\/_ipx[^"]+"/g, (r: string) => r.replaceAll("//", "/"))
+                    route.contents = route.contents.replaceAll(/(?:src|href|srcset)="\/_ipx[^"]+"/g, (r: string) =>
+                        r.replaceAll("//", "/"),
+                    )
                 }
 
                 if (route.error) {

@@ -1,5 +1,6 @@
+<!-- 做什么：表格外壳，边框与横向滚动由 .prose table 提供。 -->
 <template>
-    <table class="max-w-100vw border-collapse caption-bottom table-auto of-auto lt-sm:(mx--6 block)">
+    <table>
         <slot />
     </table>
 </template>
