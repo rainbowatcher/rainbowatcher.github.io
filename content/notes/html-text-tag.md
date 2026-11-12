@@ -57,8 +57,8 @@ Start<br />End
 
 ```html
 <p>
-  You can use <abbr title="Cascading Style Sheets">CSS</abbr> to style your
-  <abbr title="HyperText Markup Language">HTML</abbr>.
+    You can use <abbr title="Cascading Style Sheets">CSS</abbr> to style your
+    <abbr title="HyperText Markup Language">HTML</abbr>.
 </p>
 ```
 
@@ -133,43 +133,43 @@ Start<br />End
 
 ```html
 <ol>
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ol>
 
 <ol type="a">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ol>
 
 <ol type="A">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ol>
 
 <ol type="i">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ol>
 
 <ol type="I">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ol>
 ```
 
@@ -181,50 +181,50 @@ Start<br />End
 
 ```html
 <ul class="ul-circle">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ul>
 
 <ul class="ul-square">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ul>
 
 <ul class="ul-disc">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ul>
 
 <ul class="ul-none">
-  <li>元素1</li>
-  <li>元素2</li>
-  <li>元素3</li>
-  <li>元素4</li>
-  <li>元素5</li>
+    <li>元素1</li>
+    <li>元素2</li>
+    <li>元素3</li>
+    <li>元素4</li>
+    <li>元素5</li>
 </ul>
 
 <style>
-  .ul-circle {
-    list-style: circle;
-  }
-  .ul-square {
-    list-style: square;
-  }
-  .ul-disc {
-    list-style: disc;
-  }
-  .ul-none {
-    list-style: none;
-  }
+    .ul-circle {
+        list-style: circle;
+    }
+    .ul-square {
+        list-style: square;
+    }
+    .ul-disc {
+        list-style: disc;
+    }
+    .ul-none {
+        list-style: none;
+    }
 </style>
 ```
 
@@ -246,7 +246,7 @@ More information can be found in <cite>[ISO-0000]</cite>.
 
 ```html
 <figure role="img" aria-labelledby="cow-caption">
-  <pre>
+    <pre>
   ___________________________
 ( I'm an expert in my field. )
   ---------------------------
@@ -256,10 +256,9 @@ More information can be found in <cite>[ISO-0000]</cite>.
                  ||----w |
                  ||     ||
   </pre>
-  <figcaption id="cow-caption">
-    A cow saying, "I'm an expert in my field." The cow is illustrated using
-    preformatted text characters.
-  </figcaption>
+    <figcaption id="cow-caption">
+        A cow saying, "I'm an expert in my field." The cow is illustrated using preformatted text characters.
+    </figcaption>
 </figure>
 ```
 
@@ -271,97 +270,98 @@ More information can be found in <cite>[ISO-0000]</cite>.
 
 ```html
 <table>
-  <caption>
-    Color names and values
-  </caption>
-  <tbody>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">HEX</th>
-      <th scope="col">HSLa</th>
-      <th scope="col">RGBa</th>
-    </tr>
-    <tr>
-      <th scope="row">Teal</th>
-      <td><code>#51F6F6</code></td>
-      <td><code>hsla(180, 90%, 64%, 1)</code></td>
-      <td><code>rgba(81, 246, 246, 1)</code></td>
-    </tr>
-    <tr>
-      <th scope="row">Goldenrod</th>
-      <td><code>#F6BC57</code></td>
-      <td><code>hsla(38, 90%, 65%, 1)</code></td>
-      <td><code>rgba(246, 188, 87, 1)</code></td>
-    </tr>
-  </tbody>
+    <caption>
+        Color names and values
+    </caption>
+    <tbody>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">HEX</th>
+            <th scope="col">HSLa</th>
+            <th scope="col">RGBa</th>
+        </tr>
+        <tr>
+            <th scope="row">Teal</th>
+            <td><code>#51F6F6</code></td>
+            <td><code>hsla(180, 90%, 64%, 1)</code></td>
+            <td><code>rgba(81, 246, 246, 1)</code></td>
+        </tr>
+        <tr>
+            <th scope="row">Goldenrod</th>
+            <td><code>#F6BC57</code></td>
+            <td><code>hsla(38, 90%, 65%, 1)</code></td>
+            <td><code>rgba(246, 188, 87, 1)</code></td>
+        </tr>
+    </tbody>
 </table>
 ```
 
 ```css
 td,
 th {
-  border: 1px solid black;
+    border: 1px solid black;
 }
 
 table {
-  border-collapse: collapse;
+    border-collapse: collapse;
 }
 ```
 
 :::
+
 ::: normal-demo 演示
 
 ```html
 <table>
-  <caption>
-    Superheros and sidekicks
-  </caption>
-  <tbody>
-    <colgroup>
-      <col />
-      <col span="2" class="batman" />
-      <col span="2" class="flash" />
-    </colgroup>
-    <tr>
-      <td></td>
-      <th scope="col">Batman</th>
-      <th scope="col">Robin</th>
-      <th scope="col">The Flash</th>
-      <th scope="col">Kid Flash</th>
-    </tr>
-    <tr>
-      <th scope="row">Skill</th>
-      <td>Smarts</td>
-      <td>Dex, acrobat</td>
-      <td>Super speed</td>
-      <td>Super speed</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <th scope="row">Foot</th>
-      <td>foot1</td>
-      <td>foot2</td>
-      <td>foot3</td>
-      <td>foot4</td>
-    </tr>
-  </tfoot>
+    <caption>
+        Superheros and sidekicks
+    </caption>
+    <tbody>
+        <colgroup>
+            <col />
+            <col span="2" class="batman" />
+            <col span="2" class="flash" />
+        </colgroup>
+        <tr>
+            <td></td>
+            <th scope="col">Batman</th>
+            <th scope="col">Robin</th>
+            <th scope="col">The Flash</th>
+            <th scope="col">Kid Flash</th>
+        </tr>
+        <tr>
+            <th scope="row">Skill</th>
+            <td>Smarts</td>
+            <td>Dex, acrobat</td>
+            <td>Super speed</td>
+            <td>Super speed</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="row">Foot</th>
+            <td>foot1</td>
+            <td>foot2</td>
+            <td>foot3</td>
+            <td>foot4</td>
+        </tr>
+    </tfoot>
 </table>
 ```
 
 ```css
 .batman {
-  background-color: #ffeef2;
+    background-color: #ffeef2;
 }
 .flash {
-  background-color: #ffe8d4;
+    background-color: #ffe8d4;
 }
 td,
 th {
-  border: 1px solid black;
+    border: 1px solid black;
 }
 table {
-  border-collapse: collapse;
+    border-collapse: collapse;
 }
 ```
 

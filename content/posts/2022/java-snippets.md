@@ -1,6 +1,6 @@
 ---
 title: Java 小技巧
-subtitle: 
+subtitle:
 date: 2022-08-27
 headerImage: /img/java.png
 tags: [Java]

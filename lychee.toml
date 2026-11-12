@@ -45,22 +45,14 @@ timeout = 40
 retry_wait_time = 2
 
 # Comma-separated list of accepted status codes for valid links.
-accept = [
-    200,
-    429,
-    403
-]
+accept = [200, 429, 403]
 
 # Proceed for server connections considered insecure (invalid TLS).
 insecure = false
 
 # Only test links with the given schemes (e.g. https).
 # Omit to check links with any scheme.
-scheme = [
-    "https",
-    "http",
-    "file"
-]
+scheme = ["https", "http", "file"]
 
 # When links are available using HTTPS, treat HTTP links as errors.
 require_https = false
@@ -95,10 +87,7 @@ include_verbatim = false
 glob_ignore_case = false
 
 # Exclude URLs and mail addresses from checking (supports regex).
-exclude = [ 
-    "https://rainbowatcher.github.io/.*",
-    "https://img.shields.io/*",
-]
+exclude = ["https://rainbowatcher.github.io/.*", "https://img.shields.io/*"]
 
 # Exclude these filesystem paths from getting checked.
 exclude_path = []

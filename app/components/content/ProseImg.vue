@@ -25,7 +25,6 @@ const props = defineProps({
     },
 })
 
-
 const refinedWidth = computed(() => (typeof props.width === "boolean" ? undefined : props.width))
 
 const refinedSrc = computed(() => {
@@ -40,11 +39,5 @@ const refinedSrc = computed(() => {
 </script>
 
 <template>
-    <NuxtImg
-        :src="refinedSrc"
-        :alt="alt"
-        :width="refinedWidth"
-        :height="height"
-        :loading="lazy"
-    />
+    <NuxtImg :src="refinedSrc" :alt="alt" :width="refinedWidth" :height="height" :loading="lazy" />
 </template>

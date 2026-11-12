@@ -1,6 +1,6 @@
 ---
 title: ElasticSearch REST API 使用示例
-subtitle: 
+subtitle:
 date: 2022-08-19
 headerImage: /img/elasticsearch.png
 tags: [ElasticSearch, Example]

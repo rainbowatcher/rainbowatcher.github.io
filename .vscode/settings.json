@@ -34,11 +34,9 @@
         "Vimium",
         "zhead",
         "Zheng",
-        "zoxide",
+        "zoxide"
     ],
-    "css.customData": [
-        ".vscode/uno.json",
-    ],
+    "css.customData": [".vscode/uno.json"],
     "editor.formatOnSave": false,
-    "prettier.enable": false,
+    "prettier.enable": false
 }

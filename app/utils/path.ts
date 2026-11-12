@@ -29,10 +29,9 @@ export function toOriginPath(permalink: string) {
 
 export function toNavItems(content: Post[]): NavigationItem[] {
     const items = addPermalink(content)
-    return items.map(i => ({
+    return items.map((i) => ({
         path: i.path,
         permalink: i.permalink,
         title: i.title,
     }))
-
 }

@@ -1,15 +1,10 @@
 {
     "name": "rainbowatcher.github.io",
-    "type": "module",
     "version": "0.0.4",
-    "packageManager": "pnpm@12.18.0",
-    "author": "rainbowatcher <rainbow-w@qq.com>",
     "license": "MIT",
+    "author": "rainbowatcher <rainbow-w@qq.com>",
     "repository": "https://github.com/rainbowatcher/rainbowatcher.github.io.git",
-    "engines": {
-        "node": ">=20",
-        "pnpm": ">=9"
-    },
+    "type": "module",
     "scripts": {
         "analyze": "nuxi analyze",
         "clean": "nuxi cleanup && pnpm --stream -r clean",
@@ -69,5 +64,10 @@
     },
     "simple-git-hooks": {
         "commit-msg": "pnpm exec commitlint --edit $1"
-    }
+    },
+    "engines": {
+        "node": ">=20",
+        "pnpm": ">=9"
+    },
+    "packageManager": "pnpm@12.18.0"
 }

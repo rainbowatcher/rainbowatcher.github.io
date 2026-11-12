@@ -12,8 +12,8 @@ date: 2022-07-30
 
 ```html
 <details>
-  <summary>Details</summary>
-  Something small enough to escape casual notice.
+    <summary>Details</summary>
+    Something small enough to escape casual notice.
 </details>
 ```
 
@@ -25,8 +25,8 @@ date: 2022-07-30
 
 ```html
 <details open>
-  <summary>Details</summary>
-  Something small enough to escape casual notice.
+    <summary>Details</summary>
+    Something small enough to escape casual notice.
 </details>
 ```
 
@@ -38,11 +38,10 @@ date: 2022-07-30
 
 ```html
 <details>
-  <p>
-    Requires a computer running an operating system. The computer must have some
-    memory and ideally some kind of long-term storage. An input device as well
-    as some form of output device is recommended.
-  </p>
+    <p>
+        Requires a computer running an operating system. The computer must have some memory and ideally some kind of
+        long-term storage. An input device as well as some form of output device is recommended.
+    </p>
 </details>
 ```
 
@@ -53,9 +52,9 @@ date: 2022-07-30
 ```javascript
 details.addEventListener("toggle", (event) => {
     if (details.open) {
-    /* the element was toggled open */
+        /* the element was toggled open */
     } else {
-    /* the element was toggled closed */
+        /* the element was toggled closed */
     }
 })
 ```
@@ -84,10 +83,10 @@ details.addEventListener("toggle", (event) => {
 
 - type: button 的类型。可选值：
 
-  - submit: 此按钮将表单数据提交给服务器。如果未指定属性，或者属性动态更改为空值或无效值，则此值为默认值。
-  - reset: 此按钮重置所有组件为初始值。
-  - button: 此按钮没有默认行为。它可以有与元素事件相关的客户端脚本，当事件出现时可触发。
-  - menu: 此按钮打开一个由指定`<menu>`元素进行定义的弹出菜单。
+    - submit: 此按钮将表单数据提交给服务器。如果未指定属性，或者属性动态更改为空值或无效值，则此值为默认值。
+    - reset: 此按钮重置所有组件为初始值。
+    - button: 此按钮没有默认行为。它可以有与元素事件相关的客户端脚本，当事件出现时可触发。
+    - menu: 此按钮打开一个由指定`<menu>`元素进行定义的弹出菜单。
 
 - value: button 的初始值。它定义的值与表单数据的提交按钮相关联。当表单中的数据被提交时，这个值便以参数的形式被递送至服务器。
 
@@ -109,9 +108,9 @@ details.addEventListener("toggle", (event) => {
 <label>选择你最喜欢的前端框架：</label>
 <input id="favorite-language" list="language" />
 <datalist id="language">
-  <option>Vue</option>
-  <option>React</option>
-  <option>Angular</option>
+    <option>Vue</option>
+    <option>React</option>
+    <option>Angular</option>
 </datalist>
 <output id="output"></output>
 ```
@@ -134,114 +133,114 @@ input.addEventListener("input", (event) => {
 
 - button / submit / reset
 
-  ::: normal-demo 演示
+    ::: normal-demo 演示
 
-  ```html
-  <!-- 没有默认的行为的按钮 -->
-  <input type="button" value="按钮" />
-  <!-- 提交表单内容 -->
-  <input type="submit" value="提交" />
-  <!-- 重置按钮会重置表单中所有的元素的内容 -->
-  <input type="reset" value="重置" />
-  ```
+    ```html
+    <!-- 没有默认的行为的按钮 -->
+    <input type="button" value="按钮" />
+    <!-- 提交表单内容 -->
+    <input type="submit" value="提交" />
+    <!-- 重置按钮会重置表单中所有的元素的内容 -->
+    <input type="reset" value="重置" />
+    ```
 
-  :::
+    :::
 
 - checkbox
 
-  ::: normal-demo 演示
+    ::: normal-demo 演示
 
-  ```html
-  <input type="checkbox" id="cbox1" value="选项" />
-  <label for="cbox1">选项1</label>
-  <input type="checkbox" id="cbox2" value="选项" checked />
-  <label for="cbox2">选项2</label>
-  ```
+    ```html
+    <input type="checkbox" id="cbox1" value="选项" />
+    <label for="cbox1">选项1</label>
+    <input type="checkbox" id="cbox2" value="选项" checked />
+    <label for="cbox2">选项2</label>
+    ```
 
-  :::
+    :::
 
 - color
 
-  ::: normal-demo 演示
+    ::: normal-demo 演示
 
-  ```html
-  <input type="color" value="#ff0000" />
-  ```
+    ```html
+    <input type="color" value="#ff0000" />
+    ```
 
-  :::
+    :::
 
-  有两个和值的改变相关的事件，input 和 change:
+    有两个和值的改变相关的事件，input 和 change:
 
-  每次颜色变更都会触发元素上的 input 事件。
-  用户关闭选色器之后会触发 change 事件。
-  对于这两个事件，都可以通过 value 属性获取新值。
+    每次颜色变更都会触发元素上的 input 事件。
+    用户关闭选色器之后会触发 change 事件。
+    对于这两个事件，都可以通过 value 属性获取新值。
 
-  ```javascript
-  colorPicker.addEventListener("input", updateFirst, false)
-  colorPicker.addEventListener("change", watchColorPicker, false)
+    ```javascript
+    colorPicker.addEventListener("input", updateFirst, false)
+    colorPicker.addEventListener("change", watchColorPicker, false)
 
-  function watchColorPicker(event) {
-      document.querySelectorAll("p").forEach(function (p) {
-          p.style.color = event.target.value
-      })
-  }
-  ```
+    function watchColorPicker(event) {
+        document.querySelectorAll("p").forEach(function (p) {
+            p.style.color = event.target.value
+        })
+    }
+    ```
 
-  **选取值**
+    **选取值**
 
-  如果浏览器的实现不支持为"color"类型的`<input>`元素提供选色器而只有一个文本框，可以使用`select()`方法选取输入内容。如果浏览器提供了选色器，`select()`方法将会什么也不做。因此，需要留心这两种情况下方法行为的差异。
+    如果浏览器的实现不支持为"color"类型的`<input>`元素提供选色器而只有一个文本框，可以使用`select()`方法选取输入内容。如果浏览器提供了选色器，`select()`方法将会什么也不做。因此，需要留心这两种情况下方法行为的差异。
 
-  ```javascript
-  colorWell.select()
-  ```
+    ```javascript
+    colorWell.select()
+    ```
 
 - date
 
-  ::: normal-demo 演示
+    ::: normal-demo 演示
 
-  ```html
-  <input type="date" />
-  ```
+    ```html
+    <input type="date" />
+    ```
 
-  :::
+    :::
 
-  指定默认值
+    指定默认值
 
-  ::: normal-demo 演示
+    ::: normal-demo 演示
 
-  ```html
-  <input id="date" type="date" value="2017-06-01" />
-  ```
+    ```html
+    <input id="date" type="date" value="2017-06-01" />
+    ```
 
-  :::
+    :::
 
 - radio
 
-  ::: normal-demo 演示
+    ::: normal-demo 演示
 
-  ```html
-  <input type="radio" id="huey" name="drone" value="huey" checked />
-  <label for="huey">Huey</label>
-  <br />
-  <input type="radio" id="dewey" name="drone" value="dewey" />
-  <label for="dewey">Dewey</label>
-  ```
+    ```html
+    <input type="radio" id="huey" name="drone" value="huey" checked />
+    <label for="huey">Huey</label>
+    <br />
+    <input type="radio" id="dewey" name="drone" value="dewey" />
+    <label for="dewey">Dewey</label>
+    ```
 
-  :::
+    :::
 
-  :heavy_check_mark: 你可以用 label 元素把 input 元素包裹起来，这样就可以把 input 元素的 label 和 input 元素分开了。
+    :heavy_check_mark: 你可以用 label 元素把 input 元素包裹起来，这样就可以把 input 元素的 label 和 input 元素分开了。
 
-  ::: normal-demo 演示
+    ::: normal-demo 演示
 
-  ```html
-  <input type="radio" id="huey" name="drone" value="huey" checked />
-  <label for="huey">Huey</label>
-  <br />
-  <input type="radio" id="dewey" name="drone" value="dewey" />
-  <label for="dewey">Dewey</label>
-  ```
+    ```html
+    <input type="radio" id="huey" name="drone" value="huey" checked />
+    <label for="huey">Huey</label>
+    <br />
+    <input type="radio" id="dewey" name="drone" value="dewey" />
+    <label for="dewey">Dewey</label>
+    ```
 
-  :::
+    :::
 
 ### 事件
 
@@ -267,26 +266,26 @@ input.addEventListener("change", (event) => {
 
 ```html
 <dialog id="favDialog">
-  <form method="dialog">
-    <p>
-      <label
-        >Favorite animal:
-        <select>
-          <option value="default">Choose...</option>
-          <option>Brine shrimp</option>
-          <option>Red panda</option>
-          <option>Spider monkey</option>
-        </select>
-      </label>
-    </p>
-    <div>
-      <button value="cancel">Cancel</button>
-      <button id="confirmBtn" value="default">Confirm</button>
-    </div>
-  </form>
+    <form method="dialog">
+        <p>
+            <label
+                >Favorite animal:
+                <select>
+                    <option value="default">Choose...</option>
+                    <option>Brine shrimp</option>
+                    <option>Red panda</option>
+                    <option>Spider monkey</option>
+                </select>
+            </label>
+        </p>
+        <div>
+            <button value="cancel">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+    </form>
 </dialog>
 <p>
-  <button id="updateDetails">Update details</button>
+    <button id="updateDetails">Update details</button>
 </p>
 <output></output>
 ```
@@ -314,8 +313,7 @@ updateButton.addEventListener("click", function onOpen() {
     if (typeof favDialog.showModal === "function") {
         favDialog.showModal()
     } else {
-        outputBox.value
-      = "Sorry, the <dialog> API is not supported by this browser."
+        outputBox.value = "Sorry, the <dialog> API is not supported by this browser."
     }
 })
 
@@ -326,8 +324,7 @@ selectEl.addEventListener("change", function onSelect(e) {
 
 // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
 favDialog.addEventListener("close", function onClose() {
-    outputBox.value
-    = `${favDialog.returnValue} button clicked - ${new Date().toString()}`
+    outputBox.value = `${favDialog.returnValue} button clicked - ${new Date().toString()}`
 })
 ```
 
@@ -341,10 +338,10 @@ favDialog.addEventListener("close", function onClose() {
 
 ```html
 <menu type="toolbar" id="popup-menu">
-  <menuitem>Action</menuitem>
-  <menuitem>Another action</menuitem>
-  <hr />
-  <menuitem>Separated action</menuitem>
+    <menuitem>Action</menuitem>
+    <menuitem>Another action</menuitem>
+    <hr />
+    <menuitem>Separated action</menuitem>
 </menu>
 ```
 
@@ -372,13 +369,13 @@ favDialog.addEventListener("close", function onClose() {
 <label for="ice-cream-choice">Choose a flavor:</label>
 <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
 <div>
-  <datalist id="ice-cream-flavors">
-    <option value="Chocolate" />
-    <option value="Coconut" />
-    <option value="Mint" />
-    <option value="Strawberry" />
-    <option value="Vanilla" />
-  </datalist>
+    <datalist id="ice-cream-flavors">
+        <option value="Chocolate" />
+        <option value="Coconut" />
+        <option value="Mint" />
+        <option value="Strawberry" />
+        <option value="Vanilla" />
+    </datalist>
 </div>
 ```
 
@@ -392,27 +389,27 @@ favDialog.addEventListener("close", function onClose() {
 
 ```html
 <form>
-  <fieldset>
-    <legend>Choose your favorite monster</legend>
+    <fieldset>
+        <legend>Choose your favorite monster</legend>
 
-    <input type="radio" id="kraken" name="monster" />
-    <label for="kraken">Kraken</label><br />
+        <input type="radio" id="kraken" name="monster" />
+        <label for="kraken">Kraken</label><br />
 
-    <input type="radio" id="sasquatch" name="monster" />
-    <label for="sasquatch">Sasquatch</label><br />
+        <input type="radio" id="sasquatch" name="monster" />
+        <label for="sasquatch">Sasquatch</label><br />
 
-    <input type="radio" id="mothman" name="monster" />
-    <label for="mothman">Mothman</label>
-  </fieldset>
-  <fieldset>
-    <legend>Choose your favorite monster</legend>
-    <input type="radio" id="kraken" name="monster" />
-    <label for="kraken">Kraken</label><br />
-    <input type="radio" id="sasquatch" name="monster" />
-    <label for="sasquatch">Sasquatch</label><br />
-    <input type="radio" id="mothman" name="monster" />
-    <label for="mothman">Mothman</label>
-  </fieldset>
+        <input type="radio" id="mothman" name="monster" />
+        <label for="mothman">Mothman</label>
+    </fieldset>
+    <fieldset>
+        <legend>Choose your favorite monster</legend>
+        <input type="radio" id="kraken" name="monster" />
+        <label for="kraken">Kraken</label><br />
+        <input type="radio" id="sasquatch" name="monster" />
+        <label for="sasquatch">Sasquatch</label><br />
+        <input type="radio" id="mothman" name="monster" />
+        <label for="mothman">Mothman</label>
+    </fieldset>
 </form>
 ```
 
@@ -424,34 +421,34 @@ favDialog.addEventListener("close", function onClose() {
 
 ```html
 <form action="" method="get" class="form-example">
-  <div class="form-example">
-    <label for="name">Enter your name: </label>
-    <input type="text" name="name" id="name" required />
-  </div>
-  <div class="form-example">
-    <label for="email">Enter your email: </label>
-    <input type="email" name="email" id="email" required />
-  </div>
-  <div class="form-example">
-    <input type="submit" value="Subscribe!" />
-  </div>
+    <div class="form-example">
+        <label for="name">Enter your name: </label>
+        <input type="text" name="name" id="name" required />
+    </div>
+    <div class="form-example">
+        <label for="email">Enter your email: </label>
+        <input type="email" name="email" id="email" required />
+    </div>
+    <div class="form-example">
+        <input type="submit" value="Subscribe!" />
+    </div>
 </form>
 
 <style>
-  form.form-example {
-    display: table;
-  }
-  div.form-example {
-    display: table-row;
-  }
-  .form-example label,
-  input {
-    display: table-cell;
-    margin-bottom: 10px;
-  }
-  .form-example label {
-    padding-right: 10px;
-  }
+    form.form-example {
+        display: table;
+    }
+    div.form-example {
+        display: table-row;
+    }
+    .form-example label,
+    input {
+        display: table-cell;
+        margin-bottom: 10px;
+    }
+    .form-example label {
+        padding-right: 10px;
+    }
 </style>
 ```
 
@@ -469,25 +466,25 @@ favDialog.addEventListener("close", function onClose() {
 
 - enctype: 当 method 属性值为 post 时，enctype 就是将表单的内容提交给服务器的 MIME 类型 。可能的取值有：
 
-  - application/x-www-form-urlencoded：未指定属性时的默认值。
-  - multipart/form-data：当表单包含 type=file 的 `<input>` 元素时使用此值。
-  - text/plain：出现于 HTML5，用于调试。
+    - application/x-www-form-urlencoded：未指定属性时的默认值。
+    - multipart/form-data：当表单包含 type=file 的 `<input>` 元素时使用此值。
+    - text/plain：出现于 HTML5，用于调试。
 
-  这个值可被 `<button>`、`<input type="submit">` 或 `<input type="image">` 元素上的 formenctype 属性覆盖。
+    这个值可被 `<button>`、`<input type="submit">` 或 `<input type="image">` 元素上的 formenctype 属性覆盖。
 
 - method: 浏览器使用这种 HTTP 方式来提交 表单. 可能的值有：
 
-  - post：指的是 HTTP POST 方法；表单数据会包含在表单体内然后发送给服务器.
-  - get：指的是 HTTP GET 方法；表单数据会附加在 action 属性的 URL 中，并以 '?' 作为分隔符，没有副作用 时使用这个方法。
-  - dialog：如果表单在 `<dialog>` 元素中，提交时关闭对话框。
+    - post：指的是 HTTP POST 方法；表单数据会包含在表单体内然后发送给服务器.
+    - get：指的是 HTTP GET 方法；表单数据会附加在 action 属性的 URL 中，并以 '?' 作为分隔符，没有副作用 时使用这个方法。
+    - dialog：如果表单在 `<dialog>` 元素中，提交时关闭对话框。
 
-  此值可以被 `<button>`、`<input type="submit">` 或 `<input type="image">` 元素中的 formmethod 属性覆盖。
+    此值可以被 `<button>`、`<input type="submit">` 或 `<input type="image">` 元素中的 formmethod 属性覆盖。
 
 - target: 表示在提交表单之后，在哪里显示响应信息。在 HTML 4 中, 这是一个 frame 的名字/关键字对。在 HTML5 里，这是一个浏览上下文 的名字/关键字（如标签页、窗口或 iframe）。下述关键字有特别含义：
 
-  - \_self：默认值。在相同浏览上下文中加载。
-  - \_blank：在新的未命名的浏览上下文中加载。
-  - \_parent：在当前上下文的父级浏览上下文中加载，如果没有父级，则与 \_self 表现一致。
-  - \_top：在最顶级的浏览上下文中（即当前上下文的一个没有父级的祖先浏览上下文），如果没有父级，则与 \_self 表现一致。
+    - \_self：默认值。在相同浏览上下文中加载。
+    - \_blank：在新的未命名的浏览上下文中加载。
+    - \_parent：在当前上下文的父级浏览上下文中加载，如果没有父级，则与 \_self 表现一致。
+    - \_top：在最顶级的浏览上下文中（即当前上下文的一个没有父级的祖先浏览上下文），如果没有父级，则与 \_self 表现一致。
 
-  此值可以被 `<button>`、 `<input type="submit">` 或 `<input type="image">` 元素中的 formtarget 属性覆盖。
+    此值可以被 `<button>`、 `<input type="submit">` 或 `<input type="image">` 元素中的 formtarget 属性覆盖。

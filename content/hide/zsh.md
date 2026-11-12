@@ -1,7 +1,7 @@
 ---
 layout: post
 title: zsh 速查手册
-subtitle: 
+subtitle:
 date: 2024-11-26
 # headerImage: /img/markdown.png
 tags: [Shell, Zsh]

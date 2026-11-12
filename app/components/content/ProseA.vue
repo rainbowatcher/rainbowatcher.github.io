@@ -9,16 +9,15 @@ defineProps({
     target: {
         default: undefined,
         required: false,
-        type: String as PropType<"_blank" | "_parent" | "_self" | "_top" | (Record<string, unknown> & string) | undefined | undefined>,
+        type: String as PropType<
+            "_blank" | "_parent" | "_self" | "_top" | (Record<string, unknown> & string) | undefined | undefined
+        >,
     },
 })
 </script>
 
 <template>
-    <NuxtLink
-        :href="href"
-        :target="target"
-    >
+    <NuxtLink :href="href" :target="target">
         <slot />
     </NuxtLink>
 </template>

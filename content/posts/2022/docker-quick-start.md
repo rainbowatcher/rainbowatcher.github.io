@@ -1,6 +1,6 @@
 ---
 title: Docker 常用的容器启动命令
-subtitle: 
+subtitle:
 date: 2022-08-12
 headerImage: /img/docker.png
 tags: [Docker, Container]
@@ -206,46 +206,46 @@ docker run -itd \
 version: "3"
 
 networks:
-  gitea:
-    external: false
+    gitea:
+        external: false
 
 volumes:
-  gitea:
-    driver: local
+    gitea:
+        driver: local
 
 services:
-  server:
-    image: gitea/gitea:1.21.11
-    container_name: gitea
-    environment:
-      - USER_UID=1000
-      - USER_GID=1000
-      - GITEA__database__DB_TYPE=mysql
-      - GITEA__database__HOST=db:3306
-      - GITEA__database__NAME=gitea
-      - GITEA__database__USER=gitea
-      - GITEA__database__PASSWD=gitea
-    restart: always
-    networks:
-      - gitea
-    volumes:
-      - gitea:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-    ports:
-      - "8081:3000"
-      - "2281:22"
+    server:
+        image: gitea/gitea:1.21.11
+        container_name: gitea
+        environment:
+            - USER_UID=1000
+            - USER_GID=1000
+            - GITEA__database__DB_TYPE=mysql
+            - GITEA__database__HOST=db:3306
+            - GITEA__database__NAME=gitea
+            - GITEA__database__USER=gitea
+            - GITEA__database__PASSWD=gitea
+        restart: always
+        networks:
+            - gitea
+        volumes:
+            - gitea:/data
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+        ports:
+            - "8081:3000"
+            - "2281:22"
 
-  db:
-    image: mysql:8
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=gitea
-      - MYSQL_USER=gitea
-      - MYSQL_PASSWORD=gitea
-      - MYSQL_DATABASE=gitea
-    networks:
-      - gitea
-    volumes:
-      - ./mysql:/var/lib/mysql
+    db:
+        image: mysql:8
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=gitea
+            - MYSQL_USER=gitea
+            - MYSQL_PASSWORD=gitea
+            - MYSQL_DATABASE=gitea
+        networks:
+            - gitea
+        volumes:
+            - ./mysql:/var/lib/mysql
 ```

@@ -30,9 +30,16 @@ onMounted(async () => {
             const imgElements = document.querySelectorAll("img")
             const imgs = [...imgElements]
             if (imgs.length > 0) {
-                Promise.all(imgs.filter(img => !img.complete).map(img => new Promise((resolve) => {
-                    img.addEventListener("load", () => img.addEventListener("error", resolve))
-                }))).then(() => {
+                Promise.all(
+                    imgs
+                        .filter((img) => !img.complete)
+                        .map(
+                            (img) =>
+                                new Promise((resolve) => {
+                                    img.addEventListener("load", () => img.addEventListener("error", resolve))
+                                }),
+                        ),
+                ).then(() => {
                     renderChart()
                 })
             }
@@ -64,8 +71,7 @@ async function renderChart() {
     // The cause is that the diagram is deleted during rendering (out of Vue's knowledge).
     // Because svgCode does NOT change, v-html does not re-render.
     // This is not required for all diagrams, but it is required for c4c, mindmap and zenuml.
-    const salt = Math.random().toString(36)
-        .slice(7)
+    const salt = Math.random().toString(36).slice(7)
     svg.value = `${svgCode} <span style="display: none">${salt}</span>`
 }
 </script>

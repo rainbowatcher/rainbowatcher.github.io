@@ -13,7 +13,10 @@ const PAGE_SIZE = 8
 const PREVIEW_LENGTH = 500
 
 function plainText(html) {
-    return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+    return html
+        .replace(/<[^>]*>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
 }
 
 function postCard(post) {

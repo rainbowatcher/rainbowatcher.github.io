@@ -174,51 +174,51 @@ colorscheme onedark
 
 - zsh-defer
 
-  提供了异步加载插件的功能，使用方式`zsh-defer source /path/to/your/plugin.zsh`
+    提供了异步加载插件的功能，使用方式`zsh-defer source /path/to/your/plugin.zsh`
 
 - zsh-nvm
 
-  nvm 是一个 node 版本管理工具，zsh-nvm 提供能力管理 nvm 的安装、升级等（因为 nvm 安装之后需要在`.zshrc`中添加加载代码，而这个加载代码比较占时间，会拖慢终端的启动速度），使用 zsh-defer 加 zsh-nvm 可以加速 nvm 的加载
+    nvm 是一个 node 版本管理工具，zsh-nvm 提供能力管理 nvm 的安装、升级等（因为 nvm 安装之后需要在`.zshrc`中添加加载代码，而这个加载代码比较占时间，会拖慢终端的启动速度），使用 zsh-defer 加 zsh-nvm 可以加速 nvm 的加载
 
 - zsh-syntax-highlighting
 
-  提供命令行语法高亮
+    提供命令行语法高亮
 
 - cd-ls
 
-  在你使用`cd`命令之后自动触发`ls`
+    在你使用`cd`命令之后自动触发`ls`
 
 - alias-tips
 
-  当你 shell 中存在相应的 alias 时进行提示
+    当你 shell 中存在相应的 alias 时进行提示
 
 - zsh-autocomplete
 
-  为 zsh 提供实时自动补全功能
+    为 zsh 提供实时自动补全功能
 
-  ![autocomplete](/img/2022/shell-custom/autocomplete.gif)
+    ![autocomplete](/img/2022/shell-custom/autocomplete.gif)
 
 - zsh-autosuggestions
 
-  自动提示上下文信息
+    自动提示上下文信息
 
 - autojump
 
-  自动跳转到目录
+    自动跳转到目录
 
 ## zsh 配置
 
 1. 配置 zsh 忽略注释代码
 
-   ```shell
-   setopt interactivecomments
-   ```
+    ```shell
+    setopt interactivecomments
+    ```
 
 2. 记录 zsh 加载日志
 
-   ```shell
-   zmodload zsh/zprof
-   ```
+    ```shell
+    zmodload zsh/zprof
+    ```
 
 ## zsh 脚本
 

@@ -69,8 +69,8 @@ BaseExecutionContext <.. FlinkTaskExecutor
 - IFlinkTask 抽象 Flink 任务的业务逻辑
 - AbstractFlinkTask 进一步抽象了 source/transform/sink 方法，并使用 exec 方法依次执行
 - FlinkTaskExecutor
-  1. 通过 ClassLoader 加载所有实现 IFlinkTask 的类
-  2. 通过 Reflect 为 Task 注入 Context
+    1. 通过 ClassLoader 加载所有实现 IFlinkTask 的类
+    2. 通过 Reflect 为 Task 注入 Context
 
 ### 程序流程设计
 
@@ -113,7 +113,7 @@ exe -) exe : execute
 1. 这样代码在分布上更加清晰
 2. 这样设计在开发的时候，开发者就必须将数据流拆分成不同的部分，并提起出每一个阶段的数据流为字段在方法间传递。
 
-   在进行单元测试的时候就可以较为方便的拿到不同阶段的数据流。
+    在进行单元测试的时候就可以较为方便的拿到不同阶段的数据流。
 
 :::
 

@@ -16,11 +16,11 @@ tags: [Blog, VuePress, Github Pages, Vercel]
 
 1. 由 Vue 驱动
 
-   由于我学了 Vue，而且 Vue 的开发对于新手友好，在需要定制主题或者组件的时候使用 Vue 开发会很方便。
+    由于我学了 Vue，而且 Vue 的开发对于新手友好，在需要定制主题或者组件的时候使用 Vue 开发会很方便。
 
 2. 基于 Vite 构建
 
-   如果你切身体验过 Vite 和 Webpack，你应该知道孰优孰劣。
+    如果你切身体验过 Vite 和 Webpack，你应该知道孰优孰劣。
 
 3. 内置默认主题开箱即用（懒人友好）
 4. 丰富的主题

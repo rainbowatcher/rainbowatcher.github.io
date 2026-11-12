@@ -16,23 +16,21 @@ defineProps({
 </script>
 
 <template>
-    <article class="h-full w-full flex flex-col items-start justify-end bg-background px-16 py-24 text-foreground font-sans">
+    <article
+        class="h-full w-full flex flex-col items-start justify-end bg-background px-16 py-24 text-foreground font-sans"
+    >
         <header class="text-7xl">
             {{ title }}
         </header>
         <div class="mt-10 flex flex-col text-5xl text-foreground/80 uppercase">
             <div v-if="date" class="flex flex-row">
-                <div class="mr-6">
-                    Published
-                </div>
+                <div class="mr-6">Published</div>
                 <div class="mx-8 font-bold">
                     {{ date }}
                 </div>
             </div>
             <div v-if="tags?.length" class="mt-4 flex flex-row">
-                <div class="mr-6">
-                    Tags
-                </div>
+                <div class="mr-6">Tags</div>
                 <div class="mx-8 flex flex-row gap-4 font-bold">
                     <TagList :tags="tags" />
                 </div>

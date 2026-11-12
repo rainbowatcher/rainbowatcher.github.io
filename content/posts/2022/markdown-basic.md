@@ -46,15 +46,15 @@ _斜体_
 
 ```markdown
 - JDK
-  - JRE
-  - JVM
+    - JRE
+    - JVM
 - Tomcat
 - Netty
 ```
 
 - JDK
-  - JRE
-  - JVM
+    - JRE
+    - JVM
 - Tomcat
 - Netty
 
@@ -62,31 +62,31 @@ _斜体_
 
 ```md
 1. JDK
-   1. JRE
-   1. JVM
+    1. JRE
+    1. JVM
 1. Tomcat
 1. Netty
 
 ---
 
 1. JavaScript
-   1. Vue
-   2. React
+    1. Vue
+    2. React
 2. JQuery
 3. Bootstrap
 ```
 
 1. JDK
-   1. JRE
-   1. JVM
+    1. JRE
+    1. JVM
 1. Tomcat
 1. Netty
 
 ---
 
 1. JavaScript
-   1. Vue
-   2. React
+    1. Vue
+    2. React
 2. JQuery
 3. Bootstrap
 
@@ -131,10 +131,10 @@ you can type this command `git clone <repo-addr>` to clone the repository locall
 ````markdown
 ```js
 export default {
-  markdown: {
-    lineNumbers: true,
-  },
-};
+    markdown: {
+        lineNumbers: true,
+    },
+}
 ```
 ````
 
@@ -283,7 +283,7 @@ this block is closed with 5 markers below
 ## Divider 分割线
 
 ```markdown
----
+***
 ```
 
 ---

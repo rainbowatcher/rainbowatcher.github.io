@@ -1,79 +1,79 @@
 name: Deploy Blog Site
 
 on:
-  push:
-    branches: [ main ]
-  # Allow manual triggering of deployment
-  workflow_dispatch:
+    push:
+        branches: [main]
+    # Allow manual triggering of deployment
+    workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
-  cancel-in-progress: true
+    group: "pages"
+    cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
-          fetch-depth: 0
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v7
+              with:
+                  # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+                  fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          run_install: false
+            - name: Install pnpm
+              uses: pnpm/action-setup@v6
+              with:
+                  run_install: false
 
-      - name: Install Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: 22
-          cache: pnpm
+            - name: Install Node.js
+              uses: actions/setup-node@v7
+              with:
+                  node-version: 22
+                  cache: pnpm
 
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+            - name: Get pnpm store directory
+              shell: bash
+              run: |
+                  echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v6
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            - uses: actions/cache@v6
+              name: Setup pnpm cache
+              with:
+                  path: ${{ env.STORE_PATH }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
 
-      - name: Install dependencies
-        run: pnpm install
+            - name: Install dependencies
+              run: pnpm install
 
-      - name: Build site
-        run: pnpm build
+            - name: Build site
+              run: pnpm build
 
-      - name: Upload artifact
-        id: upload
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
+            - name: Upload artifact
+              id: upload
+              uses: actions/upload-pages-artifact@v5
+              with:
+                  path: dist
 
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
+    deploy:
+        needs: build
+        permissions:
+            pages: write
+            id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v5

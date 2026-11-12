@@ -15,12 +15,8 @@ export const docSearch = {
 
 export const app: NuxtConfig["app"] = {
     head: {
-        link: [
-            { href: licenseUrl, rel: "license" },
-        ],
-        meta: [
-            { content: ogImage, property: "og:image" },
-        ],
+        link: [{ href: licenseUrl, rel: "license" }],
+        meta: [{ content: ogImage, property: "og:image" }],
     },
 }
 

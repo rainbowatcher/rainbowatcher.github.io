@@ -258,9 +258,9 @@ pick a1fa5ca docs: git intro
 - `t，reset <label>` = 将 HEAD 重置为标签
 - `m，merge [-C <commit> | -c <commit>] <label> [# <oneline>]`
 
-  使用原始合并提交的创建合并提交
-  消息（或单行，如果没有原始合并提交
-  指定的）;使用 `-c <commit>` 改写提交信息
+    使用原始合并提交的创建合并提交
+    消息（或单行，如果没有原始合并提交
+    指定的）;使用 `-c <commit>` 改写提交信息
 
 这些行可以重新排序；它们是从上到下执行的。如果您在此处删除一行，则 COMMIT 将丢失。但是，如果您删除所有内容，rebase 将被中止。
 

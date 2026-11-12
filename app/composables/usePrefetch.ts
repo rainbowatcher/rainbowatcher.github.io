@@ -10,7 +10,7 @@ function viaDOM(url: string) {
 
 function viaXHR(url: string) {
     const req = new XMLHttpRequest()
-    req.open("GET", url, req.withCredentials = true)
+    req.open("GET", url, (req.withCredentials = true))
     req.send()
 }
 
