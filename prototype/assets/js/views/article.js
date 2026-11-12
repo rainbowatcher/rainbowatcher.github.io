@@ -82,9 +82,11 @@ export function render(route) {
             </article>
 
             <aside class="article-rail" aria-label="文章目录与阅读设置">
-                <nav class="toc-nav" id="tocNav" aria-label="本文目录"></nav>
-                <div class="reading-tools">
-                    <button type="button" class="toc-top" data-to-top>回到顶部 ↑</button>
+                <div class="rail-sticky">
+                    <nav class="toc-nav" id="tocNav" aria-label="本文目录"></nav>
+                    <div class="reading-tools">
+                        <button type="button" class="toc-top" data-to-top>回到顶部 ↑</button>
+                    </div>
                 </div>
             </aside>
         </div>

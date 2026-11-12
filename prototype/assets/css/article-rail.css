@@ -1,25 +1,32 @@
-/* 右侧栏 */
+/* 右侧栏：绝对定位脱离文档流，不与正文抢宽度 */
 
 .article-rail {
+    position: absolute;
+    /* 与 .article-layout 的 padding-top 一致，和正文起始位置对齐，不贴头部分隔线 */
+    top: clamp(32px, 4.5vw, 52px);
+    right: 0;
+    bottom: 0;
+    width: 132px;
+}
+
+.rail-sticky {
     position: sticky;
     top: calc(var(--header-h) + 30px);
-    align-self: start;
     display: flex;
     flex-direction: column;
-    justify-self: end;
+    align-items: flex-start;
     gap: 24px;
 }
 
 .toc-nav {
-    display: flex;
-    flex-direction: column;
+    display: grid;
 }
 
 .toc-nav a {
     padding: 5px 0 5px 12px;
     border-left: 1px solid var(--line);
     color: var(--ink-2);
-    font-size: 12px;
+    font-size: 11.5px;
     line-height: 1.55;
     transition:
         color 0.18s ease,
@@ -210,13 +217,20 @@
     color: var(--ink);
 }
 
-/* 目录缩略图：默认收起态，hover/聚焦时展开为明文列表 */
+/* 目录缩略图：默认收起态，hover/聚焦时交叉渐变为明文列表 */
+
+.toc-nav .toc-thumb,
+.toc-nav .toc-list {
+    grid-area: 1 / 1;
+    justify-self: start;
+}
 
 .toc-nav .toc-thumb {
     display: flex;
     flex-direction: column;
     gap: 5px;
     padding: 6px 0;
+    transition: opacity 0.22s ease;
 }
 
 .toc-nav .toc-thumb i {
@@ -237,16 +251,25 @@
 }
 
 .toc-nav .toc-list {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.22s ease,
+        visibility 0s linear 0.22s;
 }
 
 .toc-nav:hover .toc-thumb,
 .toc-nav:focus-within .toc-thumb {
-    display: none;
+    opacity: 0;
 }
 
 .toc-nav:hover .toc-list,
 .toc-nav:focus-within .toc-list {
-    display: flex;
-    flex-direction: column;
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 0.22s ease,
+        visibility 0s;
 }

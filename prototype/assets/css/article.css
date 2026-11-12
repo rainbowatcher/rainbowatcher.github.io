@@ -72,10 +72,7 @@
 }
 
 .article-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 820px) 150px;
-    justify-content: space-between;
-    gap: clamp(36px, 5vw, 96px);
+    position: relative;
     padding-top: clamp(32px, 4.5vw, 52px);
 }
 

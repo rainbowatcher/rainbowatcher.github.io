@@ -1,11 +1,6 @@
-@media (width <= 1120px) {
+@media (width <= 1080px) {
     .article-wrap {
         width: min(820px, 100% - var(--gutter) * 2);
-    }
-
-    .article-layout {
-        grid-template-columns: minmax(0, 820px);
-        justify-content: center;
     }
 
     .article-rail {
@@ -17,9 +12,14 @@
     }
 }
 
-@media (width >= 1121px) {
+@media (width >= 1081px) {
     .toc-mobile {
         display: none;
+    }
+
+    /* 右侧目录已脱离文档流，正文可用全部宽度，仅留出目录的安全边距 */
+    .article-body {
+        max-width: calc(100% - 152px);
     }
 }
 
