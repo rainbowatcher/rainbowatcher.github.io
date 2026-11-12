@@ -1,7 +1,8 @@
 /**
  * 做什么：站点主导航：页头与移动端菜单共用同一组导航项。
  * 状态与生命周期：导航项为静态数据；高亮由当前路由前缀决定。
- * 取舍与不变量：路由前缀匹配允许 /research/<slug> 在内页仍高亮「研究」。
+ * 取舍与不变量：路由前缀匹配允许 /research/<slug> 在内页仍高亮「研究」；
+ * 「笔记」取代旧的「归档」，知识库条目按 section 索引而非手写目录。
  * 边界：不负责菜单显隐（见 SiteMenuContent）与主题/搜索入口。
  */
 import { NuxtLink } from "#components"
@@ -56,7 +57,7 @@ export default defineNuxtComponent({
                 { label: "专题", path: "/topics" },
                 { label: "研究", path: "/research" },
                 { label: "在用", path: "/uses" },
-                { label: "归档", path: "/archives" },
+                { label: "笔记", path: "/notes" },
                 { label: "项目", path: "/projects" },
             ],
         }

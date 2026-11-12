@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 /**
- * 做什么：/tags/<tag> 页：统计标签并列出该标签下的博客、研究报告与专题。
- * 状态与生命周期：标签计数在 posts、research 与 topics 的元数据加载后计算，随路由参数变化。
- * 取舍与不变量：三类内容共用同一套标签页，避免内容页的标签链接成为死路。
+ * 做什么：/tags/<tag> 页：统计标签并列出该标签下的博客、笔记、研究报告与专题。
+ * 状态与生命周期：标签计数在 posts、notes、research 与 topics 的元数据加载后计算，随路由参数变化。
+ * 取舍与不变量：四类内容共用同一套标签页，避免内容页的标签链接成为死路。
  * 边界：不区分大小写之外的标签归一化，也不做分页。
  */
 import type { ContentDocument } from "~/types/content"
@@ -10,6 +10,7 @@ import { getRouteParamAsString } from "~/utils/route"
 
 const route = useRoute("tags-tag")
 const { data: posts } = await useAsyncData("tags-posts", usePosts())
+const { data: notes } = await useAsyncData("tags-notes", useNotes())
 const { data: research } = await useAsyncData("tags-research", useResearch())
 const { data: topics } = await useAsyncData("tags-topics", useTopics())
 const currentTag = computed(() => getRouteParamAsString(route, "tag")?.toLocaleLowerCase() ?? "")
@@ -20,7 +21,7 @@ function hasTag(item: ContentDocument) {
 
 const tags = computed(() => {
     const map = new Map<string, number>()
-    for (const item of [...(posts.value ?? []), ...(research.value ?? []), ...(topics.value ?? [])]) {
+    for (const item of [...(posts.value ?? []), ...(notes.value ?? []), ...(research.value ?? []), ...(topics.value ?? [])]) {
         if (!item.tags) continue
         for (const tag of item.tags) {
             // TODO: Maybe better to use lowercase tags
@@ -34,6 +35,7 @@ const postList = computed(() => {
     return [...(posts.value ?? [])].filter(hasTag)
         .sort((i, j) => new Date(j.date).getTime() - new Date(i.date).getTime())
 })
+const notesList = computed(() => (notes.value ?? []).filter(hasTag))
 const researchList = computed(() => (research.value ?? []).filter(hasTag))
 const topicsList = computed(() => (topics.value ?? []).filter(hasTag))
 useShowup(".show-up", 25)
@@ -50,6 +52,17 @@ useShowup(".show-up", 25)
                     {{ post.title }}
                 </NuxtLink>
                 <span class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op-55">{{ useDateFormat(post.date, "YYYY.MM.DD").value }}</span>
+            </div>
+        </div>
+        <div v-if="notesList.length" class="notes-list mt-8 lt-sm:ml-26 sm:ml-[calc(5rem+3rem)] space-y-4">
+            <h2 class="text-sm c-muted font-sans op-75">
+                笔记
+            </h2>
+            <div v-for="item in notesList" :key="item.path" class="show-up">
+                <NuxtLink class="text-lg font-400" :href="item.path" role="link">
+                    {{ item.title }}
+                </NuxtLink>
+                <span v-if="item.date" class="float-left ml--5rem mr-4 v-text-bottom text-xs leading-7 op-55">{{ useDateFormat(item.date, "YYYY.MM.DD").value }}</span>
             </div>
         </div>
         <div v-if="researchList.length" class="research-list mt-8 lt-sm:ml-26 sm:ml-[calc(5rem+3rem)] space-y-4">
