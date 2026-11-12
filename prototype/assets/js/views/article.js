@@ -92,7 +92,6 @@ export function render(route) {
         </div>
 
         <footer class="article-foot">
-            <div class="article-foot-tags"><span>Topics</span>${doc.tags.map((tag) => tagChip(tag)).join("")}</div>
             ${
                 prev || next
                     ? `
