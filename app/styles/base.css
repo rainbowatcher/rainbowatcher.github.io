@@ -1,0 +1,212 @@
+/**
+ * 做什么：全局元素基线：纸面背景与噪点、选区、焦点环、滚动条、kbd 与减弱动效降级。
+ * 状态与生命周期：静态样式，随 index.css 在首屏加载；明暗取值全部来自 tokens.css。
+ * 取舍与不变量：只写「元素级」规则，组件外观一律走 UnoCSS 工具类；
+ * 纸面噪点用内联 SVG 背景，不引入图片资源。
+ * 边界：不含布局骨架（见布局组件）、不含正文排版（见 prose.css）。
+ */
+body {
+    min-height: 100dvh;
+    background: radial-gradient(1100px 620px at 78% -8%, var(--bg-glow), transparent 62%), var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease;
+}
+
+/* 纸面颗粒：固定定位、不参与命中，深浅两套共用同一张噪点图 */
+body::after {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+    content: "";
+    pointer-events: none;
+}
+
+::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition:
+        color 0.18s ease,
+        background-color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+strong {
+    font-weight: 650;
+}
+
+kbd {
+    display: inline-flex;
+    min-width: 1.45em;
+    height: 1.45em;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.35em;
+    border: 1px solid var(--line);
+    border-bottom-color: var(--line-strong);
+    border-radius: 4px;
+    background: var(--surface-2);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 28px);
+}
+
+:focus-visible {
+    border-radius: 3px;
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 3px solid var(--bg);
+    border-radius: 99px;
+    background: var(--line-strong);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+}
+
+/* 页头玻璃层与品牌环形标记：color-mix 与伪元素工具类表达不了，留在 CSS */
+.site-header {
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(160%) blur(18px);
+}
+
+.site-header.is-scrolled {
+    border-bottom-color: var(--line);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+}
+
+.brand-mark {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 28px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--rainbow);
+    transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.brand-mark::after {
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: var(--bg);
+    content: "";
+    transition: background-color 0.35s ease;
+}
+
+.brand:hover .brand-mark {
+    transform: rotate(160deg);
+}
+
+/* 顶部 2px 品牌线：轨道中性、进度用强调色，进度宽度由 ReadingProgress 写入 */
+.rainbow-rule {
+    position: fixed;
+    z-index: 120;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: var(--line-strong);
+}
+
+.reading-progress {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.1s linear;
+}
+
+/* 页面进入：路由切换时给主区域一层轻微上浮 */
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.view-enter {
+    animation: rise 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* 跳过链接：键盘聚焦时才出现，键盘用户可直达正文 */
+.skip-link {
+    position: fixed;
+    z-index: 200;
+    top: 12px;
+    left: 12px;
+    padding: 10px 16px;
+    border-radius: var(--radius-s);
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(-160%);
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.skip-link:focus {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 速览卡顶部 3px 彩虹条：渐变背景工具类表达不了（会被编译成 background-color） */
+.stats-card::before {
+    background: var(--rainbow);
+}

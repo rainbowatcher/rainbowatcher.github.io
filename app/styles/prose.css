@@ -1,0 +1,398 @@
+/**
+ * 做什么：正文排版：`.prose` 的标题、列表、引用、表格、图片，以及代码块外壳与提示块。
+ * 状态与生命周期：静态样式；作用于 MDC 渲染出的正文，明暗取值全部来自 tokens.css。
+ * 取舍与不变量：h2 的顶部细线与强调色短头、列表 marker 用 accent、行内代码用 surface-2，
+ * 都是工具类写不出的伪元素/后代选择器，因此留在 CSS；代码高亮的 token 颜色由 Shiki 主题决定。
+ * 边界：不负责列表页、页头页脚等组件外观。
+ */
+.prose {
+    min-width: 0;
+    color: var(--ink);
+    font-size: var(--prose-size);
+    line-height: 1.92;
+    text-wrap: pretty;
+}
+
+.prose > *:first-child {
+    margin-top: 0;
+}
+
+.prose p {
+    margin: 1.15em 0;
+}
+
+.prose p + p {
+    margin-top: 1.05em;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+    position: relative;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    text-wrap: balance;
+}
+
+.prose h2 {
+    margin-top: 2.3em;
+    padding-top: 1.15em;
+    border-top: 1px solid var(--line);
+    font-size: 1.55em;
+}
+
+.prose h2::before {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 34px;
+    height: 2px;
+    background: var(--accent);
+    content: "";
+}
+
+.prose h3 {
+    margin-top: 1.8em;
+    font-size: 1.18em;
+}
+
+.prose h4 {
+    margin-top: 1.5em;
+    font-size: 1.02em;
+}
+
+.prose ul,
+.prose ol {
+    margin: 1.1em 0;
+    padding-left: 1.35em;
+}
+
+.prose li {
+    margin: 0.35em 0;
+    padding-left: 0.25em;
+}
+
+.prose li::marker {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.prose li > ul,
+.prose li > ol {
+    margin: 0.3em 0;
+}
+
+.prose a {
+    color: var(--accent);
+    font-weight: 550;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 38%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.prose a:hover {
+    text-decoration-color: currentColor;
+}
+
+.prose strong {
+    color: var(--ink);
+    font-weight: 650;
+}
+
+.prose blockquote {
+    margin: 1.6em 0;
+    padding: 4px 0 4px 20px;
+    border-left: 2px solid var(--accent);
+    color: var(--ink-2);
+    font-family: var(--font-serif);
+    font-size: 0.98em;
+    line-height: 1.85;
+}
+
+.prose blockquote p {
+    margin: 0.4em 0;
+}
+
+.prose hr {
+    height: 1px;
+    margin: 2.6em 0;
+    border: 0;
+    background: var(--line);
+}
+
+.prose :not(pre) > code {
+    padding: 2px 5px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--surface-2);
+    color: var(--ink);
+    font-size: 0.86em;
+    word-break: break-word;
+}
+
+.prose img {
+    margin: 1.8em 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+}
+
+.prose figure figcaption {
+    margin-top: 8px;
+    color: var(--faint);
+    font-size: 11px;
+    text-align: center;
+}
+
+/* 标题锚点：默认隐形，hover 标题时出现 */
+.prose .header-anchor {
+    position: absolute;
+    margin-left: -0.9em;
+    padding-right: 0.25em;
+    color: var(--line-strong);
+    font-weight: 800;
+    opacity: 0;
+    transition:
+        opacity 0.18s ease,
+        color 0.18s ease;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6):hover .header-anchor {
+    color: var(--accent);
+    opacity: 1;
+}
+
+/* 代码块外壳：左侧三个圆点 + 文件名 + 复制按钮 */
+.code-block {
+    overflow: hidden;
+    margin: 1.7em 0;
+    border: 1px solid var(--code-line);
+    border-radius: var(--radius-m);
+    background: var(--code-bg);
+}
+
+.code-block .code-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--code-line);
+    color: #9db3ae;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+}
+
+.code-block .code-head::before {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    margin-right: 26px;
+    border-radius: 50%;
+    background: #6f8b85;
+    box-shadow:
+        12px 0 0 #55706b,
+        24px 0 0 #3e5753;
+    content: "";
+}
+
+.code-block .code-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+    padding: 3px 8px;
+    border: 1px solid #2c4742;
+    border-radius: 4px;
+    color: #b6c8c4;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.code-block .code-copy:hover {
+    border-color: #4d6e67;
+    color: #fff;
+}
+
+.code-block .code-copy svg {
+    width: 11px;
+    height: 11px;
+}
+
+.code-block pre {
+    overflow-x: auto;
+    margin: 0;
+    padding: 17px 18px 19px;
+    color: var(--code-ink);
+    font-size: 13px;
+    line-height: 1.75;
+    tab-size: 4;
+}
+
+.code-block code {
+    font-family: var(--font-mono);
+    font-size: inherit;
+}
+
+.code-block .line {
+    display: block;
+}
+
+/* 提示块：remark-flexible-containers 的容器与原型 callout 合并为一套外观 */
+.prose .remark-container {
+    margin: 1.7em 0;
+    padding: 15px 18px;
+    border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+    border-radius: var(--radius-s);
+    background: var(--accent-soft);
+}
+
+.prose .remark-container-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 4px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.prose .remark-container p {
+    margin: 0.25em 0;
+    color: var(--ink-2);
+    font-size: 0.9em;
+    line-height: 1.8;
+}
+
+.prose .remark-container.warning,
+.prose .remark-container.danger {
+    border-color: color-mix(in srgb, var(--gold) 30%, var(--line));
+    background: color-mix(in srgb, var(--gold) 8%, var(--surface));
+}
+
+.prose .remark-container.warning .remark-container-title,
+.prose .remark-container.danger .remark-container-title {
+    color: var(--gold);
+}
+
+.prose .remark-container.details summary {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+/* 表格：MDC 直接输出 table，用圆角边框包一层视觉效果 */
+.prose table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    margin: 1.7em 0;
+    border: 1px solid var(--line);
+    border-collapse: separate;
+    border-radius: var(--radius-s);
+    border-spacing: 0;
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+
+.prose th {
+    padding: 10px 13px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.prose td {
+    padding: 9px 13px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-2);
+    vertical-align: top;
+}
+
+.prose tr:last-child td {
+    border-bottom: 0;
+}
+
+.prose td code {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+/* 首页内嵌正文：去掉 h2 的顶部细线，避免和分区标题的双线 */
+.prose.is-embedded h2 {
+    margin-top: 1.5em;
+    padding-top: 0;
+    border-top: 0;
+    font-size: 1.3em;
+}
+
+.prose.is-embedded h2::before {
+    display: none;
+}
+
+/* 五、六级标题：原型只定义到 h4，这里补两档，避免正文里出现无样式的标题 */
+.prose h5 {
+    margin-top: 1.3em;
+    font-size: 0.95em;
+}
+
+.prose h6 {
+    margin-top: 1.2em;
+    color: var(--muted);
+    font-size: 0.88em;
+}
+
+.prose h5,
+.prose h6 {
+    position: relative;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* 任务列表：复选框用强调色，去掉列表符号 */
+.prose li:has(> input[type="checkbox"]) {
+    list-style: none;
+    margin-left: -1.1em;
+}
+
+.prose li > input[type="checkbox"] {
+    appearance: none;
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 0.5em;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    background: var(--surface);
+    vertical-align: -0.05em;
+}
+
+.prose li > input[type="checkbox"]:checked {
+    border-color: var(--accent);
+    background: var(--accent);
+}
+
+.prose li > input[type="checkbox"]:checked::after {
+    display: block;
+    color: var(--accent-contrast);
+    content: "✓";
+    font-size: 0.7em;
+    line-height: 0.9em;
+    text-align: center;
+}

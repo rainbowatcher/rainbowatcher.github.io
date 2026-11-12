@@ -1,4 +1,8 @@
-/* animate base */
+/* 做什么：元素进入 / 退出的关键帧，供 UnoCSS 的 animate-in / animate-out 规则引用。
+ * 状态与生命周期：静态动画定义，实际时长与位移由工具类的 CSS 变量给出。
+ * 取舍与不变量：原型的彩虹渐变文字与呼吸光效已下线，彩虹只保留在品牌线与环形标记上。
+ * 边界：不含具体组件的过渡（那些写在组件类名与工具类上）。
+ */
 @keyframes animate-enter {
     from {
         opacity: var(--un-enter-opacity, 1);
@@ -14,73 +18,5 @@
         transform: translate3d(var(--un-exit-translate-x, 0), var(--un-exit-translate-y, 0), 0)
             scale3d(var(--un-exit-scale, 1), var(--un-exit-scale, 1), var(--un-exit-scale, 1))
             rotate(var(--un-exit-rotate, 0));
-    }
-}
-
-/* rainbow glow */
-.animated::after,
-.animated::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff6700);
-    background-size: 400%;
-    z-index: -1;
-    width: 100%;
-    border-radius: 9999px;
-    animation: glow 10s linear infinite;
-}
-
-.animated::after {
-    filter: blur(25px);
-    transform: translate3d(0, 0, 0);
-}
-
-@keyframes glow {
-    0% {
-        background-position: 0 0;
-    }
-
-    50% {
-        background-position: 100% 0;
-    }
-
-    100% {
-        background-position: 0 0;
-    }
-}
-
-.bg-rainbow {
-    font-weight: 900;
-    background: linear-gradient(
-        to right,
-        #ef4444,
-        #f97316,
-        #eab308,
-        #22c55e,
-        #2dd4bf,
-        #3b82f6,
-        #6666ff,
-        #ef4444,
-        #f97316,
-        #eab308,
-        #22c55e
-    );
-    background-size: 327% 100%;
-    animation: flow 15s linear infinite;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-@keyframes flow {
-    0% {
-        background-position: 0 0;
-        background-position-x: left;
-    }
-
-    100% {
-        background-position: 100% 0;
-        background-position-x: right;
     }
 }

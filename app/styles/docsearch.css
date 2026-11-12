@@ -1,0 +1,116 @@
+/**
+ * 做什么：DocSearch 皮肤：把官方 UI 的变量映射到站点 token，并把触发器做成原型搜索胶囊。
+ * 状态与生命周期：静态样式；索引、快捷键与弹窗行为仍由 DocSearch 提供，不在这里接管。
+ * 取舍与不变量：官方弹窗的结构与交互保持不变，只覆盖颜色与触发器外观；
+ * 触发器文字由 SearchBar 的 translations 传入，这里不拼文案。
+ * 边界：不定义搜索数据源，也不处理键盘事件。
+ */
+html.light,
+html.dark {
+    --docsearch-container-background: color-mix(in srgb, var(--ink) 56%, transparent);
+    --docsearch-key-gradient: none;
+    --docsearch-key-shadow: none;
+    --docsearch-key-background: var(--surface-2);
+    --docsearch-logo-color: var(--accent);
+    --docsearch-hit-background: var(--surface);
+    --docsearch-hit-color: var(--ink);
+    --docsearch-hit-shadow: none;
+    --docsearch-hit-active-color: var(--accent);
+    --docsearch-hit-active-background: var(--accent-soft);
+    --docsearch-highlight-color: var(--accent);
+    --docsearch-searchbox-background: var(--surface);
+    --docsearch-searchbox-focus-background: var(--surface-2);
+    --docsearch-searchbox-shadow: none;
+    --docsearch-searchbox-radius: 99px;
+    --docsearch-footer-background: var(--surface-2);
+    --docsearch-footer-shadow: 0 -1px 0 0 var(--line);
+    --docsearch-text-color: var(--ink);
+    --docsearch-muted-color: var(--muted);
+    --docsearch-modal-background: var(--bg);
+    --docsearch-modal-shadow: var(--shadow-3);
+    --docsearch-primary-color: var(--accent);
+    --docsearch-separator-border: var(--line);
+}
+
+/* 页头触发器：外观对齐原型的 .search-trigger，宽度交给内容 */
+.docsearch {
+    line-height: normal;
+}
+
+.DocSearch-Button {
+    height: 36px;
+    gap: 9px;
+    padding: 0 8px 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 500;
+}
+
+.DocSearch-Button:hover,
+.DocSearch-Button:focus-visible {
+    border-color: var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+}
+
+.DocSearch-Search-Icon {
+    width: 15px;
+    height: 15px;
+    color: currentColor;
+}
+
+.DocSearch-Button-Key {
+    min-width: 1.45em;
+    height: 1.45em;
+    margin: 0;
+    padding: 0 0.35em;
+    border: 0;
+    border-radius: 4px;
+    background: var(--surface-2);
+    box-shadow: none;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    line-height: 1;
+}
+
+.DocSearch-Button-Placeholder {
+    font-size: 0;
+}
+
+.DocSearch-Button-Placeholder::after {
+    color: var(--muted);
+    content: "搜索";
+    font-size: 12.5px;
+}
+
+/* 弹窗内的键帽与命中项跟随 token */
+.DocSearch-Modal {
+    animation: dialog-in 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes dialog-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.99);
+    }
+}
+
+/* 窄屏：只留放大镜图标，与原型页头在小屏下的收缩一致 */
+@media (width <= 720px) {
+    .DocSearch-Button {
+        width: 36px;
+        justify-content: center;
+        padding: 0;
+        border-color: transparent;
+        background: transparent;
+    }
+
+    .DocSearch-Button-Placeholder,
+    .DocSearch-Button-Keys {
+        display: none;
+    }
+}
