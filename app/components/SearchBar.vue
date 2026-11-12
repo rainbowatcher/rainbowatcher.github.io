@@ -1,12 +1,17 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 /**
- * 搜索框：客户端挂载 DocSearch（经典 UI），把爬虫索引里的绝对 URL 归一成站内路径，
- * 点击结果走 Vue Router 的 SPA 导航。每个实例独占自己的容器，移动菜单与页头可各有一份。
+ * 做什么：搜索入口：挂载 DocSearch 官方 UI（索引与快捷键由它提供），外观由 docsearch.css 换成站点胶囊样式。
+ * 状态与生命周期：客户端挂载时动态 import DocSearch，卸载时 destroy；每个实例独占容器。
+ * 取舍与不变量：索引里的绝对 URL 归一成站内路径，点击结果走 Vue Router 的 SPA 导航；
+ * 触发器文案通过 translations 传入，避免在 CSS 里拼文案。
+ * 边界：不自建搜索索引，也不接管键盘事件。
  */
 const container = ref<HTMLElement>()
 const router = useRouter()
 const route = useRoute()
-const { public: { docSearch } } = useRuntimeConfig()
+const {
+    public: { docSearch },
+} = useRuntimeConfig()
 
 let instance: { destroy: () => void } | undefined
 
@@ -16,17 +21,20 @@ function toPath(url: string) {
 }
 
 onMounted(async () => {
-    const [{ default: docsearch }] = await Promise.all([
-        import("@docsearch/js/docsearch"),
-        import("@docsearch/css"),
-    ])
+    const [{ default: docsearch }] = await Promise.all([import("@docsearch/js/docsearch"), import("@docsearch/css")])
 
     instance = docsearch({
         apiKey: docSearch.apiKey,
         appId: docSearch.appId,
         container: container.value!,
         indices: [docSearch.indexName],
-        transformItems: items => items.map(item => ({ ...item, url: toPath(item.url) })),
+        transformItems: (items) => items.map((item) => ({ ...item, url: toPath(item.url) })),
+        translations: {
+            button: {
+                buttonAriaLabel: "搜索文章、主题或页面",
+                buttonText: "搜索",
+            },
+        },
         navigator: {
             navigate: ({ itemUrl }) => {
                 const path = toPath(itemUrl)
@@ -44,37 +52,3 @@ onUnmounted(() => instance?.destroy())
 <template>
     <div ref="container" class="docsearch" />
 </template>
-
-<style>
-.docsearch {
-    line-height: normal;
-}
-
-/* 预渲染阶段容器还是空的，先用伪元素占住图标位，DocSearch 注入按钮后 :empty 失效 */
-.docsearch:empty::before {
-    @apply i-ph-magnifying-glass block op-75;
-    content: "";
-    height: 1.2em;
-    width: 1.2em;
-    background-color: hsl(var(--foreground));
-}
-.docsearch > .DocSearch-Button {
-    @apply i-ph-magnifying-glass;
-    height: 1.2em !important;
-    width: 1.2em !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    background-color: hsl(var(--foreground)) !important;
-    display: block;
-
-    &:hover {
-        box-shadow: none;
-        background-color: white;
-    }
-}
-
-.DocSearch-Button-Container, .DocSearch-Button-Keys {
-    @apply !hidden !invisible of-hidden;
-}
-</style>
