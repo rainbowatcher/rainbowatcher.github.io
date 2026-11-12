@@ -1,42 +1,106 @@
-## Editor
+---
+title: 在用
+description: 按场景分组的工具、硬件与命令行清单。
 
-- Editor: [VSCode](https://code.visualstudio.com/)
-- Theme: [One Dark Pro](https://github.com/Binaryify/OneDark-Pro.git)
-- Icons: [Material Design Icons](https://github.com/material-extensions/vscode-material-icon-theme)
-- Fonts:
-  - [FiraCode](https://github.com/tonsky/FiraCode)
-  - [Cascadia Code](https://github.com/microsoft/cascadia-code)
-  - [0xProto](https://github.com/0xType/0xProto)
-- Formatting & Linting: [@rainbowatcher/eslint-config](https://github.com/rainbowatcher/eslint-config)
-
-## Chrome Extensions
-
-- [Refined GitHub](https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf) - No-brainer must-have
-- [ViolentMonkey](https://github.com/violentmonkey/violentmonkey) - Run custom script in browser
-- [GitHub File Icons](https://github.com/homerchen19/github-file-icons) - It looks very nice!
-- [I Still Don't Care About Cookies](https://github.com/OhMyGuus/I-Still-Dont-Care-About-Cookies) - Not popup cookie notice
-- [Sala Dict](https://github.com/crimx/ext-saladict) - Dictionary
-- [Immersive Translate](https://github.com/immersive-translate/immersive-translate/)
-- [Vimium C](https://github.com/gdh1995/vimium-c) - Operate browser through keyboard
-
-## Applications
-
-- [Raycast](https://raycast.com/) - Spotlight replacement
-- [Alacritty](https://github.com/alacritty/alacritty) - OpenGL terminal emulator
-- [Localsend](https://github.com/localsend/localsend) - An open-source cross-platform alternative to AirDrop
-
-## Hardware
-
-- MacBook Pro 13 inch 2020 16GB
-- Mouse: Logitech G304
-- Keyboard: Filco Majestouch Convertible 2 TKL - Cherry MX Red
-
-## CLI
-
-- [zsh](https://zsh.org/) - Shell
-  - Config: [rainbowatcher/scripts](https://github.com/rainbowatcher/scripts)
-- [pnpm](https://pnpm.io/) - Preferred package managers, also for monorepo
-- [ni](https://github.com/antfu/ni) - Aliasing package managers
-- [taze](https://github.com/antfu/taze) - Upgrade dependencies
-- [bumpp](https://github.com/antfu/bumpp) - Bump package version version for new release
-- [tsx](https://github.com/privatenumber/tsx) - Run TypeScript files without compilation
+sections:
+    - id: editor
+      title: 编辑器
+      note: "01"
+      items:
+          - name: VS Code
+            desc: 主力编辑器，配置同步到 GitHub。
+            side: Editor
+            href: https://code.visualstudio.com/
+          - name: One Dark Pro
+            desc: 用了很多年的主题，深色下对比度刚好。
+            side: Theme
+            href: https://github.com/Binaryify/OneDark-Pro
+          - name: Material Icon Theme
+            desc: 文件图标，辨识度比默认高。
+            side: Icons
+            href: https://github.com/material-extensions/vscode-material-icon-theme
+          - name: Cascadia Code / 0xProto
+            desc: 带连字的等宽字体，终端和编辑器统一。
+            side: Fonts
+            href: https://github.com/microsoft/cascadia-code
+          - name: "@rainbowatcher/eslint-config"
+            desc: 格式化与 lint 的唯一入口。
+            side: Lint
+            href: https://github.com/rainbowatcher/eslint-config
+    - id: browser
+      title: 浏览器扩展
+      note: "02"
+      items:
+          - name: Refined GitHub
+            desc: 给 GitHub 补上很多应该有的细节。
+            side: Chrome
+            href: https://github.com/refined-github/refined-github
+          - name: Violentmonkey
+            desc: 在浏览器里跑自定义脚本。
+            side: Chrome
+            href: https://violentmonkey.github.io/
+          - name: Immersive Translate
+            desc: 对照式翻译，读英文文档时很省力。
+            side: Chrome
+            href: https://immersivetranslate.com/
+          - name: Vimium C
+            desc: 用键盘操作浏览器。
+            side: Chrome
+            href: https://github.com/gdh1995/vimium-c
+          - name: Sala Dict
+            desc: 划词翻译与词典。
+            side: Chrome
+            href: https://github.com/crimx/ext-saladict
+    - id: apps
+      title: 应用
+      note: "03"
+      items:
+          - name: Raycast
+            desc: Spotlight 的替代，窗口管理与快捷指令都靠它。
+            side: macOS
+            href: https://raycast.com/
+          - name: Alacritty
+            desc: OpenGL 终端，启动快、配置简单。
+            side: Terminal
+            href: https://github.com/alacritty/alacritty
+          - name: LocalSend
+            desc: 跨平台局域网传文件，不经过云端。
+            side: Utility
+            href: https://localsend.org/
+    - id: hardware
+      title: 硬件
+      note: "04"
+      items:
+          - name: 'MacBook Pro 13" 2020'
+            desc: 16GB 内存，主力开发机。
+            side: Computer
+          - name: Logitech G304
+            desc: 轻、无线、换电池方便。
+            side: Mouse
+          - name: Filco Majestouch Convertible 2 TKL
+            desc: Cherry MX Red，用了很久依然顺手。
+            side: Keyboard
+    - id: cli
+      title: 命令行
+      note: "05"
+      items:
+          - name: zsh
+            desc: Shell，配置放在 rainbowatcher/scripts。
+            side: Shell
+            href: https://zsh.org/
+          - name: pnpm
+            desc: 首选包管理器，monorepo 也用它。
+            side: Package
+            href: https://pnpm.io/
+          - name: ni
+            desc: 自动识别项目该用哪个包管理器。
+            side: CLI
+            href: https://github.com/antfu/ni
+          - name: taze
+            desc: 依赖升级检查，比手动翻 changelog 快。
+            side: CLI
+            href: https://github.com/antfu/taze
+          - name: bat / fd / ripgrep
+            desc: cat、find、grep 的现代替代。
+            side: CLI
+---

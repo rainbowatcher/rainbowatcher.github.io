@@ -42,6 +42,32 @@ export type Research = ContentDocument & { title: string }
 /** 专题：path 即路由（/topics/<slug>），列表页需要 summary 做摘要。 */
 export type Topic = ContentDocument & { summary?: string; title: string }
 
+/** 「在用」条目：desc/side 是展示文案，href 缺失表示没有可点的链接。 */
+export type UsesItem = {
+    desc?: string
+    href?: string
+    name: string
+    side?: string
+}
+
+/** 「在用」分区：id 同时是页内锚点，note 是标题后的序号。 */
+export type UsesSection = {
+    id: string
+    items: UsesItem[]
+    note?: string
+    title: string
+}
+
+/** 「项目」条目：mark 是卡片上的两字缩写，status 是维护状态。 */
+export type ProjectItem = {
+    description?: string
+    href: string
+    mark?: string
+    name: string
+    status?: string
+    tags?: string[]
+}
+
 export type NavigationItem = {
     path?: string
     permalink?: string

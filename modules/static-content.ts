@@ -9,9 +9,7 @@
  */
 
 import { createHash } from "node:crypto"
-import {
-    existsSync, mkdirSync, readFileSync, rmSync, writeFileSync,
-} from "node:fs"
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import path from "node:path"
 import { createResolver, defineNuxtModule } from "@nuxt/kit"
 import FastGlob from "fast-glob"
@@ -24,6 +22,7 @@ const COLLECTIONS: Record<string, { patterns: string[]; root: string }> = {
     home: { patterns: ["home.md"], root: "home" },
     notes: { patterns: ["notes/**/*.md"], root: "notes" },
     posts: { patterns: ["posts/**/*.md"], root: "posts" },
+    projects: { patterns: ["projects.md"], root: "projects" },
     research: { patterns: ["research/**/*.md"], root: "research" },
     topics: { patterns: ["topics/**/*.md"], root: "topics" },
     uses: { patterns: ["uses.md"], root: "uses" },
@@ -62,124 +61,132 @@ export default defineNuxtModule({
         let rebuildChain: Promise<void> = Promise.resolve()
 
         async function rebuild() {
-            rebuildChain = rebuildChain.catch(() => {}).then(async () => {
-                if (existsSync(outDir)) {
-                    rmSync(outDir, { force: true, recursive: true })
-                }
-                mkdirSync(outDir, { recursive: true })
+            rebuildChain = rebuildChain
+                .catch(() => {})
+                .then(async () => {
+                    if (existsSync(outDir)) {
+                        rmSync(outDir, { force: true, recursive: true })
+                    }
+                    mkdirSync(outDir, { recursive: true })
 
-                const files = await FastGlob(Object.values(COLLECTIONS).flatMap(c => c.patterns), {
-                    absolute: false,
-                    cwd: join(rootDir, "content"),
-                    onlyFiles: true,
+                    const files = await FastGlob(
+                        Object.values(COLLECTIONS).flatMap((c) => c.patterns),
+                        {
+                            absolute: false,
+                            cwd: join(rootDir, "content"),
+                            onlyFiles: true,
+                        },
+                    )
+
+                    const documents: Record<string, string> = {}
+                    const notes: Array<Record<string, any>> = []
+                    const posts: Array<Record<string, any>> = []
+                    const research: Array<Record<string, any>> = []
+                    const topics: Array<Record<string, any>> = []
+                    const errors: string[] = []
+
+                    for (const file of files.sort()) {
+                        const absPath = join(rootDir, "content", file)
+                        let markdown: string
+                        try {
+                            markdown = readFileSync(absPath, "utf8")
+                        } catch (error) {
+                            errors.push(`${file}: ${(error as Error).message}`)
+                            continue
+                        }
+
+                        const { path, title: fallbackTitle } = toSourcePath(file)
+                        const parsed = await parse(markdown, {
+                            id: file,
+                            path,
+                        })
+                        // 复刻 @nuxt/content 的树压缩：剥离 <code> 节点上的空
+                        // `className` 数组，避免 MDCRenderer 在未解析（字面量）标签上
+                        // 输出 class=""。
+                        visit(parsed.body as any, (node: any) => {
+                            if (node.tag === "code" && node.props?.className?.length === 0) {
+                                delete node.props.className
+                            }
+                        })
+
+                        const data: Record<string, any> = {
+                            ...parsed.data,
+                            _path: path,
+                            body: parsed.body,
+                            id: file,
+                            path,
+                            title: (parsed.data as any)?.title ?? fallbackTitle,
+                        }
+                        for (const key of Object.keys(data)) {
+                            if (data[key] instanceof Date) {
+                                data[key] = yamlDate(data[key])
+                            }
+                        }
+
+                        // 文件名带内容哈希：旧 JSON 不会跨部署残留。
+                        const fileName = `${path.slice(1).replaceAll("/", "_")}.${createHash("sha1")
+                            .update(JSON.stringify(data))
+                            .digest("hex")
+                            .slice(0, 8)}.json`
+                        const outPath = join(outDir, fileName)
+                        writeFileSync(outPath, JSON.stringify(data))
+
+                        if (documents[path]) {
+                            errors.push(`duplicate path ${path} from ${file}`)
+                        }
+                        documents[path] = fileName
+
+                        // 首页文档额外以 "/" 暴露（index 页）。
+                        if (file === "home.md") {
+                            documents["/"] = fileName
+                        }
+
+                        if (file.startsWith("notes/")) {
+                            // 仅元数据——索引页按 section 分组，不需要正文。
+                            const { body: _body, ...metaOnly } = data
+                            notes.push(metaOnly)
+                        }
+
+                        if (file.startsWith("posts/")) {
+                            // 仅元数据——列表页不得下载正文。
+                            const { body: _body, ...metaOnly } = data
+                            posts.push(metaOnly)
+                        }
+
+                        if (file.startsWith("research/")) {
+                            const { body: _body, ...metaOnly } = data
+                            research.push(metaOnly)
+                        }
+
+                        if (file.startsWith("topics/")) {
+                            const { body: _body, ...metaOnly } = data
+                            topics.push(metaOnly)
+                        }
+                    }
+
+                    if (errors.length > 0) {
+                        throw new Error(`static-content: ${errors.join("; ")}`)
+                    }
+
+                    notes.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
+                    posts.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
+                    research.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
+                    topics.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
+
+                    const manifest = {
+                        documents,
+                        notes,
+                        posts,
+                        research,
+                        topics,
+                    }
+                    writeFileSync(join(outDir, "manifest.json"), JSON.stringify(manifest))
+
+                    const parsedCount = Object.keys(documents).length
+                    console.log(
+                        `[static-content] wrote ${parsedCount} paths + manifest (${notes.length} notes, ${posts.length} posts, ${research.length} research, ${topics.length} topics) to ${relative(rootDir, outDir)}`,
+                    )
                 })
-
-                const documents: Record<string, string> = {}
-                const notes: Array<Record<string, any>> = []
-                const posts: Array<Record<string, any>> = []
-                const research: Array<Record<string, any>> = []
-                const topics: Array<Record<string, any>> = []
-                const errors: string[] = []
-
-                for (const file of files.sort()) {
-                    const absPath = join(rootDir, "content", file)
-                    let markdown: string
-                    try {
-                        markdown = readFileSync(absPath, "utf8")
-                    } catch (error) {
-                        errors.push(`${file}: ${(error as Error).message}`)
-                        continue
-                    }
-
-                    const { path, title: fallbackTitle } = toSourcePath(file)
-                    const parsed = await parse(markdown, {
-                        id: file,
-                        path,
-                    })
-                    // 复刻 @nuxt/content 的树压缩：剥离 <code> 节点上的空
-                    // `className` 数组，避免 MDCRenderer 在未解析（字面量）标签上
-                    // 输出 class=""。
-                    visit(parsed.body as any, (node: any) => {
-                        if (node.tag === "code" && node.props?.className?.length === 0) {
-                            delete node.props.className
-                        }
-                    })
-
-                    const data: Record<string, any> = {
-                        ...parsed.data,
-                        _path: path,
-                        body: parsed.body,
-                        id: file,
-                        path,
-                        title: (parsed.data as any)?.title ?? fallbackTitle,
-                    }
-                    for (const key of Object.keys(data)) {
-                        if (data[key] instanceof Date) {
-                            data[key] = yamlDate(data[key])
-                        }
-                    }
-
-                    // 文件名带内容哈希：旧 JSON 不会跨部署残留。
-                    const fileName = `${path.slice(1).replaceAll("/", "_")}.${createHash("sha1").update(JSON.stringify(data))
-                        .digest("hex")
-                        .slice(0, 8)}.json`
-                    const outPath = join(outDir, fileName)
-                    writeFileSync(outPath, JSON.stringify(data))
-
-                    if (documents[path]) {
-                        errors.push(`duplicate path ${path} from ${file}`)
-                    }
-                    documents[path] = fileName
-
-                    // 首页文档额外以 "/" 暴露（index 页）。
-                    if (file === "home.md") {
-                        documents["/"] = fileName
-                    }
-
-                    if (file.startsWith("notes/")) {
-                        // 仅元数据——索引页按 section 分组，不需要正文。
-                        const { body: _body, ...metaOnly } = data
-                        notes.push(metaOnly)
-                    }
-
-                    if (file.startsWith("posts/")) {
-                        // 仅元数据——列表页不得下载正文。
-                        const { body: _body, ...metaOnly } = data
-                        posts.push(metaOnly)
-                    }
-
-                    if (file.startsWith("research/")) {
-                        const { body: _body, ...metaOnly } = data
-                        research.push(metaOnly)
-                    }
-
-                    if (file.startsWith("topics/")) {
-                        const { body: _body, ...metaOnly } = data
-                        topics.push(metaOnly)
-                    }
-                }
-
-                if (errors.length > 0) {
-                    throw new Error(`static-content: ${errors.join("; ")}`)
-                }
-
-                notes.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
-                posts.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
-                research.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
-                topics.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
-
-                const manifest = {
-                    documents,
-                    notes,
-                    posts,
-                    research,
-                    topics,
-                }
-                writeFileSync(join(outDir, "manifest.json"), JSON.stringify(manifest))
-
-                const parsedCount = Object.keys(documents).length
-                console.log(`[static-content] wrote ${parsedCount} paths + manifest (${notes.length} notes, ${posts.length} posts, ${research.length} research, ${topics.length} topics) to ${relative(rootDir, outDir)}`)
-            })
             return rebuildChain
         }
 
