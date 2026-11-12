@@ -1,14 +1,9 @@
-@font-face {
-    font-family: "鸿雷行书简体";
-    src:
-        local("鸿雷行书简体"),
-        /* url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.woff") format("woff"), */
-            url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.otf") format("otf"),
-        url("../public/fonts/HongLeiXingShuJianTi-2/HongLeiXingShuJianTi-2.ttf") format("ttf");
-    font-display: swap;
-    font-style: normal;
-}
-
+/**
+ * 做什么：站点自带字体的 @font-face 声明：等宽（0xProto / Cascadia Code）与它们的斜体。
+ * 状态与生命周期：随 index.css 在首屏加载，font-display: swap 避免阻塞首屏。
+ * 取舍与不变量：只声明实际在用的字族；鸿雷行书已随品牌改版下线，正文走系统字体栈。
+ * 边界：不定义字体栈与字号（见 tokens.css），也不做字体子集化。
+ */
 @font-face {
     font-family: 0xProto;
     src:

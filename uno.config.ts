@@ -145,7 +145,6 @@ export default defineConfig({
             surface3: "var(--surface-3)",
         },
         fontFamily: {
-            mb: "var(--font-hand)",
             mono: "var(--font-mono)",
             sans: "var(--font-sans)",
             serif: "var(--font-serif)",
