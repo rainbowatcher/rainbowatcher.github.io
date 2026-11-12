@@ -28,7 +28,7 @@ const scrolled = computed(() => y.value > 8)
                 </span>
             </NuxtLink>
 
-            <SiteNav class="ml-6px hidden flex-row items-center gap-2px lt-lg:hidden" />
+            <SiteNav class="ml-6px flex flex-row items-center gap-2px lt-lg:hidden" />
 
             <div class="ml-auto flex items-center gap-6px">
                 <SearchBar />

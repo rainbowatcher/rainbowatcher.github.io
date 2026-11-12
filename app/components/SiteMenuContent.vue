@@ -67,7 +67,7 @@ onUnmounted(() => {
                 </nav>
 
                 <div class="mt-auto flex gap-10px pt-24px">
-                    <ColorModeToggler class="btn-ghost flex-1" />
+                    <ColorModeToggler block label="切换主题" />
                     <NuxtLink
                         class="btn-ghost flex-1"
                         to="https://github.com/rainbowatcher"
