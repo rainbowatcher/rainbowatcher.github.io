@@ -44,13 +44,5 @@ export function render() {
                 <a href="https://github.com/rainbowatcher?tab=repositories" target="_blank" rel="noreferrer">去 GitHub 看看 ${icon("arrow-up-right")}</a>
             </div>
         </div>
-
-        <div class="notice" style="margin-top:36px">
-            ${icon("info")}
-            <div>
-                <strong>关于这张列表</strong>
-                <p>只列出仍在维护、且我愿意回答问题的项目。归档与实验性仓库不在此列。</p>
-            </div>
-        </div>
     </div>`
 }

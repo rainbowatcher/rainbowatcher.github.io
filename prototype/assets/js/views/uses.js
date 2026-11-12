@@ -6,7 +6,6 @@
 
 import { usesSections } from "../data.js"
 import { esc } from "../utils.js"
-import { icon } from "../icons.js"
 
 function useItem(item) {
     return `
@@ -51,15 +50,6 @@ export function render() {
                     )
                     .join("")}
 
-                <section class="uses-section" aria-label="说明">
-                    <div class="notice">
-                        ${icon("info")}
-                        <div>
-                            <strong>关于这份清单</strong>
-                            <p>只列长期使用的工具，试用两周以内的不收入。链接指向官网或开源仓库，不含推广参数。</p>
-                        </div>
-                    </div>
-                </section>
             </div>
         </div>
     </div>`
