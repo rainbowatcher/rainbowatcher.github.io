@@ -1,14 +1,9 @@
 ---
-layout: Post
-title: "[HTML]交互类标签"
+title: HTML 交互类标签
 subtitle: html 中用户交互相关的组件的使用和演示
-date: 2022-07-30
-permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/html.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
+section: 语言
 tags: [HTML]
+date: 2022-07-30
 ---
 
 ## 折叠列表

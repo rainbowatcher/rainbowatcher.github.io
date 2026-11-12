@@ -1,14 +1,8 @@
 ---
-layout: Post
 title: Linux 常用命令
-subtitle:
-date: 2022-08-11
-permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/linux.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
+section: 系统
 tags: [Linux, CLI]
+date: 2022-08-11
 ---
 
 ## 帮助

@@ -1,14 +1,8 @@
 ---
-layout: Post
-title: Linux 系统的安装（Window双系统）
-subtitle:
-date: 2022-08-03
-permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/linux.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-# hide: true
+title: Linux 系统的安装（Windows 双系统）
+section: 系统
 tags: [Linux]
+date: 2022-08-03
 ---
 
 在之前使用 windows 过程中，觉得安装双系统是一件很酷的事情，且处于对 linux 系统的喜爱折腾过不少次，在这里记录下之前的安装经验。

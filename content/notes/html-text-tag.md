@@ -1,14 +1,9 @@
 ---
-layout: Post
-title: "[HTML]文本类标签"
-subtitle: HTML中的文本标签的使用和演示
-date: 2022-07-30
-permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/html.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
+title: HTML 文本类标签
+subtitle: HTML 中的文本标签的使用和演示
+section: 语言
 tags: [HTML]
+date: 2022-07-30
 ---
 
 [MDN 官方教程](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/HTML_text_fundamentals)提供更详细的使用与说明，这里制作简单的标签使用描述。

@@ -1,14 +1,8 @@
 ---
-layout: Post
-title: 表示数值的方法-进制转换
-subtitle: 
-date: 2022-08-12
-permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/computer.png
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
+title: 表示数值的方法：进制转换
+section: 基础
 tags: [Computer]
+date: 2022-08-12
 ---
 
 ## 数的表示

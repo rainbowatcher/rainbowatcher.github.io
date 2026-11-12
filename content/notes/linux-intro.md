@@ -1,14 +1,8 @@
 ---
-layout: Post
-title: Linux 基本概览介绍
-subtitle:
-date: 2022-08-11
-permalinkPattern: /post/:year/:month/:day/:slug/
-headerImage: /img/ubuntu.svg
-useHeaderImage: true
-headerMask: rgba(0, 0, 0, .4)
-hide: false
+title: Linux 基本概览
+section: 系统
 tags: [Linux]
+date: 2022-08-11
 ---
 
 关于 Linux 的介绍见[百科词条](https://baike.baidu.com/item/Linux)，常见发行版可以参考[DistroWatch 的点击排行榜](https://distrowatch.com/dwres.php?resource=popularity)。一般来说商用 Linux 主要采用 RedHat 系和 Oracle 系。

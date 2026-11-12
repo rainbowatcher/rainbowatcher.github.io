@@ -1,4 +1,9 @@
-# Typescript
+---
+title: TypeScript 学习资源
+section: 工具
+tags: [TypeScript]
+date: 2022-07-30
+---
 
 ## 工具
 
