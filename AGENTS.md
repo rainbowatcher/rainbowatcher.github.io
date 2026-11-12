@@ -113,6 +113,7 @@ pnpm lint:fix     # 自动修复
 pnpm typecheck    # 类型检查（nuxi + golar）
 pnpm generate     # 全量构建，验证 prerender 与内容管线
 pnpm check        # 检查 content/ 中的外部链接（lychee）
+pnpm content:check # 校验 frontmatter 必填项、date 格式、tags 与相对链接
 ```
 
 ## 4. 提交前自查清单

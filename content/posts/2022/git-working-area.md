@@ -1,6 +1,6 @@
 ---
 layout: Post
-title: Git 工作区和暂存区🚧
+title: Git 工作区和暂存区
 useHeaderImage: true
 headerImage: /img/git.png
 headerMask: rgba(0, 0, 0, .4)
