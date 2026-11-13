@@ -303,15 +303,18 @@
     text-transform: uppercase;
 }
 
-/* 表格：MDC 直接输出 table，用圆角边框包一层视觉效果 */
-.prose table {
-    display: block;
-    overflow-x: auto;
-    width: 100%;
+/* 表格：MDC 输出的 table 外面包一层滚动容器，圆角边框给容器；
+   table 一旦 display: block 就会缩成内容宽，行与表头底色只铺左侧一截 */
+.prose .table-scroll {
     margin: 1.7em 0;
     border: 1px solid var(--line);
-    border-collapse: separate;
     border-radius: var(--radius-s);
+    overflow-x: auto;
+}
+
+.prose table {
+    width: 100%;
+    border-collapse: separate;
     border-spacing: 0;
     font-family: var(--font-sans);
     font-size: 12.5px;
