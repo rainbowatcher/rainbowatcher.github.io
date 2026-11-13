@@ -20,7 +20,7 @@
 - 新增依赖前先确认现有依赖能否满足；锁定文件（`pnpm-lock.yaml`）随依赖变更一起提交。
 - **幽灵依赖是明确接受的**：`shamefullyHoist: true` 让 nuxt / @nuxtjs/mdc / unocss / shiki 的传递依赖（如 `@nuxt/kit`、`defu`、`ufo`、`unist-util-visit`、`@shikijs/langs`）可直接 import。不为它们声明版本，版本由上游决定，避免两份副本与独立漂移。
 - knip 的 `unlisted` 结果只作审计参考，不进 CI 门禁；需要 fail-loud 时应关闭 `shamefullyHoist` 并全面声明，而非挑选部分声明。
-- `.agents/skills/**` 里由 `skills-lock.json` 登记的是 skills CLI 装的第三方技能，属 vendored 代码：不进 `pnpm fmt` / `pnpm lint`（ignorePatterns 已排除），不要手改，升级用 `skills update`（同步重写哈希）。`.agents/skills/knowledge-writing/` 是自有写作规范，直接改，不登记进 lock。
+- `.agents/skills/**` 里由 `skills-lock.json` 登记的是 skills CLI 装的第三方技能，属 vendored 代码：不进 `pnpm fmt` / `pnpm lint`（ignorePatterns 已排除），不要手改，升级用 `skills update`（同步重写哈希）。`.agents/skills/writing/` 是自有写作规范，直接改，不登记进 lock。
 
 ### 1.3 文件头注释
 
@@ -79,8 +79,8 @@
 
 ### 1.9 文章写入
 
-- 写 `content/` 下任何 markdown 之前，必须先读 `.agents/skills/knowledge-writing/SKILL.md`；阶段、小节、frontmatter 与引用规则以它为准，本文件不重复。
-- 写作意图要自己识别，不限“写文章”字样：用户要我留下结论、探索结果、调研或命令用法（“记一下”“整理成速查”“以后能查”“调研完写出来”），就算写作请求，按 `knowledge-writing` 的阶段规则落库，不反问放哪。
+- 写 `content/` 下任何 markdown 之前，必须先读 `.agents/skills/writing/SKILL.md`；阶段、小节、frontmatter 与引用规则以它为准，本文件不重复。
+- 写作意图要自己识别，不限“写文章”字样：用户要我留下结论、探索结果、调研或命令用法（“记一下”“整理成速查”“以后能查”“调研完写出来”），就算写作请求，按 `writing` 技能的阶段规则落库，不反问放哪。
 
 ## 2. 仓库结构与内容数据流
 
@@ -137,5 +137,5 @@ pnpm content:check # 校验 frontmatter 必填项、date 格式、tags 与相对
 - [ ] 没有文件超过 500 行？
 - [ ] 新增模块目录有 `index.ts` 或 `README.md` 说明职责？
 - [ ] 未手改生成物（`public/_content/`、`.nuxt/`、`.output/`、`dist/`）？
-- [ ] 写 `content/` 前已读 `.agents/skills/knowledge-writing/SKILL.md`，文章符合其阶段、小节与引用规则？
+- [ ] 写 `content/` 前已读 `.agents/skills/writing/SKILL.md`，文章符合其阶段、小节与引用规则？
 - [ ] `pnpm fmt:check`、`pnpm lint` 通过，`pnpm typecheck` 无新增错误；构建相关改动已跑 `pnpm generate`？

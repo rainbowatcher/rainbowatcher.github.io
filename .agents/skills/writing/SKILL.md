@@ -1,5 +1,5 @@
 ---
-name: knowledge-writing
+name: writing
 description: >-
     本仓库文章写作规范，写 content/ 下任何 markdown 之前必须先读：新建、改写、晋升阶段、加站内引用、
     改 frontmatter 都适用。约定生命周期 content/research（草稿）→ content/experience（实践过）→
