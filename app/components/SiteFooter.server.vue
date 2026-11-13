@@ -3,16 +3,17 @@
  * 做什么：站点页脚：品牌简介、浏览与关于两组链接、构建信息，以及底部版权条。
  * 状态与生命周期：构建时间读自构建期写入的 build-info.json；年份在渲染时取当前年。
  * 取舍与不变量：页脚是站点地图的兜底入口，导航项与页头同源，不在这里另抄一份；
+ * 「浏览」收阅读类分组，「关于」收末组（在用 / 项目），故分组调整不必改本文件；
  * 构建列写明技术栈与许可，便于查版本来源。
  * 边界：不承载导航交互与搜索，也不做「对比度自检」这类原型自用工具。
  */
 import buildInfo from "~/assets/build-info.json"
-import { NAV_ITEMS } from "~/composables/useSiteNav"
+import { NAV_GROUPS } from "~/composables/useSiteNav"
 
 const year = new Date().getFullYear()
 const buildDate = buildInfo.time.slice(0, 10).replaceAll("-", ".")
-const browseItems = NAV_ITEMS.slice(0, 4)
-const aboutItems = NAV_ITEMS.slice(4)
+const browseItems = NAV_GROUPS.slice(0, -1).flat()
+const aboutItems = NAV_GROUPS.at(-1) ?? []
 </script>
 
 <template>
