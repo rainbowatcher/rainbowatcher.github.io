@@ -21,7 +21,7 @@ const emit = defineEmits<{ select: [id: string] }>()
         <div class="sticky top-[calc(var(--header-h)+30px)] flex flex-col items-start gap-24px">
             <nav class="group grid cursor-pointer" aria-label="本文目录">
                 <div
-                    class="flex flex-col gap-5px py-6px transition-opacity group-hover:op-0 group-focus-within:op-0"
+                    class="col-start-1 row-start-1 flex flex-col gap-5px py-6px transition-opacity group-hover:op-0 group-focus-within:op-0"
                     aria-hidden="true"
                 >
                     <i
