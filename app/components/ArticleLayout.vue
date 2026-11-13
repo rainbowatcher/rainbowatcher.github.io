@@ -25,14 +25,6 @@ const props = defineProps<{
 const { activeId, headings, scrollTo } = useArticleToc("#articleBody")
 const minutes = computed(() => readingMinutes(props.doc.body))
 const tags = computed(() => props.doc.tags ?? [])
-
-function onSelect(id: string) {
-    if (!id) {
-        window.scrollTo({ top: 0, behavior: "smooth" })
-        return
-    }
-    scrollTo(id)
-}
 </script>
 
 <template>
@@ -51,13 +43,13 @@ function onSelect(id: string) {
 
         <div class="relative pt-[clamp(16px,2.5vw,28px)]">
             <article class="min-w-0 lg:max-w-[calc(100%-152px)]">
-                <ArticleTocMobile :active-id="activeId" :headings="headings" @select="onSelect" />
+                <ArticleTocMobile :active-id="activeId" :headings="headings" @select="scrollTo" />
                 <div id="articleBody" class="prose">
                     <MDCRenderer :body="(doc as any).body" :data="doc" :components="{ code: ProseCodeInline }" />
                 </div>
             </article>
 
-            <ArticleTocRail :active-id="activeId" :headings="headings" @select="onSelect" />
+            <ArticleTocRail :active-id="activeId" :headings="headings" @select="scrollTo" />
         </div>
 
         <PrevNext :fallback-label="fallbackLabel" :fallback-to="fallbackTo" :next="next" :previous="previous" />
