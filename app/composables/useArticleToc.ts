@@ -4,7 +4,7 @@
  * 卸载时移除监听；标题集合在正文渲染完成后通过 refresh() 重新采集。
  * 取舍与不变量：无 id 的标题补 `section-N`，避免与页内锚点冲突；高亮阈值取视口上方 120px，
  * 与阅读进度（ReadingProgress）各自独立，互不引用。
- * 边界：不渲染目录，也不处理平滑滚动的视觉反馈。
+ * 边界：不渲染目录；平滑滚动只在用户未要求减弱动效时启用。
  */
 export type TocHeading = {
     id: string
@@ -51,7 +51,10 @@ export function useArticleToc(target: string) {
     }
 
     function scrollTo(id: string) {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+        document.getElementById(id)?.scrollIntoView({
+            behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            block: "start",
+        })
     }
 
     onMounted(() => {
