@@ -20,6 +20,7 @@
 - 新增依赖前先确认现有依赖能否满足；锁定文件（`pnpm-lock.yaml`）随依赖变更一起提交。
 - **幽灵依赖是明确接受的**：`shamefullyHoist: true` 让 nuxt / @nuxtjs/mdc / unocss / shiki 的传递依赖（如 `@nuxt/kit`、`defu`、`ufo`、`unist-util-visit`、`@shikijs/langs`）可直接 import。不为它们声明版本，版本由上游决定，避免两份副本与独立漂移。
 - knip 的 `unlisted` 结果只作审计参考，不进 CI 门禁；需要 fail-loud 时应关闭 `shamefullyHoist` 并全面声明，而非挑选部分声明。
+- `.agents/skills/**` 里由 `skills-lock.json` 登记的是 skills CLI 装的第三方技能，属 vendored 代码：不进 `pnpm fmt` / `pnpm lint`（ignorePatterns 已排除），不要手改，升级用 `skills update`（同步重写哈希）。`.agents/skills/knowledge-writing/` 是自有写作规范，直接改，不登记进 lock。
 
 ### 1.3 文件头注释
 
@@ -71,40 +72,38 @@
 - 新增模块目录必须包含 `index.ts` 或 `README.md`，写明该模块的职责与边界。
 - 目录复杂到需要图（架构、流程、数据流）才能讲清时，必须提供 `README.md`（推荐 Mermaid）。
 
-### 1.8 文章写入
+### 1.8 样式分层
+
+- 颜色、字体、圆角只在 `app/styles/tokens.css` 定义，`uno.config.ts` 把它们映射成工具类；组件不写十六进制色值。
+- 工具类表达不了的规则（伪元素、交叉渐变、正文后代选择器、第三方皮肤）才落到 `app/styles/` 的其余文件，层叠顺序由 `nuxt.config.ts` 的 `css` 数组决定（reset → uno.css → index.css）；`index.css` 内部按 tokens → animations → base → prose → docsearch 汇总。
+
+### 1.9 文章写入
 
 - 写 `content/` 下任何 markdown 之前，必须先读 `.agents/skills/knowledge-writing/SKILL.md`；阶段、小节、frontmatter 与引用规则以它为准，本文件不重复。
 
 ## 2. 仓库结构与内容数据流
 
 ```
-content/            markdown 唯一内容源（posts/、knowledge/、explore/、experience/、research/ 与 home/uses/projects 的 .md 会发布）
-  ├─ knowledge/     知识条目：长期维护的速查/入门，按 frontmatter 的 section 分区，不按时间排列
-  ├─ explore/       基于本机环境的探索记录（工具实测、命令输出、版本号），随站发布并在页面标注
-  ├─ experience/    经验：围绕单个问题的系统总结（结论、方案、边界与验证命令）
-  ├─ research/      研究草稿：未定型的想法、方案对比与待验证清单，随站发布并在页面标注草稿
-  ├─ home.md        首页数据源：frontmatter 提供 hero 与联系区文案（title/eyebrow/lede/contactTitle/contactText），不渲染正文
-  ├─ uses.md        在用数据源：frontmatter 的 sections[].items[] 提供分区与条目
-  ├─ projects.md    项目数据源：frontmatter 的 projects[] 提供卡片条目
-  └─ hide/          永不发布的草稿
-modules/            构建期 Nuxt 模块
-  ├─ static-content.ts   扫描 content/，编译出 public/_content/*.json + manifest.json
-  └─ content-parser.ts   复刻 @nuxt/content v3 解析管线，输出 MDC AST
-app/                Nuxt 应用目录：pages / components / composables / layouts / utils / styles
-  └─ styles/        样式入口：reset（元素重置，排在 UnoCSS 之前）→ tokens（设计变量）→ base/prose/docsearch
-public/             静态资源
+content/                  markdown 唯一内容源
+  knowledge/              长期维护的速查，平铺不建子目录
+  explore/                本机环境探索记录，结论依赖机器与版本
+  experience/             本机实践验证过的系统总结
+  research/               研究草稿，允许并列方案与「未验证」
+  posts/                  第一人称过程与教训
+  {home,uses,projects}.md 数据源，只读 frontmatter
+  hide/                   永不发布的草稿
+modules/                  构建期 Nuxt 模块
+  static-content.ts       扫描 content/ → public/_content/*.json + manifest.json
+  content-parser.ts       复刻 @nuxt/content v3 解析管线 → MDC AST
+app/                      pages / components / composables / layouts / utils / styles
+public/                   静态资源
 ```
 
-- 页面内容一律经 `app/composables/queryContents.ts` 读取 `/_content/`，不引入 `@nuxt/content` 运行时。
-- 新文按生命周期选目录，禁止跳级与一稿多放：待验证的想法 → `research/`；本机实践验证过 → `experience/`；结论脱离本机仍成立 → `knowledge/`；有第一人称过程与教训 → `posts/`；结论只在本机成立 → `explore/`。三阶段靠 `git mv` 晋升，写法见 `.agents/skills/knowledge-writing/SKILL.md`。
-- `content/research/` 是**研究草稿**：结论未定型，允许并列方案与 `未验证` 标记；走 `/research` 与 `manifest.research`，页面固定标注草稿。真实执行过一次并收敛出结论后，`git mv` 升为经验。
-- `content/experience/` 是**经验**：本机实践验证过的系统总结（结论、方案、边界与验证命令），由 `research/` 晋升；走 `/experience` 分区与 `manifest.experience`，列表页展示摘要。
-- `content/home.md`、`content/uses.md`、`content/projects.md` 是**数据源**：页面只读 frontmatter 的结构化字段（形状契约见 `app/types/content.ts`），不再渲染 markdown 正文；新增工具或项目只改这三份 markdown。
-- 样式分层：颜色、字体、圆角只在 `app/styles/tokens.css` 定义，`uno.config.ts` 把它们映射成工具类；组件不写十六进制色值。工具类表达不了的规则（伪元素、交叉渐变、正文后代选择器、第三方皮肤）才落到 `app/styles/` 的其余文件，层叠顺序由 `nuxt.config.ts` 的 `css` 数组决定（reset → uno.css → index.css）。
-- `content/knowledge/` 是**知识库**：全部平铺，不建子目录与手写 `index.md`；索引由 `/knowledge` 页读 `manifest.knowledge` 按 `section` 分组生成。frontmatter 必填 `title` / `section`（取值见 `app/utils/knowledge.ts` 的 `SECTION_ORDER`）/ `tags` / `date`（当前阶段成稿日），可选 `subtitle` / `updated`。某分区涨到 8 条以上再提为子目录，`section` 数据契约不变。
-- `content/explore/` 是**基于本机环境的探索记录**：结论依赖当时的机器状态、工具版本与本地配置，换台机器未必复现。它随站发布，走 `/explore` 分区与 `manifest.explore`，页面固定标注本地环境依赖与复验要求；其中的命令与数据引用前须在本机复验，不得当通用结论使用。
-- `public/_content/` 是生成物，禁止手改；改动 markdown 后由 dev watcher 重建，构建时全量重写。
-- `.agents/skills/**` 中由 `skills-lock.json` 登记的是 skills CLI 安装的第三方技能，属于 vendored 代码：不进 `pnpm fmt` / `pnpm lint`（两个 ignorePatterns 已排除），也不要手改；升级用 `skills update`，它会同步重写哈希。`.agents/skills/knowledge-writing/` 是本仓库自有的写作规范，直接改，不登记进 lock。
+- 数据流单向：`content/**.md` → `static-content.ts` → `public/_content/`（生成物，禁止手改，dev watcher 重建、构建全量重写）→ `queryContents.ts` → 页面；不引入 `@nuxt/content` 运行时。
+- 目录即阶段，禁止跳级与一稿多放，晋升只用 `git mv`：想法 → `research/`；本机跑通过 → `experience/`；脱离本机仍成立 → `knowledge/`；带第一人称过程 → `posts/`；只在本机成立 → `explore/`。写法按 1.9 先读规范。
+- 每个内容目录各走同名路由与 `manifest.<name>` 列表，不手写 `index.md`；`research/`、`explore/` 页面固定标注草稿与环境依赖。
+- `knowledge/` frontmatter 必填 `title` / `section`（取值见 `app/utils/knowledge.ts` 的 `SECTION_ORDER`）/ `tags` / `date`，可选 `subtitle` / `updated`；某分区涨到 8 条以上再提为子目录，`section` 契约不变。
+- `home.md` / `uses.md` / `projects.md` 只读 frontmatter 结构化字段（读取点见 `app/pages/index.vue` / `uses.vue` / `projects.vue`），不渲染正文；新增工具或项目只改这三份。
 - 解析行为（插件顺序、Shiki 主题、toc 深度）改动必须同步 `nuxt.config.ts` 与 `modules/content-parser.ts`，否则预渲染 HTML 会漂移。
 
 ## 3. 研发与交付流程
