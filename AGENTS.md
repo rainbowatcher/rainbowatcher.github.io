@@ -80,6 +80,7 @@
 ### 1.9 文章写入
 
 - 写 `content/` 下任何 markdown 之前，必须先读 `.agents/skills/knowledge-writing/SKILL.md`；阶段、小节、frontmatter 与引用规则以它为准，本文件不重复。
+- 用户只说“写一篇文章”时，默认落 `content/` 并按类型选目录（速查 → `knowledge/`、本机探索 → `explore/`、实践总结 → `experience/`、第一人称过程 → `posts/`、想法草稿 → `research/`），不写仓库根、`docs/` 或其他位置，也不反问放哪；只有用户指明别的目录才例外。
 
 ## 2. 仓库结构与内容数据流
 
