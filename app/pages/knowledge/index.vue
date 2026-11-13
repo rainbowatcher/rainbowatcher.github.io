@@ -1,27 +1,27 @@
 <script setup lang="ts">
 /**
- * 做什么：/notes 索引页：按 frontmatter 的 section 分组列出知识库条目。
- * 状态与生命周期：条目来自 manifest.notes（仅元数据）；分组顺序与详情页的前后篇顺序同源（utils/notes.ts）。
+ * 做什么：/knowledge 索引页：按 frontmatter 的 section 分组列出知识条目。
+ * 状态与生命周期：条目来自 manifest.knowledge（仅元数据）；分组顺序与详情页的前后篇顺序同源（utils/knowledge.ts）。
  * 取舍与不变量：索引完全由 frontmatter 的 section 生成，不维护手写目录；行式列表与博客列表共用 PostRow，
  * 保证同一套「日期—标题—主题—箭头」的阅读节奏。
- * 边界：不渲染正文（见 notes/[...note].vue），也不做搜索与标签过滤。
+ * 边界：不渲染正文（见 knowledge/[...knowledge].vue），也不做搜索与标签过滤。
  */
-import { groupNotes } from "~/utils/notes"
+import { groupKnowledge } from "~/utils/knowledge"
 
-const { data: notes } = await useAsyncData("notes-list", useNotes())
-const groups = computed(() => groupNotes(notes.value ?? []))
-const total = computed(() => notes.value?.length ?? 0)
+const { data: knowledge } = await useAsyncData("knowledge-list", useKnowledge())
+const groups = computed(() => groupKnowledge(knowledge.value ?? []))
+const total = computed(() => knowledge.value?.length ?? 0)
 
-useHead({ title: `笔记 · ${total.value} 条 — Rainbow Watcher` })
+useHead({ title: `知识 · ${total.value} 条 — Rainbow Watcher` })
 </script>
 
 <template>
     <div class="wrap view-enter">
         <PageHead
-            eyebrow="Knowledge / Notes"
-            title="笔记"
-            :meta="`${total} NOTES`"
-            desc="长期维护的知识条目：会随手补充与修订，按主题分区而不按时间排列。一次性探索记录在研究，成篇的唠叨在博客。"
+            eyebrow="Knowledge / Long-term"
+            title="知识"
+            :meta="`${total} ENTRIES`"
+            desc="长期维护的知识条目：会随手补充与修订，按主题分区而不按时间排列。一次性的实地记录放在探索，成篇的唠叨在博客。"
         />
 
         <div v-if="groups.length" class="pt-8px">
@@ -54,6 +54,6 @@ useHead({ title: `笔记 · ${total.value} 条 — Rainbow Watcher` })
                 </div>
             </section>
         </div>
-        <p v-else class="py-40px c-muted">还没有笔记。</p>
+        <p v-else class="py-40px c-muted">还没有知识条目。</p>
     </div>
 </template>

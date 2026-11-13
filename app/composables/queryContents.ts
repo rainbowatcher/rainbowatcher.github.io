@@ -1,22 +1,22 @@
 /**
  * 做什么：读取构建期产物 public/_content/（manifest.json 与哈希 JSON），向页面提供
- * 首页/文档、博客列表、知识库条目、研究报告与专题列表。
+ * 首页/文档、博客列表、知识条目、探索记录与经验条目列表。
  * 状态与生命周期：manifestPromise 首次读取后模块级缓存，失败时清除以允许重试。
  * 取舍与不变量：SSR 直接读磁盘（Nitro 不向进程内 $fetch 暴露 public 资产），客户端走
- * $fetch；posts 的 permalink 由 addPermalink 现场补齐，notes / research / topics 的 path 即路由。
+ * $fetch；posts 的 permalink 由 addPermalink 现场补齐，knowledge / explore / experience 的 path 即路由。
  * 边界：不做路由匹配、不渲染页面、不写产物。
  */
 
 import process from "node:process"
 import { addPermalink, toNavItems } from "~/utils/path"
-import type { ContentDocument, NavigationItem, Note, Post, Research, Topic } from "~/types/content"
+import type { ContentDocument, Experience, Explore, Knowledge, NavigationItem, Post } from "~/types/content"
 
 type Manifest = {
     documents: Record<string, string>
-    notes: Note[]
+    experience: Experience[]
+    explore: Explore[]
+    knowledge: Knowledge[]
     posts: ContentDocument[]
-    research: Research[]
-    topics: Topic[]
 }
 
 let manifestPromise: Promise<Manifest> | undefined
@@ -82,24 +82,24 @@ export function useNavItems() {
     }
 }
 
-export function useNotes() {
-    return async (): Promise<Note[]> => {
+export function useKnowledge() {
+    return async (): Promise<Knowledge[]> => {
         const manifest = await getManifest()
-        return manifest.notes
+        return manifest.knowledge
     }
 }
 
-export function useResearch() {
-    return async (): Promise<Research[]> => {
+export function useExplore() {
+    return async (): Promise<Explore[]> => {
         const manifest = await getManifest()
-        return manifest.research
+        return manifest.explore
     }
 }
 
-export function useTopics() {
-    return async (): Promise<Topic[]> => {
+export function useExperience() {
+    return async (): Promise<Experience[]> => {
         const manifest = await getManifest()
-        return manifest.topics
+        return manifest.experience
     }
 }
 

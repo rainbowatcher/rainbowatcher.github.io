@@ -2,7 +2,7 @@
  * 做什么：校验 content/ 下已发布 markdown 的 frontmatter 与相对链接，跑 `pnpm content:check`。
  * 状态与生命周期：一次性脚本，读文件后逐条规则收集问题，有问题时 exit 1。
  * 取舍与不变量：只认本仓库实际使用的极简 YAML（key: value 与行内数组），不引入 yaml 依赖；
- * notes 的合法 section 从 app/utils/notes.ts 的 SECTION_ORDER 读取，避免两处枚举漂移。
+ * knowledge 的合法 section 从 app/utils/knowledge.ts 的 SECTION_ORDER 读取，避免两处枚举漂移。
  * 边界：不做 schema 级类型校验，不检查外链可达性（那是 `pnpm check` 的 lychee），
  * 也不检查 hide/ 下的草稿。
  */
@@ -16,22 +16,22 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const contentDir = path.join(root, "content")
 
 /** 会发布并因此参与校验的集合；hide/ 是草稿，故意不在名单里。 */
-const PUBLISHED = ["posts", "notes", "research", "topics"]
+const PUBLISHED = ["posts", "knowledge", "explore", "experience"]
 
 const REQUIRED = {
-    notes: ["title", "section", "tags", "date"],
+    experience: ["title", "tags", "date"],
+    explore: ["title", "tags", "date"],
+    knowledge: ["title", "section", "tags", "date"],
     posts: ["title", "tags", "date"],
-    research: ["title", "tags", "date"],
-    topics: ["title", "tags", "date"],
 }
 
 const problems = []
 const report = (file, message) => problems.push(`${path.relative(root, file)}: ${message}`)
 
 function readSectionOrder() {
-    const source = readFileSync(path.join(root, "app/utils/notes.ts"), "utf8")
+    const source = readFileSync(path.join(root, "app/utils/knowledge.ts"), "utf8")
     const match = source.match(/SECTION_ORDER\s*=\s*\[([^\]]*)]/)
-    if (!match) throw new Error("无法从 app/utils/notes.ts 解析 SECTION_ORDER")
+    if (!match) throw new Error("无法从 app/utils/knowledge.ts 解析 SECTION_ORDER")
     return [...match[1].matchAll(/"([^"]+)"/g)].map((item) => item[1])
 }
 
@@ -100,7 +100,7 @@ for (const collection of PUBLISHED) {
             report(file, `date 必须是 YYYY-MM-DD：${data.date}`)
         }
 
-        if (collection === "notes" && data.section && !sectionOrder.includes(data.section)) {
+        if (collection === "knowledge" && data.section && !sectionOrder.includes(data.section)) {
             report(file, `section 只能是 ${sectionOrder.join(" / ")}：${data.section}`)
         }
 

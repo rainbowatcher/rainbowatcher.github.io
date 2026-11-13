@@ -74,10 +74,10 @@
 ## 2. 仓库结构与内容数据流
 
 ```
-content/            markdown 唯一内容源（posts/、notes/、research/、topics/ 与 home/uses/projects 的 .md 会发布）
-  ├─ notes/         知识库条目：长期维护的速查/入门，按 frontmatter 的 section 分区，不按时间排列
-  ├─ research/      基于本机环境的探索报告（工具实测、命令输出、版本号），随站发布并在页面标注
-  ├─ topics/        专题：围绕单个问题的系统分析（结论、方案、边界与验证命令）
+content/            markdown 唯一内容源（posts/、knowledge/、explore/、experience/ 与 home/uses/projects 的 .md 会发布）
+  ├─ knowledge/     知识条目：长期维护的速查/入门，按 frontmatter 的 section 分区，不按时间排列
+  ├─ explore/       基于本机环境的探索记录（工具实测、命令输出、版本号），随站发布并在页面标注
+  ├─ experience/    经验：围绕单个问题的系统总结（结论、方案、边界与验证命令）
   ├─ home.md        首页数据源：frontmatter 提供 hero 与联系区文案（title/eyebrow/lede/contactTitle/contactText），不渲染正文
   ├─ uses.md        在用数据源：frontmatter 的 sections[].items[] 提供分区与条目
   ├─ projects.md    项目数据源：frontmatter 的 projects[] 提供卡片条目
@@ -91,12 +91,12 @@ public/             静态资源
 ```
 
 - 页面内容一律经 `app/composables/queryContents.ts` 读取 `/_content/`，不引入 `@nuxt/content` 运行时。
-- 新文先按职责选目录，从上往下问，第一个命中即归属：有第一人称过程与教训 → `posts/`；结论只在某台机器上成立 → `research/`；要给出方案与取舍 → `topics/`；其余 → `notes/`。同一篇只放一处，禁止在 `posts/` 与 `notes/` 各留一份。
-- `content/topics/` 是**专题**：围绕单个问题的系统分析，结论不依赖本机环境；走 `/topics` 分区与 `manifest.topics`，列表页展示摘要。
+- 新文先按职责选目录，从上往下问，第一个命中即归属：有第一人称过程与教训 → `posts/`；结论只在某台机器上成立 → `explore/`；要给出方案与取舍 → `experience/`；其余 → `knowledge/`。同一篇只放一处，禁止在 `posts/` 与 `knowledge/` 各留一份。
+- `content/experience/` 是**经验**：围绕单个问题的系统总结，结论不依赖本机环境；走 `/experience` 分区与 `manifest.experience`，列表页展示摘要。
 - `content/home.md`、`content/uses.md`、`content/projects.md` 是**数据源**：页面只读 frontmatter 的结构化字段（形状契约见 `app/types/content.ts`），不再渲染 markdown 正文；新增工具或项目只改这三份 markdown。
 - 样式分层：颜色、字体、圆角只在 `app/styles/tokens.css` 定义，`uno.config.ts` 把它们映射成工具类；组件不写十六进制色值。工具类表达不了的规则（伪元素、交叉渐变、正文后代选择器、第三方皮肤）才落到 `app/styles/` 的其余文件，层叠顺序由 `nuxt.config.ts` 的 `css` 数组决定（reset → uno.css → index.css）。
-- `content/notes/` 是**知识库**：全部平铺，不建子目录与手写 `index.md`；索引由 `/notes` 页读 `manifest.notes` 按 `section` 分组生成。frontmatter 必填 `title` / `section`（取值见 `app/utils/notes.ts` 的 `SECTION_ORDER`）/ `tags` / `date`（首次成稿，不参与排序），可选 `subtitle` / `updated`。某分区涨到 8 条以上再提为子目录，`section` 数据契约不变。
-- `content/research/` 是**基于本机环境的探索报告**：结论依赖当时的机器状态、工具版本与本地配置，换台机器未必复现。它随站发布，走 `/research` 分区与 `manifest.research`，页面固定标注本地环境依赖与复验要求；其中的命令与数据引用前须在本机复验，不得当通用结论使用。
+- `content/knowledge/` 是**知识库**：全部平铺，不建子目录与手写 `index.md`；索引由 `/knowledge` 页读 `manifest.knowledge` 按 `section` 分组生成。frontmatter 必填 `title` / `section`（取值见 `app/utils/knowledge.ts` 的 `SECTION_ORDER`）/ `tags` / `date`（首次成稿，不参与排序），可选 `subtitle` / `updated`。某分区涨到 8 条以上再提为子目录，`section` 数据契约不变。
+- `content/explore/` 是**基于本机环境的探索记录**：结论依赖当时的机器状态、工具版本与本地配置，换台机器未必复现。它随站发布，走 `/explore` 分区与 `manifest.explore`，页面固定标注本地环境依赖与复验要求；其中的命令与数据引用前须在本机复验，不得当通用结论使用。
 - `public/_content/` 是生成物，禁止手改；改动 markdown 后由 dev watcher 重建，构建时全量重写。
 - `.agents/skills/**` 是 skills CLI 安装的第三方技能，属于 vendored 代码：不进 `pnpm fmt` / `pnpm lint`（两个 ignorePatterns 已排除），也不要手改；升级用 `skills update`，它会同步重写 `skills-lock.json` 的哈希。
 - 解析行为（插件顺序、Shiki 主题、toc 深度）改动必须同步 `nuxt.config.ts` 与 `modules/content-parser.ts`，否则预渲染 HTML 会漂移。
