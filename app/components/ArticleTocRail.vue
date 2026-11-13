@@ -3,7 +3,8 @@
  * 做什么：文章右栏目录：默认显示缩略线条，hover/聚焦时交叉渐变为明文目录，并高亮当前小节。
  * 状态与生命周期：标题与高亮来自文章页的 useArticleToc，本组件只负责渲染与派发选择事件。
  * 取舍与不变量：缩略线条与明文列表叠在同一个 grid 单元上做淡入淡出，宽度固定 132px，
- * 因此正文只需为它留出安全边距，不参与 grid 列宽分配。
+ * 因此正文只需为它留出安全边距，不参与 grid 列宽分配；缩略线条叠在上层但不接指针事件，
+ * 目录高度上限为视口减去页头与底部工具，超出部分在明文列表内滚动，避免标题过多时溢出屏幕。
  * 边界：不采集标题、不算阅读进度，也不处理窄屏（见 ArticleTocMobile）。
  */
 import type { TocHeading } from "~/composables/useArticleToc"
@@ -19,9 +20,9 @@ const emit = defineEmits<{ select: [id: string] }>()
 <template>
     <aside class="absolute bottom-0 right-0 top-[clamp(32px,4.5vw,52px)] w-132px lt-lg:hidden" aria-label="文章目录">
         <div class="sticky top-[calc(var(--header-h)+30px)] flex flex-col items-start gap-24px">
-            <nav class="group grid cursor-pointer" aria-label="本文目录">
+            <nav class="group grid max-h-[calc(100vh_-_var(--header-h)_-_128px)] cursor-pointer" aria-label="本文目录">
                 <div
-                    class="col-start-1 row-start-1 flex flex-col gap-5px py-6px transition-opacity group-hover:op-0 group-focus-within:op-0"
+                    class="col-start-1 row-start-1 max-h-[inherit] pointer-events-none flex flex-col gap-5px overflow-hidden py-6px transition-opacity group-hover:op-0 group-focus-within:op-0"
                     aria-hidden="true"
                 >
                     <i
@@ -36,7 +37,7 @@ const emit = defineEmits<{ select: [id: string] }>()
                     />
                 </div>
                 <div
-                    class="col-start-1 row-start-1 flex flex-col justify-self-start op-0 transition-opacity group-hover:op-100 group-focus-within:op-100"
+                    class="col-start-1 row-start-1 max-h-[inherit] flex flex-col justify-self-start overflow-y-auto op-0 transition-opacity group-hover:op-100 group-focus-within:op-100"
                 >
                     <button
                         v-for="heading in headings"
