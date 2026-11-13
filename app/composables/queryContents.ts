@@ -7,7 +7,6 @@
  * 边界：不做路由匹配、不渲染页面、不写产物。
  */
 
-import process from "node:process"
 import { addPermalink, toNavItems } from "~/utils/path"
 import type { ContentDocument, Experience, Explore, Knowledge, NavigationItem, Post } from "~/types/content"
 
@@ -34,8 +33,13 @@ function baseURL() {
  */
 async function loadJson<T>(file: string): Promise<T> {
     if (import.meta.server) {
-        const { readFileSync } = await import(/* @vite-ignore */ "node:fs")
-        return JSON.parse(readFileSync(`${process.cwd()}/public/_content/${file}`, "utf8")) as T
+        // 只在服务端分支里动态引入 node 内置模块：静态 import 会让客户端构建
+        // 外部化 node:process 并告警（客户端永远走 $fetch 分支）。
+        const [{ readFileSync }, { cwd }] = await Promise.all([
+            import(/* @vite-ignore */ "node:fs"),
+            import(/* @vite-ignore */ "node:process"),
+        ])
+        return JSON.parse(readFileSync(`${cwd()}/public/_content/${file}`, "utf8")) as T
     }
     return (await $fetch<T>(`${baseURL()}/_content/${file}`)) as T
 }

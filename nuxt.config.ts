@@ -47,7 +47,9 @@ export default defineNuxtConfig({
         ],
     },
 
-    // 顺序即优先级：自写的元素重置在最前，UnoCSS 工具类随后，站点全局样式最后
+    // 顺序即优先级：自写的元素重置在最前，UnoCSS 工具类随后，站点全局样式最后。
+    // uno.css 只在这里引入一次：再开 @unocss/nuxt 的 autoImport 就等于引入两次，
+    // UnoCSS 只取第一处，层叠顺序不再由本数组决定。
     css: ["~/styles/reset.css", "uno.css", "~/styles/index.css"],
     devtools: { enabled: false },
 
@@ -59,13 +61,14 @@ export default defineNuxtConfig({
             },
         },
         noVueServer: true,
-        payloadExtraction: false,
+        payloadExtraction: "client",
         renderJsonPayloads: false,
     },
 
     features: {
-        // For UnoCSS
-        inlineStyles: true,
+        // 样式走 /_nuxt/entry.*.css 外链：内联样式会让 Nuxt 把未接入的 uno.css
+        // 当作可内联目标去探测，UnoCSS 因此误报「重复引入」，且每页都重发一遍 CSS。
+        inlineStyles: false,
     },
 
     fonts: {
@@ -228,8 +231,19 @@ export default defineNuxtConfig({
     site,
 
     unocss: {
-        disableNuxtInlineStyle: false,
+        // uno.css 的位置由上面的 css 数组决定，autoImport 再注入一份就是重复引入
+        autoImport: false,
+        // 与 features.inlineStyles 保持一致，否则模块会反向把它改回 true
+        disableNuxtInlineStyle: true,
     },
 
     compatibilityDate: "2025-02-05",
+
+    vite: {
+        build: {
+            // mermaid 图表库只在含图表的文章里按需加载，单个 chunk 本身就超过 500 kB，
+            // 阈值按实测的 1.5 MB 放宽到 1.6 MB；应用自身代码远低于此值。
+            chunkSizeWarningLimit: 1600,
+        },
+    },
 })
