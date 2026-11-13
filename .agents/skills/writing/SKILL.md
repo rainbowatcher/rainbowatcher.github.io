@@ -32,8 +32,8 @@ description: >-
 
 冲突时按序号取舍：
 
-1. 一篇一个问题。标题就是问题或结论，不写「浅谈」「详解」「入门」。
-2. 前 5 行给结论：一句话回答 + ≤3 条要点；读完这段可以不读正文。
+1. 一篇只覆盖一个主题。标题提取「技术对象 + 任务、机制或场景」，保留工具名与关键术语；不复述用户问句，不用「是什么」「怎么用」「如何」「为什么」「浅谈」「详解」「入门」。例：「atop 是什么，怎么用」应写成「atop 系统监控与历史回放」。
+2. 去掉 frontmatter 后，正文前 5 行给结论：一句话回答 + ≤3 条要点；读完这段可以不读正文。research 先给当前方向，后面的「当前判断」只展开依据与缺口。
 3. 能引用就不复述：一条命令、一个版本号、一个结论只存在一处，其余位置给链接。
 4. 段落 = 断言 + 依据；没有依据就写 `未验证`。
 5. 表格优于长段，命令优于描述；命令要能直接粘贴，不写 `...`。
@@ -50,9 +50,9 @@ description: >-
 | knowledge  | `title` `date` `tags` `section`   | `subtitle` `updated` |
 
 - `date`：当前阶段的成稿日，`YYYY-MM-DD`，不加引号。
-- `tags`：行内数组，复用已有标签，不自造同义词。
+- `tags`：行内数组，复用已有标签，不塞整条问题或摘要关键词。
 - `section`：只能是 `基础` / `语言` / `系统` / `工具`（`app/utils/knowledge.ts`）。
-- `summary`：一句话结论 + 边界，列表页直接展示，不写「本文介绍」。
+- 摘要字段决定 agent 要不要打开正文，只有一处：research / experience 用 `summary`，knowledge 用 `subtitle`；写技术对象、结论或验证状态与适用前提，不复述标题，不写「本文介绍」。
 - `posts/`、`explore/`、`hide/` 的必填字段见 `scripts/check-content.mjs`，本表不管。
 
 ## 小节
@@ -62,6 +62,7 @@ description: >-
 - research：`## 问题` `## 候选` `## 当前判断` `## 下一步` `## 参考`
 - experience：`## 结论` `## 环境` `## 做法` `## 边界与失败` `## 证据`
 - knowledge：`## 要点` `## 用法` `## 边界` `## 参考`
+- H2 只做切片键，不承担检索关键词；具体主题与术语放 `title`、H3、表格行与正文。
 
 ## 引用
 
@@ -72,8 +73,8 @@ description: >-
 
 ## 读写顺序
 
-- 读：`title` + `summary` → 结论/要点 → 边界 → 引用。四步够用就不读全文。
-- 写：查重 `rg -l "<关键词>" content/{research,experience,knowledge}` → 选阶段 → 套 `templates/<阶段>.md` → `pnpm content:check`。
+- 读：`title` + 摘要（research / experience 看 `summary`，knowledge 看 `subtitle`）→ 当前判断 / 结论 / 要点 → 边界或待验证项 → 引用。四步够用就不读全文。
+- 写：查重 `rg -l "<关键词>" content/{research,experience,knowledge}` → 选阶段 → 套 `templates/<阶段>.md` → 替换全部占位符（不留假日期、假链接、空表格）→ `pnpm content:check`。
 - 命中已有文章就改那一篇，不新建。
 
 ## 边界
