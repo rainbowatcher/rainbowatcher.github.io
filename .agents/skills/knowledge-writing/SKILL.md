@@ -23,6 +23,8 @@ description: >-
 | `content/knowledge/`   | 知识        | 可复用结论、用法、边界               | 终态                           |
 
 - 晋升：`git mv content/<旧>/<slug>.md content/<新>/<slug>.md`，删掉过程段落，`date` 改成晋升日。
+- 默认落库：写作一律落 `content/`，按上表选目录；不写仓库根、`docs/` 等别处，也不反问放哪。阶段不明先落 `research/`，验证或收敛后再 `git mv` 晋升。
+- 不在阶段表里的集合按性质直接落：第一人称过程 → `posts/`，本机环境探索 → `explore/`，永不发布 → `hide/`。
 - 证据不搬家：知识引用经验、经验引用研究，不复制它们的段落。
 - 结论失效：文首写「已失效（YYYY-MM-DD）」并链到替代文章，不删文——agent 需要知道这条路是错的。
 
