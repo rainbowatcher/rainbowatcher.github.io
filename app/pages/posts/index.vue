@@ -115,7 +115,7 @@ useHead({ title: `博客 · ${posts.value.length} 篇 — Rainbow Watcher` })
             </NuxtLink>
         </div>
 
-        <div v-if="pageItems.length" class="mx-auto max-w-760px border-t border-line" aria-live="polite">
+        <div v-if="pageItems.length" class="border-t border-line" aria-live="polite">
             <PostCard v-for="post in pageItems" :key="post.path" :post="post" />
         </div>
         <div v-else class="border-b border-line py-70px text-center">

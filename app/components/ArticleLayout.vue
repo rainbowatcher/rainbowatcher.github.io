@@ -49,7 +49,7 @@ function onSelect(id: string) {
             :title="doc.title ?? ''"
         />
 
-        <div class="relative pt-[clamp(32px,4.5vw,52px)]">
+        <div class="relative pt-[clamp(16px,2.5vw,28px)]">
             <article class="min-w-0 lg:max-w-[calc(100%-152px)]">
                 <ArticleTocMobile :active-id="activeId" :headings="headings" @select="onSelect" />
                 <div id="articleBody" class="prose">

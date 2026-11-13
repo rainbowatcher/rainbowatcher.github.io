@@ -3,7 +3,8 @@
  * 的运行时查询；每篇文档一个内容哈希命名的 JSON，外加 manifest.json 索引。
  * 状态与生命周期：rebuildChain 串行化重建（dev watcher 会突发事件），每次清空后全量重写。
  * 取舍与不变量：manifest.documents 以路由 path 为键，posts / knowledge / explore / experience 的列表项
- * 剔除 body；哈希文件名保证旧 JSON 不跨部署残留；content/hide/ 与 COLLECTIONS 之外不发布。
+ * 剔除 body（posts 额外附 500 字纯文本 excerpt）；哈希文件名保证旧 JSON 不跨部署残留；
+ * content/hide/ 与 COLLECTIONS 之外不发布。
  * 边界：只产出数据资产到 public/_content/（供 queryContents.ts 读取），不渲染页面、
  * 不定义路由，也不处理 .md 以外的文件。
  */
@@ -33,6 +34,22 @@ function yamlDate(value: any): any {
         return value.toISOString()
     }
     return value
+}
+
+/** 生成 500 字以内的纯文本摘要：剥 frontmatter/代码块/图片后，去掉行内语法并折叠空白。 */
+function toExcerpt(markdown: string, max = 500): string {
+    const text = markdown
+        .replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, "") // frontmatter
+        .replace(/```[\s\S]*?```/g, " ") // 代码块
+        .replace(/`([^`]*)`/g, "$1") // 行内代码留内容
+        .replace(/!\[[^\]]*\]\([^)]*\)/g, " ") // 图片
+        .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // 链接留文字
+        .replace(/^[ \t]{0,3}#{1,6}[ \t]+/gm, "") // 标题标记
+        .replace(/^[ \t]{0,3}>[ \t]?/gm, "") // 引用标记
+        .replace(/[*_~]+/g, "") // 强调语法
+        .replace(/\s+/g, " ")
+        .trim()
+    return text.length > max ? `${text.slice(0, max)}…` : text
 }
 
 export default defineNuxtModule({
@@ -159,9 +176,9 @@ export default defineNuxtModule({
                         }
 
                         if (file.startsWith("posts/")) {
-                            // 仅元数据——列表页不得下载正文。
+                            // 仅元数据——列表页不得下载正文；附构建期生成的纯文本摘要供卡片预览。
                             const { body: _body, ...metaOnly } = data
-                            posts.push(metaOnly)
+                            posts.push({ ...metaOnly, excerpt: toExcerpt(markdown) })
                         }
                     }
 

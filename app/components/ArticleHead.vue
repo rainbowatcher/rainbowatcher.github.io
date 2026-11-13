@@ -20,7 +20,7 @@ defineProps<{
 </script>
 
 <template>
-    <header class="border-b border-line pb-30px pt-[clamp(36px,5vw,58px)]">
+    <header class="border-b border-line pb-34px pt-[clamp(36px,5vw,58px)]">
         <NuxtLink
             class="inline-flex items-center gap-6px c-muted font-mono text-[10.5px] tracking-[0.02em] hover:c-accent"
             :to="backTo"

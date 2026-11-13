@@ -53,6 +53,17 @@
     content: "";
 }
 
+/* 正文以 h2 开头时（页面标题职责在 ArticleHead），首节顶格呈现，不画分节线。 */
+.prose h2:first-child {
+    margin-top: 0.4em;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.prose h2:first-child::before {
+    content: none;
+}
+
 .prose h3 {
     margin-top: 1.8em;
     font-size: 1.18em;

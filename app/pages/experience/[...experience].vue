@@ -2,7 +2,7 @@
 /**
  * 做什么：/experience/<slug> 经验详情页：取文档与相邻条目，交给 ArticleLayout 渲染，并写页面级 SEO。
  * 状态与生命周期：路由切换时按 route.path 重新取文档；相邻关系取自 manifest.experience 的顺序。
- * 取舍与不变量：经验固定带「命令与结论随环境变化」提示条；description 优先取 frontmatter，
+ * 取舍与不变量：description 优先取 frontmatter，
  * 缺失时退回 summary，保证 meta description 非空。
  * 边界：不渲染正文排版与目录（见 ArticleLayout），也不负责列表页。
  */
@@ -56,7 +56,6 @@ const previousExperience = computed(() => neighbor(-1))
     <ArticleLayout
         :doc="doc!"
         :back="{ label: '经验', to: '/experience' }"
-        :banner="{ lead: '经验总结。', text: '命令与结论会随版本、网络与部署方式变化，执行前请先核对目标环境。' }"
         fallback-label="全部经验"
         fallback-to="/experience"
         :kicker="'经验'"

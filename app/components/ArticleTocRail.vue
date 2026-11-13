@@ -18,7 +18,7 @@ const emit = defineEmits<{ select: [id: string] }>()
 </script>
 
 <template>
-    <aside class="absolute bottom-0 right-0 top-[clamp(32px,4.5vw,52px)] w-132px lt-lg:hidden" aria-label="文章目录">
+    <aside class="absolute bottom-0 right-0 top-[clamp(16px,2.5vw,28px)] w-132px lt-lg:hidden" aria-label="文章目录">
         <div class="sticky top-[calc(var(--header-h)+30px)] flex flex-col items-start gap-24px">
             <nav class="group grid max-h-[calc(100vh_-_var(--header-h)_-_128px)] cursor-pointer" aria-label="本文目录">
                 <div
