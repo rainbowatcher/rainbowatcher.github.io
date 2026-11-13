@@ -2,7 +2,7 @@
  * 做什么：把 content/ 下的 markdown 在构建期编译成静态 JSON 数据集，取代 @nuxt/content
  * 的运行时查询；每篇文档一个内容哈希命名的 JSON，外加 manifest.json 索引。
  * 状态与生命周期：rebuildChain 串行化重建（dev watcher 会突发事件），每次清空后全量重写。
- * 取舍与不变量：manifest.documents 以路由 path 为键，posts / knowledge / explore / experience 的列表项
+ * 取舍与不变量：manifest.documents 以路由 path 为键，posts / knowledge / explore / experience / research 的列表项
  * 剔除 body（posts 额外附 500 字纯文本 excerpt）；哈希文件名保证旧 JSON 不跨部署残留；
  * content/hide/ 与 COLLECTIONS 之外不发布。
  * 边界：只产出数据资产到 public/_content/（供 queryContents.ts 读取），不渲染页面、
@@ -25,6 +25,7 @@ const COLLECTIONS: Record<string, { patterns: string[]; root: string }> = {
     home: { patterns: ["home.md"], root: "home" },
     knowledge: { patterns: ["knowledge/**/*.md"], root: "knowledge" },
     posts: { patterns: ["posts/**/*.md"], root: "posts" },
+    research: { patterns: ["research/**/*.md"], root: "research" },
     projects: { patterns: ["projects.md"], root: "projects" },
     uses: { patterns: ["uses.md"], root: "uses" },
 }
@@ -100,6 +101,7 @@ export default defineNuxtModule({
                     const explore: Array<Record<string, any>> = []
                     const knowledge: Array<Record<string, any>> = []
                     const posts: Array<Record<string, any>> = []
+                    const research: Array<Record<string, any>> = []
                     const errors: string[] = []
 
                     for (const file of files.sort()) {
@@ -180,6 +182,12 @@ export default defineNuxtModule({
                             const { body: _body, ...metaOnly } = data
                             posts.push({ ...metaOnly, excerpt: toExcerpt(markdown) })
                         }
+
+                        if (file.startsWith("research/")) {
+                            // 仅元数据——草稿列表只展示判断与下一步。
+                            const { body: _body, ...metaOnly } = data
+                            research.push(metaOnly)
+                        }
                     }
 
                     if (errors.length > 0) {
@@ -190,6 +198,7 @@ export default defineNuxtModule({
                     explore.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
                     knowledge.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
                     posts.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
+                    research.sort((a, b) => new Date(b.date ?? 0).valueOf() - new Date(a.date ?? 0).valueOf())
 
                     const manifest = {
                         documents,
@@ -197,12 +206,13 @@ export default defineNuxtModule({
                         explore,
                         knowledge,
                         posts,
+                        research,
                     }
                     writeFileSync(join(outDir, "manifest.json"), JSON.stringify(manifest))
 
                     const parsedCount = Object.keys(documents).length
                     console.log(
-                        `[static-content] wrote ${parsedCount} paths + manifest (${experience.length} experience, ${explore.length} explore, ${knowledge.length} knowledge, ${posts.length} posts) to ${relative(rootDir, outDir)}`,
+                        `[static-content] wrote ${parsedCount} paths + manifest (${experience.length} experience, ${explore.length} explore, ${knowledge.length} knowledge, ${posts.length} posts, ${research.length} research) to ${relative(rootDir, outDir)}`,
                     )
                 })
             return rebuildChain

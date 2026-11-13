@@ -1,15 +1,15 @@
 <script setup lang="ts">
 /**
- * 做什么：/tags/<tag> 页：列出该标签下的博客、知识、探索与经验，并给出全部标签的切换入口。
- * 状态与生命周期：标签计数与四个集合来自 useTagStats；当前标签取自路由参数，随路由切换重算。
- * 取舍与不变量：四类内容共用同一套标签页，避免内容页的标签链接成为死路；
- * 分组顺序固定为博客 → 知识 → 探索 → 经验，各组内按日期倒序。
+ * 做什么：/tags/<tag> 页：列出该标签下的博客、知识、探索、经验与研究，并给出全部标签的切换入口。
+ * 状态与生命周期：标签计数与五个集合来自 useTagStats；当前标签取自路由参数，随路由切换重算。
+ * 取舍与不变量：五类内容共用同一套标签页，避免内容页的标签链接成为死路；
+ * 分组顺序固定为博客 → 知识 → 探索 → 经验 → 研究，各组内按日期倒序。
  * 边界：不区分大小写之外的标签归一化，也不做分页。
  */
 import { getRouteParamAsString } from "~/utils/route"
 
 const route = useRoute("tags-tag")
-const { experience, explore, hasTag, knowledge, posts, tags } = useTagStats()
+const { experience, explore, hasTag, knowledge, posts, research, tags } = useTagStats()
 const currentTag = computed(() => getRouteParamAsString(route, "tag")?.toLocaleLowerCase() ?? "")
 
 function byDate<T extends { date?: string }>(list: T[]) {
@@ -20,12 +20,14 @@ const matchedPosts = computed(() => byDate(posts.value.filter(hasTag(currentTag.
 const matchedKnowledge = computed(() => byDate(knowledge.value.filter(hasTag(currentTag.value))))
 const matchedExplore = computed(() => byDate(explore.value.filter(hasTag(currentTag.value))))
 const matchedExperience = computed(() => byDate(experience.value.filter(hasTag(currentTag.value))))
+const matchedResearch = computed(() => byDate(research.value.filter(hasTag(currentTag.value))))
 const total = computed(
     () =>
         matchedPosts.value.length +
         matchedKnowledge.value.length +
         matchedExplore.value.length +
-        matchedExperience.value.length,
+        matchedExperience.value.length +
+        matchedResearch.value.length,
 )
 
 useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher` })
@@ -37,7 +39,7 @@ useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher
             eyebrow="Tag / Cross collections"
             :title="`#${currentTag}`"
             :meta="`${total} ENTRIES`"
-            desc="同一标签下的全部内容：博客、知识、探索与经验放在一起看。"
+            desc="同一标签下的全部内容：博客、知识、探索、经验与研究放在一起看。"
         >
             <div class="mt-20px flex flex-wrap gap-7px">
                 <TagList :tags="tags" :active="currentTag" class="h-28px px-11px text-11.5px" />
@@ -106,6 +108,23 @@ useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher
                 :key="item.path"
                 :date="item.date"
                 :excerpt="item.summary ?? item.description"
+                :tags="item.tags"
+                :title="item.title"
+                :to="item.path"
+            />
+        </section>
+
+        <section v-if="matchedResearch.length" class="mt-30px">
+            <div class="flex items-baseline gap-12px border-t border-line pt-18px">
+                <span class="c-accent font-mono text-10px tracking-[0.08em]">05</span>
+                <h2 class="section-title">研究</h2>
+                <span class="c-faint font-mono text-9.5px">{{ matchedResearch.length }} 篇</span>
+            </div>
+            <PostRow
+                v-for="item in matchedResearch"
+                :key="item.path"
+                :date="item.date"
+                :excerpt="item.summary ?? item.description ?? item.subtitle"
                 :tags="item.tags"
                 :title="item.title"
                 :to="item.path"

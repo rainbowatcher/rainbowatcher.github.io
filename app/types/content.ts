@@ -1,5 +1,5 @@
 /**
- * 做什么：内容管线共享类型：MDC 文档、博客列表项、知识条目、探索记录、经验条目与导航项。
+ * 做什么：内容管线共享类型：MDC 文档、博客列表项、知识条目、探索记录、经验条目、研究草稿与导航项。
  * 状态与生命周期：纯类型声明，无运行时副作用。
  * 取舍与不变量：ContentDocument 保留 frontmatter 的宽松形状，列表类型只收窄不裁剪。
  * 边界：不描述 public/_content/manifest.json 的结构，也不做运行时校验。
@@ -43,6 +43,9 @@ export type Explore = ContentDocument & { title: string }
 
 /** 经验条目：path 即路由（/experience/<slug>），列表页需要 summary 做摘要。 */
 export type Experience = ContentDocument & { summary?: string; title: string }
+
+/** 研究草稿：path 即路由（/research/<slug>），结论未定型，列表页同样展示 summary。 */
+export type Research = ContentDocument & { summary?: string; title: string }
 
 /** 「在用」条目：desc/side 是展示文案，href 缺失表示没有可点的链接。 */
 export type UsesItem = {

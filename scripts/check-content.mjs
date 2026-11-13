@@ -16,13 +16,14 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const contentDir = path.join(root, "content")
 
 /** 会发布并因此参与校验的集合；hide/ 是草稿，故意不在名单里。 */
-const PUBLISHED = ["posts", "knowledge", "explore", "experience"]
+const PUBLISHED = ["posts", "knowledge", "explore", "experience", "research"]
 
 const REQUIRED = {
     experience: ["title", "tags", "date"],
     explore: ["title", "tags", "date"],
     knowledge: ["title", "section", "tags", "date"],
     posts: ["title", "tags", "date"],
+    research: ["title", "tags", "date"],
 }
 
 const problems = []
