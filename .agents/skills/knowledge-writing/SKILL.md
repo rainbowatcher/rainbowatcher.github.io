@@ -1,12 +1,18 @@
 ---
 name: knowledge-writing
 description: >-
-    本仓库知识库文章规范：先给 agent 读（短、可切片、引用优先），其次给人读。生命周期是
-    content/research（草稿）→ content/experience（实践过）→ content/knowledge（沉淀），阶段由目录表达。
-    新建或改写这三类 markdown、判断一篇文章该放哪个集合、把草稿晋升为经验或知识时使用。
+    本仓库文章写作规范，写 content/ 下任何 markdown 之前必须先读：新建、改写、晋升阶段、加站内引用、
+    改 frontmatter 都适用。约定生命周期 content/research（草稿）→ content/experience（实践过）→
+    content/knowledge（沉淀）、每阶段固定小节、相对 .md 引用与行数预算；文章先给 agent 读，其次给人读。
 ---
 
 # 知识库写作
+
+## 何时必须使用
+
+- 写入 `content/` 下任何 markdown 之前：新建、改正文、改 frontmatter、加站内引用、`git mv` 晋升。
+- 判断一篇该进 `research/`、`experience/` 还是 `knowledge/`。
+- 只读代码、不改 `content/` 时不必读。
 
 ## 阶段
 
@@ -45,6 +51,7 @@ description: >-
 - `tags`：行内数组，复用已有标签，不自造同义词。
 - `section`：只能是 `基础` / `语言` / `系统` / `工具`（`app/utils/knowledge.ts`）。
 - `summary`：一句话结论 + 边界，列表页直接展示，不写「本文介绍」。
+- `posts/`、`explore/`、`hide/` 的必填字段见 `scripts/check-content.mjs`，本表不管。
 
 ## 小节
 
@@ -69,6 +76,6 @@ description: >-
 
 ## 边界
 
-- 不负责 `content/posts/`（第一人称过程）与 `content/explore/`（本机环境依赖）。
+- 阶段表只管 `research/` / `experience/` / `knowledge/`；`posts/` / `explore/` / `hide/` 不适用阶段，但仍受「写作」「引用」两节约束。
 - 不管页面、样式与渲染；正文只用 GFM 与已注册的 MDC 组件。
 - 旧文不批量改写；下次改到哪篇，再把它对齐到最近的一组小节。

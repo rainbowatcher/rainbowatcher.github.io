@@ -71,6 +71,10 @@
 - 新增模块目录必须包含 `index.ts` 或 `README.md`，写明该模块的职责与边界。
 - 目录复杂到需要图（架构、流程、数据流）才能讲清时，必须提供 `README.md`（推荐 Mermaid）。
 
+### 1.8 文章写入
+
+- 写 `content/` 下任何 markdown 之前，必须先读 `.agents/skills/knowledge-writing/SKILL.md`；阶段、小节、frontmatter 与引用规则以它为准，本文件不重复。
+
 ## 2. 仓库结构与内容数据流
 
 ```
@@ -133,5 +137,5 @@ pnpm content:check # 校验 frontmatter 必填项、date 格式、tags 与相对
 - [ ] 没有文件超过 500 行？
 - [ ] 新增模块目录有 `index.ts` 或 `README.md` 说明职责？
 - [ ] 未手改生成物（`public/_content/`、`.nuxt/`、`.output/`、`dist/`）？
-- [ ] 新增/修改的 `content/` 文章符合 `.agents/skills/knowledge-writing/SKILL.md`（阶段、小节、引用）？
+- [ ] 写 `content/` 前已读 `.agents/skills/knowledge-writing/SKILL.md`，文章符合其阶段、小节与引用规则？
 - [ ] `pnpm fmt:check`、`pnpm lint` 通过，`pnpm typecheck` 无新增错误；构建相关改动已跑 `pnpm generate`？
