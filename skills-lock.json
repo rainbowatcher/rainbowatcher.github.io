@@ -6,6 +6,12 @@
             "sourceType": "github",
             "skillPath": "skills/taste-skill/SKILL.md",
             "computedHash": "2bc09f93103f5b2cef17820e0f24c742d39a02806b3e23a133452778ed7ec29c"
+        },
+        "improve-codebase-architecture": {
+            "source": "mattpocock/skills",
+            "sourceType": "github",
+            "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md",
+            "computedHash": "f0820b18426a7d9a6c823a890988ba0ac70bf0fd596d30d7ef07c88558728c23"
         }
     }
 }
