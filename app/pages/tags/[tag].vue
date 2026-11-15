@@ -46,8 +46,11 @@ useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher
             </div>
         </PageHead>
 
-        <section v-if="matchedPosts.length" class="mt-30px">
-            <div class="flex items-baseline gap-12px border-t border-line pt-18px">
+        <section
+            v-if="matchedPosts.length"
+            class="mt-30px border-t border-line first-of-type:border-t-0 [&>div:last-child]:border-b-0"
+        >
+            <div class="flex items-baseline gap-12px pt-18px">
                 <span class="c-accent font-mono text-10px tracking-[0.08em]">01</span>
                 <h2 class="section-title">博客</h2>
                 <span class="c-faint font-mono text-9.5px">{{ matchedPosts.length }} 篇</span>
@@ -63,8 +66,11 @@ useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher
             />
         </section>
 
-        <section v-if="matchedKnowledge.length" class="mt-30px">
-            <div class="flex items-baseline gap-12px border-t border-line pt-18px">
+        <section
+            v-if="matchedKnowledge.length"
+            class="mt-30px border-t border-line first-of-type:border-t-0 [&>div:last-child]:border-b-0"
+        >
+            <div class="flex items-baseline gap-12px pt-18px">
                 <span class="c-accent font-mono text-10px tracking-[0.08em]">02</span>
                 <h2 class="section-title">知识</h2>
                 <span class="c-faint font-mono text-9.5px">{{ matchedKnowledge.length }} 条</span>
@@ -80,8 +86,11 @@ useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher
             />
         </section>
 
-        <section v-if="matchedExplore.length" class="mt-30px">
-            <div class="flex items-baseline gap-12px border-t border-line pt-18px">
+        <section
+            v-if="matchedExplore.length"
+            class="mt-30px border-t border-line first-of-type:border-t-0 [&>div:last-child]:border-b-0"
+        >
+            <div class="flex items-baseline gap-12px pt-18px">
                 <span class="c-accent font-mono text-10px tracking-[0.08em]">03</span>
                 <h2 class="section-title">探索</h2>
                 <span class="c-faint font-mono text-9.5px">{{ matchedExplore.length }} 篇</span>
@@ -97,8 +106,11 @@ useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher
             />
         </section>
 
-        <section v-if="matchedExperience.length" class="mt-30px">
-            <div class="flex items-baseline gap-12px border-t border-line pt-18px">
+        <section
+            v-if="matchedExperience.length"
+            class="mt-30px border-t border-line first-of-type:border-t-0 [&>div:last-child]:border-b-0"
+        >
+            <div class="flex items-baseline gap-12px pt-18px">
                 <span class="c-accent font-mono text-10px tracking-[0.08em]">04</span>
                 <h2 class="section-title">经验</h2>
                 <span class="c-faint font-mono text-9.5px">{{ matchedExperience.length }} 篇</span>
@@ -114,8 +126,11 @@ useHead({ title: `#${currentTag.value} · ${total.value} 条 — Rainbow Watcher
             />
         </section>
 
-        <section v-if="matchedResearch.length" class="mt-30px">
-            <div class="flex items-baseline gap-12px border-t border-line pt-18px">
+        <section
+            v-if="matchedResearch.length"
+            class="mt-30px border-t border-line first-of-type:border-t-0 [&>div:last-child]:border-b-0"
+        >
+            <div class="flex items-baseline gap-12px pt-18px">
                 <span class="c-accent font-mono text-10px tracking-[0.08em]">05</span>
                 <h2 class="section-title">研究</h2>
                 <span class="c-faint font-mono text-9.5px">{{ matchedResearch.length }} 篇</span>

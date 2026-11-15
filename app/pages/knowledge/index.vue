@@ -25,8 +25,12 @@ useHead({ title: `知识 · ${total.value} 条 — Rainbow Watcher` })
         />
 
         <div v-if="groups.length" class="pt-8px">
-            <section v-for="(group, index) in groups" :key="group.section" class="mt-30px">
-                <div class="flex items-baseline gap-12px border-t border-line pt-18px">
+            <section
+                v-for="(group, index) in groups"
+                :key="group.section"
+                class="mt-30px border-t border-line first-of-type:border-t-0"
+            >
+                <div class="flex items-baseline gap-12px pt-18px">
                     <span class="c-accent font-mono text-10px tracking-[0.08em]">{{
                         String(index + 1).padStart(2, "0")
                     }}</span>
@@ -41,7 +45,7 @@ useHead({ title: `知识 · ${total.value} 条 — Rainbow Watcher` })
                         <i class="i-ph-arrow-up-right text-14px" />
                     </NuxtLink>
                 </div>
-                <div class="mt-8px">
+                <div class="mt-8px [&>div:last-child]:border-b-0">
                     <PostRow
                         v-for="item in group.items"
                         :key="item.path"
