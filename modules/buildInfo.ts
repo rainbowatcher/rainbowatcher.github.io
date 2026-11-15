@@ -1,33 +1,35 @@
 /**
- * 做什么：构建信息模块，在 build:before 阶段把构建时间写入 app/assets/build-info.json，
- * 供 SiteFooter 展示站点最后构建时间。
- * 状态与生命周期：无内部状态，每次构建触发一次写入。
- * 取舍与不变量：不依赖构建机器时区，统一换算成 UTC+8，输出固定带 GMT+8 后缀；
- * JSON 用 4 空格缩进并保留结尾换行，保证该文件在 git 中的 diff 稳定。
- * 边界：只写这一个 JSON 文件，不参与页面渲染，也不计算版本号。
+ * 做什么：构建信息模块，把构建时刻做成 #build/build-info 虚拟模块，供 SiteFooter 展示部署时间。
+ * 状态与生命周期：模块装配时取一次时间，写进生成目录 .nuxt/，dev 下即该次启动的时刻。
+ * 取舍与不变量：构建时间只存在于生成目录，不进 git；用 Intl 固定 Asia/Shanghai，
+ * 输出形如 `YYYY-MM-DD HH:mm:ss GMT+8`，与构建机本地时区无关。
+ * 边界：只产出一个时刻常量，不计算版本号、不参与页面渲染逻辑。
  */
 
-import fs from "node:fs"
-import path from "node:path"
-import process from "node:process"
-import { defineNuxtModule } from "@nuxt/kit"
-import { useDateFormat } from "@vueuse/core"
+import { addTemplate, defineNuxtModule } from "@nuxt/kit"
 
-export default defineNuxtModule((_, nuxt) => {
-    nuxt.hook("build:before", () => {
-        const time = new Date()
-        let formatted = useDateFormat(time, "YYYY-MM-DD HH:mm:ss")
-        if (time.getTimezoneOffset() / 60 !== -8) {
-            const shanghaiOffset = 8 * 60
-            const utcOffset = time.getTimezoneOffset()
-            const shanghaiTime = time.getTime() + (shanghaiOffset - utcOffset) * 60 * 1000
-            formatted = useDateFormat(shanghaiTime, "YYYY-MM-DD HH:mm:ss")
-        }
+const TIME_FORMAT = new Intl.DateTimeFormat("sv-SE", {
+    day: "2-digit",
+    hour: "2-digit",
+    hourCycle: "h23",
+    minute: "2-digit",
+    month: "2-digit",
+    second: "2-digit",
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+})
 
-        const buildInfo = { time: `${formatted.value} GMT+8` }
-        fs.writeFileSync(
-            path.join(process.cwd(), "/app/assets/build-info.json"),
-            `${JSON.stringify(buildInfo, null, 4)}\n`,
-        )
-    })
+export default defineNuxtModule({
+    meta: {
+        name: "build-info",
+    },
+    setup() {
+        const buildTime = `${TIME_FORMAT.format(new Date())} GMT+8`
+
+        addTemplate({
+            filename: "build-info.ts",
+            getContents: () => `export const buildTime = ${JSON.stringify(buildTime)}\n`,
+            write: true,
+        })
+    },
 })
