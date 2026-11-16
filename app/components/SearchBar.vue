@@ -22,8 +22,10 @@ function toPath(url: string) {
 }
 
 /**
- * 请求 stalled 时 DocSearch 把放大镜 <label> 换成加载图标，Preact 按索引复用子节点因此错位，
- * 整个输入框被重建、焦点掉到 body；替换完成后把焦点与光标还给新输入框。
+ * 请求 stalled 时 DocSearch 把放大镜 <label> 换成加载图标，内联的 preact 11.0.0-beta.0 按索引
+ * 复用子节点因此错位，整个输入框被重建、焦点掉到 body；替换完成后把焦点与光标还给新输入框。
+ * TODO：@docsearch/js 升到 5.2.0 以上且上游给这两个图标补 key（或换掉那份内联 preact）后删掉本兜底；
+ * 验证方式是给 Algolia 的 XHR 加延迟触发 stalled，确认输入框不再被替换。
  */
 function refocusInput(input: HTMLInputElement, caret: number) {
     if (input.isConnected) return
