@@ -2,10 +2,11 @@
 /**
  * 做什么：搜索入口：挂载 DocSearch 官方 UI（索引与快捷键由它提供），外观由 docsearch.css 换成站点胶囊样式。
  * 状态与生命周期：客户端挂载时动态 import DocSearch，卸载时 destroy；每个实例独占容器。
- * 取舍与不变量：索引里的绝对 URL 归一成站内路径，点击结果走 Vue Router 的 SPA 导航；
+ * 取舍与不变量：索引里的绝对 URL 归一成站内路径；docsearch 5.2.0 只在键盘选中时调 navigator.navigate，
+ * 鼠标点击走原生 <a href> 整页跳转，静态托管下会吃 301 尾斜杠重定向，所以点击拦截后改走 router.push；
  * 触发器文案通过 translations 传入，避免在 CSS 里拼文案；
  * 请求 stalled 时 DocSearch 换掉放大镜图标会顺带重建输入框，这里补一次焦点归还。
- * 边界：不自建搜索索引，也不接管键盘事件。
+ * 边界：不自建搜索索引，也不接管键盘事件；外链与修饰键点击放行给浏览器默认行为。
  */
 const container = ref<HTMLElement>()
 const router = useRouter()
@@ -18,7 +19,22 @@ let instance: { destroy: () => void } | undefined
 
 function toPath(url: string) {
     const { pathname, hash } = new URL(url, window.location.origin)
-    return `${pathname.replace(/\/$/, "") || "/"}${hash}`
+    return `${pathname.replace(/\/+$/, "") || "/"}${hash}`
+}
+
+/**
+ * 鼠标点击搜索结果时拦截同源 <a>，改成 SPA 导航；外链与修饰键（新标签等）交回浏览器默认行为。
+ * 监听挂在 document 上：结果弹窗由 docsearch 自行挂载，不在触发器容器里。
+ */
+function onDocumentClick(event: MouseEvent) {
+    if (event.defaultPrevented || event.button !== 0) return
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    const anchor = event.target instanceof Element ? event.target.closest("a") : null
+    if (!anchor || !anchor.closest(".DocSearch")) return
+    if (new URL(anchor.href, window.location.origin).origin !== window.location.origin) return
+    const path = toPath(anchor.href)
+    event.preventDefault()
+    if (path !== route.fullPath) router.push(path)
 }
 
 /**
@@ -69,10 +85,12 @@ onMounted(async () => {
     })
 
     document.addEventListener("focusout", onSearchFocusOut)
+    document.addEventListener("click", onDocumentClick)
 })
 
 onUnmounted(() => {
     document.removeEventListener("focusout", onSearchFocusOut)
+    document.removeEventListener("click", onDocumentClick)
     instance?.destroy()
 })
 </script>
