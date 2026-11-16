@@ -3,7 +3,8 @@
  * 做什么：搜索入口：挂载 DocSearch 官方 UI（索引与快捷键由它提供），外观由 docsearch.css 换成站点胶囊样式。
  * 状态与生命周期：客户端挂载时动态 import DocSearch，卸载时 destroy；每个实例独占容器。
  * 取舍与不变量：索引里的绝对 URL 归一成站内路径，点击结果走 Vue Router 的 SPA 导航；
- * 触发器文案通过 translations 传入，避免在 CSS 里拼文案。
+ * 触发器文案通过 translations 传入，避免在 CSS 里拼文案；
+ * 请求 stalled 时 DocSearch 换掉放大镜图标会顺带重建输入框，这里补一次焦点归还。
  * 边界：不自建搜索索引，也不接管键盘事件。
  */
 const container = ref<HTMLElement>()
@@ -18,6 +19,26 @@ let instance: { destroy: () => void } | undefined
 function toPath(url: string) {
     const { pathname, hash } = new URL(url, window.location.origin)
     return `${pathname.replace(/\/$/, "") || "/"}${hash}`
+}
+
+/**
+ * 请求 stalled 时 DocSearch 把放大镜 <label> 换成加载图标，Preact 按索引复用子节点因此错位，
+ * 整个输入框被重建、焦点掉到 body；替换完成后把焦点与光标还给新输入框。
+ */
+function refocusInput(input: HTMLInputElement, caret: number) {
+    if (input.isConnected) return
+    if (!document.querySelector(".DocSearch-Container") || document.activeElement !== document.body) return
+    const next = document.querySelector<HTMLInputElement>(".DocSearch-Input")
+    if (!next) return
+    next.focus({ preventScroll: true })
+    next.setSelectionRange(caret, caret)
+}
+
+function onSearchFocusOut(event: FocusEvent) {
+    const input = event.target
+    if (!(input instanceof HTMLInputElement) || !input.classList.contains("DocSearch-Input")) return
+    const caret = input.selectionEnd ?? input.value.length
+    requestAnimationFrame(() => refocusInput(input, caret))
 }
 
 onMounted(async () => {
@@ -44,9 +65,14 @@ onMounted(async () => {
             },
         },
     })
+
+    document.addEventListener("focusout", onSearchFocusOut)
 })
 
-onUnmounted(() => instance?.destroy())
+onUnmounted(() => {
+    document.removeEventListener("focusout", onSearchFocusOut)
+    instance?.destroy()
+})
 </script>
 
 <template>
