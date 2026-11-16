@@ -27,6 +27,11 @@ export function toOriginPath(permalink: string) {
     }
 }
 
+/** 静态托管会把无尾斜杠 URL 301 到 <path>/index.html，匹配文档前先用它归一掉尾部斜杠。 */
+export function normalizePath(path: string) {
+    return path.length > 1 ? path.replace(/\/+$/, "") : path
+}
+
 export function toNavItems(content: Post[]): NavigationItem[] {
     const items = addPermalink(content)
     return items.map((i) => ({

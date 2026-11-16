@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 做什么：/knowledge/<slug> 知识条目详情页：取文档与相邻条目，交给 ArticleLayout 渲染。
- * 状态与生命周期：路由切换时按 route.path 重新取文档；相邻顺序来自 flattenKnowledge（与索引页一致）。
+ * 状态与生命周期：路由切换时按归一化路径重新取文档；相邻顺序来自 flattenKnowledge（与索引页一致）。
  * 取舍与不变量：条目的 section 作为 kicker 标在日期前，链接只用 path，改 date 不会断链；
  * 首尾条目环绕到另一端，保证每条都有上一篇与下一篇。
  * 边界：不渲染正文排版与目录（见 ArticleLayout），也不负责索引页。
@@ -9,19 +9,21 @@
 import "katex/dist/katex.min.css"
 import type { Knowledge } from "~/types/content"
 import { flattenKnowledge } from "~/utils/knowledge"
+import { normalizePath } from "~/utils/path"
 
 const route = useRoute()
 const { data: knowledge } = await useAsyncData("knowledge-nav", useKnowledge())
 const ordered = computed(() => flattenKnowledge(knowledge.value ?? []))
-const path = computed(() => ordered.value.find((item) => item.path === route.path)?.path)
+const routePath = computed(() => normalizePath(route.path))
+const path = computed(() => ordered.value.find((item) => item.path === routePath.value)?.path)
 if (!path.value) throw createError({ fatal: true, statusCode: 404 })
 const { data: doc } = await useAsyncData(
-    `knowledge:${route.path}`,
+    `knowledge:${routePath.value}`,
     async () => {
         if (!path.value) return null
         return await useDocument(path.value)()
     },
-    { watch: [() => route.path] },
+    { watch: [routePath] },
 )
 if (!doc.value) throw createError({ fatal: true, statusCode: 404 })
 

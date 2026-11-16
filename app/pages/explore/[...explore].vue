@@ -1,25 +1,27 @@
 <script setup lang="ts">
 /**
  * 做什么：/explore/<slug> 探索记录详情页：取文档与相邻记录，交给 ArticleLayout 渲染。
- * 状态与生命周期：路由切换时按 route.path 重新取文档；相邻关系取自 manifest.explore 的顺序。
+ * 状态与生命周期：路由切换时按归一化路径重新取文档；相邻关系取自 manifest.explore 的顺序。
  * 取舍与不变量：探索记录固定带「本机环境依赖」提示条，提醒结论换台机器未必复现；
  * explore 的 path 即路由（无时间永久链接），匹配与链接都用 path。
  * 边界：不渲染正文排版与目录（见 ArticleLayout），也不负责列表页。
  */
 import "katex/dist/katex.min.css"
 import type { Explore } from "~/types/content"
+import { normalizePath } from "~/utils/path"
 
 const route = useRoute()
 const { data: explore } = await useAsyncData("explore-nav", useExplore())
-const path = computed(() => explore.value?.find((item) => item.path === route.path)?.path)
+const routePath = computed(() => normalizePath(route.path))
+const path = computed(() => explore.value?.find((item) => item.path === routePath.value)?.path)
 if (!path.value) throw createError({ fatal: true, statusCode: 404 })
 const { data: doc } = await useAsyncData(
-    `explore:${route.path}`,
+    `explore:${routePath.value}`,
     async () => {
         if (!path.value) return null
         return await useDocument(path.value)()
     },
-    { watch: [() => route.path] },
+    { watch: [routePath] },
 )
 if (!doc.value) throw createError({ fatal: true, statusCode: 404 })
 

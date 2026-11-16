@@ -1,25 +1,27 @@
 <script setup lang="ts">
 /**
  * 做什么：/research/<slug> 研究草稿详情页：取文档与相邻条目，交给 ArticleLayout 渲染。
- * 状态与生命周期：路由切换时按 route.path 重新取文档；相邻关系取自 manifest.research 的顺序。
+ * 状态与生命周期：路由切换时按归一化路径重新取文档；相邻关系取自 manifest.research 的顺序。
  * 取舍与不变量：草稿固定带「未定型」提示条，避免读者把未验证判断当成结论；
  * research 的 path 即路由，匹配与链接都用 path。
  * 边界：不渲染正文排版与目录（见 ArticleLayout），也不负责列表页。
  */
 import "katex/dist/katex.min.css"
 import type { Research } from "~/types/content"
+import { normalizePath } from "~/utils/path"
 
 const route = useRoute()
 const { data: research } = await useAsyncData("research-nav", useResearch())
-const path = computed(() => research.value?.find((item) => item.path === route.path)?.path)
+const routePath = computed(() => normalizePath(route.path))
+const path = computed(() => research.value?.find((item) => item.path === routePath.value)?.path)
 if (!path.value) throw createError({ fatal: true, statusCode: 404 })
 const { data: doc } = await useAsyncData(
-    `research:${route.path}`,
+    `research:${routePath.value}`,
     async () => {
         if (!path.value) return null
         return await useDocument(path.value)()
     },
-    { watch: [() => route.path] },
+    { watch: [routePath] },
 )
 if (!doc.value) throw createError({ fatal: true, statusCode: 404 })
 
