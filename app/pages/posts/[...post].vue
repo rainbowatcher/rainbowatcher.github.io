@@ -54,6 +54,7 @@ useHead({ title: post.value.title })
         :back="{ label: '博客', to: '/posts' }"
         fallback-label="全部文章"
         fallback-to="/posts"
+        kicker="文章"
         :next="entry(nextPost)"
         :previous="entry(previousPost)"
     />

@@ -31,7 +31,7 @@ defineProps<{
         </NuxtLink>
 
         <div class="mt-26px flex flex-wrap items-center gap-9px c-muted font-mono text-[10.5px] tracking-[0.03em]">
-            <span v-if="kicker">{{ kicker }}</span>
+            <span v-if="kicker" class="kicker">{{ kicker }}</span>
             <span v-if="kicker && date" class="dot" />
             <time v-if="date" :datetime="date">{{ date.replaceAll("-", ".") }}</time>
             <span v-if="date && minutes" class="dot" />
