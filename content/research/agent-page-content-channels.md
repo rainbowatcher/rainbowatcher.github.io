@@ -1,55 +1,59 @@
 ---
-title: agent 读取浏览器页面内容的通道
+title: Electron 内置浏览器给 agent 读页面内容的接入与提取
 date: 2026-11-17
 tags: [Agent, 浏览器]
-summary: 同一页面按用途要选不同通道——无障碍树给交互（ref/uid 定位）、正文提取给阅读（Accept: text/markdown 或 Readability）、网络响应给结构化数据、截图给视觉兜底；Playwright MCP 与 chrome-devtools-mcp 都默认 a11y 树，Lightpanda 用自研引擎换内存，内嵌浏览器用 CDP 接管。
+summary: 内嵌 webview 的读取分两段——接入（启动参数开 CDP、进程内 debugger、preload 注入、扩展）与提取（AX 树、站点自曝 JSON、网络响应、截图、字幕）；X/Reddit/YouTube 这类站点 AX 树覆盖交互与文案、站点 JSON 拿数据、视频另取字幕，真正的瓶颈是登录态与反爬而不是解析。
 ---
 
-页面内容对 agent 不是一种东西：同一页要按用途选通道，混着用才稳。
+Electron 里给 agent 读页面是两层问题：先把页面暴露成可读目标，再选通道读。
 
-- 要点击、填表：无障碍树 + ref（`@e1`、`e5`、uid），文本小、可定位。
-- 要正文：`Accept: text/markdown` 或 Readability 提取，别把整页 HTML 塞进上下文。
-- 要数据：监听 XHR/fetch 响应，比从 DOM 反推稳；页面若暴露 WebMCP 工具，直接调。
-- 要 canvas、验证码、样式核对：截图 + 视觉模型，最后手段。
+- 接入最省事的是 `--remote-debugging-port` + 外部 CDP 客户端；不想开端口用 `webContents.debugger`，自家 webview 用 preload 回传。
+- 提取先用 AX 树（穿透 Shadow DOM），列表数据走站点自曝 JSON，视频走字幕轨。
+- 富站点的瓶颈是登录态与反爬，带用户会话的内嵌浏览器正好绕开机房 IP 那套限制。
 
 ## 问题
 
-- 判据：单次读取的 token 成本、保真度（可见文本 / 隐藏数据 / 布局）、能否支撑后续动作、是否需要视觉模型。
-- 页面分四类：SSR 文档、SPA 交互页、列表或表格数据页、canvas 与验证码页，四类要的通道不同。
+- 形态决定可见性：`<webview>` 与 `WebContentsView`（替代已废弃的 `BrowserView`）是独立 target，能单独 snapshot；iframe 只是页面里的 frame；主窗口页面就是普通 page。
+- 富站点四类内容要分开处理：时间线与列表（虚拟滚动）、详情页、视频与音频、图片与 canvas。
 
 ## 候选
 
-| 通道           | 代表实现                                                                                                                          | 输出                | 代价与边界                                                     |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- | -------------------------------------------------------------- |
-| 无障碍树       | Playwright MCP `browser_snapshot`、chrome-devtools-mcp `take_snapshot`、agent-browser `snapshot`                                  | 带 ref/uid 的树     | 小、可定位、确定性；拿不到隐藏数据与图片                       |
-| 正文提取       | `agent-browser read`（优先 `Accept: text/markdown` 与 `llms.txt`，回退 Readability）、Stagehand `extract`、Jina Reader、Firecrawl | Markdown 正文、JSON | 阅读便宜；丢交互点与页面结构                                   |
-| 整页 HTML      | `agent-browser get html`、CDP `DOM.getOuterHTML` / `Runtime.evaluate`                                                             | HTML 字符串         | 保真最高；token 爆炸                                           |
-| 网络响应       | chrome-devtools-mcp `list_network_requests` + `get_network_request`、Playwright `page.route` / HAR                                | JSON 或响应体       | 结构化且稳；要先判断哪个请求是目标                             |
-| 截图 + 视觉    | Playwright MCP vision mode、Anthropic computer use、browser-use 截图通道                                                          | 图像                | 覆盖 canvas 与验证码；慢、贵，依赖视觉模型                     |
-| 页面暴露工具   | WebMCP：chrome-devtools-mcp `execute_webmcp_tool`、agent-browser `webmcp invoke`（均在实验开关后）                                | 工具返回值          | 直接拿数据；站点需注册，覆盖面小                               |
-| 接管内嵌浏览器 | Electron `webContents.debugger.attach("1.3")` 走 CDP、Playwright `connectOverCDP`                                                 | 复用到上面任一      | 无需改造 App；要求调试端口或进程内权限                         |
-| 轻量渲染       | Lightpanda `fetch --dump markdown` / `structured_data`、自带 CDP server                                                           | Markdown、JSON-LD   | 厂商口径内存约为 Chrome 1/16、快 9x；无渲染引擎，canvas 不适用 |
+接入方式：
+
+| 接入                | 做法                                                                                    | 适用                   | 代价                                 |
+| ------------------- | --------------------------------------------------------------------------------------- | ---------------------- | ------------------------------------ |
+| 外部 CDP            | 启动加 `--remote-debugging-port=9222`，`agent-browser connect 9222` 或 `connectOverCDP` | 非自家 App、外包 agent | 端口暴露；App 已在跑要先退出         |
+| 进程内 debugger     | `webContents.debugger.attach("1.3")` + `sendCommand`                                    | 自家 App、不开端口     | 写主进程代码；DevTools 打开会 detach |
+| preload + IPC       | `<webview preload>` 注入，`sendToHost` 回传摘要                                         | 自家 webview           | 每个站点一套提取脚本                 |
+| Playwright Electron | `_electron.launch({ executablePath })` 拿 `firstWindow()`                               | 自家 App 的端到端测试  | 进程内启动，要改测试代码             |
+| 加载扩展            | `session.loadExtension` 装 content script                                               | 需要同上下文           | 受 CSP 与隔离世界限制                |
+
+提取通道：
+
+| 通道          | 实现                                                             | 富站点表现                                    |
+| ------------- | ---------------------------------------------------------------- | --------------------------------------------- |
+| AX 树         | `Accessibility.getFullAXTree`、`snapshot -i`、`take_snapshot`    | 按钮/链接/文案全覆盖，穿透 Shadow DOM；无画面 |
+| 站点自曝 JSON | `ytInitialData`、`__NEXT_DATA__`、Reddit `.json`、X GraphQL 响应 | 数据最全；字段随改版漂移                      |
+| 网络响应      | CDP `Network` 域、chrome-devtools-mcp `list_network_requests`    | 拿接口原始 JSON，绕开 DOM                     |
+| 截图          | `webContents.capturePage()`、`Page.captureScreenshot`            | canvas、验证码、画面；token 贵                |
+| 字幕/转写     | `ytInitialPlayerResponse` 的 captionTracks、yt-dlp               | 视频内容的唯一可靠通道                        |
 
 ## 当前判断
 
-- 交互与阅读分两条腿：`snapshot` 定位可点元素，正文另走 markdown 提取；存在性检查也别截图（Playwright MCP、agent-browser 文档都这么要求）。
-- 数据密集页先看网络请求，能直接打站点 JSON API 就不解析 DOM。
-- 先试 `Accept: text/markdown`（Cloudflare Markdown for Agents 已在边缘按需转换），不认再起浏览器。
-- 内嵌浏览器（Electron / CEF）优先 `connectOverCDP` 或 `webContents.debugger`，比注入 content script 稳。
-- Lightpanda 适合批量抓取，不适合需要像素或复杂 CSS 的页面。
+- 默认链路：CDP 接上 webview target → AX 树做交互与文案 → 站点 JSON 拿列表全量 → 视频取字幕。
+- 虚拟滚动（X 时间线、Reddit 列表）里 AX 树只有视口内容，要么滚动增量，要么直接打接口，别指望一次 snapshot 拿全。
+- 站点 JSON 优先于 DOM 解析，字段变了再降级回 AX 树。
+- 图片只有 alt/name，要视觉描述就按元素截一张图。
+- 反爬：内嵌浏览器带用户的 cookie 是核心优势；headless + 机房 IP 访问 Reddit/X 直接 403（[CDP 直连读取 Chromium 页面内容](../experience/chromium-cdp-content-extraction.md)）。
 
 ## 下一步
 
-- 同一页面横评 `agent-browser snapshot` / `read` 与 chrome-devtools-mcp `take_snapshot` 的 token 与保真；本机沙箱内 agent-browser 因 `~/.agent-browser` 不可写、Chrome 启动失败，未跑通。
-- 用 `agent-browser skills get electron` 验证内嵌 Electron App 的读取路径。
+- 在真 Electron 里跑通 `--remote-debugging-port` + webview target（本机没有 Electron 二进制，未验证）。
+- 横评 AX 树与 `DOMSnapshot.captureSnapshot` 的 token 与保真，确定列表页用哪个。
 
 ## 参考
 
-- [Playwright MCP Snapshots](https://playwright.dev/mcp/snapshots)
-- [chrome-devtools-mcp 工具参考](https://github.com/ChromeDevTools/chrome-devtools-mcp/blob/main/docs/tool-reference.md)
-- [agent-browser](https://github.com/vercel-labs/agent-browser)
-- [browser-use](https://github.com/browser-use/browser-use)
-- [Stagehand](https://docs.stagehand.dev/)
-- [Lightpanda](https://github.com/lightpanda-io/browser)
-- [Cloudflare Markdown for Agents](https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/)
 - [Electron debugger](https://www.electronjs.org/docs/latest/api/debugger)
+- [Electron webview tag](https://www.electronjs.org/docs/latest/api/webview-tag)
+- [WebContentsView](https://www.electronjs.org/docs/latest/api/web-contents-view)
+- [agent-browser](https://github.com/vercel-labs/agent-browser)
