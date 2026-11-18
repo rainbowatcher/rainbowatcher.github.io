@@ -87,9 +87,8 @@
 ```
 content/                  markdown 唯一内容源
   knowledge/              长期维护的速查，平铺不建子目录
-  explore/                本机环境探索记录，结论依赖机器与版本
+  explore/                本机环境实测与未定型的调研草稿
   experience/             本机实践验证过的系统总结
-  research/               研究草稿，允许并列方案与「未验证」
   posts/                  第一人称过程与教训
   {home,uses,projects}.md 数据源，只读 frontmatter
   hide/                   永不发布的草稿
@@ -101,8 +100,8 @@ public/                   静态资源
 ```
 
 - 数据流单向：`content/**.md` → `static-content.ts` → `public/_content/`（生成物，禁止手改，dev watcher 重建、构建全量重写）→ `queryContents.ts` → 页面；不引入 `@nuxt/content` 运行时。
-- 目录即阶段，禁止跳级与一稿多放，晋升只用 `git mv`：想法 → `research/`；本机跑通过 → `experience/`；脱离本机仍成立 → `knowledge/`；带第一人称过程 → `posts/`；只在本机成立 → `explore/`。写法按 1.9 先读规范。
-- 每个内容目录各走同名路由与 `manifest.<name>` 列表，不手写 `index.md`；`research/`、`explore/` 页面固定标注草稿与环境依赖。
+- 目录即阶段，禁止跳级与一稿多放，晋升只用 `git mv`：想法与调研 → `explore/`；本机跑通过 → `experience/`；脱离本机仍成立 → `knowledge/`；带第一人称过程 → `posts/`；只在本机成立且不打算泛化就留在 `explore/`。写法按 1.9 先读规范。
+- 每个内容目录各走同名路由与 `manifest.<name>` 列表，不手写 `index.md`；`explore/` 页面固定标注「实测换机未必复现，草稿结论未定型」。
 - `knowledge/` frontmatter 必填 `title` / `section`（取值见 `app/utils/knowledge.ts` 的 `SECTION_ORDER`）/ `tags` / `date`，可选 `subtitle` / `updated`；某分区涨到 8 条以上再提为子目录，`section` 契约不变。
 - `home.md` / `uses.md` / `projects.md` 只读 frontmatter 结构化字段（读取点见 `app/pages/index.vue` / `uses.vue` / `projects.vue`），不渲染正文；新增工具或项目只改这三份。
 - 解析行为（插件顺序、Shiki 主题、toc 深度）改动必须同步 `nuxt.config.ts` 与 `modules/content-parser.ts`，否则预渲染 HTML 会漂移。
