@@ -4,7 +4,7 @@
  * 状态与生命周期：客户端挂载时动态 import DocSearch，卸载时 destroy；每个实例独占容器。
  * 取舍与不变量：索引里的绝对 URL 归一成站内路径；docsearch 5.2.0 只在键盘选中时调 navigator.navigate，
  * 鼠标点击走原生 <a href> 整页跳转，静态托管下会吃 301 尾斜杠重定向，所以点击拦截后改走 router.push；
- * 触发器文案通过 translations 传入，避免在 CSS 里拼文案；
+ * 触发器与弹窗文案通过 translations 传入，避免在 CSS 里拼文案；
  * 请求 stalled 时 DocSearch 换掉放大镜图标会顺带重建输入框，这里补一次焦点归还。
  * 边界：不自建搜索索引，也不接管键盘事件；外链与修饰键点击放行给浏览器默认行为。
  */
@@ -72,6 +72,35 @@ onMounted(async () => {
             button: {
                 buttonAriaLabel: "搜索文章、主题或页面",
                 buttonText: "搜索",
+            },
+            modal: {
+                searchBox: {
+                    placeholderText: "搜索文章、主题或页面",
+                    clearButtonTitle: "清空",
+                    clearButtonAriaLabel: "清空搜索",
+                    closeButtonText: "关闭",
+                    closeButtonAriaLabel: "关闭搜索",
+                },
+                footer: {
+                    selectText: "选择",
+                    navigateText: "导航",
+                    closeText: "关闭",
+                    poweredByText: "由 Algolia 提供",
+                },
+                startScreen: {
+                    recentSearchesTitle: "最近搜索",
+                    noRecentSearchesText: "暂无搜索记录，输入关键词开始",
+                    saveRecentSearchButtonTitle: "收藏该搜索",
+                    removeRecentSearchButtonTitle: "移除该搜索",
+                },
+                noResultsScreen: {
+                    noResultsText: "没有找到相关内容，换个关键词试试",
+                    suggestedQueryText: "试试这些",
+                },
+                errorScreen: {
+                    titleText: "搜索出了点问题",
+                    helpText: "请稍后再试，或者直接去博客列表翻翻。",
+                },
             },
         },
         navigator: {
