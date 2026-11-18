@@ -11,6 +11,9 @@ const route = useRoute()
 const router = useRouter()
 const { posts, tags } = useTagStats()
 const pageSize = 8
+/** 筛选条默认只铺两行，长尾主题收进展开按钮，避免 57 个胶囊喧宾夺主。 */
+const tagPreviewCount = 14
+const showAllTags = ref(false)
 
 const keyword = ref("")
 const currentTag = computed(() => (typeof route.query.tag === "string" ? route.query.tag : ""))
@@ -45,6 +48,9 @@ const filterNote = computed(() => {
     if (keyword.value.trim()) return `“${keyword.value.trim()}”`
     return "全部主题"
 })
+
+const visibleTags = computed(() => (showAllTags.value ? tags.value : tags.value.slice(0, tagPreviewCount)))
+const hiddenTagCount = computed(() => tags.value.length - tagPreviewCount)
 
 function setPage(next: number) {
     router.push({ query: { ...route.query, page: String(next) } })
@@ -96,7 +102,7 @@ useHead({ title: `博客 · ${posts.value.length} 篇 — Rainbow Watcher` })
 
         <div class="flex flex-wrap gap-7px pt-15px pb-18px lt-md:(flex-nowrap overflow-x-auto pb-12px)">
             <NuxtLink
-                class="tag-pill h-28px px-11px text-11.5px"
+                class="tag-pill h-28px px-11px text-11.5px whitespace-nowrap"
                 :class="{ 'border-accent bg-accentSoft c-accent': !currentTag }"
                 to="/posts"
                 prefetch
@@ -104,7 +110,7 @@ useHead({ title: `博客 · ${posts.value.length} 篇 — Rainbow Watcher` })
                 全部 {{ sortedPosts.length }}
             </NuxtLink>
             <NuxtLink
-                v-for="[name, count] in tags"
+                v-for="[name, count] in visibleTags"
                 :key="name"
                 class="tag-pill h-28px px-11px text-11.5px whitespace-nowrap"
                 :class="{ 'border-accent bg-accentSoft c-accent': name === currentTag }"
@@ -113,6 +119,15 @@ useHead({ title: `博客 · ${posts.value.length} 篇 — Rainbow Watcher` })
             >
                 {{ name }} <span class="ml-5px c-faint font-mono text-9.5px">{{ count }}</span>
             </NuxtLink>
+            <button
+                v-if="hiddenTagCount > 0 || showAllTags"
+                class="tag-pill h-28px px-11px text-11.5px cursor-pointer whitespace-nowrap"
+                type="button"
+                @click="showAllTags = !showAllTags"
+            >
+                <i class="text-11px transition-transform" :class="showAllTags ? 'i-ph-caret-up' : 'i-ph-caret-down'" />
+                {{ showAllTags ? "收起主题" : `全部 ${tags.length} 个主题` }}
+            </button>
         </div>
 
         <div v-if="pageItems.length" class="border-t border-line" aria-live="polite">
