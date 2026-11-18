@@ -2,7 +2,7 @@
 title: CAS 库选型：整文件存储与分块去重
 date: 2026-11-18
 tags: [存储, 去重]
-summary: 整文件 CAS 用 cacache 或百行自写；跨版本去重看 desync（Go）与 iroh-blobs（Rust）；casync 2020 年后事实停更，Python 侧只有小体量库；CAS 只解决内容存放，版本元数据仍需自建。
+subtitle: 整文件 CAS 用 cacache 或百行自写；跨版本去重看 desync（Go）与 iroh-blobs（Rust）；casync 2020 年后事实停更，Python 侧只有小体量库；CAS 只解决内容存放，版本元数据仍需自建。
 ---
 
 CAS 库分「整文件」与「分块 CDC」两档，前者多数场景自写即可；`casync` 最后发布 2020 年、事实停更，Python 侧只有小体量实现。

@@ -2,7 +2,7 @@
 title: Electron 内置浏览器给 agent 读页面内容的接入与提取
 date: 2026-11-17
 tags: [Agent, 浏览器]
-summary: 内嵌 webview 的读取分两段——接入（启动参数开 CDP、进程内 debugger、preload 注入、扩展）与提取（AX 树、站点自曝 JSON、网络响应、截图、字幕）；X/Reddit/YouTube 这类站点 AX 树覆盖交互与文案、站点 JSON 拿数据、视频另取字幕，真正的瓶颈是登录态与反爬而不是解析。
+subtitle: 内嵌 webview 的读取分两段——接入（启动参数开 CDP、进程内 debugger、preload 注入、扩展）与提取（AX 树、站点自曝 JSON、网络响应、截图、字幕）；X/Reddit/YouTube 这类站点 AX 树覆盖交互与文案、站点 JSON 拿数据、视频另取字幕，真正的瓶颈是登录态与反爬而不是解析。
 ---
 
 Electron 里给 agent 读页面是两层问题：先把页面暴露成可读目标，再选通道读。

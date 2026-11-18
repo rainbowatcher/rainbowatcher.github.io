@@ -2,7 +2,7 @@
 title: opencode 的会话循环、inbox 调度与压缩
 date: 2026-11-18
 tags: [Agent, LLM, 源码阅读]
-summary: 提示词先 admit 进 inbox 再 wake 循环，输入排队与抢占是显式状态机而不是隐含行为；工具走文件、检索、执行、网络与 subagent，压缩由 Session.compact 与 admitCompaction 承担。
+subtitle: 提示词先 admit 进 inbox 再 wake 循环，输入排队与抢占是显式状态机而不是隐含行为；工具走文件、检索、执行、网络与 subagent，压缩由 Session.compact 与 admitCompaction 承担。
 ---
 
 opencode 和别家最大的不同，是把「会话里多条输入怎么排队」当成一等问题。

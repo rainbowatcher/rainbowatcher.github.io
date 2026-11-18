@@ -2,7 +2,7 @@
 title: Hermes Agent 的单轮会话循环、工具面与后台复盘
 date: 2026-11-18
 tags: [Agent, LLM, 源码阅读]
-summary: 经典单轮 tool-calling 循环加 IterationBudget 限轮，外围是巨型工具面、多平台 gateway 与每轮结束后的后台复盘 fork，MoA 只是按轮开关，不改变循环归属。
+subtitle: 经典单轮 tool-calling 循环加 IterationBudget 限轮，外围是巨型工具面、多平台 gateway 与每轮结束后的后台复盘 fork，MoA 只是按轮开关，不改变循环归属。
 ---
 
 Hermes 的循环很小，外围极重，读它要先切开这两层。

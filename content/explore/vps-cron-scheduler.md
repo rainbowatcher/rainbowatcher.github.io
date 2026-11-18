@@ -2,7 +2,7 @@
 title: VPS 上的轻量定时任务调度器选型
 date: 2026-11-16
 tags: [运维, Docker, Linux]
-summary: 单台 1C1G–2C2G VPS 跑爬虫脚本时，按「要不要 Web UI」和「脚本在宿主机还是容器里」两条轴收敛：纯脚本用 systemd timer + healthchecks，要执行历史与手动触发用 dagu，容器化爬虫用 ofelia，面板式脚本托管用白虎面板；青龙与 Cronicle 在低配机器上偏重。
+subtitle: 单台 1C1G–2C2G VPS 跑爬虫脚本时，按「要不要 Web UI」和「脚本在宿主机还是容器里」两条轴收敛：纯脚本用 systemd timer + healthchecks，要执行历史与手动触发用 dagu，容器化爬虫用 ofelia，面板式脚本托管用白虎面板；青龙与 Cronicle 在低配机器上偏重。
 ---
 
 单台 VPS 跑几个爬虫脚本，`cron` 只负责触发，缺执行历史、失败重试、手动触发与日志检索。候选按「单机、常驻内存小、不引入外部数据库」筛过一遍。

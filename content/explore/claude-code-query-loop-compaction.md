@@ -2,7 +2,7 @@
 title: Claude Code 的查询循环、工具面与三层压缩
 date: 2026-11-18
 tags: [Agent, LLM, 源码阅读]
-summary: 闭源 CLI 还原出的结构是单 agent tool-calling 循环加分层压缩与子 agent 隔离——query() 是 async generator，queryLoop 是 while(true)，压缩阈值是公式而非百分比，子 agent 各起一个独立 query 实例。
+subtitle: 闭源 CLI 还原出的结构是单 agent tool-calling 循环加分层压缩与子 agent 隔离——query() 是 async generator，queryLoop 是 while(true)，压缩阈值是公式而非百分比，子 agent 各起一个独立 query 实例。
 ---
 
 Claude Code 没有编排器，只有一个循环，复杂度全在循环周边。

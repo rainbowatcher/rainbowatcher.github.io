@@ -2,7 +2,7 @@
 title: pi 的最小主循环与扩展机制
 date: 2026-11-18
 tags: [Agent, LLM, 源码阅读]
-summary: 刻意不做 sub-agent 与 plan mode，内核只有 read/bash/edit/write 四件套加会话、压缩、skill 与 RPC，缺的能力交给 extension 与 package，因此主循环是六家里最可审计的。
+subtitle: 刻意不做 sub-agent 与 plan mode，内核只有 read/bash/edit/write 四件套加会话、压缩、skill 与 RPC，缺的能力交给 extension 与 package，因此主循环是六家里最可审计的。
 ---
 
 pi 的取舍是把「智能」放在提示词与扩展里，而不是编排机制里。

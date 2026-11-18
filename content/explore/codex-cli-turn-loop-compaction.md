@@ -2,7 +2,7 @@
 title: Codex CLI 的 turn 循环、沙箱审批与自动压缩
 date: 2026-11-18
 tags: [Agent, LLM, 源码阅读]
-summary: 事件驱动的 turn/step 结构包住 Responses API 的 tool-calling 内核，压缩在窗口 90% 触发且可异步或远端执行，沙箱与审批是独立 crate 与决策层而不是提示词。
+subtitle: 事件驱动的 turn/step 结构包住 Responses API 的 tool-calling 内核，压缩在窗口 90% 触发且可异步或远端执行，沙箱与审批是独立 crate 与决策层而不是提示词。
 ---
 
 Codex 的循环本身很小，外壳全是为 steer 与恢复服务的。

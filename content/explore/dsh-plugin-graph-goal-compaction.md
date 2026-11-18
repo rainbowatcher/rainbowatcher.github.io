@@ -2,7 +2,7 @@
 title: DeepSeek Harness 的插件图、goal 续跑与压缩
 date: 2026-11-18
 tags: [Agent, LLM, 源码阅读]
-summary: 没有写死的主循环，循环本身由 profile 里的 bundle 行拼出来；goal 与 goal-round-driver 提供跨轮次自动续跑，压缩由 basic 摘要与 tool-result-pruner 裁剪两层分担。
+subtitle: 没有写死的主循环，循环本身由 profile 里的 bundle 行拼出来；goal 与 goal-round-driver 提供跨轮次自动续跑，压缩由 basic 摘要与 tool-result-pruner 裁剪两层分担。
 ---
 
 DSH 的「范式」是配置项而不是代码路径：能力即插件，装什么就有什么。
@@ -60,5 +60,5 @@ pre-step 注入（time-context / session projection / working_directory）
 
 ## 参考
 
-- [dsh 上下文注入机制：pre-step 追加消息与 time-context 排程](../explore/dsh-context-injection.md)
+- [dsh 上下文注入机制：pre-step 追加消息与 time-context 排程](dsh-context-injection.md)
 - [pi 的最小主循环与扩展机制](pi-agent-minimal-loop-extensions.md)

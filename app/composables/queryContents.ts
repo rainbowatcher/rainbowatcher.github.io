@@ -1,14 +1,14 @@
 /**
  * 做什么：读取构建期产物 public/_content/（manifest.json 与哈希 JSON），向页面提供
- * 首页/文档、博客列表、知识条目、探索记录、经验条目与研究草稿列表。
+ * 首页/文档、博客列表、知识条目、探索记录与经验条目列表。
  * 状态与生命周期：manifestPromise 首次读取后模块级缓存，失败时清除以允许重试。
  * 取舍与不变量：SSR 直接读磁盘（Nitro 不向进程内 $fetch 暴露 public 资产），客户端走
- * $fetch；posts 的 permalink 由 addPermalink 现场补齐，knowledge / explore / experience / research 的 path 即路由。
+ * $fetch；posts 的 permalink 由 addPermalink 现场补齐，knowledge / explore / experience 的 path 即路由。
  * 边界：不做路由匹配、不渲染页面、不写产物。
  */
 
 import { addPermalink, toNavItems } from "~/utils/path"
-import type { ContentDocument, Experience, Explore, Knowledge, NavigationItem, Post, Research } from "~/types/content"
+import type { ContentDocument, Experience, Explore, Knowledge, NavigationItem, Post } from "~/types/content"
 
 type Manifest = {
     documents: Record<string, string>
@@ -16,7 +16,6 @@ type Manifest = {
     explore: Explore[]
     knowledge: Knowledge[]
     posts: ContentDocument[]
-    research: Research[]
 }
 
 let manifestPromise: Promise<Manifest> | undefined
@@ -105,13 +104,6 @@ export function useExperience() {
     return async (): Promise<Experience[]> => {
         const manifest = await getManifest()
         return manifest.experience
-    }
-}
-
-export function useResearch() {
-    return async (): Promise<Research[]> => {
-        const manifest = await getManifest()
-        return manifest.research
     }
 }
 

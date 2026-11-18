@@ -2,7 +2,7 @@
 title: Rust agent 循环：自建与现成库的取舍
 date: 2026-11-18
 tags: [Agent, LLM, Rust]
-summary: agent loop 建议自建（200–500 行），现成库只用在 provider 客户端与 tool schema；锁死单一供应商时 async-openai + schemars 比 Rig/AutoAgents 更可控，未实测。
+subtitle: agent loop 建议自建（200–500 行），现成库只用在 provider 客户端与 tool schema；锁死单一供应商时 async-openai + schemars 比 Rig/AutoAgents 更可控，未实测。
 ---
 
 结论是自建 loop，库只买 provider 与 schema 两层。
