@@ -30,13 +30,6 @@ const hero = computed(() => ({
 const sortedPosts = computed(() => [...(posts.value ?? [])].sort((a, b) => b.date.localeCompare(a.date)))
 const recent = computed(() => sortedPosts.value.slice(0, 6))
 const latest = computed(() => sortedPosts.value[0])
-const startYear = computed(() => {
-    const years = documents.value
-        .map((item) => String(item.date ?? "").slice(0, 4))
-        .filter(Boolean)
-        .sort()
-    return years[0] ?? ""
-})
 const stats = computed(() => [
     { label: "篇内容", value: documents.value.length },
     { label: "个主题", value: tags.value.length },
@@ -48,6 +41,15 @@ const latestEntry = computed(() =>
         ? { date: latest.value.date, title: latest.value.title ?? "", to: latest.value.permalink ?? latest.value.path }
         : undefined,
 )
+
+/** 随机一篇只在客户端挑（避免 SSR/客户端各自随机导致 hydration 不一致），给旧文一条重新曝光的路径。 */
+const randomEntry = ref<{ date?: string; to: string; title: string }>()
+onMounted(() => {
+    const pool = sortedPosts.value
+    if (pool.length < 2) return
+    const post = pool[Math.floor(Math.random() * pool.length)]!
+    randomEntry.value = { date: post.date, title: post.title ?? "", to: post.permalink ?? post.path }
+})
 
 useHead({ title: "Rainbow Watcher — 看彩虹的人" })
 </script>
@@ -81,18 +83,9 @@ useHead({ title: "Rainbow Watcher — 看彩虹的人" })
                         <i class="i-ph-arrow-up-right text-16px" />
                     </NuxtLink>
                 </div>
-                <p
-                    class="mt-26px flex flex-wrap items-center gap-8px c-faint font-mono text-[10.5px] tracking-[0.03em]"
-                >
-                    <span>{{ documents.length }} 篇内容</span>
-                    <span class="dot mx-3px" />
-                    <span>{{ tags.length }} 个主题</span>
-                    <span class="dot mx-3px" />
-                    <span>{{ startYear ? `${startYear} 年起写作` : "持续更新" }}</span>
-                </p>
             </div>
 
-            <HomeStats :stats="stats" :latest="latestEntry" />
+            <HomeStats :latest="latestEntry" :random="randomEntry" :stats="stats" />
         </section>
 
         <section class="mt-[clamp(38px,5vw,58px)]" aria-labelledby="recent-title">

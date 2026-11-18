@@ -1,14 +1,19 @@
 <script setup lang="ts">
 /**
- * 做什么：首页速览卡：内容与主题计数、年跨度，以及最近一篇的入口。
- * 状态与生命周期：纯展示，数据由首页传入；无数据时不渲染最近更新行。
- * 取舍与不变量：顶部 3px 彩虹条与「持续写作」圆点是首页唯一的彩色装饰，其余保持中性。
+ * 做什么：首页速览卡：内容与主题计数、年跨度，以及一篇「随便看看」的入口。
+ * 状态与生命周期：纯展示，数据由首页传入；随机一篇在挂载后才落到 random prop，
+ * SSR 期间先显示最近更新兜底，避免 hydration 不一致。
+ * 取舍与不变量：顶部 3px 彩虹条与「持续写作」圆点是首页唯一的彩色装饰，其余保持中性；
+ * 「随便看看」替换重复的最近更新入口，给旧文一条被重新发现的路径。
  * 边界：不做统计口径的定义（口径见首页），也不负责列表渲染。
  */
-defineProps<{
+const props = defineProps<{
     latest?: { date?: string; to: string; title: string }
+    random?: { date?: string; to: string; title: string }
     stats: Array<{ label: string; value: number }>
 }>()
+
+const pick = computed(() => props.random ?? props.latest)
 </script>
 
 <template>
@@ -36,18 +41,22 @@ defineProps<{
             </div>
         </div>
 
-        <div v-if="latest" class="flex flex-col gap-4px border-t border-line pt-14px">
-            <span class="c-faint font-mono text-9px tracking-[0.12em] uppercase">
-                最近更新{{ latest.date ? ` · ${latest.date.replaceAll("-", ".")}` : "" }}
+        <div v-if="pick" class="flex flex-col gap-4px border-t border-line pt-14px">
+            <span class="c-faint flex items-center gap-5px font-mono text-9px tracking-[0.12em] uppercase">
+                <i class="i-ph-dice-five text-11px" />
+                随便看看{{ pick.date ? ` · ${pick.date.replaceAll("-", ".")}` : "" }}
             </span>
-            <NuxtLink
-                class="group flex items-center justify-between gap-8px font-serif text-[14.5px] font-600 leading-[1.5] hover:c-accent"
-                :to="latest.to"
-                prefetch
-            >
-                <span>{{ latest.title }}</span>
-                <i class="i-ph-arrow-right flex-none c-faint text-14px transition-colors group-hover:c-accent" />
-            </NuxtLink>
+            <Transition enter-active-class="animate-in-500 fade-in">
+                <NuxtLink
+                    :key="pick.to"
+                    class="group flex items-center justify-between gap-8px font-serif text-[14.5px] font-600 leading-[1.5] hover:c-accent"
+                    :to="pick.to"
+                    prefetch
+                >
+                    <span>{{ pick.title }}</span>
+                    <i class="i-ph-arrow-right flex-none c-faint text-14px transition-colors group-hover:c-accent" />
+                </NuxtLink>
+            </Transition>
         </div>
     </aside>
 </template>
