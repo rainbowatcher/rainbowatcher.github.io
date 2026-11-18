@@ -71,7 +71,7 @@ sections:
       title: 硬件
       note: "04"
       items:
-          - name: 'MacBook Pro 14英寸，M5 Pro'
+          - name: "MacBook Pro 14英寸，M5 Pro"
             desc: 64GB 内存，主力开发机
             side: Computer
           - name: Magic Mouse
