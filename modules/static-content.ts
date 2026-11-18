@@ -3,7 +3,7 @@
  * 的运行时查询；每篇文档一个内容哈希命名的 JSON，外加 manifest.json 索引。
  * 状态与生命周期：rebuildChain 串行化重建（dev watcher 会突发事件），每次清空后全量重写。
  * 取舍与不变量：manifest.documents 以路由 path 为键，posts / knowledge / explore / experience / research 的列表项
- * 剔除 body（posts 额外附 500 字纯文本 excerpt）；哈希文件名保证旧 JSON 不跨部署残留；
+ * 剔除 body（posts 额外附 160 字纯文本 excerpt）；哈希文件名保证旧 JSON 不跨部署残留；
  * content/hide/ 与 COLLECTIONS 之外不发布。
  * 边界：只产出数据资产到 public/_content/（供 queryContents.ts 读取），不渲染页面、
  * 不定义路由，也不处理 .md 以外的文件。
@@ -37,14 +37,19 @@ function yamlDate(value: any): any {
     return value
 }
 
-/** 生成 500 字以内的纯文本摘要：剥 frontmatter/代码块/图片后，去掉行内语法并折叠空白。 */
-function toExcerpt(markdown: string, max = 500): string {
+/** 生成 160 字以内的纯文本摘要：剥 frontmatter/代码块/表格/内联组件/HTML 标签后折叠空白，供列表卡片做两三行预览。 */
+function toExcerpt(markdown: string, max = 160): string {
     const text = markdown
         .replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, "") // frontmatter
         .replace(/```[\s\S]*?```/g, " ") // 代码块
         .replace(/`([^`]*)`/g, "$1") // 行内代码留内容
+        .replace(/<!--[\s\S]*?-->/g, " ") // HTML 注释
+        .replace(/<([A-Z][\w-]*)[^>]*>.*?<\/\1>/g, " ") // MDC 块级组件连内容一起去掉
+        .replace(/<[^>]+>/g, " ") // 残余内联组件（Badge 等）与 HTML 标签
         .replace(/!\[[^\]]*\]\([^)]*\)/g, " ") // 图片
         .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // 链接留文字
+        .replace(/^[ \t]*\|[^\n]*\|[ \t]*$/gm, " ") // 整行表格（含分隔行）
+        .replace(/^\[\^\]\+:.*$/gm, " ") // 脚注定义
         .replace(/^[ \t]{0,3}#{1,6}[ \t]+/gm, "") // 标题标记
         .replace(/^[ \t]{0,3}>[ \t]?/gm, "") // 引用标记
         .replace(/[*_~]+/g, "") // 强调语法

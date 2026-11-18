@@ -28,7 +28,7 @@ export type ContentDocument = {
 
 export type Post = {
     date: string
-    /** 构建期生成的 500 字以内纯文本摘要，列表卡片预览用，不含正文 MDC。 */
+    /** 构建期生成的 160 字以内纯文本摘要，列表卡片预览用，不含正文 MDC。 */
     excerpt?: string
     permalink: string
     tags: string[]
