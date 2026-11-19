@@ -38,7 +38,7 @@ export type Post = {
 /** 知识条目：path 即路由（/knowledge/<slug>），section 决定它在索引页的归属分区。 */
 export type Knowledge = ContentDocument & { section: string; title: string }
 
-/** 探索记录：path 即路由（/explore/<slug>），包含本机环境实测与未定型的调研草稿，列表页展示 subtitle。 */
+/** 探索地图：path 即路由（/explore/<slug>），记陌生领域是什么、有哪几条路径与各自状态，列表页展示 subtitle。 */
 export type Explore = ContentDocument & { title: string }
 
 /** 经验条目：path 即路由（/experience/<slug>），列表页需要 summary 做摘要。 */

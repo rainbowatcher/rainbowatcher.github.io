@@ -1,9 +1,9 @@
 <script setup lang="ts">
 /**
- * 做什么：/explore 列表页：按日期倒序列出 content/explore/ 下的探索记录。
+ * 做什么：/explore 列表页：按日期倒序列出 content/explore/ 下的领域地图。
  * 状态与生命周期：条目来自 manifest.explore（仅元数据），渲染时读取一次。
- * 取舍与不变量：本机实测结论换机未必复现，调研草稿结论尚未定型，两类共用一栏；
- * 页面固定标注复核要求，行式列表与博客列表共用 PostRow。
+ * 取舍与不变量：地图讲对象是什么与有哪几条路，已落地结论链到经验/知识；
+ * 页面固定标注「地图不是结论」，行式列表与博客列表共用 PostRow。
  * 边界：不渲染正文（见 explore/[...explore].vue），也不做分页与标签过滤。
  */
 const { data: explore } = await useAsyncData("explore-list", useExplore())
@@ -29,7 +29,7 @@ useHead({ title: `探索 · ${items.value.length} 篇 — Rainbow Watcher` })
             eyebrow="Explore / Notes"
             title="探索"
             :meta="`${items.length} RECORDS · ${yearSpan}`"
-            desc="本机环境的实测记录，与还在验证的调研草稿。前者换台机器未必复现，后者结论未定型；引用其中的命令与数据前请先复核。"
+            desc="陌生领域的路径地图：对象是什么、有哪几条路、每条走到哪一步。已落地的结论链到经验或知识文章；地图里未落地的部分引用前请先复核。"
         />
 
         <div class="pt-8px">
