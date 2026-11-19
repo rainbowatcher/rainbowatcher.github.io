@@ -4,6 +4,7 @@
  * 状态与生命周期：高亮器与语言包在 createContentParser 调用时一次性加载，由调用方复用。
  * 取舍与不变量：`#mdc-imports` / `#mdc-configs` 在 Vite 外不可解析，故插件在此显式
  * import；主题按「具名槽位在前、default 在后」排序，class 列表与 CSS 变量顺序稳定。
+ * 语言包按语法自带的别名一并登记，`js` / `sh` 这类围栏写法的渲染结果与文档顺序无关。
  * 边界：不读文件、不写产物、不维护路由或 manifest。
  */
 
@@ -143,6 +144,14 @@ export async function createContentParser(config: { highlight?: ParserConfig } =
     for (const lang of langs) {
         const langModule = await import(`@shikijs/langs/${lang}`)
         bundledLangs[lang] = langModule.default
+        // 别名必须一起登记：@nuxtjs/mdc 只按 bundledLangs 的键精确查找，查不到就直接
+        // 回退纯文本；shiki 自带的别名要等语法首次加载后才生效，于是围栏写 `js`
+        // 能否高亮取决于别的代码块是否先触发过 `javascript`。别名登记后与顺序无关。
+        for (const grammar of [langModule.default].flat() as any[]) {
+            for (const alias of grammar?.aliases ?? []) {
+                bundledLangs[alias] = langModule.default
+            }
+        }
     }
     const highlighter = createShikiHighlighter({
         bundledLangs,
