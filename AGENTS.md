@@ -80,6 +80,7 @@
 ### 1.9 文章写入
 
 - 写 `content/` 下任何 markdown 之前，必须先读 `.agents/skills/writing/SKILL.md`；阶段、小节、frontmatter 与引用规则以它为准，本文件不重复。
+- `explore/` 不是草稿池：读者读完要能说清对象是什么、有哪几条路、差别在哪；只停在分支处，不停在未跑处，跑通的路径当天把结果落成 `experience/` 或 `knowledge/` 并在路径表里链接。
 - 写作意图要自己识别，不限“写文章”字样：用户要我留下结论、探索结果、调研或命令用法（“记一下”“整理成速查”“以后能查”“调研完写出来”），就算写作请求，按 `writing` 技能的阶段规则落库，不反问放哪。
 
 ## 2. 仓库结构与内容数据流
@@ -87,7 +88,7 @@
 ```
 content/                  markdown 唯一内容源
   knowledge/              长期维护的速查，平铺不建子目录
-  explore/                本机环境实测与未定型的调研草稿
+  explore/                陌生领域的路径地图，结论落经验/知识后仍留在原地
   experience/             本机实践验证过的系统总结
   posts/                  第一人称过程与教训
   {home,uses,projects}.md 数据源，只读 frontmatter
@@ -100,8 +101,8 @@ public/                   静态资源
 ```
 
 - 数据流单向：`content/**.md` → `static-content.ts` → `public/_content/`（生成物，禁止手改，dev watcher 重建、构建全量重写）→ `queryContents.ts` → 页面；不引入 `@nuxt/content` 运行时。
-- 目录即阶段，禁止跳级与一稿多放，晋升只用 `git mv`：想法与调研 → `explore/`；本机跑通过 → `experience/`；脱离本机仍成立 → `knowledge/`；带第一人称过程 → `posts/`；只在本机成立且不打算泛化就留在 `explore/`。写法按 1.9 先读规范。
-- 每个内容目录各走同名路由与 `manifest.<name>` 列表，不手写 `index.md`；`explore/` 页面固定标注「实测换机未必复现，草稿结论未定型」。
+- 目录即阶段，禁止跳级与一稿多放：`explore/` 是陌生领域的路径地图，留在原地不搬家——某条路径跑通后，结论写成新文章落 `experience/`（本机验证）或 `knowledge/`（脱离本机仍成立），地图在路径表里链过去；`git mv` 只用于 `experience/` → `knowledge/`。带第一人称过程 → `posts/`；只在本机成立且不打算泛化就留在 `explore/`。写法按 1.9 先读规范。
+- 每个内容目录各走同名路由与 `manifest.<name>` 列表，不手写 `index.md`；`explore/` 页面固定标注「路径地图，已落地结论已链到经验或知识文章」。
 - `knowledge/` frontmatter 必填 `title` / `section`（取值见 `app/utils/knowledge.ts` 的 `SECTION_ORDER`）/ `tags` / `date`，可选 `subtitle` / `updated`；某分区涨到 8 条以上再提为子目录，`section` 契约不变。
 - `home.md` / `uses.md` / `projects.md` 只读 frontmatter 结构化字段（读取点见 `app/pages/index.vue` / `uses.vue` / `projects.vue`），不渲染正文；新增工具或项目只改这三份。
 - 解析行为（插件顺序、Shiki 主题、toc 深度）改动必须同步 `nuxt.config.ts` 与 `modules/content-parser.ts`，否则预渲染 HTML 会漂移。
@@ -137,4 +138,5 @@ pnpm content:check # 校验 frontmatter 必填项、date 格式、tags 与相对
 - [ ] 新增模块目录有 `index.ts` 或 `README.md` 说明职责？
 - [ ] 未手改生成物（`public/_content/`、`.nuxt/`、`.output/`、`dist/`）？
 - [ ] 写 `content/` 前已读 `.agents/skills/writing/SKILL.md`，文章符合其阶段、小节与引用规则？
+- [ ] `explore/` 讲清了对象是什么、有哪几条路与差别，已跑通的路径已在表里链到 `experience/` / `knowledge/` 结果文章？
 - [ ] `pnpm fmt:check`、`pnpm lint` 通过，`pnpm typecheck` 无新增错误；构建相关改动已跑 `pnpm generate`？
