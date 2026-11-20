@@ -119,3 +119,4 @@ subtitle: 把大文件切成按哈希命名的块发布到任意静态目录，�
 - [Concepts](https://github.com/folbricht/desync/blob/master/docs/concepts.md)：分块与并行、seed 与 reflink、tar 互操作。
 - [Cookbook](https://github.com/folbricht/desync/blob/master/docs/cookbook.md)：提取、缓存、服务端、用量估算的完整命令。
 - [casync 设计背景](http://0pointer.net/blog/casync-a-tool-for-distributing-file-system-images.html)：CDC 分块与索引格式的来源。
+- 站内：[desync Go 库集成：分块、索引与带 seed 还原](desync-go-library.md)：把这套 API 嵌进 Go 项目时的成本与坑。
