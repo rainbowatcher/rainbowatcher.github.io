@@ -29,7 +29,7 @@ CAS 只负责「内容存哪」，`fileId → version → hash` 的元数据、�
 ## 当前判断
 
 - 只存整文件：自写 100~150 行（流式哈希 → 临时文件 → `rename` → 前缀分片，读时校验 + GC），或 Node 用 `cacache`。
-- 大文件跨版本去重：`desync`（可复用 casync 生态）或 `iroh-blobs`（按块范围传输）；存储已上 S3 则 key 用哈希 + `If-None-Match`，不必引库。
+- 大文件跨版本去重：`desync`（可复用 casync 生态，用法与实测见[desync 增量分发与 chunk store 运维](../knowledge/desync.md)）或 `iroh-blobs`（按块范围传输）；存储已上 S3 则 key 用哈希 + `If-None-Match`，不必引库。
 
 ## 下一步
 
